@@ -1,0 +1,287 @@
+<div ng-include="'views/topbar.html'"></div>
+<div id="main">
+       <div class="wysiwyg_editor_skins_RulerSkin-background" style="left: 0px; top: 0px; height: 20px; width: 100%; background: url(http://static.parastorage.com/services/web/2.1102.13/images/web/EditorRulerBG-H.png) 0px -2px repeat-x;">
+      <div skinpart="scaleNumbers" class="wysiwyg_editor_skins_RulerSkin-scaleNumbers" style="left:0px; top: 0px; height: 20px; width: 100%;">
+        <div class="scaleNumber" style="left: 3px;">0</div>
+        <div class="scaleNumber" style="left: 103px;">100</div>
+        <div class="scaleNumber" style="left: 203px;">200</div>
+        <div class="scaleNumber" style="left: 303px;">300</div>
+        <div class="scaleNumber" style="left: 403px;">400</div>
+        <div class="scaleNumber" style="left: 503px;">500</div>
+        <div class="scaleNumber" style="left: 603px;">600</div>
+        <div class="scaleNumber" style="left: 703px;">700</div>
+        <div class="scaleNumber" style="left: 803px;">800</div>
+        <div class="scaleNumber" style="left: 903px;">900</div>
+        <div class="scaleNumber" style="left: 1003px;">1000</div>
+        <div class="scaleNumber" style="left: 1103px;">1100</div>
+        <div class="scaleNumber" style="left: 1203px;">1200</div>
+        <div class="scaleNumber" style="left: 1303px;">1300</div>
+        <div class="scaleNumber" style="left: 1403px;">1400</div>
+        <div class="scaleNumber" style="left: 1503px;">1500</div>
+        <div class="scaleNumber" style="left: 1603px;">1600</div>
+        <div class="scaleNumber" style="left: 1703px;">1700</div>
+        <div class="scaleNumber" style="left: 1803px;">1800</div>
+        <div class="scaleNumber" style="left: 1903px;">1900</div>
+      </div>
+    </div>
+
+    <div skinpart="rulerVert" class="wysiwyg_editor_skins_EditLayerSkin-rulerVert wysiwyg_editor_skins_RulerSkin" skin="wysiwyg.editor.skins.RulerSkin" comp="wysiwyg.editor.components.Ruler" id="i3pvj15g" styleid="" style="visibility: visible; width: 20px; height: 100%; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(0, 0, 0); top: 20px; right: 0px; display: inline-block;">
+      <div skinpart="rulerContainer" style="right: 0px; width: 20px; text-align: right;">
+        <div skinpart="background" class="wysiwyg_editor_skins_RulerSkin-background" style="right: 0px; top: 0px; height: 100%; width: 20px; background: url(http://static.parastorage.com/services/web/2.1102.15/images/web/EditorRulerBG-V.png) -19px -20px repeat-y;"></div>
+        <div skinpart="scaleNumbers" class="wysiwyg_editor_skins_RulerSkin-scaleNumbers" style="right: 0px; top: -76px; height: 100%; width: 20px;">
+          <div class="scaleNumber" style="top: 156px; left: 2px;">100</div>
+          <div class="scaleNumber" style="top: 256px; left: 2px;">200</div>
+          <div class="scaleNumber" style="top: 356px; left: 2px;">300</div>
+          <div class="scaleNumber" style="top: 456px; left: 2px;">400</div>
+          <div class="scaleNumber" style="top: 556px; left: 2px;">500</div>
+          <div class="scaleNumber" style="top: 656px; left: 2px;">600</div>
+          <div class="scaleNumber" style="top: 756px; left: 2px;">700</div>
+          <div class="scaleNumber" style="top: 856px; left: 2px;">800</div>
+          <div class="scaleNumber" style="top: 956px; left: 2px;">900</div>
+          <div class="scaleNumber" style="top: 1056px; left: 2px;">1000</div>
+          <div class="scaleNumber" style="top: 1156px; left: 2px;">1100</div>
+          <div class="scaleNumber" style="top: 1256px; left: 2px;">1200</div>
+          <div class="scaleNumber" style="top: 1356px; left: 2px;">1300</div>
+          <div class="scaleNumber" style="top: 1456px; left: 2px;">1400</div>
+          <div class="scaleNumber" style="top: 1556px; left: 2px;">1500</div>
+          <div class="scaleNumber" style="top: 1656px; left: 2px;">1600</div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+    .wysiwyg_editor_skins_RulerSkin-background {
+position: absolute;
+opacity: 0.5;
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-bottom-color: rgb(0, 0, 0);
+z-index: 99;
+
+}
+
+.wysiwyg_editor_skins_RulerSkin-scaleNumbers {
+position: absolute;
+top: 0px;
+height: 20px;
+width: 100%;
+}
+.wysiwyg_editor_skins_RulerSkin-scaleNumbers .scaleNumber {
+position: absolute;
+font-size: 6pt;
+pointer-events: none;
+}
+.wysiwyg_editor_skins_RulerSkin {
+position: fixed;
+visibility: visible;
+width: 20px;
+height: 100%;
+border-left-width: 1px;
+border-left-style: solid;
+border-left-color: rgb(0, 0, 0);
+top: 56px;
+right: 0px;
+display: inline-block;
+z-index:9999;
+}
+    </style>
+      <div class="preloader done" style="display: none;">
+        <div class="box">
+          <div class="message">构建页面</div>
+        </div>
+      </div>
+      <div id="canvas" class="canvas"  droppable></div>
+      <div class="gridbg"></div>
+
+    </div>
+
+<!--
+    <div id="slide" class="box inner-wrap">
+      <tabset>
+        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+          <div ng-include="tab.content"></div>
+        </tab>
+      </tabset>
+    </div>-->
+
+    <div id="attribute" class="box boxbg jq_dd_div attribute window">
+      <div class="hd">
+        <i class="icon-xxx icon-white icon-minus fr sx_i_minify" tooltip="缩小还原属性窗"></i>
+        <i class="icon-xxx icon-white icon-magnet fr sx_i_magnet mr5" tooltip="不自动吸附属性窗"></i>
+        <span class="fr mr20">
+          小提示: 按住 shift 后,用鼠标选择多个组件, 再 shift + G 可编组. 编组后拖动本组名称即可一次拖动多个组件.
+        </span>
+        <span class="name">
+          属性&nbsp;&nbsp; <em></em>
+        </span>
+        <span class="sx_align_operate">
+          <i class="icon-xxx icon-white icon-sx-left" data-align="canvas-left" tooltip="相对画布居左"></i>
+          <i class="icon-xxx icon-white icon-sx-center" data-align="canvas-center" tooltip="相对画布居中"></i>
+          <i class="icon-xxx icon-white icon-sx-right" data-align="canvas-right" tooltip="相对画布居右"></i>
+          <i class="icon-xxx icon-white icon-sx-align-left hidden mulit-align" data-align="left" tooltip="左对齐"></i>
+          <i class="icon-xxx icon-white icon-sx-align-center hidden mulit-align" data-align="center" tooltip="左右居中对齐"></i>
+          <i class="icon-xxx icon-white icon-sx-align-right hidden mulit-align" data-align="right" tooltip="右对齐"></i>
+          <i class="icon-xxx icon-white icon-sx-align-top hidden mulit-align" data-align="top" tooltip="上对齐"></i>
+          <i class="icon-xxx icon-white icon-sx-align-middle hidden mulit-align" data-align="middle" tooltip="上下居中对齐"></i>
+          <i class="icon-xxx icon-white icon-sx-align-bottom hidden mulit-align" data-align="bottom" tooltip="下对齐"></i>
+        </span>
+      </div>
+      <div class="bd">
+        <div class="attr_group">
+          <div class="area_1 sx_attr">
+            <dl>
+              <dt class="clearfix">
+                <span class="fl" style="margin-right:5px;">当前对象</span>
+                <div class="fl"></div>
+              </dt>
+              <dd class="">
+                <span>{{data[order].name}}_{{data[order].id+1}}</span>
+              </dd>
+              <dd class="">
+                <span class="btn sx_btn btn_delete" ng-click="remove()">删除</span>
+              </dd>
+            </dl>
+            <dl>
+              <dt class="clearfix">
+                <span class="fl" style="margin-right:5px;">位置</span>
+                <div class="fl"></div>
+              </dt>
+              <dd class="">
+                左位移:
+                <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="data[order].position.left">px</dd>
+              <dd class="">
+                上位移:
+                <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="data[order].position.top">px</dd>
+            </dl>
+            <dl>
+              <dt class="clearfix">
+                <span class="fl" style="margin-right:5px;">大小</span>
+                <div class="fl"></div>
+              </dt>
+              <dd class="">
+                宽:
+                <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="data[order].a_size.width">px</dd>
+              <dd class="">
+                高:
+                <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="data[order].a_size.height">px</dd>
+            </dl>
+            <dl>
+              <dt class="clearfix">
+                <span class="fl" style="margin-right:5px;">点击链接</span>
+                <div class="fl"></div>
+              </dt>
+              <dd class="">
+                <input type="text" name="sx_area_link" class="sx_area_link sx_monitor" size="40" ng-model="data[order].link"></dd>
+            </dl>
+          </div>
+        </div>
+        <div class="basic_attr" style="display:none;">
+          <dl class="mk_config sx_attr">
+            <dt>
+              <i class="icon-xxx icon-white icon-info-sign"></i>
+              基本信息
+            </dt>
+            <dd>
+              <span class="name">配置名称:</dpan>
+              <span class="cont">
+                <input class="sx_mk_name sx_monitor" type="text" value="未命名" ></span>
+            </dd>
+            <dd>
+              <span class="name">主尺寸:</span>
+              <span class="cont">
+
+                <input class="sx_mk_width sx_mk_w_c sx_monitor" type="radio" name="sx_mk_width"  value="0" >
+                集市 &nbsp;
+                <input class="sx_mk_width sx_mk_w_b sx_monitor" type="radio" name="sx_mk_width"  value="1" >
+                天猫 &nbsp;
+                <input class="sx_mk_width sx_mk_w_s sx_monitor" type="radio" name="sx_mk_width" checked value="2" >
+                自定义
+                <span>
+                  宽
+                  <input class="sx_mk_width_val sx_monitor" type="text" name="" value="1920" style="width:40px;">px</span>
+                <span>
+                  高
+                  <input class="sx_mk_height_val sx_monitor" type="text" name="" value="600" style="width:40px;">px</span>
+              </span>
+            </dd>
+          </dl>
+
+          <dl class="type_slider tab_box">
+            <hr />
+            <dt>
+              <i class="icon-xxx icon-white icon-picture"></i>
+              画布设置
+            </dt>
+
+            <dd class="tab_nav">
+              <ul>
+                <li class="tab_act">画布1</li>
+                <span class="btn smallbtn fl sx_add_slide" style="margin-left:5px; margin-top:3px;">
+                  <i class="icon-xxx icon-white icon-plus"></i>
+                  增加
+                </span>
+                <span class="btn smallbtn fl sx_remove_slide" style="margin-top:3px;">
+                  <i class="icon-xxx icon-white icon-remove"></i>
+                  删除
+                </span>
+              </ul>
+            </dd>
+            <dd class="mk_slide sx_attr hidden">
+              <span class="clearfix cfg_cont" name="more">
+                <span class="mt5 mb5">
+                  <span class="name" style="line-height: 22px;">自动播放:</span>
+                  <span class="cont">
+                    <span class="sx_switch center">
+                      <span class="sx_switch_btn sx_monitor" style="background-position: 0px 0px; ">
+                        <input type="hidden" class="slide_autoplay_val" name="slide_autoplay_val" value="1"></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="mt5 mb5">
+                  <span class="name">轮播时长:</span>
+                  <span class="cont">
+                    <input type="text" class="slide_duration_val sx_monitor" />
+                  </span>
+                </span>
+
+                <span class="clearfix mt5">
+                  <span class="name">轮播效果:</span>
+                  <span class="cont">
+                    <select name="config_slide_effect" class="config_slide_effect sx_monitor">
+                      <option value="none" selected>普通</option>
+                      <option value="scrollx">左右</option>
+                      <option value="scrolly">上下</option>
+                      <option value="fade">渐变</option>
+                    </select>
+
+                  </span>
+                </span>
+                <span class="clearfix mt5 mb5">
+                  <span class="name" style="line-height: 22px;">箭头:</span>
+                  <span class="cont">
+                    <span class="sx_switch center">
+                      <span class="sx_switch_btn sx_monitor" style="background-position: 0px 0px; ">
+                        <input type="hidden" class="slide_arrow_val" name="slide_arrow_val" value="1"></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="clearfix mt5 mb5">
+                  <span class="name" style="line-height: 22px;">导航:</span>
+                  <span class="cont">
+                    <span class="sx_switch center">
+                      <span class="sx_switch_btn sx_monitor" style="background-position: 0px 0px; ">
+                        <input type="hidden" class="slide_nav_val" name="slide_nav_val" value="1"></span>
+                    </span>
+                  </span>
+                </span>
+                <!--</div>--></span>
+            </dd>
+            <div class="bg_config tab_bd mb10"></div>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

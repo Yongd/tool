@@ -1,0 +1,259 @@
+#topbar{
+	position:fixed;
+	top:0;
+	left:0px;
+	width:100%;
+	height: 40px;
+	z-index: 1005;
+	color:#fff;
+	background-color: #34383c;
+	text-align: center;
+	border-bottom: 3px #000 solid;
+}#topbar .left{
+
+}
+.logo{
+	display: block;
+	width: 50px;
+	height:40px;
+	background:url(../images/logo.png) center no-repeat;
+	float: left;
+}
+#topbar .icon{
+	border-left: 1px #3c4045 solid;
+	display: block;
+	width: 50px;
+	height: 40px;
+	cursor: pointer;
+	color:#d8d8d8;
+	line-height:40px;
+	position: relative;
+}
+
+#topbar .icon:hover{
+	color:#fff;
+	background-color: #4b4c4d;
+}
+
+#workspace #slide{
+	position:absolute;
+	top:0;
+	left:-200px;
+	width:231px;
+	height: 100%;
+	background-color: #222;
+	z-index: 1002;
+	border-left: 1px rgba(0,0,0,0.4) solid;
+	padding:0 1px;
+ 	box-shadow:inset 1px 0 0 rgba(255,255,255,0.05);
+}
+#workspace.move-right #slide{
+	left:-146px;
+}
+#slide .tabs dd a{
+	background-color: #333;
+	color:#fff;
+	padding:6px 29px;
+	font-size: 14px;
+}
+#slide .tabs dd.active a{
+	background-color: #222;
+}
+
+
+
+
+#tools{
+	width: 94%;
+	margin:0 auto;
+}
+#tools .toolist{
+	width: 100%;
+	height: 500px;
+}
+#tools li{
+	float: left;
+	text-align: center;
+	width: 70px;
+	height: 70px;
+	padding:10px 0;
+	cursor: move;
+	color:#ccc;
+}
+#tools li:hover{
+	background-color: #333;
+	color:#fff;
+}
+#tools li i{
+	display: block;
+	width: 100%;
+}
+#tools li label{
+	padding-top:3px;
+	color:inherit;
+	cursor: inherit;
+}
+
+
+
+
+
+#workspace #tools .normal .name{
+	display: none;
+}
+#workspace #tools.mini .hd{ 
+	width: 20px;
+	padding: 7px 6px 7px 9px;
+	height: auto;
+	border:none;
+}
+#workspace #tools .bd{
+	padding:0;
+}
+#workspace #tools .icon-minus{
+	margin-left: 3px;
+}
+#workspace #tools p{
+	text-align: center;
+	cursor:pointer;
+	border-bottom:1px solid #242424;
+	border-bottom:1px solid rgba(0,0,0,0.2);
+	box-shadow:inset 0 -1px 0 rgba(255,255,255,0.05);
+	-webkit-transition:all 1s ease-out;
+	-moz-transition:all 1s ease-out;
+	-o-transition:all 1s ease-out;
+	transition:all 1s ease-out;
+	height: 20px;
+}
+#workspace #tools p em{
+	display: none;
+}
+#workspace #tools p a{
+	color:inherit;
+}#workspace #tools p i{
+	display: block;
+	margin-top: 4px;
+	margin-left: 2px;
+}
+
+
+
+
+
+
+#layers{
+	width: 90%;
+	margin:0 auto;
+}#layers .hd{
+	padding-bottom:5px;
+	color:#fff;
+}
+#layers .hd .name{
+	float: left;
+}
+#layers .fi-trash{
+	float: right;
+	width: 12px;
+	cursor: pointer;
+}#layers .bd .list{
+	width:205px;
+	height: 100%;
+	position: absolute;
+	overflow-y:auto;
+	padding-bottom:150px;
+}#layers p{
+	cursor:default;
+	border-bottom:1px solid rgba(0,0,0,0.4);
+	box-shadow:inset 0 -1px 0 rgba(255,255,255,0.05);
+	color:#bdbdbd;
+}#layers p:hover,#layers p:hover i{
+	color:#fff;
+}#layers p i{
+	margin-left:5px;
+	margin-top: 2px;
+	float:right;
+	width: 14px;
+	cursor: pointer;
+}#layers p i.fi-x{
+	width: 12px;
+}#layers p span{
+	float:left;
+}#layers .bd .list p.active span{
+	color:#ffb400;
+}#layers .bd .list p{
+  -webkit-transition:all ease-in 0.2s;
+  -moz-transition:all ease-in 0.2s;
+  -o-transition:all ease-in 0.2s;
+  transition:all ease-in 0.2s;
+}#layers .bd .list p.ts{
+  padding-top:0;
+  padding-bottom:0;
+  height:0;
+  overflow: hidden;
+  margin-top:0;
+  margin-bottom: 0;
+  border-bottom-color: transparent;
+}#layers .grid_set{
+	margin-top: 10px;
+	position: absolute;
+	bottom: 0;
+	width:205px;
+	background-color: #222;
+}#layers .grid_set dt{
+	text-align: center;
+}#layers .range-slider.round {
+	background-color: #333;
+	border-color: #000;
+	height:10px;
+}#layers .range-slider .range-slider-handle{
+	height: 18px;
+	width: 23px;
+	left:90px;
+	background:url(../../images/ui/handle.png) no-repeat;
+}#layers .range-slider.round .range-slider-active-segment{
+	border-radius: 1000px;
+	height: 8px;
+}
+
+
+
+/*Aleat Window Animate*/
+.reveal-modal-bg{
+	background: rgba(0, 0, 0, 0.9);
+	-webkit-transition: opacity 5s linear;
+	transition: opacity 5s linear;
+}
+.reveal-modal-bg.fadeIn {
+	filter: alpha(opacity=100);
+	opacity:1;
+}
+.reveal-modal-bg.windowbg {
+	filter: alpha(opacity=0);
+	opacity: 0;
+}
+
+
+/*Alert Windows*/
+.reveal-modal p{
+	margin:30px 0;
+}.reveal-modal p strong{
+	color:#f00;
+	padding:0 3px;
+	text-decoration: underline;
+}.reveal-modal p em{
+	font-style: normal;
+	color:#008cba;
+}.reveal-modal .button.small{
+  font-size: 0.88889rem;
+  padding-top: 0.58889rem;
+  padding-right: 1.47778rem;
+  padding-bottom: 0.64444rem;
+  padding-left: 1.47778rem;
+  margin:0 0.5rem 0 0;
+}
+
+
+
+#main{
+	margin-top: 40px;
+}
