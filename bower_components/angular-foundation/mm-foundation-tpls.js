@@ -1303,8 +1303,17 @@ angular.module("mm.foundation.offcanvas", [])
             require: '^offCanvasWrap',
             restrict: 'C',
             link: function ($scope, element, attrs, offCanvasWrap) {
+                beforeToggle = 3;
                 element.on('click', function () {
-                    offCanvasWrap.leftToggle();
+                    if (beforeToggle == 3) {
+                      offCanvasWrap.leftToggle(),
+                      beforeToggle = attrs.actab
+                    } else if (beforeToggle == attrs.actab) {
+                      offCanvasWrap.leftToggle(),
+                      beforeToggle = 3;
+                    } else {
+                      beforeToggle = attrs.actab
+                    }
                 });
             }
         };

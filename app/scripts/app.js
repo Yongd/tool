@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var app = angular
+  angular
   .module('toolApp', [
     'ngCookies',
     'ngResource',
@@ -20,7 +20,7 @@ var app = angular
 	$tooltipProvider.options({
 		placement: 'bottom',
 		animation: true,
-		popupDelay: 200,
+		popupDelay:200,
 		appendToBody: true
 	});
 	}

@@ -1,7 +1,7 @@
 <div ng-include="'views/topbar.html'"></div>
 <div id="main">
-       <div class="wysiwyg_editor_skins_RulerSkin-background" style="left: 0px; top: 0px; height: 20px; width: 100%; background: url(http://static.parastorage.com/services/web/2.1102.13/images/web/EditorRulerBG-H.png) 0px -2px repeat-x;">
-      <div skinpart="scaleNumbers" class="wysiwyg_editor_skins_RulerSkin-scaleNumbers" style="left:0px; top: 0px; height: 20px; width: 100%;">
+       <div class="editorruler rulerx">
+      <div class="editorscaleNumbers">
         <div class="scaleNumber" style="left: 3px;">0</div>
         <div class="scaleNumber" style="left: 103px;">100</div>
         <div class="scaleNumber" style="left: 203px;">200</div>
@@ -25,10 +25,8 @@
       </div>
     </div>
 
-    <div skinpart="rulerVert" class="wysiwyg_editor_skins_EditLayerSkin-rulerVert wysiwyg_editor_skins_RulerSkin" skin="wysiwyg.editor.skins.RulerSkin" comp="wysiwyg.editor.components.Ruler" id="i3pvj15g" styleid="" style="visibility: visible; width: 20px; height: 100%; border-left-width: 1px; border-left-style: solid; border-left-color: rgb(0, 0, 0); top: 20px; right: 0px; display: inline-block;">
-      <div skinpart="rulerContainer" style="right: 0px; width: 20px; text-align: right;">
-        <div skinpart="background" class="wysiwyg_editor_skins_RulerSkin-background" style="right: 0px; top: 0px; height: 100%; width: 20px; background: url(http://static.parastorage.com/services/web/2.1102.15/images/web/EditorRulerBG-V.png) -19px -20px repeat-y;"></div>
-        <div skinpart="scaleNumbers" class="wysiwyg_editor_skins_RulerSkin-scaleNumbers" style="right: 0px; top: -76px; height: 100%; width: 20px;">
+        <div class="editorruler rulery">
+        <div class="editorscaleNumbers">
           <div class="scaleNumber" style="top: 156px; left: 2px;">100</div>
           <div class="scaleNumber" style="top: 256px; left: 2px;">200</div>
           <div class="scaleNumber" style="top: 356px; left: 2px;">300</div>
@@ -47,63 +45,30 @@
           <div class="scaleNumber" style="top: 1656px; left: 2px;">1600</div>
         </div>
       </div>
-    </div>
-
-    <style>
-    .wysiwyg_editor_skins_RulerSkin-background {
-position: absolute;
-opacity: 0.5;
-border-bottom-width: 1px;
-border-bottom-style: solid;
-border-bottom-color: rgb(0, 0, 0);
-z-index: 99;
-
-}
-
-.wysiwyg_editor_skins_RulerSkin-scaleNumbers {
-position: absolute;
-top: 0px;
-height: 20px;
-width: 100%;
-}
-.wysiwyg_editor_skins_RulerSkin-scaleNumbers .scaleNumber {
-position: absolute;
-font-size: 6pt;
-pointer-events: none;
-}
-.wysiwyg_editor_skins_RulerSkin {
-position: fixed;
-visibility: visible;
-width: 20px;
-height: 100%;
-border-left-width: 1px;
-border-left-style: solid;
-border-left-color: rgb(0, 0, 0);
-top: 56px;
-right: 0px;
-display: inline-block;
-z-index:9999;
-}
-    </style>
+  
       <div class="preloader done" style="display: none;">
         <div class="box">
           <div class="message">构建页面</div>
         </div>
       </div>
-      <div id="canvas" class="canvas"  droppable></div>
-      <div class="gridbg"></div>
+      <div id="canvas" class="canvas"  droppable>
+        <div class="gridbg"></div>
+
+        
+      </div>
+     
 
     </div>
+ 
 
-<!--
-    <div id="slide" class="box inner-wrap">
+    <div id="slide" class="box inner-wrap ts">
       <tabset>
         <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
           <div ng-include="tab.content"></div>
         </tab>
       </tabset>
-    </div>-->
-
+    </div>
+      <!--
     <div id="attribute" class="box boxbg jq_dd_div attribute window">
       <div class="hd">
         <i class="icon-xxx icon-white icon-minus fr sx_i_minify" tooltip="缩小还原属性窗"></i>
@@ -281,7 +246,8 @@ z-index:9999;
           </dl>
         </div>
       </div>
-    </div>
-  </div>
+    <!--</div>
+    -->
+  <a class="exit-off-canvas"></a>
 
 </div>
