@@ -1,43 +1,57 @@
-#topbar{
+/*topbar*/
+.topbar{
 	position:fixed;
 	top:0;
 	left:0px;
 	width:100%;
-	height: 40px;
-	z-index: 1003;
+	height: 43px;
+	z-index: 1005;
 	color:#fff;
-	background-color: #34383c;
+	background-color: #2e363f;
 	text-align: center;
-	border-bottom: 3px #000 solid;
-	box-sizing:content-box;
+	overflow: hidden;
 }.logo{
 	display: block;
-	width: 50px;
-	height:40px;
+	width: 160px;
+	height:43px;
 	background:url(../images/logo.png) center no-repeat;
-}
-#topbar .icon{
-	border-left: 1px #3c4045 solid;
+}.topbar .icon{
+	border-left: 1px #37414b solid;
 	display: block;
 	width: 50px;
-	height: 40px;
+	height: 43px;
 	cursor: pointer;
-	color:#d8d8d8;
-	line-height:40px;
-}#topbar .icon:hover{
+	color:#8f9da4;
+	line-height:43px;
+	text-align: center;
+	white-space:nowrap;
+}.topbar .icon:hover{
 	color:#fff;
-	background-color: #4b4c4d;
-}.has-tip,.has-tip:hover, .has-tip:focus {
-	border-bottom: none;
+	width: 90px;
+	background-color: #1f262d;
+}.topbar .icon:hover:before{
+	display: none;
+}.topbar .icon span{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 43px;
+	font-style: normal;
+}.topbar .icon::selection,.topbar .icon span::selection {
+    background:none;
 }
 
+
+.has-tip,.has-tip:hover, .has-tip:focus {
+	border-bottom: none;
+}
 
 #workspace{
 	height:100%;
 	width:100%;
 	min-height:100%;
 	*zoom:1;
-	position: relative;
 	overflow: visible;
 }
 #main{
@@ -45,6 +59,8 @@
 	min-height:100%;
 	width:100%;
 	*zoom:1;
+	position: relative;
+	top:43px;
 }
 #canvas{
 	position:absolute;
@@ -61,7 +77,7 @@
 	min-height:100%;
 	width:100%;
 	height:100%;
-	z-index:1;
+	z-index:0;
 	*zoom:1;
 	background-image:url("../images/tool/grid.png");
 	opacity:.5;
@@ -123,23 +139,23 @@
 	left:-230px;
 	width:230px;
 	height: 100%;
-	background-color: #222;
+	background-color: #1e242b;
 	z-index: 1003;
-	border-left: 1px rgba(0,0,0,0.4) solid;
-	padding:0 1px;
- 	box-shadow:inset 1px 0 0 rgba(255,255,255,0.05);
+	color:#8f9da4;
 }
 #workspace.move-right #slide{
 	left:0px;
 }
 #slide .tabs dd a{
-	background-color: #333;
-	color:#fff;
+	background-color: #262d35;
+	color:#8f9da4;
 	padding:6px 29px;
 	font-size: 14px;
+	border-top:1px #1e242b solid;
 }
 #slide .tabs dd.active a{
-	background-color: #222;
+	color:#fff;
+	background-color: #1e242b;
 }
 
 
@@ -278,7 +294,7 @@
 }#layers .grid_set{
 	margin-top: 10px;
 	position: absolute;
-	bottom: 0;
+	bottom: 45px;
 	width:205px;
 	background-color: #222;
 }#layers .grid_set dt{

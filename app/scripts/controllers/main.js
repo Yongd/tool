@@ -23,8 +23,8 @@ app.controller('MyTool', function ($scope,$modal) {
 		];
 		$scope.data = [];
 		$scope.getOrder = function(){
-			$scope.nowct++;
-			$scope.order=$scope.nowct;
+			$scope.nowAct++;
+			$scope.order=$scope.nowAct;
 			return $scope.order;
 		};
 		$scope.remove = function() {

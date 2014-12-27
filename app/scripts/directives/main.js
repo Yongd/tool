@@ -74,6 +74,7 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
         angular.element(e.target).removeClass('lvl-over');
       });*/
       b.bind('drop', function(e) {
+        console.log(11);
         if (e.preventDefault) {
           e.preventDefault();
         }

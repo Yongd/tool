@@ -196,7 +196,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acron
 	_font-family:"宋体",Arial;
 	line-height:160%;
 	padding:0;
-	margin:0;
+	margin:0;-webkit-font-smoothing: antialiased;
 }:focus{
 	outline:0;
 }fieldset{
@@ -543,10 +543,11 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acron
   cursor: pointer; }
 
 
-.drop-target {
+#canvas.drop-target {
     background-color: #ddd; 
     opacity: .5;
     border: 2px dashed black;
+    z-index: 1003;
 }
  
 
