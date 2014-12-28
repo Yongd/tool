@@ -1,57 +1,13 @@
 <div ng-include="'views/topbar.html'"></div>
 <div id="main">
-       <div class="editorruler rulerx">
-      <div class="editorscaleNumbers">
-        <div class="scaleNumber" style="left: 3px;">0</div>
-        <div class="scaleNumber" style="left: 103px;">100</div>
-        <div class="scaleNumber" style="left: 203px;">200</div>
-        <div class="scaleNumber" style="left: 303px;">300</div>
-        <div class="scaleNumber" style="left: 403px;">400</div>
-        <div class="scaleNumber" style="left: 503px;">500</div>
-        <div class="scaleNumber" style="left: 603px;">600</div>
-        <div class="scaleNumber" style="left: 703px;">700</div>
-        <div class="scaleNumber" style="left: 803px;">800</div>
-        <div class="scaleNumber" style="left: 903px;">900</div>
-        <div class="scaleNumber" style="left: 1003px;">1000</div>
-        <div class="scaleNumber" style="left: 1103px;">1100</div>
-        <div class="scaleNumber" style="left: 1203px;">1200</div>
-        <div class="scaleNumber" style="left: 1303px;">1300</div>
-        <div class="scaleNumber" style="left: 1403px;">1400</div>
-        <div class="scaleNumber" style="left: 1503px;">1500</div>
-        <div class="scaleNumber" style="left: 1603px;">1600</div>
-        <div class="scaleNumber" style="left: 1703px;">1700</div>
-        <div class="scaleNumber" style="left: 1803px;">1800</div>
-        <div class="scaleNumber" style="left: 1903px;">1900</div>
-      </div>
-    </div>
-
-        <div class="editorruler rulery">
-        <div class="editorscaleNumbers">
-          <div class="scaleNumber" style="top: 156px; left: 2px;">100</div>
-          <div class="scaleNumber" style="top: 256px; left: 2px;">200</div>
-          <div class="scaleNumber" style="top: 356px; left: 2px;">300</div>
-          <div class="scaleNumber" style="top: 456px; left: 2px;">400</div>
-          <div class="scaleNumber" style="top: 556px; left: 2px;">500</div>
-          <div class="scaleNumber" style="top: 656px; left: 2px;">600</div>
-          <div class="scaleNumber" style="top: 756px; left: 2px;">700</div>
-          <div class="scaleNumber" style="top: 856px; left: 2px;">800</div>
-          <div class="scaleNumber" style="top: 956px; left: 2px;">900</div>
-          <div class="scaleNumber" style="top: 1056px; left: 2px;">1000</div>
-          <div class="scaleNumber" style="top: 1156px; left: 2px;">1100</div>
-          <div class="scaleNumber" style="top: 1256px; left: 2px;">1200</div>
-          <div class="scaleNumber" style="top: 1356px; left: 2px;">1300</div>
-          <div class="scaleNumber" style="top: 1456px; left: 2px;">1400</div>
-          <div class="scaleNumber" style="top: 1556px; left: 2px;">1500</div>
-          <div class="scaleNumber" style="top: 1656px; left: 2px;">1600</div>
-        </div>
-      </div>
+  <div ng-include="'views/ruler.html'"></div>    
   
       <div class="preloader done" style="display: none;">
         <div class="box">
           <div class="message">构建页面</div>
         </div>
       </div>
-      <div id="canvas" class="canvas"  droppable>
+      <div  class="canvas"  droppable>
         <div class="gridbg"></div>
 
         
@@ -61,7 +17,7 @@
     </div>
  
 
-    <div id="slide" class="box inner-wrap ts">
+    <div id="side" class="box inner-wrap ts">
       <tabset>
         <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
           <div ng-include="tab.content"></div>

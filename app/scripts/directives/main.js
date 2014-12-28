@@ -127,6 +127,7 @@ app.directive('ta', ['$document' , function() {
          'size':{'width':200,'height':300},
          'link':''
       });
+      console.log(a.$parent.data);
       function removeData(){
         delete a.$parent.data[a.index];
       }

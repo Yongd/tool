@@ -38,53 +38,11 @@
 	font-size: 14px;
 	line-height: 43px;
 	font-style: normal;
+	-webkit-font-smoothing: antialiased;
 }.topbar .icon::selection,.topbar .icon span::selection {
     background:none;
 }
-
-
-.has-tip,.has-tip:hover, .has-tip:focus {
-	border-bottom: none;
-}
-
-#workspace{
-	height:100%;
-	width:100%;
-	min-height:100%;
-	*zoom:1;
-	overflow: visible;
-}
-#main{
-	height:100%;
-	min-height:100%;
-	width:100%;
-	*zoom:1;
-	position: relative;
-	top:43px;
-}
-#canvas{
-	position:absolute;
-	top:0;
-	right:0;
-	width:100%;
-	height:100%;
-	z-index:2;
-}
-#canvas .gridbg{
-	position:fixed;
-	top:42px;
-	left:0;
-	min-height:100%;
-	width:100%;
-	height:100%;
-	z-index:0;
-	*zoom:1;
-	background-image:url("../images/tool/grid.png");
-	opacity:.5;
-	filter:alpha(opacity=50);
-	filter:alpha(opacity=50);
-}
-
+/*Ruler*/
 .editorruler{
 	opacity: 0.5;
 	z-index: 100;
@@ -124,38 +82,97 @@
 	position: absolute;
 	font-size: 6pt;
 	pointer-events: none;
+}.rulery .scaleNumber{
+	left:2px;
 }
 
-
-
-
-
-
-
-
-#slide{
+/*Work space*/
+#workspace{
+	height:100%;
+	width:100%;
+	min-height:100%;
+	*zoom:1;
+	overflow: visible;
+}#main{
+	height:100%;
+	min-height:100%;
+	width:100%;
+	*zoom:1;
+	position: relative;
+	top:43px;
+}.canvas{
+	position:absolute;
+	top:0;
+	right:0;
+	width:100%;
+	height:100%;
+	z-index:2;
+}.canvas .gridbg{
+	position:fixed;
+	top:42px;
+	left:0;
+	min-height:100%;
+	width:100%;
+	height:100%;
+	z-index:0;
+	*zoom:1;
+	background-image:url("../images/tool/grid.png");
+	opacity:.5;
+	filter:alpha(opacity=50);
+	filter:alpha(opacity=50);
+}
+/*Side bar*/
+#side{
 	position:fixed;
 	top:43px;
-	left:-230px;
-	width:230px;
+	left:-240px;
+	width:240px;
 	height: 100%;
-	background-color: #1e242b;
+	background-color:rgba(30,36,43,0.9);
 	z-index: 1003;
-	color:#8f9da4;
 }
-#workspace.move-right #slide{
+#workspace.move-right #side{
 	left:0px;
 }
-#slide .tabs dd a{
-	background-color: #262d35;
-	color:#8f9da4;
-	padding:6px 29px;
-	font-size: 14px;
-	border-top:1px #1e242b solid;
+#side .tabs dd a{
+	background-color:rgba(30,36,43,0.4);
+	color:#ccc;
+	padding:6px 14px;
+	font-size: 0.81rem;
+	border-top:1px solid rgba(30,36,43,0.7);;
 }
-#slide .tabs dd.active a{
+#side .tabs dd.active a{
 	color:#fff;
-	background-color: #1e242b;
+	background-color:transparent;
+}
+
+
+#canvas .bd{
+	padding:0 10px;
+}.mk_config{
+	margin-bottom: 1rem;
+}.yd_attr dt{
+	font-size: 0.85rem;
+	color:#fff;
+	margin-bottom: 0.6rem;
+}.yd_attr dt em{
+	color:#999;
+	font-size: 0.75rem;
+	font-style: normal;
+	font-weight: normal;
+	padding-left: 0.3rem;
+}.yd_attr dd{
+	font-size: 0.75rem;
+	line-height: 25px;
+}.yd_attr hr {
+	margin: 10px 0;
+	border: 0;
+	border-top: 1px solid rgba(30,36,43,0.6);
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}.yd_attr .size{
+	padding-top: 28px;
+}#canvas .yd_attr .size input{
+	width: 40px;
 }
 
 
@@ -164,12 +181,12 @@
 #tools{
 	width: 94%;
 	margin:0 auto;
-}
-#tools .toolist{
+}#tools .toolist{
 	width: 100%;
 	height: 500px;
-}
-#tools li{
+	list-style: none;
+	margin:0;
+}#tools li{
 	float: left;
 	text-align: center;
 	width: 70px;
@@ -177,64 +194,21 @@
 	padding:10px 0;
 	cursor: move;
 	color:#ccc;
-}
-#tools li:hover{
-	background-color: #333;
+
+}#tools li:hover{
+	background-color: #2e363f;
 	color:#fff;
-}
-#tools li i{
+}#tools li i{
 	display: block;
 	width: 100%;
-}
-#tools li label{
+}#tools li label{
 	padding-top:3px;
 	color:inherit;
 	cursor: inherit;
+	font-size: 12px;
+}.has-tip,.has-tip:hover, .has-tip:focus {
+	border-bottom: none;
 }
-
-
-
-
-
-#workspace #tools .normal .name{
-	display: none;
-}
-#workspace #tools.mini .hd{ 
-	width: 20px;
-	padding: 7px 6px 7px 9px;
-	height: auto;
-	border:none;
-}
-#workspace #tools .bd{
-	padding:0;
-}
-#workspace #tools .icon-minus{
-	margin-left: 3px;
-}
-#workspace #tools p{
-	text-align: center;
-	cursor:pointer;
-	border-bottom:1px solid #242424;
-	border-bottom:1px solid rgba(0,0,0,0.2);
-	box-shadow:inset 0 -1px 0 rgba(255,255,255,0.05);
-	-webkit-transition:all 1s ease-out;
-	-moz-transition:all 1s ease-out;
-	-o-transition:all 1s ease-out;
-	transition:all 1s ease-out;
-	height: 20px;
-}
-#workspace #tools p em{
-	display: none;
-}
-#workspace #tools p a{
-	color:inherit;
-}#workspace #tools p i{
-	display: block;
-	margin-top: 4px;
-	margin-left: 2px;
-}
-
-
 
 
 

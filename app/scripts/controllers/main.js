@@ -18,9 +18,13 @@ app.controller('MyTool', function ($scope,$modal) {
 		$scope.left = 200;
 		$scope.bgcolor='#f00';
 		$scope.tabs = [
-		{ title:'添加组件', content:'views/tools.html' },
+		{ title:'添加组件', content:'views/tools.html'},
+		{ title:'画布管理', content:'views/canvas.html'},
 		{ title:'图层管理', content:'views/layer.html'}
 		];
+		$scope.rgbaPicker = {
+        color: ''
+      	};
 		$scope.data = [];
 		$scope.getOrder = function(){
 			$scope.nowAct++;

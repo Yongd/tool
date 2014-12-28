@@ -14,7 +14,8 @@
     'ngResource',
     'ngSanitize',
     'mm.foundation',
-    'ngAnimate'
+    'ngAnimate',
+    'colorpicker.module'
   ])
   .config(['$tooltipProvider', function ($tooltipProvider) {
 	$tooltipProvider.options({
