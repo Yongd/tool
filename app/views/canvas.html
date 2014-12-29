@@ -5,53 +5,55 @@
       <dd class="clearfix">
         <div class="name left">配置名称:</div>
         <div class="cont right">
-          <input class="sx_mk_name sx_monitor ts" type="text" placeholder="未命名">
+          <input type="text" placeholder="未命名">
         </div>
       </dd>
       <dd>
         <div class="name left">画布尺寸:</div>
         <div class="cont right">       
-          <input class="sx_mk_width sx_mk_w_c sx_monitor" type="radio" name="sx_mk_width" value="0"> 集市 &nbsp;
-          <input class="sx_mk_width sx_mk_w_b sx_monitor" type="radio" name="sx_mk_width" value="1"> 天猫 &nbsp;
-          <input class="sx_mk_width sx_mk_w_s sx_monitor" type="radio" name="sx_mk_width" checked="" value="2"> 自定义  &nbsp; 
+          <input type="radio" name="sx_mk_width" value="0"> 集市 &nbsp;
+          <input type="radio" name="sx_mk_width" value="1"> 天猫 &nbsp;
+          <input type="radio" name="sx_mk_width" checked="" value="2"> 自定义&nbsp; 
         </div>
         <div class="cont size text-right clearfix">
-          <span>宽 <input class="sx_mk_width_val sx_monitor" type="text" name="" value="1920" disabled=""> px</span>&nbsp;
-          <span>高 <input class="sx_mk_height_val sx_monitor" type="text" name="" value="600" > px</span>&nbsp;&nbsp;
+          <span>宽 <input type="text" name="" value="1920" disabled=""> px</span>&nbsp;
+          <span>高 <input type="text" name="" value="600" > px</span>&nbsp;
         </div>
       </dd>
     </dl>
-    <dl class="type_slider tab_box yd_attr">
+    <dl class="slider_config yd_attr">
       <hr>
       <dt>
         <i class="icon fi-photo"></i> 画布设置<em>(多张画布时,轮播显示)</em>
       </dt>
 
-      <dd class="tab_nav">
+      <dd class="tab_nav" style="display:none;">
         <ul>
           <li class="tab_act">画布1</li>
           <span class="btn smallbtn fl sx_add_slide" style="margin-left:10px; margin-top:3px;"><i class="icon-xxx icon-white icon-plus"></i>增加</span>
           <span class="btn smallbtn fl sx_remove_slide" style="margin-top:3px;"><i class="icon-xxx icon-white icon-remove"></i>删除</span>
         </ul>
       </dd>
+
       <div class="bg_config tab_bd mb10">
+
         <div class="bg_0 sx_attr tab_bd_item"> 
+          
           <dd class="clearfix">  
             <div class="name left">主背景色:</div> 
             <div class="cont right">    
-              <div class="color_picker bg_color_picker">      
-                <input type="text" class="sx_bg_color sx_monitor color_select_val" value="transparent" size="10">
-                <input type="text" class="color_select_trigger" value="transparent" style="display: none;">
-                  <div class="sp-replacer sp-light sx_color_picker">
+              <input class="left" type="text" ng-model="nonInput.color" size="5" style="width:120px;">
+                <div class="right color-picker">
                     <div class="sp-preview">
-                      <div class="sp-preview-inner" style="background-color: rgba(0, 0, 0, 0);"></div>
+                      <div colorpicker="rgba" colorpicker-position="right" colorpicker-with-input="nonInput.color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="nonInput.color" style="background-color:{{nonInput.color}}"></div>
                     </div>
-                    <input colorpicker colorpicker-fixed-position="true" class="span2" type="text" ng-model="rgbaPicker.color" />
+                    
                   </div>   
                 </div>  
-              </div>
+              
             </div>  
           </dd>
+
           <dd class="clearfix"> 
             <div class="name">主背景图:</div> 
             <div class="cont">    
@@ -60,15 +62,17 @@
                 <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="btn">打开淘宝图片空间</a>  
             </div>
           </dd>
-          <dd> 
-            <div class="name">平铺方式:</div> 
-            <div class="cont">    
-              <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat"> 平铺</span>    
-              <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-x"> 横向平铺</span>    
-              <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-y"> 纵向平铺</span>    
-              <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="no-repeat" checked=""> 不平铺</span> 
-            </div>
-          </dd>
+
+            <dd> 
+              <div class="name">平铺方式:</div> 
+              <div class="cont">    
+                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat"> 平铺</span>    
+                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-x"> 横向平铺</span>    
+                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-y"> 纵向平铺</span>    
+                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="no-repeat" checked=""> 不平铺</span> 
+              </div>
+            </dd>
+
         </div>
       </div>  
       <dd class="mk_slide sx_attr hidden" style="display: none;"> 

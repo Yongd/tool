@@ -170,16 +170,15 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	text-shadow:0 1px 2px rgba(0,0,0,0.6);
 }.box .bd input{
 	margin:0;
-}.box .bd input[type=text],.box .bd input[type=password]{
-	height:24px;
-	border:#000 1px solid;
-	padding:3px;
+}.bd input[type=text],.bd input[type=password]{
+	border:1px solid rgba(30,36,43,1);
+	padding:0;
 	display: inline-block;
 	width: auto;
 	margin:0;
 	box-shadow:0 0 0px rgba(0,0,0,0);
-	font-size: 13px;
-}.box .bd input[type=text]:focus{
+	text-indent: 0.2rem;
+}input[type=text]:focus{
 	box-shadow:0 0 7px rgba(39,170,227,1);
 	border-color:#27aae3;
 }.box .ft{

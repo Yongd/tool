@@ -22,10 +22,15 @@ app.controller('MyTool', function ($scope,$modal) {
 		{ title:'画布管理', content:'views/canvas.html'},
 		{ title:'图层管理', content:'views/layer.html'}
 		];
-		$scope.rgbaPicker = {
-        color: ''
+		$scope.nonInput = {
+        color: 'transparent'
+      	};
+
+      	$scope.test = function(){
+      		console.log(1);
       	};
 		$scope.data = [];
+		
 		$scope.getOrder = function(){
 			$scope.nowAct++;
 			$scope.order=$scope.nowAct;
