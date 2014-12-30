@@ -17,6 +17,7 @@ app.controller('MyTool', function ($scope,$modal) {
 	    $scope.nowAct=-1;
 		$scope.left = 200;
 		$scope.bgcolor='#f00';
+		$scope.canvasOrder=0;
 		$scope.tabs = [
 		{ title:'添加组件', content:'views/tools.html'},
 		{ title:'画布管理', content:'views/canvas.html'},
@@ -29,8 +30,21 @@ app.controller('MyTool', function ($scope,$modal) {
       	$scope.test = function(){
       		console.log(1);
       	};
+
+		$scope.dataMks = {
+			'jname':'未命名',
+			'width':1885,
+			'height':627,
+			'mks':[
+				{
+					'color': 'transparent',
+					'img':{'repeat':'no-repeat','url':''}
+					
+				}
+			],
+			'version':1
+		};
 		$scope.data = [];
-		
 		$scope.getOrder = function(){
 			$scope.nowAct++;
 			$scope.order=$scope.nowAct;
