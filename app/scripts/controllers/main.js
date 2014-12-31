@@ -33,7 +33,7 @@ app.controller('MyTool', function ($scope,$modal) {
 
 		$scope.dataMks = {
 			'jname':'未命名',
-			'width':1885,
+			'width':1920,
 			'height':627,
 			'mks':[
 				{

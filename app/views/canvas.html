@@ -1,32 +1,31 @@
 <div id="canvas">
   <div class="bd">
-    <dl class="mk_config yd_attr">
-    <dt><i class="icon fi-widget"></i> 基本信息</dt>
+    <dl class="yd_attr mk_config clearfix">
+      <dt><i class="icon fi-annotate"></i> 基本信息</dt>
       <dd class="clearfix">
         <div class="name left">配置名称:</div>
         <div class="cont right">
-          <input type="text" placeholder="未命名">
+          <input type="text" required ng-model="dataMks.jname">
         </div>
       </dd>
       <dd>
         <div class="name left">画布尺寸:</div>
         <div class="cont right">       
-          <input type="radio" name="sx_mk_width" value="0"> 集市 &nbsp;
-          <input type="radio" name="sx_mk_width" value="1"> 天猫 &nbsp;
-          <input type="radio" name="sx_mk_width" checked="" value="2"> 自定义&nbsp; 
-        </div>
-        <div class="cont size text-right clearfix">
-          <span>宽 <input type="text" name="" value="1920" disabled=""> px</span>&nbsp;
-          <span>高 <input type="text" name="" value="600" > px</span>&nbsp;
+          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-init="dataMks.width=950"> 集市店铺 &nbsp;
+          <input type="radio" name="mk_width" ng-model="dataMks.width" value=990> 天猫店铺 &nbsp;
+          <input type="radio" name="mk_width" ng-model="dataMks.width" value="1920"> 自定义&nbsp; 
+          <div class="size text-center">
+            <span>宽 <input type="number" required ng-model="dataMks.width"  disabled=""> px</span> &nbsp;&nbsp;&nbsp; 
+            <span>高 <input type="number" required ng-model="dataMks.height"> px</span>
+          </div>
         </div>
       </dd>
     </dl>
-    <dl class="slider_config yd_attr">
+    <dl class="yd_attr bg_config">
       <hr>
       <dt>
         <i class="icon fi-photo"></i> 画布设置<em>(多张画布时,轮播显示)</em>
       </dt>
-
       <dd class="tab_nav" style="display:none;">
         <ul>
           <li class="tab_act">画布1</li>
@@ -34,85 +33,74 @@
           <span class="btn smallbtn fl sx_remove_slide" style="margin-top:3px;"><i class="icon-xxx icon-white icon-remove"></i>删除</span>
         </ul>
       </dd>
-
       <div class="bg_config tab_bd mb10">
-
         <div class="bg_0 sx_attr tab_bd_item"> 
-          
           <dd class="clearfix">  
             <div class="name left">主背景色:</div> 
             <div class="cont right">    
-              <input class="left" type="text" ng-model="dataMks.mks[canvasOrder].color" size="5" style="width:120px;">
-                <div class="right color-picker">
-                    <div class="sp-preview">
-                      <div colorpicker="rgba" colorpicker-position="left" colorpicker-with-input="dataMks.mks[canvasOrder].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].color" style="background-color:{{dataMks.mks[canvasOrder].color}}"></div>
-                    </div>
-                    
-                  </div>   
-                </div>  
-              
+              <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].color">
+              <div class="right color-picker">
+                <div class="sp-preview">
+                  <div colorpicker="rgba" colorpicker-position="left" colorpicker-with-input="dataMks.mks[canvasOrder].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].color" style="background-color:{{dataMks.mks[canvasOrder].color}}"></div>
+                </div>
+              </div>   
             </div>  
           </dd>
-
           <dd class="clearfix"> 
-            <div class="name">主背景图:</div> 
-            <div class="cont">    
-              <p>
-                <input type="text" class="sx_bg_url auto_img sx_monitor" value=""></p>
-                <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="btn">打开淘宝图片空间</a>  
+            <div class="name left">主背景图:</div> 
+            <div class="cont right">    
+              <input type="text" class="bginput">
+              <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="button tiny">图片空间</a>
             </div>
           </dd>
-
-            <dd> 
-              <div class="name">平铺方式:</div> 
-              <div class="cont">    
-                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat"> 平铺</span>    
-                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-x"> 横向平铺</span>    
-                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="repeat-y"> 纵向平铺</span>    
-                <span class="radios"><input type="radio" class="sx_tile sx_monitor" name="sx_tile" value="no-repeat" checked=""> 不平铺</span> 
-              </div>
-            </dd>
-
+          <dd class="clearfix"> 
+            <div class="name left">平铺方式:</div> 
+            <div class="cont right">    
+              <input type="radio" name="sx_tile" value="repeat"> 平铺
+              <input type="radio" name="sx_tile" value="repeat-x"> 横铺  
+              <input type="radio" name="sx_tile" value="repeat-y"> 纵铺 
+              <input type="radio" name="sx_tile" value="no-repeat" checked=""> 不平铺
+            </div>
+          </dd>
         </div>
-      </div>  
-      <dd class="mk_slide sx_attr hidden" style="display: none;"> 
-
-        <div class="clearfix cfg_cont" name="more">                                     
-          <div class="clearfix mt5 mb5">
-            <div class="name" style="line-height: 22px;">自动播放:</div>
-            <div class="cont">
-              <div class="sx_switch center"><div class="sx_switch_btn sx_monitor" style="background-position: 0px 0px;"><input type="hidden" class="slide_autoplay_val" name="slide_autoplay_val" value="1"></div></div>
-            </div>
-          </div>               
-          <div class="clearfix mt5 mb5">
-            <div class="name">轮播时长:</div>
-            <div class="cont"><input type="text" class="slide_duration_val sx_monitor"></div>
-          </div>     
-
-          <div class="clearfix mt5">
-            <div class="name">轮播效果:</div>
-            <div class="cont">
-              <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="none"> 普通 &nbsp;&nbsp;
-              <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrollx" checked=""> 左右 &nbsp;&nbsp;
-              <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrolly"> 上下 &nbsp;&nbsp;
-              <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="fade"> 渐变
-            </div>                        
-          </div> 
-          <div class="clearfix mt5 mb5">
-            <div class="name" style="line-height: 22px;">箭头开关:</div>
-            <div class="cont">
-              <div class="sx_switch center"><div class="sx_switch_btn sx_monitor" style="background-position: 0px 0px;"><input type="hidden" class="slide_arrow_val" name="slide_arrow_val" value="1"></div></div>
-            </div>
-          </div> 
-          <div class="clearfix mt5 mb5">
-            <div class="name" style="line-height: 22px;">导航开关:</div>
-            <div class="cont">
-              <div class="sx_switch center"><div class="sx_switch_btn sx_monitor" style="background-position: 0px 0px;"><input type="hidden" class="slide_nav_val" name="slide_nav_val" value="1"></div></div>
-            </div>
+      </div> 
+    </dl>  
+    <dl class="yd_attr slide_config hidden"> 
+      <hr>
+      <dt>
+      <i class="icon fi-play-video"></i> 轮播设置
+      </dt>
+      <dd class="clearfix">
+        <div class="name left">自动播放:</div>
+        <div class="cont left switch small round">
+          <input id="exampleCheckboxSwitch" checked type="checkbox">
+          <label for="exampleCheckboxSwitch"></label>
+        </div>
+        <div class="name left">轮播时长:</div>
+        <div class="cont left"><input type="text" class="timeinput" style="80px;"></div>
+      </dd>               
+      <dd class="clearfix">
+        <div class="name left">箭头开关:</div>
+        <div class="cont left switch small round">
+            <input id="exampleCheckboxSwitch" checked type="checkbox">
+            <label for="exampleCheckboxSwitch"></label>
           </div>
-          <!--</div>--> 
-        </div> 
-      </dd>
-    </dl>
-  </div>
+        <div class="name left">导航开关:</div>
+        <div class="cont left switch small round">
+            <input id="exampleCheckboxSwitch" checked type="checkbox">
+            <label for="exampleCheckboxSwitch"></label>
+        </div>
+      </dd> 
+      <dd class="clearfix effect">
+        <div class="name left">轮播效果:</div>
+        <div class="cont left">
+          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="none"> 普通 &nbsp;&nbsp;
+          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrollx" checked=""> 左右 &nbsp;&nbsp;
+          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrolly"> 上下 &nbsp;&nbsp;
+          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="fade"> 渐变
+        </div>                        
+      </dd> 
+      
+  </dl>
+</div>
 </div>

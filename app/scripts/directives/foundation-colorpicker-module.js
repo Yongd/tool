@@ -272,7 +272,7 @@ angular.module('colorpicker.module', [])
               inputTemplate = withInput ? '<input type="text" name="colorpicker-input"></div>' : '',
               closeButton = !inline ? '<button type="button" class="tiny button">&times;</button>' : '',
               template =
-                      '<div class="colorpicker f-dropdown">' +
+                      '<div class="colorpicker f-dropdown animated ">' +
                       '<div class="left" ng-include="\'views/generatedcolor.html\'"></div>' +
                       '<div class="right rcolorpicker"><colorpicker-saturation><i></i></colorpicker-saturation>' +
                       '<colorpicker-hue><i></i></colorpicker-hue>' +
@@ -290,10 +290,7 @@ angular.module('colorpicker.module', [])
               pickerColorPointers = colorpickerTemplate.find('i');
 
           $compile(colorpickerTemplate)($scope);
-          $scope.changeColor=function(color){
-            ngModel.$setViewValue(color);
-            previewColor();
-          };
+          
           if (withInput) {
             var pickerColorInput = colorpickerTemplate.find('input');
             pickerColorInput
@@ -384,7 +381,11 @@ angular.module('colorpicker.module', [])
 
           var previewColor = function () {
             try {
-              colorpickerPreview.css('backgroundColor', pickerColor[thisFormat]());
+              if(ngModel.$viewValue=='transparent'){
+                colorpickerPreview.css('backgroundColor', pickerColor[thisFormat]());
+              }else{
+                colorpickerPreview.css('backgroundColor', ngModel.$viewValue);
+              }
             } catch (e) {
               colorpickerPreview.css('backgroundColor', pickerColor.toHex());
             }
@@ -393,7 +394,7 @@ angular.module('colorpicker.module', [])
               sliderAlpha.css.backgroundColor = pickerColor.toHex();
             }
           };
-
+          
           var mousemove = function (event) {
             var
                 left = Slider.getLeftPosition(event),
@@ -481,7 +482,8 @@ angular.module('colorpicker.module', [])
             elem.on('click', function () {
               update();
               colorpickerTemplate
-                .addClass('colorpicker-visible')
+                .removeClass('flipOutY')
+                .addClass('colorpicker-visible flipInY')
                 .css(getColorpickerTemplatePosition());
 
               // register global mousedown event to hide the colorpicker
@@ -490,7 +492,8 @@ angular.module('colorpicker.module', [])
           } else {
             update();
             colorpickerTemplate
-              .addClass('colorpicker-visible')
+              .removeClass('flipOutY')
+              .addClass('colorpicker-visible flipInY')
               .css(getColorpickerTemplatePosition());
           }
 
@@ -510,11 +513,15 @@ angular.module('colorpicker.module', [])
 
           var hideColorpickerTemplate = function() {
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
-              colorpickerTemplate.removeClass('colorpicker-visible');
+              colorpickerTemplate.removeClass('flipInY').addClass('flipOutY');
               emitEvent('colorpicker-closed');
               // unregister the global mousedown event
               $document.off('mousedown', documentMousedownHandler);
             }
+          };
+
+          $scope.changeColor=function(color){
+            ngModel.$setViewValue(color);
           };
 
           colorpickerTemplate.find('button').on('click', function () {

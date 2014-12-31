@@ -125,8 +125,8 @@
 #side{
 	position:fixed;
 	top:43px;
-	left:-240px;
-	width:240px;
+	left:-20rem;
+	width:20rem;
 	height: 100%;
 	background-color:rgba(30,36,43,0.9);
 	z-index: 1003;
@@ -147,10 +147,10 @@
 }
 
 
+
+/*mk_config*/
 #canvas .bd{
-	padding:0 10px;
-}.mk_config{
-	margin-bottom: 1rem;
+	padding:0 15px;
 }.yd_attr dt{
 	font-size: 0.85rem;
 	color:#fff;
@@ -170,46 +170,50 @@
 	border-top: 1px solid rgba(30,36,43,0.6);
 	border-bottom: 1px solid rgba(255,255,255,0.1);
 }.yd_attr .size{
-	padding-top: 28px;
-}#canvas .yd_attr input[type=text]{
+	margin-top: 0.32rem;
+}.yd_attr input[type=text]{
 	height: 1.8rem;
-	width: 10rem;
+	width: 14.4rem;
 	font-size: 0.75rem;
-}#canvas .yd_attr .size input{
-	width:2.5rem;
+}.yd_attr .size input[type=number]{
+	width:3.5rem;
+	height: 1.8rem;
+	font-size: 0.75rem;
 	text-align: center;
-	text-indent: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-right: 0;
+}.mk_config input[type=radio]{
+	margin-left: 0.65rem;
 }
-
-.color-picker{
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	border:1px solid rgba(30,36,43,0.6);
-	box-shadow: inset 1px 1px 0 rgba(255,255,255,0.08);
-	overflow: hidden;
-	cursor: pointer;
-	padding: 0.26rem;
-	color: #333;
-	vertical-align: middle;
-	width: 2.11rem;
-	margin-left: 0.40rem;
-}.sp-preview {
-	position: relative;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
-	width: 1.48rem;
-	height: 1.2rem;
-	border: 1px solid rgba(30,36,43,0.9);
-	z-index: 0;
-}.sp-preview-inner{
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
+/*bg_config*/
+.bg_config input.colorinput{
+	width: 11.8rem;
+}.bg_config input.bginput{
+	width: 10rem;
+}.bg_config .button.tiny{
+	margin-left: 0.24rem;
+	margin-bottom:0;
+	padding:0.45rem 0.55rem;
+}.bg_config input[type=radio]{
+	margin-left: 0.885rem;
+}.bg_config input[value=repeat]{
+	margin-left: 0;
 }
-
+/*Slider_config*/
+.slide_config .name{
+	margin-right: 0.55rem;
+}.slide_config .cont{
+	margin-right: 1.7rem;
+}.slide_config .effect .name{
+	margin-right: 0.75rem;
+}.slide_config .effect .cont{
+	margin-right: 0;
+}.slide_config div.switch.small label{
+	margin-bottom: 0;
+}.slide_config input[type=text]{
+	width: 3.5rem;
+}
 
 
 
