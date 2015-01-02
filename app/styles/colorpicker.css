@@ -584,7 +584,7 @@ colorpicker-preview {
   color:#fff;
   text-align: center;
   font-size: 0.8rem;
-}.colorpicker input{
+}.colorpicker input[type=text]{
   margin-top: 0.2rem;
   float: right;
   width: 8.5rem;
@@ -592,6 +592,7 @@ colorpicker-preview {
   font-size: 0.85rem;
   padding-left: 3px;
   box-shadow:0 0 0px rgba(0,0,0,0);
+  border-color:#ccc;
 }.colorpicker button.tiny{
   position: absolute;
   bottom: 0;

@@ -121,7 +121,8 @@
 	filter:alpha(opacity=50);
 	filter:alpha(opacity=50);
 }
-/*Side bar*/
+
+/*Side Tab Header*/
 #side{
 	position:fixed;
 	top:43px;
@@ -134,27 +135,57 @@
 #workspace.move-right #side{
 	left:0px;
 }
-#side .tabs dd a{
+.ftab > .tabs dd a{
 	background-color:rgba(30,36,43,0.4);
 	color:#ccc;
-	padding:6px 14px;
-	font-size: 0.81rem;
-	border-top:1px solid rgba(30,36,43,0.7);;
+	padding:0.5rem 1.628rem;
+	font-size: 0.85rem;
+	border-top:1px solid rgba(30,36,43,0.7);
+	font-weight: 600;
 }
-#side .tabs dd.active a{
+.ftab > .tabs dd.active a{
 	color:#fff;
 	background-color:transparent;
 }
+.tabs-content .content .bd{
+	width: 90%;
+	margin:0 auto;
+}
 
-
-
+.toolist{
+	width: 100%;
+	height: 500px;
+	list-style: none;
+	margin:0;
+}.toolist li{
+	float: left;
+	text-align: center;
+	width: 70px;
+	height: 70px;
+	padding:10px 5px;
+	cursor: move;
+	color:#ccc;
+	margin-bottom: 10px;
+}.toolist li:hover{
+	background-color: #222;
+	color:#fff;
+}.toolist li i{
+	display: block;
+	width: 100%;
+}.toolist li label{
+	padding-top:3px;
+	color:inherit;
+	cursor: inherit;
+	font-size: 12px;
+}.has-tip,.has-tip:hover, .has-tip:focus {
+	border-bottom: none;
+}
 /*mk_config*/
-#canvas .bd{
-	padding:0 15px;
-}.yd_attr dt{
-	font-size: 0.85rem;
+.yd_attr dt{
+	font-size: 0.8rem;
 	color:#fff;
 	margin-bottom: 0.6rem;
+	font-weight: normal;
 }.yd_attr dt em{
 	color:#999;
 	font-size: 0.75rem;
@@ -184,13 +215,40 @@
 	padding-bottom: 0;
 	padding-right: 0;
 }.mk_config input[type=radio]{
-	margin-left: 0.65rem;
+	margin-left: 0.62rem;
 }
 /*bg_config*/
+.bg_config{
+	margin-bottom: 0;
+}.bg_config .tabs{
+	border:1px solid rgba(0,0,0,0.3);
+	background-color:rgba(30,36,43,0.3);
+}.bg_config .tabs dd a{
+	background-color: transparent;
+	color:#ccc;
+	padding:0.1rem 0.828rem;
+	font-size: 0.75rem;
+}.bg_config .tabs dd.active a{
+	color:#ffb400;
+	background-color:rgba(0,0,0,0.3);
+}.bg_config .tabs-content > .content{
+	padding-bottom: 0;
+}.bg_config .tabs-content{
+	margin-bottom: 0;
+}.bg_config dt .fi-minus,.bg_config dt .fi-plus{
+	width: 0.8rem;
+	margin-left: 0.6rem;
+	cursor: pointer;
+}.bg_config dt .fi-minus:hover,.bg_config dt .fi-plus:hover{
+	color:#ffb400;
+}
+
 .bg_config input.colorinput{
 	width: 11.8rem;
 }.bg_config input.bginput{
 	width: 10rem;
+	height: 1.8rem;
+	font-size: 0.75rem;
 }.bg_config .button.tiny{
 	margin-left: 0.24rem;
 	margin-bottom:0;
@@ -201,6 +259,7 @@
 	margin-left: 0;
 }
 /*Slider_config*/
+
 .slide_config .name{
 	margin-right: 0.55rem;
 }.slide_config .cont{
@@ -217,37 +276,6 @@
 
 
 
-#tools{
-	width: 94%;
-	margin:0 auto;
-}#tools .toolist{
-	width: 100%;
-	height: 500px;
-	list-style: none;
-	margin:0;
-}#tools li{
-	float: left;
-	text-align: center;
-	width: 70px;
-	height: 70px;
-	padding:10px 0;
-	cursor: move;
-	color:#ccc;
-
-}#tools li:hover{
-	background-color: #2e363f;
-	color:#fff;
-}#tools li i{
-	display: block;
-	width: 100%;
-}#tools li label{
-	padding-top:3px;
-	color:inherit;
-	cursor: inherit;
-	font-size: 12px;
-}.has-tip,.has-tip:hover, .has-tip:focus {
-	border-bottom: none;
-}
 
 
 

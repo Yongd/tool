@@ -23,18 +23,51 @@ app.controller('MyTool', function ($scope,$modal) {
 		{ title:'画布管理', content:'views/canvas.html'},
 		{ title:'图层管理', content:'views/layer.html'}
 		];
-		$scope.nonInput = {
-        color: 'transparent'
-      	};
 
+		$scope.canvastabs = [
+		{ title:'画布1', content:'views/canvasconfig.html'}
+		];
+
+		
+
+
+      	var 
+      	wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+      	wHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      	
+      	$scope.width ={
+      		'c':950,
+      		'b':990,
+      		'self':wWidth
+      	};
       	$scope.test = function(){
       		console.log(1);
       	};
-
+      	
 		$scope.dataMks = {
 			'jname':'未命名',
-			'width':1920,
-			'height':627,
+			'width':wWidth,
+			'height':wHeight,
+			'slider':{
+				'arrow':{
+						'enable':true,
+						'left_url':'http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX',
+						'left_position':{'left':447.5,'top':273},
+						'right_url':'http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX',
+						'right_position':{'left':1397,'top':273},
+					},
+				'nav':{
+						'enable':true,
+						'bg_color':'',
+						'border_color':'',
+						'font_color':'',
+						'align':0,
+						'position':{'left':600,'top':100}
+					},
+				'effect':'scrollx',
+				'duration':0.5,
+				'autoplay':true
+			},
 			'mks':[
 				{
 					'color': 'transparent',
@@ -45,6 +78,33 @@ app.controller('MyTool', function ($scope,$modal) {
 			'version':1
 		};
 		$scope.data = [];
+		
+		$scope.indexCanvas = 1;
+		/**/
+		$scope.addCanvas = function(){
+			$scope.indexCanvas += 1;
+			$scope.canvastabs.push({title:'画布'+$scope.indexCanvas, content:'views/canvasconfig.html'});
+			$scope.dataMks.mks.push({'color': 'transparent', 'img':{'repeat':'no-repeat','url':''}});
+			
+		};
+
+		$scope.deleteCanvas = function(){
+			$scope.indexCanvas -= 1;
+			$scope.canvastabs.splice($scope.canvasOrder,1);
+			var tabLength = $scope.canvastabs.length;
+			if($scope.canvasOrder==tabLength){
+				$scope.canvasOrder-=1;
+			}else{
+				var rIndex = 0;
+				for(var $i=0;$i<tabLength;$i++){
+					rIndex ++;
+					$scope.canvastabs[$i].title = '画布'+rIndex;
+				}
+			}
+			$scope.dataMks.mks.splice($scope.canvasOrder,1);
+		};
+
+
 		$scope.getOrder = function(){
 			$scope.nowAct++;
 			$scope.order=$scope.nowAct;

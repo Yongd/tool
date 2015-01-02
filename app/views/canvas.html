@@ -1,5 +1,4 @@
-<div id="canvas">
-  <div class="bd">
+<div class="bd">
     <dl class="yd_attr mk_config clearfix">
       <dt><i class="icon fi-annotate"></i> 基本信息</dt>
       <dd class="clearfix">
@@ -11,11 +10,11 @@
       <dd>
         <div class="name left">画布尺寸:</div>
         <div class="cont right">       
-          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-init="dataMks.width=950"> 集市店铺 &nbsp;
-          <input type="radio" name="mk_width" ng-model="dataMks.width" value=990> 天猫店铺 &nbsp;
-          <input type="radio" name="mk_width" ng-model="dataMks.width" value="1920"> 自定义&nbsp; 
+          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.c"> 集市店铺 &nbsp;
+          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.b"> 天猫店铺 &nbsp;
+          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.self"> 自定义&nbsp; 
           <div class="size text-center">
-            <span>宽 <input type="number" required ng-model="dataMks.width"  disabled=""> px</span> &nbsp;&nbsp;&nbsp; 
+            <span>宽 <input type="number" required ng-model="dataMks.width"  ng-disabled="dataMks.width==width.c||dataMks.width==width.b"> px</span> &nbsp;&nbsp;&nbsp; 
             <span>高 <input type="number" required ng-model="dataMks.height"> px</span>
           </div>
         </div>
@@ -25,47 +24,16 @@
       <hr>
       <dt>
         <i class="icon fi-photo"></i> 画布设置<em>(多张画布时,轮播显示)</em>
+        <i class="icon fi-minus size-14 right" tooltip="删除画布" ng-click="deleteCanvas()"></i>
+        <i class="icon fi-plus size-14 right" tooltip="添加画布" ng-click="addCanvas()"></i>
       </dt>
-      <dd class="tab_nav" style="display:none;">
-        <ul>
-          <li class="tab_act">画布1</li>
-          <span class="btn smallbtn fl sx_add_slide" style="margin-left:10px; margin-top:3px;"><i class="icon-xxx icon-white icon-plus"></i>增加</span>
-          <span class="btn smallbtn fl sx_remove_slide" style="margin-top:3px;"><i class="icon-xxx icon-white icon-remove"></i>删除</span>
-        </ul>
-      </dd>
-      <div class="bg_config tab_bd mb10">
-        <div class="bg_0 sx_attr tab_bd_item"> 
-          <dd class="clearfix">  
-            <div class="name left">主背景色:</div> 
-            <div class="cont right">    
-              <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].color">
-              <div class="right color-picker">
-                <div class="sp-preview">
-                  <div colorpicker="rgba" colorpicker-position="left" colorpicker-with-input="dataMks.mks[canvasOrder].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].color" style="background-color:{{dataMks.mks[canvasOrder].color}}"></div>
-                </div>
-              </div>   
-            </div>  
-          </dd>
-          <dd class="clearfix"> 
-            <div class="name left">主背景图:</div> 
-            <div class="cont right">    
-              <input type="text" class="bginput">
-              <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="button tiny">图片空间</a>
-            </div>
-          </dd>
-          <dd class="clearfix"> 
-            <div class="name left">平铺方式:</div> 
-            <div class="cont right">    
-              <input type="radio" name="sx_tile" value="repeat"> 平铺
-              <input type="radio" name="sx_tile" value="repeat-x"> 横铺  
-              <input type="radio" name="sx_tile" value="repeat-y"> 纵铺 
-              <input type="radio" name="sx_tile" value="no-repeat" checked=""> 不平铺
-            </div>
-          </dd>
-        </div>
-      </div> 
+      <tabset>
+      <tab ng-repeat="tab in canvastabs" heading="{{tab.title}}" active="tab.active">
+        <div ng-include="tab.content"></div>
+        </tab>
+      </tabset>
     </dl>  
-    <dl class="yd_attr slide_config hidden"> 
+    <dl class="yd_attr slide_config" ng-class="{'hide': indexCanvas==1}"> 
       <hr>
       <dt>
       <i class="icon fi-play-video"></i> 轮播设置
@@ -73,34 +41,32 @@
       <dd class="clearfix">
         <div class="name left">自动播放:</div>
         <div class="cont left switch small round">
-          <input id="exampleCheckboxSwitch" checked type="checkbox">
-          <label for="exampleCheckboxSwitch"></label>
+          <input id="autoplay" type="checkbox" ng-model="dataMks.slider.autoplay">
+          <label for="autoplay"></label>
         </div>
         <div class="name left">轮播时长:</div>
-        <div class="cont left"><input type="text" class="timeinput" style="80px;"></div>
+        <div class="cont left"><input type="text" class="timeinput" style="80px;" ng-model="dataMks.slider.duration"></div>
       </dd>               
       <dd class="clearfix">
         <div class="name left">箭头开关:</div>
         <div class="cont left switch small round">
-            <input id="exampleCheckboxSwitch" checked type="checkbox">
-            <label for="exampleCheckboxSwitch"></label>
+            <input id="arrow" type="checkbox" ng-model="dataMks.slider.arrow.enable">
+            <label for="arrow"></label>
           </div>
         <div class="name left">导航开关:</div>
         <div class="cont left switch small round">
-            <input id="exampleCheckboxSwitch" checked type="checkbox">
-            <label for="exampleCheckboxSwitch"></label>
+            <input id="nav" type="checkbox"  ng-model="dataMks.slider.nav.enable">
+            <label for="nav"></label>
         </div>
       </dd> 
       <dd class="clearfix effect">
         <div class="name left">轮播效果:</div>
         <div class="cont left">
-          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="none"> 普通 &nbsp;&nbsp;
-          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrollx" checked=""> 左右 &nbsp;&nbsp;
-          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="scrolly"> 上下 &nbsp;&nbsp;
-          <input type="radio" name="config_slide_effect" class="config_slide_effect sx_monitor" value="fade"> 渐变
+          <input type="radio" ng-model="dataMks.slider.effect" value="none"> 普通 &nbsp;&nbsp;
+          <input type="radio" ng-model="dataMks.slider.effect" value="scrollx" checked=""> 左右 &nbsp;&nbsp;
+          <input type="radio" ng-model="dataMks.slider.effect" value="scrolly"> 上下 &nbsp;&nbsp;
+          <input type="radio" ng-model="dataMks.slider.effect" value="fade"> 渐变
         </div>                        
       </dd> 
-      
   </dl>
-</div>
 </div>

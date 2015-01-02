@@ -2212,14 +2212,15 @@ angular.module('mm.foundation.tabs', [])
     });
     tab.active = true;
   };
-
+  ctrl.getCanvasOrder = function(order){
+    $scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder=order;
+  }
   ctrl.addTab = function addTab(tab) {
     tabs.push(tab);
     if (tabs.length === 1 || tab.active) {
       ctrl.select(tab);
     }
   };
-
   ctrl.removeTab = function removeTab(tab) {
     var index = tabs.indexOf(tab);
     //Select a new tab if the tab to be removed is selected
@@ -2368,7 +2369,7 @@ angular.module('mm.foundation.tabs', [])
     scope: {
       heading: '@',
       onSelect: '&select', //This callback is called in contentHeadingTransclude
-                          //once it inserts the tab's content into the dom
+                        //once it inserts the tab's content into the dom
       onDeselect: '&deselect'
     },
     controller: function() {
@@ -2376,7 +2377,7 @@ angular.module('mm.foundation.tabs', [])
     },
     compile: function(elm, attrs, transclude) {
       return function postLink(scope, elm, attrs, tabsetCtrl) {
-        var getActive, setActive;
+        var getActive, setActive, order;
         if (attrs.active) {
           getActive = $parse(attrs.active);
           setActive = getActive.assign;
@@ -2419,14 +2420,16 @@ angular.module('mm.foundation.tabs', [])
           if ( ! scope.disabled ) {
             scope.active = true;
           }
+          order = attrs.heading.replace(/[^0-9]/ig,'');
+          if(order!=''){
+            tabsetCtrl.getCanvasOrder(order-1)
+          }
         };
 
         tabsetCtrl.addTab(scope);
         scope.$on('$destroy', function() {
           tabsetCtrl.removeTab(scope);
         });
-
-
         //We need to transclude later, once the content container is ready.
         //when this link happens, we're inside a tab heading.
         scope.$transcludeFn = transclude;
@@ -2435,12 +2438,13 @@ angular.module('mm.foundation.tabs', [])
   };
 }])
 
+
 .directive('tabHeadingTransclude', [function() {
   return {
-    restrict: 'A',
+    restrict: 'C',
     require: '^tab',
     link: function(scope, elm, attrs, tabCtrl) {
-      scope.$watch('headingElement', function updateHeadingElement(heading) {
+       scope.$watch('headingElement', function updateHeadingElement(heading) {
         if (heading) {
           elm.html('');
           elm.append(heading);
@@ -2449,6 +2453,7 @@ angular.module('mm.foundation.tabs', [])
     }
   };
 }])
+
 
 .directive('tabContentTransclude', function() {
   return {
