@@ -1,6 +1,96 @@
-<div ng-include="'views/topbar.html'"></div>
+<div class="topbar animated fadeInDown">
+  <div class="left">
+    <a class="left logo" href="#" target="_blank"></a>
+    <a class="left icon fi-home size-18 ts" href="#" target="_blank"><span>首页</span></a>
+    <i class="left icon fi-widget size-18 ts" dropdown-toggle="#tool-setting"><span>界面设置</span></i>
+    <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span></i>
+    <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span></i>
+    <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
+    <i class="left icon fi-eye size-24 ts"><span>预览效果</span></i>
+    <i class="left icon fi-checkbox size-20 ts"><span>生成代码</span></i>
+    <i class="left icon fi-list-thumbnails size-20 ts"><span>代码列表</span></i>
+    <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
+    <i class="left icon fi-page-add size-18 ts"><span>新建画布</span></i>
+  </div>
+  <div class="right">
+    <i class="icon left fi-paint-bucket size-18"><span>装修模板</span></i>
+    <i class="icon left fi-share size-16"><span>分享给好友</span></i>
+        <!--
+        <i class="icon left fi-torso size-18"><span>我的账户</span></i>
+        <i class="icon left fi-save size-18"><span>保存代码</span></i>
+        <i class="icon left fi-power size-18"><span>退出登录</span></i>
+      -->
+      <i class="icon left fi-torso size-18"><span>注册&登陆</span></i>
+      <i class="icon left fi-info size-18"><span>帮助&Bug</span></i>
+  </div>
+  <div id="tool-setting" class="f-dropdown">
+      <div class="tool-set clearfix">
+             <div class="name left">标尺:{{ruler}}</div>
+             <div class="cont left switch small round">
+                <input id="ruler" type="checkbox" ng-model="ruler">
+                <label for="ruler"></label>
+            </div>
+      </div>
+      <div class="grid-set">   
+            <p>背景网格透明度:  <span id="alpha_val">50</span></p>
+            <div class="range-slider round">
+              <div class="rsHandle range-slider-handle" role="slider" display="alpha_val"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
 <div id="main">
-  <div ng-include="'views/ruler.html'"></div>    
+  <div class="ruler">
+     <div class="editorruler rulerx animated" ng-class="{'fadeInDown':ruler==true,'fadeOutUp':ruler==false}">
+      <div class="editorscaleNumbers">
+        <div class="scaleNumber" style="left: 3px;">0</div>
+        <div class="scaleNumber" style="left: 103px;">100</div>
+        <div class="scaleNumber" style="left: 203px;">200</div>
+        <div class="scaleNumber" style="left: 303px;">300</div>
+        <div class="scaleNumber" style="left: 403px;">400</div>
+        <div class="scaleNumber" style="left: 503px;">500</div>
+        <div class="scaleNumber" style="left: 603px;">600</div>
+        <div class="scaleNumber" style="left: 703px;">700</div>
+        <div class="scaleNumber" style="left: 803px;">800</div>
+        <div class="scaleNumber" style="left: 903px;">900</div>
+        <div class="scaleNumber" style="left: 1003px;">1000</div>
+        <div class="scaleNumber" style="left: 1103px;">1100</div>
+        <div class="scaleNumber" style="left: 1203px;">1200</div>
+        <div class="scaleNumber" style="left: 1303px;">1300</div>
+        <div class="scaleNumber" style="left: 1403px;">1400</div>
+        <div class="scaleNumber" style="left: 1503px;">1500</div>
+        <div class="scaleNumber" style="left: 1603px;">1600</div>
+        <div class="scaleNumber" style="left: 1703px;">1700</div>
+        <div class="scaleNumber" style="left: 1803px;">1800</div>
+        <div class="scaleNumber" style="left: 1903px;">1900</div>
+  </div>
+
+
+    </div>
+    <div class="editorruler rulery animated" ng-class="{'fadeInRight':ruler==true,'fadeOutRight':ruler==false}">
+        <div class="editorscaleNumbers">
+            <div class="scaleNumber" style="top: 156px;">100</div>
+            <div class="scaleNumber" style="top: 256px;">200</div>
+            <div class="scaleNumber" style="top: 356px;">300</div>
+            <div class="scaleNumber" style="top: 456px;">400</div>
+            <div class="scaleNumber" style="top: 556px;">500</div>
+            <div class="scaleNumber" style="top: 656px;">600</div>
+            <div class="scaleNumber" style="top: 756px;">700</div>
+            <div class="scaleNumber" style="top: 856px;">800</div>
+            <div class="scaleNumber" style="top: 956px;">900</div>
+            <div class="scaleNumber" style="top: 1056px;">1000</div>
+            <div class="scaleNumber" style="top: 1156px;">1100</div>
+            <div class="scaleNumber" style="top: 1256px;">1200</div>
+            <div class="scaleNumber" style="top: 1356px;">1300</div>
+            <div class="scaleNumber" style="top: 1456px;">1400</div>
+            <div class="scaleNumber" style="top: 1556px;">1500</div>
+            <div class="scaleNumber" style="top: 1656px;">1600</div>
+        </div>
+    </div> 
+</div> 
+  
   
       <div class="preloader done" style="display: none;">
         <div class="box">
@@ -9,7 +99,6 @@
       </div>
       <div  class="canvas"  droppable>
         <div class="gridbg"></div>
-
         
       </div>
      

@@ -8,35 +8,7 @@
  * Controller of the toolApp
  */
 var app = angular.module('toolApp'); 
-app.directive('rsHandle', function($document) {
-  return {
-    restrict : 'C',
-    link : function(a,b,c) {
-      function mousedown() {
-        $document.bind('mousemove',move);
-        $document.bind('mouseup', mouseup);
-      }
-      function mouseup() {
-        $document.unbind('mousemove', move);
-        $document.unbind('mouseup', mouseup);
-      }
-      b.bind('mousedown',mousedown);
-      function move(event){
-        var left = event.clientX-44;
-        if(left<=0){
-          left=0;
-        }else if(left>=181){
-          left=181;
-      }
-        b.css('left',left+'px');
-        var percent = Math.ceil(left/181*100);
-        angular.element(document.getElementsByClassName('gridbg')[0]).css('opacity',percent/100);
-        angular.element(document.getElementById(c.display)).text(percent);
-      }
-      
-    }
-  };
-});
+
 app.directive('draggable', ['$rootScope',function($rootScope) {
   return {
     restrict: 'A',
@@ -100,6 +72,7 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
         b.addClass('drop-target');
       });
       $rootScope.$on('dragEnd', function() {
+        angular.element(document.getElementById('workspace')).removeClass('move-right');
         b.removeClass('drop-target');
       });
     }

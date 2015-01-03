@@ -40,9 +40,7 @@ app.controller('MyTool', function ($scope,$modal) {
       		'b':990,
       		'self':wWidth
       	};
-      	$scope.test = function(){
-      		console.log(1);
-      	};
+      	$scope.ruler = true;
       	
 		$scope.dataMks = {
 			'jname':'未命名',

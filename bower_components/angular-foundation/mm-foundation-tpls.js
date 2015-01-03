@@ -6,7 +6,7 @@
  * License: MIT
  * (c) Pinecone, LLC
  */
-angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
+angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
 angular.module("mm.foundation.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/topbar/has-dropdown.html","template/topbar/toggle-top-bar.html","template/topbar/top-bar-dropdown.html","template/topbar/top-bar-section.html","template/topbar/top-bar.html","template/tour/tour.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
 angular.module('mm.foundation.accordion', [])
 
@@ -443,6 +443,7 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
         if (!elementWasOpen && !element.hasClass('disabled') && !element.prop('disabled')) {
           dropdown.css('display', 'block'); // We display the element so that offsetParent is populated
           var offset = $position.offset(element);
+          element.addClass('onhover');
           var parentOffset = $position.offset(angular.element(dropdown[0].offsetParent));
           var dropdownWidth = dropdown.prop('offsetWidth');
           var css = {
@@ -477,6 +478,7 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
 
           closeMenu = function (event) {
             $document.off('click', closeMenu);
+            element.removeClass('onhover');
             dropdown.css('display', 'none');
             closeMenu = angular.noop;
             openElement = null;
@@ -484,7 +486,7 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
               parent.removeClass('hover');
             }
           };
-          $document.on('click', closeMenu);
+          angular.element($document[0].querySelector('#main')).on('click', closeMenu);
         }
       };
 
@@ -502,6 +504,42 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
   };
 }]);
 
+angular.module('mm.foundation.ranger',[])
+.directive('rsHandle', ['$document', function ($document) {
+  return {
+    restrict: 'C',
+    link: function(scope, element, attrs) {
+      var percent = 50;
+      function mousedown() {
+        $document.bind('mousemove',move);
+        $document.bind('mouseup', mouseup);
+      }
+      function mouseup() {
+        $document.unbind('mousemove', move);
+        $document.unbind('mouseup', mouseup);
+      }
+      function updateval(value){
+        angular.element(document.getElementById(attrs.display)).text(value);
+      }
+      element.bind('mousedown',mousedown);
+      function move(event){
+        var left = event.clientX-243;
+        if(left<=0){
+          left=0;
+        }else if(left>=190){
+          left=190;
+        }
+        element.css('left',left+'px');
+        percent = Math.ceil(left/190*100);
+        angular.element(document.getElementsByClassName('gridbg')[0]).css('opacity',percent/100);
+        updateval(percent);
+      }
+      element.css('left',95+'px');
+      updateval(percent);
+      //previousElementSibling).children().text(percent);    
+   }  
+  }
+ }]);   
 /**
  * @ngdoc service
  * @name mm.foundation.interchange
@@ -1283,9 +1321,11 @@ angular.module("mm.foundation.offcanvas", [])
 
             },
             controller: ['$scope', function($scope) {
-
+                this.ifmove = function(){
+                  return angular.element($scope.sidebar).hasClass('move-right');
+                };
                 this.leftToggle = function() {
-                    $scope.sidebar.toggleClass("move-right");
+                  $scope.sidebar.toggleClass("move-right");
                 };
 
                 this.rightToggle = function() {
@@ -1305,6 +1345,7 @@ angular.module("mm.foundation.offcanvas", [])
             link: function ($scope, element, attrs, offCanvasWrap) {
                 beforeToggle = 3;
                 element.on('click', function () {
+
                     if (beforeToggle == 3) {
                       offCanvasWrap.leftToggle(),
                       beforeToggle = attrs.actab
@@ -1312,9 +1353,15 @@ angular.module("mm.foundation.offcanvas", [])
                       offCanvasWrap.leftToggle(),
                       beforeToggle = 3;
                     } else {
-                      beforeToggle = attrs.actab
+                      beforeToggle = attrs.actab;
+                      if(!offCanvasWrap.ifmove()){
+                        offCanvasWrap.leftToggle()
+                      }
                     }
+                    
+
                 });
+                
             }
         };
     }])
@@ -1847,7 +1894,7 @@ angular.module( 'mm.foundation.tooltip', [ 'mm.foundation.position', 'mm.foundat
               // need to wait for it to expire beforehand.
               // FIXME: this is a placeholder for a port of the transitions library.
               if ( scope.tt_animation ) {
-                transitionTimeout = $timeout(removeTooltip, 500);
+                transitionTimeout = $timeout(removeTooltip, 100);
               } else {
                 removeTooltip();
               }
@@ -2850,7 +2897,8 @@ angular.module("mm.foundation.topbar", ['mm.foundation.mediaQueries'])
                     if(topBar.settings.isHover && !mediaQueries.topbarBreakpoint()){
                         element.addClass('not-click');
                     }
-                });
+
+                }); 
                 element.bind('click', function(event) {
                     if(!topBar.settings.isHover && !mediaQueries.topbarBreakpoint()){
                         element.toggleClass('not-click');

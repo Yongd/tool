@@ -19,6 +19,97 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	text-align:center;
 }
 
+
+
+
+
+.ebutton{
+	z-index:100;
+}.ebutton{
+	outline:transparent 1px solid;
+	_border:transparent 1px solid;
+}.ebutton:hover{
+	outline:#ff6a6a 1px solid;
+	_border:#ff6a6a 1px solid;
+}.canvas .ebutton.active{
+	outline:#f00 1px solid;
+	_border:#f00 1px solid;
+	box-sizing: content-box;
+}.ebutton .resizehandle{
+	position:absolute;
+	overflow:hidden;
+	font-size:0;
+	line-height:0;
+	z-index:101;
+}.ebutton .n-resize,.ebutton .e-resize,.ebutton .s-resize,.ebutton .w-resize{
+	opacity:1;
+	filter:alpha(opacity=1);
+	filter:alpha(opacity=1);
+	background-color:transparent;
+}.ebutton .n-resize{
+	left:0;
+	height:1px;
+	width:100%;
+	cursor:n-resize;
+}.ebutton .s-resize{
+	bottom:0;
+}.ebutton .n-resize{
+	top:0;
+}.ebutton .e-resize{
+	top:0;
+	height:100%;
+	width:1px;
+	cursor:e-resize;
+}.ebutton .w-resize,{
+	left:0;
+}.ebutton .e-resize{
+	right:0;
+}.ebutton .sw-resize,.ebutton .se-resize,.ebutton .nw-resize,.ebutton .ne-resize{
+	position:absolute;
+	width:8px;
+	height:8px;
+	background-color:transparent;
+	z-index:101;
+}.ebutton .sw-resize{
+	left:-3px;
+	bottom:-3px;
+	cursor:sw-resize;
+}.ebutton .se-resize{
+	right:-3px;
+	bottom:-3px;
+	cursor:nw-resize;
+}.ebutton .nw-resize{
+	left:-3px;
+	top:-3px;
+	cursor:nw-resize;
+}.ebutton .ne-resize{
+	right:-3px;
+	top:-3px;
+	cursor:sw-resize;
+}.ebutton:hover{
+	outline:none 0;
+	_border:none 0;
+}.ebutton:hover .sw-resize,.dd_i_zoom:hover .sw-resize,.ebutton:hover .se-resize,.dd_i_zoom:hover .se-resize,.ebutton:hover .nw-resize,.dd_i_zoom:hover .nw-resize,.ebutton:hover .ne-resize,.dd_i_zoom:hover .ne-resize,.ebutton:hover .n-resize,.dd_i_zoom:hover .n-resize,.ebutton:hover .e-resize,.dd_i_zoom:hover .e-resize,.ebutton:hover .s-resize,.dd_i_zoom:hover .s-resize,.ebutton:hover .w-resize,.dd_i_zoom:hover .w-resize,.ebutton:hover .ks-resizable-handler-bl,.dd_i_zoom:hover .ks-resizable-handler-bl,.ebutton:hover .ks-resizable-handler-br,.dd_i_zoom:hover .ks-resizable-handler-br,.ebutton:hover .ks-resizable-handler-tl,.dd_i_zoom:hover .ks-resizable-handler-tl,.ebutton:hover .ks-resizable-handler-tr,.dd_i_zoom:hover .ks-resizable-handler-tr,.ebutton:hover .ks-resizable-handler-t,.dd_i_zoom:hover .ks-resizable-handler-t,.ebutton:hover .ks-resizable-handler-b,.dd_i_zoom:hover .ks-resizable-handler-b,.ebutton:hover .ks-resizable-handler-r,.dd_i_zoom:hover .ks-resizable-handler-r,.ebutton:hover .ks-resizable-handler-l,.dd_i_zoom:hover .ks-resizable-handler-l{
+	background-color:#f60;
+	opacity:.6;
+	filter:alpha(opacity=60);
+	filter:alpha(opacity=60);
+}.ebutton.active,.dd_i_zoom.active{
+	outline:none 0;
+	_border:none 0;
+}.ebutton.active .sw-resize,.ebutton.active .se-resize,.ebutton.active .nw-resize,.ebutton.active .ne-resize{
+	opacity:1;
+	filter:alpha(opacity=100);
+	filter:alpha(opacity=100);
+	background-color:#f00;
+}
+
+
+
+
+
+
+
 /*
 .button,button.button{
 	-webkit-border-radius:3px;
@@ -104,7 +195,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 .size-20 { font-size: 20px; }
 .size-21 { font-size: 21px; }
 .size-24 { font-size: 24px; }
-.size-28 { font-size: 28px; }
+.size-28 { font-size: 1.7rem; }
 .size-30 { font-size: 30px; }
 .size-36 { font-size: 36px; }
 .size-48 { font-size: 48px; }
@@ -131,8 +222,9 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 
 
 .box{
-	color:#999;
+	color:#bcbcbc;
 }
+/*
 .box .hd{
 	padding:5px;
 	color:#ccc;
@@ -154,20 +246,10 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	line-height:0;
 }.box .bd:after{
 	clear:both;
-}
+}*/
 
 
-.box .bd iframe,.box .bd textarea{
-	border:1px solid #242424;
-	border:1px solid rgba(0,0,0,0.4);
-	box-shadow:1px 1px 2px 1px rgba(0,0,0,0.1) inset;
-	background:#222;
-	padding:5px;
-	color:#999;
-	text-shadow:0 1px 2px rgba(0,0,0,0.6);
-}.box .bd input{
-	margin:0;
-}input[type=text],input[type=password],input[type=number],input[type=url]{
+input[type=text],input[type=password],input[type=number],input[type=url]{
 	border:1px solid rgba(30,36,43,1);
 	display: inline-block;
 	margin:0;
@@ -202,19 +284,6 @@ input.ng-invalid{
 
 
 
-#workspace .box .list p{
-	padding:5px;
-	*zoom:1;
-}#workspace .box .list p:before,#workspace .box .list p:after{
-	display:table;
-	content:"";
-	line-height:0;
-}#workspace .box .list p:after{
-	clear:both;
-}
-#workspace .box .list p:hover{
-	color:#fff;
-}
 
 #workspace .grid{
 	background:none;
@@ -343,117 +412,16 @@ input.ng-invalid{
 	box-shadow:inset 1px 1px 0 rgba(255,255,255,0.05);
 }.sx_color_picker .sp-dd{
 	color:#999;
-}.ebutton{
-	z-index:100;
-}.popup{
-	z-index:200;
-}.ebutton{
-	outline:transparent 1px solid;
-	_border:transparent 1px solid;
-}.ebutton:hover{
-	outline:#ff6a6a 1px solid;
-	_border:#ff6a6a 1px solid;
-}#canvas .active{
-	outline:#f00 1px solid;
-	_border:#f00 1px solid;
-	box-sizing: content-box;
-}.act_mulit{
-	outline:#f0f 1px solid!important;
-	_border:#f0f 1px solid!important;
-}.dd_group{
-	position:absolute;
-	z-index:9999;
-}.dd_droup_act{
-	outline:#6d00d9 1px solid;
-	_border:#6d00d9 1px solid;
-}.ebutton,.dd_i_zoom{
-	outline:none 0;
-	_border:none 0;
-	overflow:hidden;
-}.ebutton .resizehandle,.dd_i_zoom .resizehandle,.ebutton .ks-resizable-handler,.dd_i_zoom .ks-resizable-handler{
-	position:absolute;
-	overflow:hidden;
-	font-size:0;
-	line-height:0;
-	z-index:101;
-}.ebutton .n-resize,.dd_i_zoom .n-resize,.ebutton .e-resize,.dd_i_zoom .e-resize,.ebutton .s-resize,.dd_i_zoom .s-resize,.ebutton .w-resize,.dd_i_zoom .w-resize,.ebutton .ks-resizable-handler-t,.dd_i_zoom .ks-resizable-handler-t,.ebutton .ks-resizable-handler-b,.dd_i_zoom .ks-resizable-handler-b,.ebutton .ks-resizable-handler-r,.dd_i_zoom .ks-resizable-handler-r,.ebutton .ks-resizable-handler-l,.dd_i_zoom .ks-resizable-handler-l{
-	opacity:0;
-	filter:alpha(opacity=0);
-	filter:alpha(opacity=0);
-	background-color:transparent;
-}.ebutton .n-resize,.dd_i_zoom .n-resize,.ebutton .s-resize,.dd_i_zoom .s-resize,.ebutton .ks-resizable-handler-t,.dd_i_zoom .ks-resizable-handler-t,.ebutton .ks-resizable-handler-b,.dd_i_zoom .ks-resizable-handler-b{
-	left:0;
-	height:1px;
-	width:100%;
-	cursor:n-resize;
-}.ebutton .s-resize,.dd_i_zoom .s-resize,.ebutton .ks-resizable-handler-b,.dd_i_zoom .ks-resizable-handler-b{
-	bottom:0;
-}.ebutton .n-resize,.dd_i_zoom .n-resize,.ebutton .ks-resizable-handler-t,.dd_i_zoom .ks-resizable-handler-t{
-	top:0;
-}.ebutton .e-resize,.dd_i_zoom .e-resize,.ebutton .w-resize,.dd_i_zoom .w-resize,.ebutton .ks-resizable-handler-r,.dd_i_zoom .ks-resizable-handler-r,.ebutton .ks-resizable-handler-l,.dd_i_zoom .ks-resizable-handler-l{
-	top:0;
-	height:100%;
-	width:1px;
-	cursor:e-resize;
-}.ebutton .w-resize,.dd_i_zoom .w-resize,.ebutton .ks-resizable-handler-l,.dd_i_zoom .ks-resizable-handler-l{
-	left:0;
-}.ebutton .e-resize,.dd_i_zoom .e-resize,.ebutton .ks-resizable-handler-r,.dd_i_zoom .ks-resizable-handler-r{
-	right:0;
-}.ebutton .sw-resize,.dd_i_zoom .sw-resize,.ebutton .se-resize,.dd_i_zoom .se-resize,.ebutton .nw-resize,.dd_i_zoom .nw-resize,.ebutton .ne-resize,.dd_i_zoom .ne-resize,.ebutton .ks-resizable-handler-bl,.dd_i_zoom .ks-resizable-handler-bl,.ebutton .ks-resizable-handler-br,.dd_i_zoom .ks-resizable-handler-br,.ebutton .ks-resizable-handler-tl,.dd_i_zoom .ks-resizable-handler-tl,.ebutton .ks-resizable-handler-tr,.dd_i_zoom .ks-resizable-handler-tr{
-	position:absolute;
-	width:8px;
-	height:8px;
-	background-color:transparent;
-	z-index:101;
-}.ebutton .sw-resize,.dd_i_zoom .sw-resize,.ebutton .ks-resizable-handler-bl,.dd_i_zoom .ks-resizable-handler-bl{
-	left:-3px;
-	bottom:-3px;
-	cursor:sw-resize;
-}.ebutton .se-resize,.dd_i_zoom .se-resize,.ebutton .ks-resizable-handler-br,.dd_i_zoom .ks-resizable-handler-br{
-	right:-3px;
-	bottom:-3px;
-	cursor:nw-resize;
-}.ebutton .nw-resize,.dd_i_zoom .nw-resize,.ebutton .ks-resizable-handler-tl,.dd_i_zoom .ks-resizable-handler-tl{
-	left:-3px;
-	top:-3px;
-	cursor:nw-resize;
-}.ebutton .ne-resize,.dd_i_zoom .ne-resize,.ebutton .ks-resizable-handler-tr,.dd_i_zoom .ks-resizable-handler-tr{
-	right:-3px;
-	top:-3px;
-	cursor:sw-resize;
-}.ebutton:hover,.dd_i_zoom:hover{
-	outline:none 0;
-	_border:none 0;
-}.ebutton:hover .sw-resize,.dd_i_zoom:hover .sw-resize,.ebutton:hover .se-resize,.dd_i_zoom:hover .se-resize,.ebutton:hover .nw-resize,.dd_i_zoom:hover .nw-resize,.ebutton:hover .ne-resize,.dd_i_zoom:hover .ne-resize,.ebutton:hover .n-resize,.dd_i_zoom:hover .n-resize,.ebutton:hover .e-resize,.dd_i_zoom:hover .e-resize,.ebutton:hover .s-resize,.dd_i_zoom:hover .s-resize,.ebutton:hover .w-resize,.dd_i_zoom:hover .w-resize,.ebutton:hover .ks-resizable-handler-bl,.dd_i_zoom:hover .ks-resizable-handler-bl,.ebutton:hover .ks-resizable-handler-br,.dd_i_zoom:hover .ks-resizable-handler-br,.ebutton:hover .ks-resizable-handler-tl,.dd_i_zoom:hover .ks-resizable-handler-tl,.ebutton:hover .ks-resizable-handler-tr,.dd_i_zoom:hover .ks-resizable-handler-tr,.ebutton:hover .ks-resizable-handler-t,.dd_i_zoom:hover .ks-resizable-handler-t,.ebutton:hover .ks-resizable-handler-b,.dd_i_zoom:hover .ks-resizable-handler-b,.ebutton:hover .ks-resizable-handler-r,.dd_i_zoom:hover .ks-resizable-handler-r,.ebutton:hover .ks-resizable-handler-l,.dd_i_zoom:hover .ks-resizable-handler-l{
-	background-color:#f60;
-	opacity:.6;
-	filter:alpha(opacity=60);
-	filter:alpha(opacity=60);
-}.ebutton.active,.dd_i_zoom.active{
-	outline:none 0;
-	_border:none 0;
-}.ebutton.active .sw-resize,.dd_i_zoom.active .sw-resize,.ebutton.active .se-resize,.dd_i_zoom.active .se-resize,.ebutton.active .nw-resize,.dd_i_zoom.active .nw-resize,.ebutton.active .ne-resize,.dd_i_zoom.active .ne-resize,.ebutton.active .n-resize,.dd_i_zoom.active .n-resize,.ebutton.active .e-resize,.dd_i_zoom.active .e-resize,.ebutton.active .s-resize,.dd_i_zoom.active .s-resize,.ebutton.active .w-resize,.dd_i_zoom.active .w-resize,.ebutton.active .ks-resizable-handler-bl,.dd_i_zoom.active .ks-resizable-handler-bl,.ebutton.active .ks-resizable-handler-br,.dd_i_zoom.active .ks-resizable-handler-br,.ebutton.active .ks-resizable-handler-tl,.dd_i_zoom.active .ks-resizable-handler-tl,.ebutton.active .ks-resizable-handler-tr,.dd_i_zoom.active .ks-resizable-handler-tr,.ebutton.active .ks-resizable-handler-t,.dd_i_zoom.active .ks-resizable-handler-t,.ebutton.active .ks-resizable-handler-b,.dd_i_zoom.active .ks-resizable-handler-b,.ebutton.active .ks-resizable-handler-r,.dd_i_zoom.active .ks-resizable-handler-r,.ebutton.active .ks-resizable-handler-l,.dd_i_zoom.active .ks-resizable-handler-l{
-	opacity:1;
-	filter:alpha(opacity=100);
-	filter:alpha(opacity=100);
-	background-color:#f00;
 }
-.draggable {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  cursor: pointer; }
 
 
-#canvas.drop-target {
-    background-color: #ddd; 
-    opacity: .5;
-    border: 2px dashed black;
-    z-index: 1003;
-}
- 
+
+
+
+
+
+
+
 
 
 
