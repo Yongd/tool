@@ -23,89 +23,72 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 
 
 
-.ebutton{
+.eButton{
 	z-index:100;
-}.ebutton{
-	outline:transparent 1px solid;
-	_border:transparent 1px solid;
-}.ebutton:hover{
-	outline:#ff6a6a 1px solid;
-	_border:#ff6a6a 1px solid;
-}.canvas .ebutton.active{
-	outline:#f00 1px solid;
-	_border:#f00 1px solid;
-	box-sizing: content-box;
-}.ebutton .resizehandle{
+	outline:none;
+}.eButton .resizehandle{
 	position:absolute;
 	overflow:hidden;
 	font-size:0;
 	line-height:0;
 	z-index:101;
-}.ebutton .n-resize,.ebutton .e-resize,.ebutton .s-resize,.ebutton .w-resize{
-	opacity:1;
-	filter:alpha(opacity=1);
-	filter:alpha(opacity=1);
-	background-color:transparent;
-}.ebutton .n-resize{
+	background-color:#f00;
+	opacity:0;
+	filter:alpha(opacity=0);
+}.eButton .n-resize,.eButton .s-resize{
 	left:0;
 	height:1px;
 	width:100%;
 	cursor:n-resize;
-}.ebutton .s-resize{
+}.eButton .s-resize{
 	bottom:0;
-}.ebutton .n-resize{
+}.eButton .n-resize{
 	top:0;
-}.ebutton .e-resize{
+}.eButton .e-resize,.eButton .w-resize{
 	top:0;
 	height:100%;
 	width:1px;
 	cursor:e-resize;
-}.ebutton .w-resize,{
+}.eButton .w-resize{
 	left:0;
-}.ebutton .e-resize{
+}.eButton .e-resize{
 	right:0;
-}.ebutton .sw-resize,.ebutton .se-resize,.ebutton .nw-resize,.ebutton .ne-resize{
+}.eButton .sw-resize,.eButton .se-resize,.eButton .nw-resize,.eButton .ne-resize{
 	position:absolute;
 	width:8px;
 	height:8px;
-	background-color:transparent;
 	z-index:101;
-}.ebutton .sw-resize{
+}.eButton .sw-resize{
 	left:-3px;
 	bottom:-3px;
 	cursor:sw-resize;
-}.ebutton .se-resize{
+}.eButton .se-resize{
 	right:-3px;
 	bottom:-3px;
 	cursor:nw-resize;
-}.ebutton .nw-resize{
+}.eButton .nw-resize{
 	left:-3px;
 	top:-3px;
 	cursor:nw-resize;
-}.ebutton .ne-resize{
+}.eButton .ne-resize{
 	right:-3px;
 	top:-3px;
 	cursor:sw-resize;
-}.ebutton:hover{
-	outline:none 0;
-	_border:none 0;
-}.ebutton:hover .sw-resize,.dd_i_zoom:hover .sw-resize,.ebutton:hover .se-resize,.dd_i_zoom:hover .se-resize,.ebutton:hover .nw-resize,.dd_i_zoom:hover .nw-resize,.ebutton:hover .ne-resize,.dd_i_zoom:hover .ne-resize,.ebutton:hover .n-resize,.dd_i_zoom:hover .n-resize,.ebutton:hover .e-resize,.dd_i_zoom:hover .e-resize,.ebutton:hover .s-resize,.dd_i_zoom:hover .s-resize,.ebutton:hover .w-resize,.dd_i_zoom:hover .w-resize,.ebutton:hover .ks-resizable-handler-bl,.dd_i_zoom:hover .ks-resizable-handler-bl,.ebutton:hover .ks-resizable-handler-br,.dd_i_zoom:hover .ks-resizable-handler-br,.ebutton:hover .ks-resizable-handler-tl,.dd_i_zoom:hover .ks-resizable-handler-tl,.ebutton:hover .ks-resizable-handler-tr,.dd_i_zoom:hover .ks-resizable-handler-tr,.ebutton:hover .ks-resizable-handler-t,.dd_i_zoom:hover .ks-resizable-handler-t,.ebutton:hover .ks-resizable-handler-b,.dd_i_zoom:hover .ks-resizable-handler-b,.ebutton:hover .ks-resizable-handler-r,.dd_i_zoom:hover .ks-resizable-handler-r,.ebutton:hover .ks-resizable-handler-l,.dd_i_zoom:hover .ks-resizable-handler-l{
-	background-color:#f60;
+}.eButton:hover .resizehandle{
 	opacity:.6;
 	filter:alpha(opacity=60);
-	filter:alpha(opacity=60);
-}.ebutton.active,.dd_i_zoom.active{
-	outline:none 0;
-	_border:none 0;
-}.ebutton.active .sw-resize,.ebutton.active .se-resize,.ebutton.active .nw-resize,.ebutton.active .ne-resize{
+}.eButton.active .resizehandle{
 	opacity:1;
 	filter:alpha(opacity=100);
-	filter:alpha(opacity=100);
-	background-color:#f00;
 }
 
 
 
+.canvas div[class^="area"]{
+	opacity: .6;
+	overflow: hidden;
+	background-color:#60e6e3;
+}
 
 
 

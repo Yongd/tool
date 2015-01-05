@@ -27,8 +27,8 @@ app.directive('draggable', ['$rootScope',function($rootScope) {
 app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile) {
   return {
     restrict: 'A',
-    link: function(a,b) {
-      b.bind('dragover', function(e) {
+    link: function(scope, element) {
+      element.bind('dragover', function(e) {
         if (e.preventDefault) {
           e.preventDefault(); 
         }
@@ -45,8 +45,7 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
       b.bind("dragleave", function(e) {
         angular.element(e.target).removeClass('lvl-over');
       });*/
-      b.bind('drop', function(e) {
-        console.log(11);
+      element.bind('drop', function(e) {
         if (e.preventDefault) {
           e.preventDefault();
         }
@@ -54,26 +53,25 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
           e.stopPropogation(); 
         }
         var dx = e.clientX,dy = e.clientY;//data = e.dataTransfer.getData('text');
-        b.append($compile('<div ta ce-drag ce-resize></div>')(a));
-        a.data[a.order].position.left=dx;
-        a.data[a.order].position.top=dy;
-
+        element.append($compile('<div ta ce-drag ce-resize></div>')(scope));
+        scope.data[scope.order].position.left=dx;
+        scope.data[scope.order].position.top=dy;
         var obj=document.getElementById('layer_list');
-        var layerHtml = '<p class="'+a.data[a.order].type+'_'+a.order+' active eButton" index="'+a.order+'">';
-        layerHtml+='<i class="icon fi-x size-14" ng-click="openWindow()" ></i>';
-        layerHtml+='<i class="icon fi-arrow-down size-14 actChangeZindex" tooltip="下移"></i>';
-        layerHtml+='<i class="icon fi-arrow-up size-14 actChangeZindex" tooltip="上移"></i>';
-        layerHtml+='<i class="icon fi-unlock size-14 actLock" tooltip="锁定"></i>';
-        layerHtml+='<span>'+a.data[a.order].name+(a.order+1)+'</span>';
+        var layerHtml = '<p class="'+scope.data[scope.order].type+'_'+scope.order+' active eButton" index="'+scope.order+'">';
+        layerHtml+='<span class="left">'+scope.data[scope.order].name+(scope.order+1)+'</span>';
+        layerHtml+='<i class="icon fi-x size-14 right" ng-click="openWindow()" ></i>';
+        layerHtml+='<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>';
+        layerHtml+='<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>';
+        layerHtml+='<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>';
         layerHtml+='</p>';
-        angular.element(obj).prepend($compile(layerHtml)(a));
+        angular.element(obj).prepend($compile(layerHtml)(scope));
       });
       $rootScope.$on('dragStart', function() {
-        b.addClass('drop-target');
+        element.addClass('drop-target');
       });
       $rootScope.$on('dragEnd', function() {
         angular.element(document.getElementById('workspace')).removeClass('move-right');
-        b.removeClass('drop-target');
+        element.removeClass('drop-target');
       });
     }
   };
@@ -88,23 +86,22 @@ app.directive('ta', ['$document' , function() {
     transclude: true,
     replace: true,
     scope:{},
-    template:'<div class="{{$parent.data[index].type}}_{{index}} eButton active" index="{{index}}" style="position:absolute;left:{{$parent.data[index].position.left}}px;top:{{$parent.data[index].position.top}}px;width:{{$parent.data[index].size.width}}px;height:{{$parent.data[index].size.height}}px;background-color:#0f0;">{{index}}{{$parent.data[index]}}</div>',
-    link:function(a,b){
-      a.index=a.$parent.getOrder();
-      a.$parent.data.push({
-         'id':a.index,
-         'zindex':a.index,
+    template:'<div class="{{$parent.data[index].type}}_{{index}} eButton active" index="{{index}}" style="position:absolute;left:{{$parent.data[index].position.left}}px;top:{{$parent.data[index].position.top}}px;width:{{$parent.data[index].size.width}}px;height:{{$parent.data[index].size.height}}px;">{{index}}{{$parent.data[index]}}</div>',
+    link:function(scope, element){
+      scope.index=scope.$parent.addElement();
+      scope.$parent.data.push({
+         'id':scope.index,
+         'zindex':scope.index,
          'name':'热点层',
          'type':'area',
          'position':{'left':200,'top':100},
-         'size':{'width':200,'height':300},
+         'size':{'width':100,'height':100},
          'link':''
       });
-      console.log(a.$parent.data);
       function removeData(){
-        delete a.$parent.data[a.index];
+        delete scope.$parent.data[scope.index];
       }
-      b.on('$destroy',removeData);
+      element.on('$destroy',removeData);
     }
   };
 }]);
@@ -154,16 +151,16 @@ app.directive('ceDrag', function($document) {
     function mouseup() {
       $document.unbind('mousemove', mousemove);
       $document.unbind('mouseup', mouseup);
-      b.css('opacity',1);
+      b.css('opacity',0.6);
     }
   };
 });
 app.directive('ceResize', function($document) {
   return function(a, b, c) {
     var resizeUp = function($event) {
-      var top = $event.pageY;
-      var height = b[0].offsetTop + b[0].offsetHeight - $event.pageY;
-      if ($event.pageY < b[0].offsetTop + b[0].offsetHeight - 10) {
+      var top = $event.pageY-43;
+      var height = b[0].offsetTop + b[0].offsetHeight - top;
+      if (top < b[0].offsetTop + b[0].offsetHeight - 10) {
         a.data[c.index].position.top=top;
         a.data[c.index].size.height=height;
       } else {
@@ -180,12 +177,13 @@ app.directive('ceResize', function($document) {
       }
     };
     var resizeDown = function($event) {
-      var height = $event.pageY - b[0].offsetTop;
-      if ($event.pageY > b[0].offsetTop + 10) {
+      var height = $event.pageY-43 - b[0].offsetTop;
+      if ($event.pageY-43 > b[0].offsetTop + 10) {
         a.data[c.index].size.height=height;
       } else {
         a.data[c.index].size.height=10;
       }
+      
     };
     var resizeLeft = function($event) {
       var left = $event.pageX;
@@ -337,14 +335,18 @@ app.directive('ceResize', function($document) {
 app.directive('eButton',function(){
   return {
     restrict : 'C',
-    link:function(a,b,c){
-      function addAct(){
+    link:function(scope,element,attrs){
+      function removeAct(){
         angular.element(document.querySelectorAll('.eButton')).removeClass('active');
-        angular.element(document.getElementsByClassName(c.class.split(' ')[0])).addClass('active');
-        a.order=c.index;    
       }
-      angular.element(document.querySelectorAll('.eButton')).removeClass('active');
-      b.on('mousedown',addAct);
+      function addAct(){
+        removeAct();
+        angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('active');
+        scope.$parent.order=attrs.index;   
+      }
+      removeAct();
+      element.on('mousedown',addAct);
+
     }
   }; 
 });
@@ -357,39 +359,40 @@ app.directive('layercontrol',function(){
       b.bind('mousedown',function(){
         b.parent().children().removeClass('active');
         b.addClass('active');
-        a.order=b.attr('class').replace(/[^0-9]/ig,'');
+        a.elementOrder=b.attr('class').replace(/[^0-9]/ig,'');
       });
     }
   };
 });
-app.directive('actChangeZindex',['$animate',function($animate){
+
+app.directive('actChangeZindex',['$timeout',function($timeout){
   return {
     restrict : 'C',
-    link : function(a,b){ 
-      
+    link : function(scope, element){ 
       function changeZindex(){
-        var obj = b.parent(),nextObj;
-        nextObj = b.hasClass('fi-arrow-down')?obj.next():angular.element(obj[0].previousSibling);
-        if(nextObj.length===1&&angular.element(obj.children()[3]).hasClass('fi-unlock')){
-          $animate.addClass(nextObj, 'ts', function(){
-            obj.parent().children().removeClass('active');
-            if(b.hasClass('fi-arrow-down')){
-              nextObj.after(obj);
-            }else{
-              obj.parent()[0].insertBefore(obj[0],nextObj[0]);
-            }
-            $animate.removeClass(nextObj, 'ts',function(){
-              obj.addClass('active');
-            });
-          });
+        var obj = element.parent(),nextObj;
+        nextObj = element.hasClass('fi-arrow-down')?obj.next():angular.element(obj[0].previousSibling);
+        if(nextObj.length===1&&angular.element(obj.children()[4]).hasClass('fi-unlock')){
+          nextObj.addClass('changing');
+          $timeout(function(){
+                if(element.hasClass('fi-arrow-down')){
+                    nextObj.after(obj);
+                }else{
+                    obj.parent()[0].insertBefore(obj[0],nextObj[0]);
+                }
+                nextObj.removeClass('changing');
+              },
+              300
+          );
+          console.log(scope);
           var order = obj.attr('class').replace(/[^0-9]/ig,'');
           var nextOrder = nextObj.attr('class').replace(/[^0-9]/ig,'');
-          var tempOrder = a.data[order].zindex;
-          a.data[order].zindex = nextOrder;
-          a.data[nextOrder].zindex = tempOrder;
+          var tempOrder = scope.data[order].zindex;
+          scope.data[order].zindex = nextOrder;
+          scope.data[nextOrder].zindex = tempOrder;
         }
       }
-      b.bind('mousedown',changeZindex);
+      element.bind('mousedown',changeZindex);
     }
   };
 }]);
@@ -417,7 +420,7 @@ app.directive("actRemove",function(){
     restrict : 'C',
     link : function(a,b,c){ 
       b.bind('mousedown',function(){
-        //a.order=b.parent().attr('class').replace(/[^0-9]/ig,"");
+        //a.elementOrder=b.parent().attr('class').replace(/[^0-9]/ig,"");
         b.attr('tooltip','');
       })
     }

@@ -97,7 +97,7 @@
           <div class="message">构建页面</div>
         </div>
       </div>
-      <div  class="canvas"  droppable>
+      <div  class="canvas"  droppable ng-controller="widget">
         <div class="gridbg"></div>
         
       </div>
@@ -106,7 +106,7 @@
     </div>
  
 
-    <div id="side" class="box inner-wrap ts">
+    <div id="side" class="box inner-wrap ts" ng-controller="gridConfig">
       <tabset class="ftab">
         <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
           <div ng-include="tab.content"></div>
