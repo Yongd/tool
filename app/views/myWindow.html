@@ -1,6 +1,18 @@
 <h3>温馨提示：</h3>
-<p>您当前的操作是<strong> 删除 </strong><em>第{{order}}个{{name}}</em></p>
-<a class="button small radius" ng-click="ok()">确定</a>
-<a class="button secondary small radius" ng-click="cancel()">取消</a>
+
+<div ng-if="code==1">
+  	<p>您当前的操作是<strong> 删除 </strong><em>第{{order}}个{{name}}</em></p>
+	<a class="button small radius" ng-click="ok()">确定{{code}}</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+<div ng-if="code==2">
+  	<p><em>第{{order}}个{{name}}</em> 处于<strong> 锁定 </strong>状态，不可删除，请先解锁后再删除。</p>
+	<a class="button small radius" ng-click="cancel()">确定</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+
+
 <a class="close-reveal-modal" ng-click="cancel()">×</a>
 

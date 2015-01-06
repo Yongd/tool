@@ -6,7 +6,7 @@
  * License: MIT
  * (c) Pinecone, LLC
  */
-angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
+angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.resize", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
 angular.module("mm.foundation.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/topbar/has-dropdown.html","template/topbar/toggle-top-bar.html","template/topbar/top-bar-dropdown.html","template/topbar/top-bar-section.html","template/topbar/top-bar.html","template/tour/tour.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
 angular.module('mm.foundation.accordion', [])
 
@@ -486,7 +486,7 @@ angular.module('mm.foundation.dropdownToggle', [ 'mm.foundation.position', 'mm.f
               parent.removeClass('hover');
             }
           };
-          angular.element($document[0].querySelector('#main')).on('click', closeMenu);
+          angular.element($document[0].querySelector('.canvas')).on('click', closeMenu);
         }
       };
 
@@ -540,6 +540,193 @@ angular.module('mm.foundation.ranger',[])
    }  
   }
  }]);   
+
+angular.module('mm.foundation.resize',[])
+.directive('ceResize', ['$document','$position', function ($document,$position) {
+  return function(a, b, c){
+      var resizeUp = function($event) {
+      var top = $event.pageY-43;
+      var height = b[0].offsetTop + b[0].offsetHeight - top;
+      if (top < b[0].offsetTop + b[0].offsetHeight - 10) {
+        a.data[c.index].position.top=top;
+        a.data[c.index].size.height=height;
+      } else {
+        a.data[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
+        a.data[c.index].size.height=10;
+      }
+      //console.log(  $position.offset(b.parent())   );
+      
+     
+    };
+    var resizeRight = function($event) {
+      var width = $event.pageX - b[0].offsetLeft-50;
+      if ($event.pageX > b[0].offsetLeft + 10) {
+        a.data[c.index].size.width=width;
+      } else {
+        a.data[c.index].size.width=10;
+      }
+    };
+    var resizeDown = function($event) {
+      var height = $event.pageY-43 - b[0].offsetTop;
+      if ($event.pageY-43 > b[0].offsetTop + 10) {
+        a.data[c.index].size.height=height;
+      } else {
+        a.data[c.index].size.height=10;
+      }
+      
+    };
+    var resizeLeft = function($event) {
+      var left = $event.pageX-50;
+      var width = b[0].offsetLeft + b[0].offsetWidth - left;
+
+      if (left < b[0].offsetLeft + b[0].offsetWidth - 10) {
+        a.data[c.index].position.left=left;
+        a.data[c.index].size.width=width;
+      } else {
+        a.data[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
+        a.data[c.index].size.width=10;
+      }
+    };
+    var newElement = angular.element('<div class="resizehandle n-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeUp($event));
+      }
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+    });
+    newElement = angular.element('<div class="resizehandle e-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeRight($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+      
+    });
+    newElement = angular.element('<div class="resizehandle s-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeDown($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+      
+    });
+    newElement = angular.element('<div class="resizehandle w-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeLeft($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+      
+    });
+    newElement = angular.element('<div class="resizehandle nw-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeUp($event),resizeLeft($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+      
+    });
+    newElement = angular.element('<div class="resizehandle ne-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeUp($event),resizeRight($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+    });
+    newElement = angular.element('<div class="resizehandle se-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+      function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeDown($event),resizeRight($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+
+      
+    });
+    newElement = angular.element('<div class="resizehandle sw-resize"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function() {
+       function mousemove($event) {
+        event.preventDefault();
+        a.$apply(resizeDown($event),resizeLeft($event));
+      }
+
+      function mouseup() {
+        $document.unbind('mousemove', mousemove);
+        $document.unbind('mouseup', mouseup);
+      }
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+      
+     
+    });
+
+
+
+
+   
+  }
+ }]); 
 /**
  * @ngdoc service
  * @name mm.foundation.interchange

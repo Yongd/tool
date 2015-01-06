@@ -37,14 +37,7 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
         }
         e.dataTransfer.dropEffect = 'move';
         return false;
-      });/*
-      b.bind("dragenter", function(e) {
-        angular.element(e.target).addClass('lvl-over');
-        console.log(e)
       });
-      b.bind("dragleave", function(e) {
-        angular.element(e.target).removeClass('lvl-over');
-      });*/
       element.bind('drop', function(e) {
         if (e.preventDefault) {
           e.preventDefault();
@@ -65,6 +58,7 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
         layerHtml+='<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>';
         layerHtml+='</p>';
         angular.element(obj).prepend($compile(layerHtml)(scope));
+        console.log(scope);
       });
       $rootScope.$on('dragStart', function() {
         element.addClass('drop-target');
@@ -155,183 +149,8 @@ app.directive('ceDrag', function($document) {
     }
   };
 });
-app.directive('ceResize', function($document) {
-  return function(a, b, c) {
-    var resizeUp = function($event) {
-      var top = $event.pageY-43;
-      var height = b[0].offsetTop + b[0].offsetHeight - top;
-      if (top < b[0].offsetTop + b[0].offsetHeight - 10) {
-        a.data[c.index].position.top=top;
-        a.data[c.index].size.height=height;
-      } else {
-        a.data[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
-        a.data[c.index].size.height=10;
-      }
-    };
-    var resizeRight = function($event) {
-      var width = $event.pageX - b[0].offsetLeft;
-      if ($event.pageX > b[0].offsetLeft + 10) {
-        a.data[c.index].size.width=width;
-      } else {
-        a.data[c.index].size.width=10;
-      }
-    };
-    var resizeDown = function($event) {
-      var height = $event.pageY-43 - b[0].offsetTop;
-      if ($event.pageY-43 > b[0].offsetTop + 10) {
-        a.data[c.index].size.height=height;
-      } else {
-        a.data[c.index].size.height=10;
-      }
-      
-    };
-    var resizeLeft = function($event) {
-      var left = $event.pageX;
-      var width = b[0].offsetLeft + b[0].offsetWidth - $event.pageX;
 
-      if ($event.pageX < b[0].offsetLeft + b[0].offsetWidth - 10) {
-        a.data[c.index].position.left=left;
-        a.data[c.index].size.width=width;
-      } else {
-        a.data[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
-        a.data[c.index].size.width=10;
-      }
-    };
-    var newElement = angular.element('<div class="resizehandle n-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeUp($event));
-      }
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-    });
-    newElement = angular.element('<div class="resizehandle e-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeRight($event));
-      }
 
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-      
-    });
-    newElement = angular.element('<div class="resizehandle s-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeDown($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-      
-    });
-    newElement = angular.element('<div class="resizehandle w-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeLeft($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-      
-    });
-    newElement = angular.element('<div class="resizehandle nw-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeUp($event),resizeLeft($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-      
-    });
-    newElement = angular.element('<div class="resizehandle ne-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeUp($event),resizeRight($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-    });
-    newElement = angular.element('<div class="resizehandle se-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-      function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeDown($event),resizeRight($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-
-      
-    });
-    newElement = angular.element('<div class="resizehandle sw-resize"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function() {
-       function mousemove($event) {
-        event.preventDefault();
-        a.$apply(resizeDown($event),resizeLeft($event));
-      }
-
-      function mouseup() {
-        $document.unbind('mousemove', mousemove);
-        $document.unbind('mouseup', mouseup);
-      }
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-      
-     
-    });
-  };
-});
 app.directive('eButton',function(){
   return {
     restrict : 'C',
@@ -342,7 +161,11 @@ app.directive('eButton',function(){
       function addAct(){
         removeAct();
         angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('active');
-        scope.$parent.order=attrs.index;   
+        if(angular.isUndefined(scope.order)){
+          scope.$parent.order=attrs.index; 
+        }else{
+          scope.order=attrs.index; 
+        }
       }
       removeAct();
       element.on('mousedown',addAct);
@@ -384,11 +207,10 @@ app.directive('actChangeZindex',['$timeout',function($timeout){
               },
               300
           );
-          console.log(scope);
           var order = obj.attr('class').replace(/[^0-9]/ig,'');
           var nextOrder = nextObj.attr('class').replace(/[^0-9]/ig,'');
           var tempOrder = scope.data[order].zindex;
-          scope.data[order].zindex = nextOrder;
+          scope.data[order].zindex = scope.data[nextOrder].zindex;
           scope.data[nextOrder].zindex = tempOrder;
         }
       }

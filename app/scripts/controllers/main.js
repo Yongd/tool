@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
 var app = angular.module('toolApp');
-app.controller('MyTool', function ($scope,$modal) {
+app.controller('MyTool', function ($scope) {
 	    $scope.awesomeThings = [
 	      'HTML5 Boilerplate',
 	      'AngularJS',
@@ -21,45 +21,102 @@ app.controller('MyTool', function ($scope,$modal) {
 		];
 		$scope.bgcolor='#f00';
 		
-		
-		$scope.test=function(){
-			console.log($scope);
-		};
-		
-
-
+		$scope.ruler = true;
+		$scope.canvasPosition = 1;
       	
-      	$scope.ruler = true;
-      	
-		
-		
-		
+		var 
+      	wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+      	wHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
+      	$scope.width ={
+	      	'c':950,
+	      	'b':990,
+	      	'self':wWidth
+	    };
 		
-		
-
-
-
-
-	    $scope.openWindow = function () {
-	    	var calldata={'name':$scope.data[$scope.elementOrder].name,'order':$scope.elementOrder,'remove':$scope.remove};
-			//var modalInstance = $modal.open({
-			$modal.open({
-		      templateUrl: 'views/myWindow.html',
-		      controller: 'WindowCtrl',
-		      resolve: {
-		        data: function () {
-		         	return calldata;
-		        }
-		      }
-			});
+		$scope.canvastabs = [
+			{ title:'画布1', content:'views/canvasconfig.html'}
+		];
+		$scope.dataMks = {
+			'jname':'未命名',
+			'width':wWidth-100,
+			'height':wHeight-100,
+			'offset':'margin:0 auto',
+			'slider':{
+				'arrow':{
+						'enable':true,
+						'left_url':'http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX',
+						'left_position':{'left':447.5,'top':273},
+						'right_url':'http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX',
+						'right_position':{'left':1397,'top':273},
+					},
+				'nav':{
+						'enable':true,
+						'bg_color':'',
+						'border_color':'',
+						'font_color':'',
+						'align':0,
+						'position':{'left':600,'top':100}
+					},
+				'effect':'scrollx',
+				'duration':0.5,
+				'autoplay':true
+			},
+			'mks':[
+				{
+					'color': 'transparent',
+					'img':{'repeat':'no-repeat','url':''}
+						
+				}
+			],
+			'version':1
 		};
+
+		
+		
+		
+			
+		
+		$scope.canvasOrder=0;
+		$scope.indexCanvas = 1;
+		$scope.addCanvas = function(){
+			$scope.indexCanvas += 1;
+			$scope.canvastabs.push({title:'画布'+$scope.indexCanvas, content:'views/canvasconfig.html'});
+			$scope.dataMks.mks.push({'color': 'transparent', 'img':{'repeat':'no-repeat','url':''}});
+		};
+		$scope.deleteCanvas = function(){
+			$scope.indexCanvas -= 1;
+			$scope.canvastabs.splice($scope.canvasOrder,1);
+			var tabLength = $scope.canvastabs.length;
+			if($scope.canvasOrder==tabLength){
+				$scope.canvasOrder-=1;
+			}else{
+				var rIndex = 0;
+				for(var $i=0;$i<tabLength;$i++){
+					rIndex ++;
+					$scope.canvastabs[$i].title = '画布'+rIndex;
+				}
+			}
+			$scope.dataMks.mks.splice($scope.canvasOrder,1);
+		};
+			
+		
+
+		
+		
+
+
+
+
+	    
 });
 
 
 
-app.controller('widget',function($scope){
+app.controller('widget',function ($scope, $modal){
+	var code;
 	$scope.data = [];
+	
 	$scope.order = $scope.addOrder = -1;
 	$scope.addElement = function(){
 		$scope.addOrder += 1;
@@ -67,87 +124,31 @@ app.controller('widget',function($scope){
 		return $scope.order;
 	};
 	$scope.remove = function() {
-		var obj = document.getElementsByClassName($scope.data[$scope.order].type+'_'+$scope.order);
-	    if(obj!==null&&angular.element(obj[1].children[4]).hasClass('fi-unlock')) {
-	        angular.element(obj).remove();
+		angular.element($scope.obj).remove();
+	};
+	$scope.openWindow = function () {
+		$scope.obj = document.getElementsByClassName($scope.data[$scope.order].type+'_'+$scope.order);
+		if($scope.obj===null||angular.element($scope.obj[1].children[4]).hasClass('fi-lock')) {
+	        code = 2;
+	    }else
+	    {
+	    	code = 1;
 	    }
+		var calldata={'name':$scope.data[$scope.order].name,'order':$scope.order,'remove':$scope.remove,'code':code};
+		$modal.open({
+		     templateUrl: 'views/myWindow.html',
+		     controller: 'WindowCtrl',
+		     resolve: {
+		        data: function () {
+		         	return calldata;
+		        }
+		      }
+		});
 	};
 });
-
-app.controller('gridConfig',function($scope){
-	var 
-      	wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-      	wHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    $scope.width ={
-      	'c':950,
-      	'b':990,
-      	'self':wWidth
-    };
-	
-	$scope.canvastabs = [
-		{ title:'画布1', content:'views/canvasconfig.html'}
-	];
-	$scope.dataMks = {
-		'jname':'未命名',
-		'width':wWidth,
-		'height':wHeight,
-		'slider':{
-			'arrow':{
-					'enable':true,
-					'left_url':'http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX',
-					'left_position':{'left':447.5,'top':273},
-					'right_url':'http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX',
-					'right_position':{'left':1397,'top':273},
-				},
-			'nav':{
-					'enable':true,
-					'bg_color':'',
-					'border_color':'',
-					'font_color':'',
-					'align':0,
-					'position':{'left':600,'top':100}
-				},
-			'effect':'scrollx',
-			'duration':0.5,
-			'autoplay':true
-		},
-		'mks':[
-			{
-				'color': 'transparent',
-				'img':{'repeat':'no-repeat','url':''}
-					
-			}
-		],
-		'version':1
-	};
-	$scope.canvasOrder=0;
-	$scope.indexCanvas = 1;
-	$scope.addCanvas = function(){
-		$scope.indexCanvas += 1;
-		$scope.canvastabs.push({title:'画布'+$scope.indexCanvas, content:'views/canvasconfig.html'});
-		$scope.dataMks.mks.push({'color': 'transparent', 'img':{'repeat':'no-repeat','url':''}});
-	};
-	$scope.deleteCanvas = function(){
-		$scope.indexCanvas -= 1;
-		$scope.canvastabs.splice($scope.canvasOrder,1);
-		var tabLength = $scope.canvastabs.length;
-		if($scope.canvasOrder==tabLength){
-			$scope.canvasOrder-=1;
-		}else{
-			var rIndex = 0;
-			for(var $i=0;$i<tabLength;$i++){
-				rIndex ++;
-				$scope.canvastabs[$i].title = '画布'+rIndex;
-			}
-		}
-		$scope.dataMks.mks.splice($scope.canvasOrder,1);
-	};
-
-});
-
-
 app.controller('WindowCtrl', function ($scope, $modalInstance, data) {
 		$scope.name = data.name;
+		$scope.code = data.code;
 	  	$scope.order = parseInt(data.order)+1;
 	  	$scope.remove = data.remove;
 		$scope.ok = function () {
@@ -158,6 +159,9 @@ app.controller('WindowCtrl', function ($scope, $modalInstance, data) {
 	    	$modalInstance.dismiss('cancel');
     };
 });
+
+
+
 
 Array.prototype.unique3 = function(){
  this.sort();
