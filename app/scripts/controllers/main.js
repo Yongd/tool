@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
 var app = angular.module('toolApp');
-app.controller('MyTool', function ($scope) {
+app.controller('MyTool', function ($scope, $modal) {
 	    $scope.awesomeThings = [
 	      'HTML5 Boilerplate',
 	      'AngularJS',
@@ -33,14 +33,14 @@ app.controller('MyTool', function ($scope) {
 	      	'b':990,
 	      	'self':wWidth
 	    };
-		
+		$scope.addOrder = [-1];
 		$scope.canvastabs = [
 			{ title:'画布1', content:'views/canvasconfig.html'}
 		];
 		$scope.dataMks = {
 			'jname':'未命名',
-			'width':wWidth-100,
-			'height':wHeight-100,
+			'width':wWidth-160,
+			'height':wHeight-300,
 			'offset':'margin:0 auto',
 			'slider':{
 				'arrow':{
@@ -65,8 +65,8 @@ app.controller('MyTool', function ($scope) {
 			'mks':[
 				{
 					'color': 'transparent',
-					'img':{'repeat':'no-repeat','url':''}
-						
+					'img':{'repeat':'no-repeat','url':''},
+					'widget':[]
 				}
 			],
 			'version':1
@@ -82,11 +82,13 @@ app.controller('MyTool', function ($scope) {
 		$scope.addCanvas = function(){
 			$scope.indexCanvas += 1;
 			$scope.canvastabs.push({title:'画布'+$scope.indexCanvas, content:'views/canvasconfig.html'});
-			$scope.dataMks.mks.push({'color': 'transparent', 'img':{'repeat':'no-repeat','url':''}});
+			$scope.dataMks.mks.push({'color': 'transparent', 'img':{'repeat':'no-repeat','url':''}, 'widget':[]});
+			$scope.addOrder.push(-1);
 		};
 		$scope.deleteCanvas = function(){
 			$scope.indexCanvas -= 1;
 			$scope.canvastabs.splice($scope.canvasOrder,1);
+			$scope.addOrder.splice($scope.indexCanvas,1);
 			var tabLength = $scope.canvastabs.length;
 			if($scope.canvasOrder==tabLength){
 				$scope.canvasOrder-=1;
@@ -99,42 +101,30 @@ app.controller('MyTool', function ($scope) {
 			}
 			$scope.dataMks.mks.splice($scope.canvasOrder,1);
 		};
-			
 		
-
-		
-		
-
-
-
-
-	    
-});
-
-
-
-app.controller('widget',function ($scope, $modal){
-	var code;
-	$scope.data = [];
 	
-	$scope.order = $scope.addOrder = -1;
+		
+
+	var code;
+	$scope.order = -1;
+
 	$scope.addElement = function(){
-		$scope.addOrder += 1;
-		$scope.order = $scope.addOrder;
+		$scope.addOrder[$scope.canvasOrder] += 1;
+		$scope.order = $scope.addOrder[$scope.canvasOrder];
 		return $scope.order;
 	};
 	$scope.remove = function() {
 		angular.element($scope.obj).remove();
 	};
 	$scope.openWindow = function () {
-		$scope.obj = document.getElementsByClassName($scope.data[$scope.order].type+'_'+$scope.order);
+		$scope.obj = document.getElementsByClassName($scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].type+'_'+$scope.order);
 		if($scope.obj===null||angular.element($scope.obj[1].children[4]).hasClass('fi-lock')) {
 	        code = 2;
 	    }else
 	    {
 	    	code = 1;
 	    }
-		var calldata={'name':$scope.data[$scope.order].name,'order':$scope.order,'remove':$scope.remove,'code':code};
+		var calldata={'name':$scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].name,'order':$scope.order,'remove':$scope.remove,'code':code};
 		$modal.open({
 		     templateUrl: 'views/myWindow.html',
 		     controller: 'WindowCtrl',
@@ -145,7 +135,14 @@ app.controller('widget',function ($scope, $modal){
 		      }
 		});
 	};
+
+
+	    
 });
+
+
+
+
 app.controller('WindowCtrl', function ($scope, $modalInstance, data) {
 		$scope.name = data.name;
 		$scope.code = data.code;

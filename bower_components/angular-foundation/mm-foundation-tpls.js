@@ -6,7 +6,7 @@
  * License: MIT
  * (c) Pinecone, LLC
  */
-angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.resize", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
+angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.resize", "mm.foundation.drag", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
 angular.module("mm.foundation.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/topbar/has-dropdown.html","template/topbar/toggle-top-bar.html","template/topbar/top-bar-dropdown.html","template/topbar/top-bar-section.html","template/topbar/top-bar.html","template/tour/tour.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
 angular.module('mm.foundation.accordion', [])
 
@@ -542,49 +542,46 @@ angular.module('mm.foundation.ranger',[])
  }]);   
 
 angular.module('mm.foundation.resize',[])
-.directive('ceResize', ['$document','$position', function ($document,$position) {
+.directive('ydResize', ['$document','$position', function ($document,$position) {
   return function(a, b, c){
-      var resizeUp = function($event) {
-      var top = $event.pageY-43;
+   var resizeUp = function($event) {
+      var top = $event.pageY-$position.offset(b.parent()).top;
       var height = b[0].offsetTop + b[0].offsetHeight - top;
       if (top < b[0].offsetTop + b[0].offsetHeight - 10) {
-        a.data[c.index].position.top=top;
-        a.data[c.index].size.height=height;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=top;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=height;
       } else {
-        a.data[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
-        a.data[c.index].size.height=10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=10;
       }
-      //console.log(  $position.offset(b.parent())   );
-      
-     
     };
     var resizeRight = function($event) {
-      var width = $event.pageX - b[0].offsetLeft-50;
+      var width = $event.pageX - b[0].offsetLeft-$position.offset(b.parent()).left;
       if ($event.pageX > b[0].offsetLeft + 10) {
-        a.data[c.index].size.width=width;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=width;
       } else {
-        a.data[c.index].size.width=10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=10;
       }
     };
     var resizeDown = function($event) {
-      var height = $event.pageY-43 - b[0].offsetTop;
-      if ($event.pageY-43 > b[0].offsetTop + 10) {
-        a.data[c.index].size.height=height;
+      var xtop = $event.pageY-$position.offset(b.parent()).top;
+      var height = xtop - b[0].offsetTop;
+      if (xtop > b[0].offsetTop + 10) {
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=height;
       } else {
-        a.data[c.index].size.height=10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=10;
       }
-      
     };
     var resizeLeft = function($event) {
-      var left = $event.pageX-50;
+      var left = $event.pageX-$position.offset(b.parent()).left;
       var width = b[0].offsetLeft + b[0].offsetWidth - left;
 
       if (left < b[0].offsetLeft + b[0].offsetWidth - 10) {
-        a.data[c.index].position.left=left;
-        a.data[c.index].size.width=width;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=left;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=width;
       } else {
-        a.data[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
-        a.data[c.index].size.width=10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=10;
       }
     };
     var newElement = angular.element('<div class="resizehandle n-resize"></div>');
@@ -717,13 +714,57 @@ angular.module('mm.foundation.resize',[])
       }
       $document.bind('mousemove', mousemove);
       $document.bind('mouseup', mouseup);
-      
-     
     });
+  }
+ }]); 
 
-
-
-
+angular.module('mm.foundation.drag',[])
+.directive('ydDrag', ['$document','$position', function ($document,$position) {
+  return function(a, b, c){
+    var startX = 0, startY = 0;
+    var newElement = angular.element('<div class="draggable"></div>');
+    b.append(newElement);
+    newElement.on('mousedown', function($event) {
+      event.preventDefault();
+      startX = $event.pageX - b[0].offsetLeft;
+      startY = $event.pageY - b[0].offsetTop;
+      $document.bind('mousemove', mousemove);
+      $document.bind('mouseup', mouseup);
+    });
+    function mousemove($event) {
+      var 
+        y = $event.pageY - startY,
+        x = $event.pageX - startX,
+        width = parseInt(b.css('width')),
+        height = parseInt(b.css('height')),
+        cwidth = $position.offset(b.parent()).width,
+        cheight = $position.offset(b.parent()).height;
+      
+      if(x+width > cwidth ){
+        x = cwidth - width;
+      }else if(x<0){
+        x = 0;
+      }
+      if(y+height > cheight ){
+        y = cheight - height;
+      }else if(y<0){
+        y = 0;
+      }
+      a.$apply(function(){
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=x;
+        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=y;
+      });
+      b.css({
+        top: y + 'px',
+        left:  x + 'px',
+        opacity: 0.8
+      });
+    }
+    function mouseup() {
+      $document.unbind('mousemove', mousemove);
+      $document.unbind('mouseup', mouseup);
+      b.css('opacity',0.6);
+    }
    
   }
  }]); 
@@ -2450,13 +2491,27 @@ angular.module('mm.foundation.tabs', [])
   };
   ctrl.getCanvasOrder = function(order){
     $scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder=order;
-  }
+  };
+  ctrl.hide = function(index){
+
+    angular.element(document.querySelectorAll('.wrap')).addClass('hide');
+    angular.element(document.querySelectorAll('.wrap_'+index)).removeClass('hide');
+  };
   ctrl.addTab = function addTab(tab) {
     tabs.push(tab);
     if (tabs.length === 1 || tab.active) {
       ctrl.select(tab);
+      
     }
+    var order = tab.heading.replace(/[^0-9]/ig,'')-1;
+    if(order>0){
+      ctrl.select(tab);
+      ctrl.hide(order);
+      ctrl.getCanvasOrder(order);
+    }
+    
   };
+
   ctrl.removeTab = function removeTab(tab) {
     var index = tabs.indexOf(tab);
     //Select a new tab if the tab to be removed is selected
@@ -2657,8 +2712,10 @@ angular.module('mm.foundation.tabs', [])
             scope.active = true;
           }
           order = attrs.heading.replace(/[^0-9]/ig,'');
+          var index = order-1;
           if(order!=''){
-            tabsetCtrl.getCanvasOrder(order-1)
+            tabsetCtrl.getCanvasOrder(index);
+            tabsetCtrl.hide(index);
           }
         };
 

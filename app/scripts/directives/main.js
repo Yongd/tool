@@ -24,7 +24,7 @@ app.directive('draggable', ['$rootScope',function($rootScope) {
     }
   };
 }]);
-app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile) {
+app.directive('droppable', ['$rootScope', '$compile', '$position', function($rootScope, $compile, $position) {
   return {
     restrict: 'A',
     link: function(scope, element) {
@@ -45,20 +45,21 @@ app.directive('droppable', ['$rootScope','$compile',function($rootScope,$compile
         if (e.stopPropogation) {
           e.stopPropogation(); 
         }
-        var dx = e.clientX,dy = e.clientY;//data = e.dataTransfer.getData('text');
-        element.append($compile('<div ta ce-drag ce-resize></div>')(scope));
-        scope.data[scope.order].position.left=dx;
-        scope.data[scope.order].position.top=dy;
+        var dx = e.clientX-$position.offset(element).left,dy = e.clientY-$position.offset(element).top;//data = e.dataTransfer.getData('text');
+        
+        angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div ta yd-drag yd-resize></div>')(scope));
+        scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.left=dx-scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.width/2;
+        scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.top=dy-scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.height/2;
+        
         var obj=document.getElementById('layer_list');
-        var layerHtml = '<p class="'+scope.data[scope.order].type+'_'+scope.order+' active eButton" index="'+scope.order+'">';
-        layerHtml+='<span class="left">'+scope.data[scope.order].name+(scope.order+1)+'</span>';
+        var layerHtml = '<p class="'+scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].type+'_'+scope.$parent.order+' active eButton" index="'+scope.$parent.order+'">';
+        layerHtml+='<span class="left">'+scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].name+(scope.$parent.order+1)+'</span>';
         layerHtml+='<i class="icon fi-x size-14 right" ng-click="openWindow()" ></i>';
         layerHtml+='<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>';
         layerHtml+='<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>';
         layerHtml+='<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>';
         layerHtml+='</p>';
         angular.element(obj).prepend($compile(layerHtml)(scope));
-        console.log(scope);
       });
       $rootScope.$on('dragStart', function() {
         element.addClass('drop-target');
@@ -80,10 +81,10 @@ app.directive('ta', ['$document' , function() {
     transclude: true,
     replace: true,
     scope:{},
-    template:'<div class="{{$parent.data[index].type}}_{{index}} eButton active" index="{{index}}" style="position:absolute;left:{{$parent.data[index].position.left}}px;top:{{$parent.data[index].position.top}}px;width:{{$parent.data[index].size.width}}px;height:{{$parent.data[index].size.height}}px;">{{index}}{{$parent.data[index]}}</div>',
+    template:'<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}  eButton active" index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>',
     link:function(scope, element){
-      scope.index=scope.$parent.addElement();
-      scope.$parent.data.push({
+      scope.index=scope.$parent.$parent.addElement();
+      scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget.push({
          'id':scope.index,
          'zindex':scope.index,
          'name':'热点层',
@@ -93,62 +94,13 @@ app.directive('ta', ['$document' , function() {
          'link':''
       });
       function removeData(){
-        delete scope.$parent.data[scope.index];
+        delete scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget[scope.index];
       }
       element.on('$destroy',removeData);
     }
   };
 }]);
 
-
-
-app.directive('ceDrag', function($document) {
-  return function(a, b, c) {
-    var startX = 0, startY = 0;
-    var newElement = angular.element('<div class="draggable"></div>');
-    b.append(newElement);
-    newElement.on('mousedown', function($event) {
-      event.preventDefault();
-        // To keep the last selected box in front
-        //angular.element(document.querySelectorAll(".contentEditorBox")).css("z-index", "0");
-        // b.css("z-index", "1"); 
-      startX = $event.pageX - b[0].offsetLeft;
-      startY = $event.pageY - b[0].offsetTop;
-      $document.bind('mousemove', mousemove);
-      $document.bind('mouseup', mouseup);
-    });
-    function mousemove($event) {
-      var y = $event.pageY - startY;
-      var x = $event.pageX - startX;
-      var width = parseInt(b.css('width'));
-      var height = parseInt(b.css('height'));
-      if(x+width > window.innerWidth ){
-        x = window.innerWidth - width;
-      }else if(x<0){
-        x = 0;
-      }
-      if(y+height > window.innerHeight ){
-        y = window.innerHeight - height;
-      }else if(y<0){
-        y = 0;
-      }
-      a.$apply(function(){
-        a.data[c.index].position.left=x;
-        a.data[c.index].position.top=y;
-      });
-      b.css({
-        top: y + 'px',
-        left:  x + 'px',
-        opacity: 0.8
-      });
-    }
-    function mouseup() {
-      $document.unbind('mousemove', mousemove);
-      $document.unbind('mouseup', mouseup);
-      b.css('opacity',0.6);
-    }
-  };
-});
 
 
 app.directive('eButton',function(){
@@ -162,9 +114,9 @@ app.directive('eButton',function(){
         removeAct();
         angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('active');
         if(angular.isUndefined(scope.order)){
-          scope.$parent.order=attrs.index; 
+          scope.$parent.$parent.order=attrs.index; 
         }else{
-          scope.order=attrs.index; 
+          scope.$parent.order=attrs.index; 
         }
       }
       removeAct();
@@ -172,20 +124,6 @@ app.directive('eButton',function(){
 
     }
   }; 
-});
-
-
-app.directive('layercontrol',function(){
-  return {
-    restrict : 'A',
-    link : function(a,b){ 
-      b.bind('mousedown',function(){
-        b.parent().children().removeClass('active');
-        b.addClass('active');
-        a.elementOrder=b.attr('class').replace(/[^0-9]/ig,'');
-      });
-    }
-  };
 });
 
 app.directive('actChangeZindex',['$timeout',function($timeout){
@@ -207,11 +145,12 @@ app.directive('actChangeZindex',['$timeout',function($timeout){
               },
               300
           );
-          var order = obj.attr('class').replace(/[^0-9]/ig,'');
-          var nextOrder = nextObj.attr('class').replace(/[^0-9]/ig,'');
-          var tempOrder = scope.data[order].zindex;
-          scope.data[order].zindex = scope.data[nextOrder].zindex;
-          scope.data[nextOrder].zindex = tempOrder;
+          var 
+            order = obj.attr('class').replace(/[^0-9]/ig,''),
+            nextOrder = nextObj.attr('class').replace(/[^0-9]/ig,''),
+            tempOrder = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[order].zindex;
+          scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[order].zindex = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[nextOrder].zindex;
+          scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[nextOrder].zindex = tempOrder;
         }
       }
       element.bind('mousedown',changeZindex);
@@ -234,17 +173,19 @@ app.directive('actLock',function(){
   };
 });
 
-
-
-/*
-app.directive("actRemove",function(){
+app.directive('addWrap', ['$compile', function( $compile ){
   return {
     restrict : 'C',
-    link : function(a,b,c){ 
-      b.bind('mousedown',function(){
-        //a.elementOrder=b.parent().attr('class').replace(/[^0-9]/ig,"");
-        b.attr('tooltip','');
-      })
+    link : function(scope,element){ 
+      var pre=0,index=1,template;
+      element.bind('mousedown',function(){
+
+        template = '<div class="wrap_'+index+' wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-image:url({{dataMks.mks['+index+'].img.url}});background-repeat:{{dataMks.mks['+index+'].img.repeat}};background-color:{{dataMks.mks['+index+'].color}};"></div>';
+        angular.element(document.querySelectorAll('.wrap_'+pre)).after($compile(template)(scope));
+        index += 1;
+        pre += 1;
+
+      });
     }
-  }
-})*/
+  };
+}]);

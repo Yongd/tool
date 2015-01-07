@@ -84,7 +84,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 
 
 
-.canvas div[class^="area"]{
+.wrap .area{
 	opacity: .6;
 	overflow: hidden;
 	background-color:#60e6e3;
@@ -171,7 +171,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 
 
 
-.size-12 { font-size: 12px; }
+.size-12 { font-size: 0.75rem; }
 .size-14 { font-size: 0.9rem; }
 .size-16 { font-size: 1rem; }
 .size-18 { font-size: 1.1rem;}

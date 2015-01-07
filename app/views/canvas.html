@@ -12,7 +12,7 @@
         <div class="cont right">       
           <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.c"> 集市店铺 &nbsp;
           <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.b"> 天猫店铺 &nbsp;
-          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.self"> 自定义&nbsp; 
+          <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.self-160"> 自定义&nbsp; 
           <div class="size text-center">
             <span>宽 <input type="number" required ng-model="dataMks.width"  ng-disabled="dataMks.width==width.c||dataMks.width==width.b"> px</span> &nbsp;&nbsp;&nbsp; 
             <span>高 <input type="number" required ng-model="dataMks.height"> px</span>
@@ -25,7 +25,7 @@
       <dt>
         <i class="icon fi-photo"></i> 画布设置<em>(多张画布时,轮播显示)</em>
         <i class="icon fi-minus size-14 right" tooltip="删除画布" ng-click="deleteCanvas()"></i>
-        <i class="icon fi-plus size-14 right" tooltip="添加画布" ng-click="addCanvas()"></i>
+        <i class="icon fi-plus size-14 right addWrap" tooltip="添加画布" ng-click="addCanvas()"></i>
       </dt>
       <tabset>
       <tab ng-repeat="tab in canvastabs" heading="{{tab.title}}" active="tab.active">
