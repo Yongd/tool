@@ -101,11 +101,12 @@
     <div class="message">构建页面</div>
 </div>
 <div class="canvas" droppable style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;{{dataMks.offset}}">
-  <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-image:url({{dataMks.mks[0].img.url}});background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};">
+  <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};">
 
+    <div class="gridbg"></div>
   </div>
 </div>
-<div class="gridbg"></div>
+
 <div id="side" class="inner-wrap ts">
     <tabset class="ftab">
       <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
@@ -113,7 +114,7 @@
       </tab>
     </tabset>
 </div>
-<div class="attribute box" style="display:none;">
+<div class="attribute box">
   <div class="hd">
     <span class="name">
       组件属性&nbsp;&nbsp; <em></em>
@@ -129,11 +130,11 @@
     <div class="attr_group">
       <dl class="left">
         <dt class="clearfix">
-          <span class="fl" style="margin-right:5px;">当前对象{{elementOrder}}</span>
+          <span class="fl" style="margin-right:5px;">当前对象</span>
              <div class="fl"></div>
         </dt>
         <dd class="">
-          <span>{{order}}{{data[order].name}}_{{data[order].id+1}}</span>
+          <span ng-model="elementOrder" ng-value="order+1">{{dataMks.mks[canvasOrder].widget[order].name}}</span>
         </dd>
         <dd class="">
           <span class="btn sx_btn btn_delete" ng-click="remove()">删除</span>
@@ -147,10 +148,10 @@
               </dt>
               <dd class="">
                 左位移:
-                <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="data[order].position.left">px</dd>
+                <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
               <dd class="">
                 上位移:
-                <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="data[order].position.top">px</dd>
+                <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
             </dl>
 
             <dl class="left">
@@ -160,10 +161,10 @@
               </dt>
               <dd class="">
                 宽:
-                <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="data[order].a_size.width">px</dd>
+                <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.width">px</dd>
               <dd class="">
                 高:
-                <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="data[order].a_size.height">px</dd>
+                <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.height">px</dd>
             </dl>
 
             <dl class="left">

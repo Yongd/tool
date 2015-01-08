@@ -99,7 +99,7 @@ app.controller('MyTool', function ($scope, $modal) {
 					$scope.canvastabs[$i].title = '画布'+rIndex;
 				}
 			}
-			$scope.dataMks.mks.splice($scope.canvasOrder,1);
+			
 		};
 		
 	
@@ -107,7 +107,7 @@ app.controller('MyTool', function ($scope, $modal) {
 
 	var code;
 	$scope.order = -1;
-
+	$scope.elementOrder = $scope.order+1;
 	$scope.addElement = function(){
 		$scope.addOrder[$scope.canvasOrder] += 1;
 		$scope.order = $scope.addOrder[$scope.canvasOrder];

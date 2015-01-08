@@ -2493,7 +2493,6 @@ angular.module('mm.foundation.tabs', [])
     $scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder=order;
   };
   ctrl.hide = function(index){
-
     angular.element(document.querySelectorAll('.wrap')).addClass('hide');
     angular.element(document.querySelectorAll('.wrap_'+index)).removeClass('hide');
   };
@@ -2501,7 +2500,6 @@ angular.module('mm.foundation.tabs', [])
     tabs.push(tab);
     if (tabs.length === 1 || tab.active) {
       ctrl.select(tab);
-      
     }
     var order = tab.heading.replace(/[^0-9]/ig,'')-1;
     if(order>0){
@@ -2509,7 +2507,6 @@ angular.module('mm.foundation.tabs', [])
       ctrl.hide(order);
       ctrl.getCanvasOrder(order);
     }
-    
   };
 
   ctrl.removeTab = function removeTab(tab) {
@@ -2519,6 +2516,7 @@ angular.module('mm.foundation.tabs', [])
       //If this is the last tab, select the previous tab. else, the next tab.
       var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
       ctrl.select(tabs[newActiveIndex]);
+      ctrl.hide(tabs.indexOf(tab)-1);
     }
     tabs.splice(index, 1);
   };

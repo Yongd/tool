@@ -120,6 +120,7 @@
 .ruler{
 	opacity: 0.5;
 	z-index: 100;
+	position: relative;
 }.rulerx{
 	position: fixed;
 	top:41px;
@@ -360,7 +361,7 @@
 .attribute{
 	position: fixed;
 	_position: absolute;
-	top: 160px;
+	top: 460px;
 	left: 5%;
 	width: 90%;
 	min-width: 90%;
@@ -392,10 +393,13 @@
 	font-size: 0.75rem;
 }.attr_group dt{
 	font-weight: normal;
+	margin-bottom: 0.6rem;
 }
 
 .attr_group input{
-	width: 1rem;
+	width: 4rem;
+	height: 1.6rem;
+	padding:0 0.3rem;
 }
 
 
