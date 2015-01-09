@@ -2517,6 +2517,7 @@ angular.module('mm.foundation.tabs', [])
       var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
       ctrl.select(tabs[newActiveIndex]);
       ctrl.hide(tabs.indexOf(tab)-1);
+      ctrl.getCanvasOrder(newActiveIndex);
     }
     tabs.splice(index, 1);
   };

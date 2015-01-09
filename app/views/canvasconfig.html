@@ -1,29 +1,27 @@
-
-          <dd class="clearfix">  
-            <div class="name left">主背景色:</div> 
-            <div class="cont right">    
-              <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].color">
-              <div class="right color-picker">
-                <div class="sp-preview">
-                  <div colorpicker="rgba" colorpicker-position="left" colorpicker-with-input="dataMks.mks[canvasOrder].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].color" style="background-color:{{dataMks.mks[canvasOrder].color}}"></div>
-                </div>
-              </div>   
-            </div>  
-          </dd>
-          <dd class="clearfix"> 
-            <div class="name left">主背景图:</div> 
-            <div class="cont right">    
-              <input type="url" class="bginput" ng-model="dataMks.mks[canvasOrder].img.url" ng-keyup="addbg()" placeholder="如需设置背景请输入地址">
-              <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="button tiny">图片空间</a>
+<dd class="clearfix">
+    <div class="name left">主背景色:</div>
+    <div class="cont right">
+        <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].color">
+        <div class="right color-picker">
+            <div class="sp-preview">
+                <div colorpicker="rgba" colorpicker-position="left" colorpicker-with-input="dataMks.mks[canvasOrder].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].color" style="background-color:{{dataMks.mks[canvasOrder].color}}"></div>
             </div>
-          </dd>
-          <dd> 
-            <div class="name left">平铺方式:</div> 
-            <div class="cont right">    
-              <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat"> 平铺
-              <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-x"> 横铺  
-              <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-y"> 纵铺 
-              <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="no-repeat"> 不平铺
-            </div>
-          </dd>
-     
+        </div>
+    </div>
+</dd>
+<dd class="clearfix">
+    <div class="name left">主背景图:</div>
+    <div class="cont right">
+        <input type="url" class="bginput" ng-model="dataMks.mks[canvasOrder].img.url" ng-keyup="addbg()" placeholder="如需设置背景请输入地址">
+        <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="button tiny">图片空间</a>
+    </div>
+</dd>
+<dd>
+    <div class="name left">平铺方式:</div>
+    <div class="cont right">
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat"> 平铺
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-x"> 横铺
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-y"> 纵铺
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="no-repeat"> 不平铺
+    </div>
+</dd>

@@ -1,80 +1,81 @@
 <div class="topbar animated fadeInDown">
-  <div class="left">
-    <a class="left logo" href="#" target="_blank"></a>
-    <a class="left icon fi-home size-18 ts" href="#" target="_blank"><span>首页</span></a>
-    <i class="left icon fi-widget size-18 ts" dropdown-toggle="#tool-setting"><span>界面设置</span></i>
-    <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span></i>
-    <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span></i>
-    <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
-    <i class="left icon fi-eye size-24 ts"><span>预览效果</span></i>
-    <i class="left icon fi-checkbox size-20 ts"><span>生成代码</span></i>
-    <i class="left icon fi-list-thumbnails size-20 ts"><span>代码列表</span></i>
-    <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
-    <i class="left icon fi-page-add size-18 ts"><span>新建画布</span></i>
-  </div>
-  <div class="right">
-    <i class="icon left fi-paint-bucket size-18"><span>装修模板</span></i>
-    <i class="icon left fi-share size-16"><span>分享给好友</span></i>
+    <div class="left">
+        <a class="left logo" href="#" target="_blank"></a>
+        <a class="left icon fi-home size-18 ts" href="#" target="_blank"><span>首页</span></a>
+        <i class="left icon fi-widget size-18 ts" dropdown-toggle="#tool-setting"><span>界面设置</span></i>
+        <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span></i>
+        <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span></i>
+        <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
+        <i class="left icon fi-eye size-24 ts"><span>预览效果</span></i>
+        <i class="left icon fi-checkbox size-20 ts"><span>生成代码</span></i>
+        <i class="left icon fi-list-thumbnails size-20 ts"><span>代码列表</span></i>
+        <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
+        <i class="left icon fi-page-add size-18 ts"><span>新建画布</span></i>
+    </div>
+    <div class="right">
+        <i class="icon left fi-paint-bucket size-18"><span>装修模板</span></i>
+        <i class="icon left fi-share size-16"><span>分享给好友</span></i>
         <!--
         <i class="icon left fi-torso size-18"><span>我的账户</span></i>
         <i class="icon left fi-save size-18"><span>保存代码</span></i>
         <i class="icon left fi-power size-18"><span>退出登录</span></i>
       -->
-      <i class="icon left fi-torso size-18"><span>注册&登陆</span></i>
-      <i class="icon left fi-info size-18"><span>帮助&Bug</span></i>
-  </div>
-  <div id="tool-setting" class="f-dropdown">
-      <dl class="tool-set clearfix">
-        <dd class="clearfix">
-            <div class="name left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尺 :</div>
-            <div class="cont left switch small round">
-                <input id="ruler" type="checkbox" ng-model="ruler">
-                <label for="ruler"></label>
-            </div>
-        </dd>   
-        <dd class="clearfix"> 
-            <div class="name left">画布位置 :</div>
-            <div class="cont left">
-              <input type="radio" ng-model="dataMks.offset" value="float:left"> 居左&nbsp;
-              <input type="radio" ng-model="dataMks.offset" value="margin:0 auto"> 居中&nbsp;  
-              <input type="radio" ng-model="dataMks.offset" value="float:right"> 居右&nbsp;
-            </div>
-        </dd>    
-      </dl>
-      <div class="grid-set">   
-            <p>背景网格透明度:  <span id="alpha_val">50</span></p>
+        <i class="icon left fi-torso size-18"><span>注册&登陆</span></i>
+        <i class="icon left fi-info size-18"><span>帮助&Bug</span></i>
+    </div>
+    <div id="tool-setting" class="f-dropdown">
+        <dl class="tool-set clearfix">
+            <dd class="clearfix">
+                <div class="name left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;尺 :</div>
+                <div class="cont left switch small round">
+                    <input id="ruler" type="checkbox" ng-model="ruler">
+                    <label for="ruler"></label>
+                </div>
+            </dd>
+            <dd class="clearfix">
+                <div class="name left">画布位置 :</div>
+                <div class="cont left">
+                    <input type="radio" ng-model="dataMks.offset" value="float:left"> 居左&nbsp;
+                    <input type="radio" ng-model="dataMks.offset" value="margin:0 auto"> 居中&nbsp;
+                    <input type="radio" ng-model="dataMks.offset" value="float:right"> 居右&nbsp;
+                </div>
+            </dd>
+        </dl>
+        <div class="grid-set">
+            <p>背景网格透明度: <span id="alpha_val">50</span>
+            </p>
             <div class="range-slider round">
-              <div class="rsHandle range-slider-handle" role="slider" display="alpha_val"></div>
-          </div>
-      </div>
-  </div>
+                <div class="rsHandle range-slider-handle" role="slider" display="alpha_val"></div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="ruler">
     <div class="editorruler rulerx animated" ng-class="{'fadeInDown':ruler==true,'fadeOutUp':ruler==false}">
-      <div class="editorscaleNumbers">
-          <div class="scaleNumber" style="left: 3px;">0</div>
-          <div class="scaleNumber" style="left: 103px;">100</div>
-          <div class="scaleNumber" style="left: 203px;">200</div>
-          <div class="scaleNumber" style="left: 303px;">300</div>
-          <div class="scaleNumber" style="left: 403px;">400</div>
-          <div class="scaleNumber" style="left: 503px;">500</div>
-          <div class="scaleNumber" style="left: 603px;">600</div>
-          <div class="scaleNumber" style="left: 703px;">700</div>
-          <div class="scaleNumber" style="left: 803px;">800</div>
-          <div class="scaleNumber" style="left: 903px;">900</div>
-          <div class="scaleNumber" style="left: 1003px;">1000</div>
-          <div class="scaleNumber" style="left: 1103px;">1100</div>
-          <div class="scaleNumber" style="left: 1203px;">1200</div>
-          <div class="scaleNumber" style="left: 1303px;">1300</div>
-          <div class="scaleNumber" style="left: 1403px;">1400</div>
-          <div class="scaleNumber" style="left: 1503px;">1500</div>
-          <div class="scaleNumber" style="left: 1603px;">1600</div>
-          <div class="scaleNumber" style="left: 1703px;">1700</div>
-          <div class="scaleNumber" style="left: 1803px;">1800</div>
-          <div class="scaleNumber" style="left: 1903px;">1900</div>
+        <div class="editorscaleNumbers">
+            <div class="scaleNumber" style="left: 3px;">0</div>
+            <div class="scaleNumber" style="left: 103px;">100</div>
+            <div class="scaleNumber" style="left: 203px;">200</div>
+            <div class="scaleNumber" style="left: 303px;">300</div>
+            <div class="scaleNumber" style="left: 403px;">400</div>
+            <div class="scaleNumber" style="left: 503px;">500</div>
+            <div class="scaleNumber" style="left: 603px;">600</div>
+            <div class="scaleNumber" style="left: 703px;">700</div>
+            <div class="scaleNumber" style="left: 803px;">800</div>
+            <div class="scaleNumber" style="left: 903px;">900</div>
+            <div class="scaleNumber" style="left: 1003px;">1000</div>
+            <div class="scaleNumber" style="left: 1103px;">1100</div>
+            <div class="scaleNumber" style="left: 1203px;">1200</div>
+            <div class="scaleNumber" style="left: 1303px;">1300</div>
+            <div class="scaleNumber" style="left: 1403px;">1400</div>
+            <div class="scaleNumber" style="left: 1503px;">1500</div>
+            <div class="scaleNumber" style="left: 1603px;">1600</div>
+            <div class="scaleNumber" style="left: 1703px;">1700</div>
+            <div class="scaleNumber" style="left: 1803px;">1800</div>
+            <div class="scaleNumber" style="left: 1903px;">1900</div>
         </div>
-      </div>
-      <div class="editorruler rulery animated" ng-class="{'fadeInRight':ruler==true,'fadeOutRight':ruler==false}">
+    </div>
+    <div class="editorruler rulery animated" ng-class="{'fadeInRight':ruler==true,'fadeOutRight':ruler==false}">
         <div class="editorscaleNumbers">
             <div class="scaleNumber" style="top: 156px;">100</div>
             <div class="scaleNumber" style="top: 256px;">200</div>
@@ -92,94 +93,95 @@
             <div class="scaleNumber" style="top: 1456px;">1400</div>
             <div class="scaleNumber" style="top: 1556px;">1500</div>
             <div class="scaleNumber" style="top: 1656px;">1600</div>
-          </div>
-      </div> 
-</div> 
-  
-  
+        </div>
+    </div>
+</div>
+
+
 <div class="preloader done" style="display: none;">
     <div class="message">构建页面</div>
 </div>
 <div class="canvas" droppable style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;{{dataMks.offset}}">
-  <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};">
+    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};">
 
-    <div class="gridbg"></div>
-  </div>
+        <div class="gridbg"></div>
+    </div>
 </div>
 
 <div id="side" class="inner-wrap ts">
     <tabset class="ftab">
-      <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
-        <div ng-include="tab.content"></div>
-      </tab>
+        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+            <div ng-include="tab.content"></div>
+        </tab>
     </tabset>
 </div>
-<div class="attribute box">
-  <div class="hd">
-    <span class="name">
+<div class="attribute box" style="display:none;">
+    <div class="hd">
+        <span class="name">
       组件属性&nbsp;&nbsp; <em></em>
     </span>
-    
-    <span class="fr mr20">
+
+        <span class="fr mr20">
       小提示: 
     </span>
-    <i class="icon fi-minus size-12 right"></i>    
-        
-  </div>
-  <div class="bd">
-    <div class="attr_group">
-      <dl class="left">
-        <dt class="clearfix">
-          <span class="fl" style="margin-right:5px;">当前对象</span>
-             <div class="fl"></div>
-        </dt>
-        <dd class="">
-          <span ng-model="elementOrder" ng-value="order+1">{{dataMks.mks[canvasOrder].widget[order].name}}</span>
-        </dd>
-        <dd class="">
-          <span class="btn sx_btn btn_delete" ng-click="remove()">删除</span>
-        </dd>
-      </dl>
+        <i class="icon fi-minus size-12 right"></i>
 
+    </div>
+    <div class="bd">
+        <div class="attr_group">
             <dl class="left">
-              <dt class="clearfix">
-                <span class="fl" style="margin-right:5px;">位置</span>
-                <div class="fl"></div>
-              </dt>
-              <dd class="">
-                左位移:
-                <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
-              <dd class="">
-                上位移:
-                <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
+                <dt class="clearfix">
+                    <span class="fl" style="margin-right:5px;">当前对象</span>
+                    <div class="fl"></div>
+                </dt>
+                <dd class="">
+                    <span ng-model="elementOrder" ng-value="order+1">{{dataMks.mks[canvasOrder].widget[order].name}}</span>
+                </dd>
+                <dd class="">
+                    <span class="btn sx_btn btn_delete" ng-click="remove()">删除</span>
+                </dd>
             </dl>
 
             <dl class="left">
-              <dt class="clearfix">
-                <span class="fl" style="margin-right:5px;">大小</span>
-                <div class="fl"></div>
-              </dt>
-              <dd class="">
-                宽:
-                <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.width">px</dd>
-              <dd class="">
-                高:
-                <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.height">px</dd>
+                <dt class="clearfix">
+                    <span class="fl" style="margin-right:5px;">位置</span>
+                    <div class="fl"></div>
+                </dt>
+                <dd class="">
+                    左位移:
+                    <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
+                <dd class="">
+                    上位移:
+                    <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
             </dl>
 
             <dl class="left">
-              <dt class="clearfix">
-                <span class="fl" style="margin-right:5px;">点击链接</span>
-                <div class="fl"></div>
-              </dt>
-              <dd class="">
-                <input type="text" name="sx_area_link" class="sx_area_link sx_monitor" size="40" ng-model="data[order].link"></dd>
+                <dt class="clearfix">
+                    <span class="fl" style="margin-right:5px;">大小</span>
+                    <div class="fl"></div>
+                </dt>
+                <dd class="">
+                    宽:
+                    <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.width">px</dd>
+                <dd class="">
+                    高:
+                    <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.height">px</dd>
             </dl>
 
-         
+            <dl class="left">
+                <dt class="clearfix">
+                    <span class="fl" style="margin-right:5px;">点击链接</span>
+                    <div class="fl"></div>
+                </dt>
+                <dd class="">
+                    <input type="text" name="sx_area_link" class="sx_area_link sx_monitor" size="40" ng-model="data[order].link">
+                </dd>
+            </dl>
+
+
         </div>
-        
-      </div>
-  </div>
-   
-  <a class="exit-off-canvas"></a>
+
+    </div>
+</div>
+
+<a class="exit-off-canvas"></a>
