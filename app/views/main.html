@@ -115,7 +115,8 @@
         </tab>
     </tabset>
 </div>
-<div class="attribute box" style="display:none;">
+
+<div class="attribute animated"  ng-class="{'fadeInUp':attrControl==true,'fadeOutDown':attrControl==false}">
     <div class="hd">
         <span class="name">
       组件属性&nbsp;&nbsp; <em></em>
@@ -130,52 +131,48 @@
     <div class="bd">
         <div class="attr_group">
             <dl class="left">
-                <dt class="clearfix">
-                    <span class="fl" style="margin-right:5px;">当前对象</span>
-                    <div class="fl"></div>
+                <dt>
+                    <span>当前对象</span>
                 </dt>
-                <dd class="">
-                    <span ng-model="elementOrder" ng-value="order+1">{{dataMks.mks[canvasOrder].widget[order].name}}</span>
+                <dd>
+                    <span>{{dataMks.mks[canvasOrder].widget[order].name}}</span>
                 </dd>
-                <dd class="">
-                    <span class="btn sx_btn btn_delete" ng-click="remove()">删除</span>
+                <dd>
+                  <span class="btn btn-delete ts" ng-click="deleteElement()"><i class="icon fi-x size-14 left"></i><b class="right">删除</b></span>
                 </dd>
             </dl>
 
             <dl class="left">
-                <dt class="clearfix">
-                    <span class="fl" style="margin-right:5px;">位置</span>
-                    <div class="fl"></div>
+                <dt>
+                    <span>位置</span>
                 </dt>
                 <dd class="">
-                    左位移:
-                    <input type="text" name="sx_area_p_l" class="sx_area_p_l sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
+                    左:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
                 <dd class="">
-                    上位移:
-                    <input type="text" name="sx_area_p_t" class="sx_area_p_t sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
+                    上:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
             </dl>
-
             <dl class="left">
-                <dt class="clearfix">
-                    <span class="fl" style="margin-right:5px;">大小</span>
-                    <div class="fl"></div>
+                <dt>
+                    <span>大小</span>
                 </dt>
-                <dd class="">
+                <dd>
                     宽:
-                    <input type="text" name="sx_area_width" class="sx_area_width sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.width">px</dd>
-                <dd class="">
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.width">px</dd>
+                <dd>
                     高:
-                    <input type="text" name="sx_area_height" class="sx_area_height sx_monitor" size="5" ng-model="dataMks.mks[canvasOrder].widget[order].a_size.height">px</dd>
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.height">px</dd>
             </dl>
 
             <dl class="left">
-                <dt class="clearfix">
-                    <span class="fl" style="margin-right:5px;">点击链接</span>
-                    <div class="fl"></div>
+                <dt>
+                    <span>链接</span>
                 </dt>
-                <dd class="">
-                    <input type="text" name="sx_area_link" class="sx_area_link sx_monitor" size="40" ng-model="data[order].link">
+                <dd>
+                    <input type="url" ng-model="data[order].link">
                 </dd>
+                <dd>点击后页面跳转的链接地址</dd>
             </dl>
 
 

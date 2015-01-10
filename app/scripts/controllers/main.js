@@ -27,6 +27,7 @@ app.controller('MyTool', function($scope, $modal) {
     $scope.bgcolor = '#f00';
 
     $scope.ruler = true;
+    $scope.attrControl = false;
     $scope.canvasPosition = 1;
 
     $scope.wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -195,8 +196,27 @@ app.controller('MyTool', function($scope, $modal) {
             }
         });
     };
-
-
+    $scope.clearElement = function(){
+    	$scope.confirmClear = function(){
+    		angular.element(document.querySelector('.clearElement')).scope().emptyWrap($scope.canvasOrder);
+    		$scope.dataMks.mks[$scope.canvasOrder].widget.splice(0,$scope.dataMks.mks[$scope.canvasOrder].widget.length);
+            $scope.addOrder[$scope.canvasOrder] = -1; 
+    	};
+    	var calldata = {
+            'name': $scope.canvastabs[$scope.canvasOrder].title + '中的所有组件',
+            'remove': $scope.confirmClear,
+            'code': 1
+        };
+        $modal.open({
+            templateUrl: 'views/myWindow.html',
+            controller: 'elementWindowCtrl',
+            resolve: {
+                data: function() {
+                    return calldata;
+                }
+            }
+        });
+    };
 });
 
 

@@ -7,6 +7,9 @@
  * # MainCtrl
  * Controller of the toolApp
  */
+
+
+
 var app = angular.module('toolApp');
 
 app.directive('draggable', ['$rootScope', function($rootScope) {
@@ -15,7 +18,7 @@ app.directive('draggable', ['$rootScope', function($rootScope) {
         link: function(a, b, c) {
             angular.element(b).attr('draggable', 'true');
             b.bind('dragstart', function(e) {
-                e.dataTransfer.setData('text', c.directive);
+                e.dataTransfer.setData('element', c.directive);
                 $rootScope.$emit('dragStart');
             });
             b.bind('dragend', function() {
@@ -47,8 +50,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }
                 var dx = e.clientX - $position.offset(element).left,
                     dy = e.clientY - $position.offset(element).top; //data = e.dataTransfer.getData('text');
-
-                angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div ta yd-drag yd-resize></div>')(scope));
+                angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div '+e.dataTransfer.getData('element')+' yd-drag yd-resize></div>')(scope));
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.left = dx - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.width / 2;
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.top = dy - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.height / 2;
                 var layerHtml = '<p class="' + scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].type + '_' + scope.$parent.order + ' active eButton" index="' + scope.$parent.order + '">';
@@ -59,6 +61,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 layerHtml += '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>';
                 layerHtml += '</p>';
                 angular.element(document.querySelector('.layer_' + scope.$parent.canvasOrder)).prepend($compile(layerHtml)(scope));
+                scope.$parent.attrControl = true;
             });
             $rootScope.$on('dragStart', function() {
                 element.addClass('drop-target');
@@ -80,7 +83,10 @@ app.directive('ta', ['$document', function() {
         transclude: true,
         replace: true,
         scope: {},
-        template: '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}  eButton active" index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>',
+        template: '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+ 
+    'index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;'+
+    'top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>',
         link: function(scope, element) {
             scope.index = scope.$parent.$parent.addElement();
             scope.nameOrder = scope.index + 1;
@@ -122,9 +128,9 @@ app.directive('eButton', function() {
                 removeAct();
                 angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('active');
                 if (angular.isUndefined(scope.order)) {
-                    scope.$apply(scope.$parent.$parent.order = attrs.index);
+                    scope.$apply(scope.$parent.$parent.order = attrs.index,scope.$parent.$parent.attrControl=true);
                 } else {
-                    scope.$apply(scope.$parent.order = attrs.index);
+                    scope.$apply(scope.$parent.order = attrs.index,scope.$parent.attrControl=true);
                 }
 
             }
@@ -231,43 +237,34 @@ app.directive('bginput', function() {
     };
 });
 
-app.directive('clearElement', function($modal) {
+app.directive('clearElement', function() {
     return {
         restrict: 'C',
-        require: 'elementWindowCtrl',
-        link: function(scope, element,elementWindowCtrl) {
-            var order = scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder,
-                length = scope.$parent.$parent.$parent.$parent.$parent.$parent.dataMks.mks[order].widget.length;
-
-            scope.confirmClear = function() {
+        link: function(scope) {
+           scope.emptyWrap = function(order) {
                 angular.element(document.querySelector('.wrap_' + order)).empty().append('<div class="gridbg"></div>');
                 angular.element(document.querySelector('.layer_' + order)).empty();
-                scope.$parent.$parent.$parent.$parent.$parent.$parent.dataMks.mks[order].widget.splice(0, length);
-                scope.$parent.$parent.$parent.$parent.$parent.$parent.addOrder[order] = -1;
-            }
-
-            element.bind('click', function() {
-                console.log(scope);
-            });
-
-            var calldata = {
-                'name': '画布'+order+'中的所有图层',
-                'remove': scope.confirmClear,
-                'code': 11
-            };
-            $modal.open({
-                templateUrl: 'views/myWindow.html',
-                controller: 'elementWindowCtrl',
-                resolve: {
-                    data: function() {
-                        return calldata;
-                    }
-                }
-            });
-
-
-
-
+          };
         }
     };
 });
+
+app.directive('gridbg', function(){
+    return {
+      restrict:'C',
+      link:function(scope, element){
+        element.bind('click', function(){
+          scope.$apply(scope.$parent.attrControl=false);
+        });
+      }
+    };
+});
+
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/area.html',
+    '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+ 
+    'index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;'+
+    'top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>');
+}]);

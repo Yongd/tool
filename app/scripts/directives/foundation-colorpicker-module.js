@@ -482,8 +482,8 @@ angular.module('colorpicker.module', [])
             elem.on('click', function () {
               update();
               colorpickerTemplate
-                .removeClass('flipOutY')
-                .addClass('colorpicker-visible flipInY')
+                .removeClass('fadeOutDown')
+                .addClass('colorpicker-visible fadeInUp')
                 .css(getColorpickerTemplatePosition());
 
               // register global mousedown event to hide the colorpicker
@@ -492,8 +492,8 @@ angular.module('colorpicker.module', [])
           } else {
             update();
             colorpickerTemplate
-              .removeClass('flipOutY')
-              .addClass('colorpicker-visible flipInY')
+              .removeClass('fadeOutDown')
+              .addClass('colorpicker-visible fadeInUp')
               .css(getColorpickerTemplatePosition());
           }
 
@@ -513,7 +513,7 @@ angular.module('colorpicker.module', [])
 
           var hideColorpickerTemplate = function() {
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
-              colorpickerTemplate.removeClass('flipInY').addClass('flipOutY');
+              colorpickerTemplate.removeClass('fadeInUp').addClass('fadeOutDown');
               emitEvent('colorpicker-closed');
               // unregister the global mousedown event
               $document.off('mousedown', documentMousedownHandler);
