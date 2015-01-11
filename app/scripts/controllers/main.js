@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
 var app = angular.module('toolApp');
-app.controller('MyTool', function($scope, $modal) {
+app.controller('MyTool', ['$http', function($scope, $modal, $http) {
     $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -43,6 +43,11 @@ app.controller('MyTool', function($scope, $modal) {
         title: '画布1',
         content: 'views/canvasconfig.html'
     }];
+
+    $http.get('scripts/data/data.json').success (function(data){
+				$scope.dataMks = data;
+	});
+
     $scope.dataMks = {
         'jname': '未命名',
         'width': $scope.wWidth - 160,
@@ -169,6 +174,28 @@ app.controller('MyTool', function($scope, $modal) {
     $scope.addElement = function() {
         $scope.addOrder[$scope.canvasOrder] += 1;
         $scope.order = $scope.addOrder[$scope.canvasOrder];
+        console.log(1234);
+        $scope.dataMks.mks[$scope.canvasOrder].widget.push({
+                'id': $scope.order,
+                'zindex': $scope.order,
+                'name': '热点层' + $scope.order,
+                'type': 'area',
+                'position': {
+                    'left': 200,
+                    'top': 100
+                },
+                'size': {
+                    'width': 100,
+                    'height': 100
+                },
+                'link': ''
+            });
+
+
+
+
+
+
         return $scope.order;
     };
     $scope.remove = function() {
@@ -217,7 +244,7 @@ app.controller('MyTool', function($scope, $modal) {
             }
         });
     };
-});
+}]);
 
 
 

@@ -50,6 +50,8 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }
                 var dx = e.clientX - $position.offset(element).left,
                     dy = e.clientY - $position.offset(element).top; //data = e.dataTransfer.getData('text');
+                    scope.$parent.addElement();
+                    console.log(3456);
                 angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div '+e.dataTransfer.getData('element')+' yd-drag yd-resize></div>')(scope));
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.left = dx - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.width / 2;
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.top = dy - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.height / 2;
@@ -83,29 +85,12 @@ app.directive('ta', ['$document', function() {
         transclude: true,
         replace: true,
         scope: {},
-        template: '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+ 
-    'index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;'+
-    'top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>',
+        templateUrl: 'template/test.html',
         link: function(scope, element) {
-            scope.index = scope.$parent.$parent.addElement();
+            scope.index = scope.$parent.$parent.order;
             scope.nameOrder = scope.index + 1;
-            scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget.push({
-                'id': scope.index,
-                'zindex': scope.index,
-                'name': '热点层' + scope.nameOrder,
-                'type': 'area',
-                'position': {
-                    'left': 200,
-                    'top': 100
-                },
-                'size': {
-                    'width': 100,
-                    'height': 100
-                },
-                'link': ''
-            });
-
+            
+ console.log(6789);
             function removeData() {
                 delete scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget[scope.index];
             }
@@ -262,9 +247,11 @@ app.directive('gridbg', function(){
 
 
 app.run(['$templateCache', function($templateCache) {
-  $templateCache.put('template/widget/area.html',
-    '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+ 
+  $templateCache.put('template/test.html',
+    '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;'+
     'top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;'+
     'height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>');
 }]);
+
+
