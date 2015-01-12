@@ -8,8 +8,6 @@
  * Controller of the toolApp
  */
 
-
-
 var app = angular.module('toolApp');
 
 app.directive('draggable', ['$rootScope', function($rootScope) {
@@ -18,7 +16,7 @@ app.directive('draggable', ['$rootScope', function($rootScope) {
         link: function(a, b, c) {
             angular.element(b).attr('draggable', 'true');
             b.bind('dragstart', function(e) {
-                e.dataTransfer.setData('element', c.directive);
+                e.dataTransfer.setData('type', c.directive);
                 $rootScope.$emit('dragStart');
             });
             b.bind('dragend', function() {
@@ -50,20 +48,20 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }
                 var dx = e.clientX - $position.offset(element).left,
                     dy = e.clientY - $position.offset(element).top; //data = e.dataTransfer.getData('text');
-                    scope.$parent.addElement();
-                    console.log(3456);
-                angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div '+e.dataTransfer.getData('element')+' yd-drag yd-resize></div>')(scope));
+                scope.$parent.addElement( e.dataTransfer.getData('type') );
+                scope.$parent.attrControl = true;   
+                angular.element(element[0].children[scope.$parent.canvasOrder]).append($compile('<div '+e.dataTransfer.getData('type')+' yd-drag yd-resize></div>')(scope));
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.left = dx - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.width / 2;
                 scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].position.top = dy - scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].size.height / 2;
-                var layerHtml = '<p class="' + scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].type + '_' + scope.$parent.order + ' active eButton" index="' + scope.$parent.order + '">';
-                layerHtml += '<span class="left">' + scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].name + '</span>';
-                layerHtml += '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>';
-                layerHtml += '<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>';
-                layerHtml += '<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>';
-                layerHtml += '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>';
-                layerHtml += '</p>';
+                var layerHtml = '<p class="' + scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].type + '_' + scope.$parent.order + ' active eButton" index="' + scope.$parent.order + '">'+
+                '<span class="left">' + scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.$parent.order].name + '</span>'+
+                '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+
+                '<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>'+
+                '<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>'+
+                '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>'+
+                '</p>';
                 angular.element(document.querySelector('.layer_' + scope.$parent.canvasOrder)).prepend($compile(layerHtml)(scope));
-                scope.$parent.attrControl = true;
+                
             });
             $rootScope.$on('dragStart', function() {
                 element.addClass('drop-target');
@@ -77,30 +75,6 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
 }]);
 
 
-
-
-app.directive('ta', ['$document', function() {
-    return {
-        restrict: 'A',
-        transclude: true,
-        replace: true,
-        scope: {},
-        templateUrl: 'template/test.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.$parent.order;
-            scope.nameOrder = scope.index + 1;
-            
- console.log(6789);
-            function removeData() {
-                delete scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget[scope.index];
-            }
-            element.on('$destroy', removeData);
-        }
-    };
-}]);
-
-
-
 app.directive('eButton', function() {
     return {
         restrict: 'C',
@@ -108,7 +82,6 @@ app.directive('eButton', function() {
             function removeAct() {
                 angular.element(document.querySelectorAll('.eButton')).removeClass('active');
             }
-
             function addAct() {
                 removeAct();
                 angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('active');
@@ -244,14 +217,5 @@ app.directive('gridbg', function(){
       }
     };
 });
-
-
-app.run(['$templateCache', function($templateCache) {
-  $templateCache.put('template/test.html',
-    '<div class="{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].type}} eButton active" '+
-    'index="{{index}}" style="position:absolute;left:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.left}}px;'+
-    'top:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index].size.height}}px;">{{index}}{{$parent.$parent.dataMks.mks[$parent.$parent.canvasOrder].widget[index]}}</div>');
-}]);
 
 

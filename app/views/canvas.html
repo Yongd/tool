@@ -12,9 +12,9 @@
             <div class="cont right">
                 <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.c"> 集市店铺 &nbsp;
                 <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.b"> 天猫店铺 &nbsp;
-                <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.self-160"> 自定义&nbsp;
+                <input type="radio" name="mk_width" ng-model="dataMks.width" ng-value="width.self"> 自定义&nbsp;
                 <div class="size text-center">
-                    <span>宽 <input type="number" required ng-model="dataMks.width"  ng-disabled="dataMks.width==width.c||dataMks.width==width.b"> px</span> &nbsp;&nbsp;&nbsp;
+                    <span>宽 <input type="number" required ng-model="dataMks.width" ng-change="width.self=dataMks.width" ng-disabled="dataMks.width==width.c||dataMks.width==width.b"> px</span> &nbsp;&nbsp;&nbsp;
                     <span>高 <input type="number" required ng-model="dataMks.height"> px</span>
                 </div>
             </div>
