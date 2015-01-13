@@ -26,6 +26,13 @@ angular.module('toolApp').
 				return '{"id": '+order+',"zindex": '+order+',"name": "热点层'+(order+1)+'","type": "area","position": {"left": 200,"top": 100},"size": {"width": 100,"height": 100},"link": ""}';
 			} 
 			break;
+			case 'img': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "图片层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 320},"imgUrl":'+
+				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","popup": {"status": false,"show": true,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1m.XNFl4iXXb1upjX",'+
+				' "position": {"left": 200,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
+			} 
+			break;
 		}
 	};
 });

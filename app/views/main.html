@@ -1,3 +1,4 @@
+<div id="main"  ng-controller="MyTool">
 <div class="topbar animated fadeInDown">
     <div class="left">
         <a class="left logo" href="#" target="_blank"></a>
@@ -164,21 +165,65 @@
                     高:
                     <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.height">px</dd>
             </dl>
-
+            <dl class="left">
+                <dt>
+                    <span>图片</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+                </dd>  
+                <dd>  
+                    <span class="btn btn-delete ts" ng-click="getImageSize()">获取图片尺寸</span>
+                    <a class="btn btn-delete ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+                </dd>    
+             </dl>
             <dl class="left">
                 <dt>
                     <span>链接</span>
                 </dt>
                 <dd>
-                    <input type="url" ng-model="data[order].link">
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link">
                 </dd>
                 <dd>点击后页面跳转的链接地址</dd>
             </dl>
-
-
+            <dl class="left image">
+                <dt class="clearfix">
+                    <span class="left">鼠标悬浮图片</span>
+                    <div class="left switch small round">
+                        <input id="hover" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].hover.status">
+                        <label for="hover"></label>
+                    </div>
+                </dt>
+                <dd class="clearfix animated" ng-class="{'fadeOutDown':!dataMks.mks[canvasOrder].widget[order].hover.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].hover.status,}">
+                    <input type="url"  required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
+                </dd>
+            </dl>
+            <dl class="left image">
+                <dt  class="clearfix">
+                    <span class="left">弹出层</span>
+                    <div class="left switch small round">
+                        <input id="popup" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.status">
+                        <label for="popup"></label>
+                    </div>
+                </dt>
+                <div class="clearfix pop animated" ng-class="{'fadeOutDown':!dataMks.mks[canvasOrder].widget[order].popup.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].popup.status}">
+                  <dd>
+                      <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].popup.imgUrl">
+                  </dd>
+                  <dd class="viewpopup">
+                      <input id="popupshow" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.show">
+                      预览弹出层
+                  </dd>
+                  <dd>
+                     左:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.left">px
+                     &nbsp;&nbsp;&nbsp;上:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.top">px
+                  </dd>
+                </div>  
+            </dl>
         </div>
 
     </div>
 </div>
 
 <a class="exit-off-canvas"></a>
+</div>

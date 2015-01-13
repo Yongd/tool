@@ -548,28 +548,28 @@ angular.module('mm.foundation.resize',[])
       var top = $event.pageY-$position.offset(b.parent()).top;
       var height = b[0].offsetTop + b[0].offsetHeight - top;
       if (top < b[0].offsetTop + b[0].offsetHeight - 10) {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=top;
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=height;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].position.top=top;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.height=height;
       } else {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].position.top=b[0].offsetTop + b[0].offsetHeight - 10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.height=10;
       }
     };
     var resizeRight = function($event) {
       var width = $event.pageX - b[0].offsetLeft-$position.offset(b.parent()).left;
       if ($event.pageX > b[0].offsetLeft + 10) {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=width;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.width=width;
       } else {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.width=10;
       }
     };
     var resizeDown = function($event) {
       var xtop = $event.pageY-$position.offset(b.parent()).top;
       var height = xtop - b[0].offsetTop;
       if (xtop > b[0].offsetTop + 10) {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=height;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.height=height;
       } else {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.height=10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.height=10;
       }
     };
     var resizeLeft = function($event) {
@@ -577,11 +577,11 @@ angular.module('mm.foundation.resize',[])
       var width = b[0].offsetLeft + b[0].offsetWidth - left;
 
       if (left < b[0].offsetLeft + b[0].offsetWidth - 10) {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=left;
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=width;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].position.left=left;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.width=width;
       } else {
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].size.width=10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].position.left=b[0].offsetLeft + b[0].offsetWidth - 10;
+        a.dataMks.mks[a.canvasOrder].widget[c.index].size.width=10;
       }
     };
     var newElement = angular.element('<div class="resizehandle n-resize"></div>');
@@ -750,20 +750,27 @@ angular.module('mm.foundation.drag',[])
       }else if(y<0){
         y = 0;
       }
-      a.$apply(function(){
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.left=x;
-        a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].position.top=y;
-      });
+      if(b.hasClass('popup')){
+        a.$apply(function(){
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].popup.position.left=x;
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].popup.position.top=y;
+        });
+      }else{
+        a.$apply(function(){
+          a.dataMks.mks[a.canvasOrder].widget[c.index].position.left=x;
+          a.dataMks.mks[a.canvasOrder].widget[c.index].position.top=y;
+        });
+      }
+      
       b.css({
         top: y + 'px',
-        left:  x + 'px',
-        opacity: 0.8
-      });
+        left:  x + 'px'
+      }).addClass('opacity');
     }
     function mouseup() {
       $document.unbind('mousemove', mousemove);
       $document.unbind('mouseup', mouseup);
-      b.css('opacity',0.6);
+      b.removeClass('opacity');
     }
    
   }

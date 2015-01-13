@@ -39,6 +39,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 .eButton{
 	z-index:100;
 	outline:none;
+	overflow: hidden;
 }.eButton .resizehandle{
 	position:absolute;
 	overflow:hidden;
@@ -90,7 +91,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 }.eButton:hover .resizehandle{
 	opacity:.6;
 	filter:alpha(opacity=60);
-}.eButton.active .resizehandle{
+}.eButton.now .resizehandle{
 	opacity:1;
 	filter:alpha(opacity=100);
 }
@@ -101,9 +102,18 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	opacity: .6;
 	overflow: hidden;
 	background-color:#60e6e3;
+}.wrap .eButton.opacity{
+	opacity: .8;
 }
 
-
+.popup{
+	border:1px #f00 solid;
+	display: none;
+}.popup.now{
+	display: block;
+}.popup.hide{
+	display: none;
+}
 
 
 /*

@@ -462,29 +462,37 @@ div.switch.small label {
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 .attribute .bd {
-    padding: 0.4rem;
+    padding: 0.2rem 0.4rem 0.4rem 0.4rem;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 .attr_group {
     font-size: 0.8rem;
 }
 .attr_group dl {
-    margin: 0 0 0.6rem 0.8rem;
+    margin:0 0 0.6rem 0.8rem;
     padding: 0.6rem 0.8rem 0.6rem 0;
     min-height: 7.5rem;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.4);
     font-size: 0.75rem;
 }
-.attr_group dt {
-    font-weight: normal;
-    margin-bottom: 0.6rem;
+.attr_group dl.image{
+    min-width: 11.1rem;
 }
-.attr_group dd{
 
+.attr_group dt{
+    margin-bottom: 0.4rem;
 }
-.attr_group input {
-	width: 9rem;
+.attr_group dt span{
+    font-weight: normal;
+    line-height: 1.8rem;
+    margin-right: 0.4rem;
+}
+.attr_group dl::selection{
+    background: none;
+}
+.attr_group input[type=url],.attr_group input[type=number]{
+	width: 10rem;
     height: 1.8rem;
     padding: 0 0.3rem;
 	margin:0 0.1rem;
@@ -495,7 +503,7 @@ div.switch.small label {
 	width: 3.8rem;
 }
 
-.attr_group .btn-delete{
+.attr_group .btn{
 	border-radius: 3px;
 	text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 	box-shadow: inset 1px 1px 0 rgba(255,255,255,0.05);
@@ -503,17 +511,30 @@ div.switch.small label {
 	display: inline-block;
 	cursor: pointer;
 	border: 1px solid rgba(0, 0, 0, 0.4);
+    color:#fff;
+    font-size: 0.75rem;
 }
-.attr_group .btn-delete:hover{
-	color:#fff;
+.attr_group .btn:hover{
 	background-color: rgba(0, 0, 0, 0.3);
 }
-.attr_group .btn-delete b{
+.attr_group .btn b{
 	margin-left: 0.15rem;
 	padding-top: 0.04rem;
 	font-weight: normal;
 }
 
+
+
+
+.attr_group dl .pop input[type=url]{
+    width: 12rem;
+}
+.attr_group dl .pop input[type=number]{
+    width: 3.2rem;
+}
+.attr_group dl .viewpopup{
+    height: 1rem;
+}
 
 
 /*Aleat Window Animate*/

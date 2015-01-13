@@ -116,7 +116,6 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
     };
 
 
-
     /*element*/
     var code;
     $scope.order = -1;
@@ -173,8 +172,16 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
         });
     };
     
+    $scope.getImageSize = function(){
+        var img = new Image();
+        img.src = $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].imgUrl;
+        img.onload = function() {
+            $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.width = this.width;
+            $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.height = this.height;
+        };
+    };
 
-	
+
 
 
 }]);
@@ -194,7 +201,6 @@ app.controller('elementWindowCtrl', function($scope, $modalInstance, data) {
         $modalInstance.dismiss('cancel');
     };
 });
-
 
 
 
