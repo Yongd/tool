@@ -117,20 +117,13 @@
     </tabset>
 </div>
 
-<div class="attribute animated"  ng-class="{'fadeInUp':attrControl==true,'fadeOutDown':attrControl==false}">
+<div class="attribute animated"  ng-class="{'fadeInRight':attrControl==true,'fadeOutRight':attrControl==false}"  style="height:{{wHeight-43}}px;">
     <div class="hd">
-        <span class="name">
-      组件属性&nbsp;&nbsp; <em></em>
-    </span>
-
-        <span class="fr mr20">
-      小提示: 
-    </span>
-        <i class="icon fi-minus size-12 right"></i>
-
+        <span class="name">组件属性:&nbsp;&nbsp; </span>
+        <i class="icon fi-arrow-right size-14 right"></i>
     </div>
     <div class="bd">
-        <div class="attr_group">
+        <div class="attr_group ">
             <dl class="left">
                 <dt>
                     <span>当前对象</span>
@@ -154,7 +147,7 @@
                     上:
                     <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
             </dl>
-            <dl class="left">
+            <dl class="left size">
                 <dt>
                     <span>大小</span>
                 </dt>
@@ -165,7 +158,7 @@
                     高:
                     <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.height">px</dd>
             </dl>
-            <dl class="left">
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].imgUrl!=null" class="left clearfix full">
                 <dt>
                     <span>图片</span>
                 </dt>
@@ -173,20 +166,92 @@
                     <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
                 </dd>  
                 <dd>  
-                    <span class="btn btn-delete ts" ng-click="getImageSize()">获取图片尺寸</span>
-                    <a class="btn btn-delete ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+                    <span class="btn ts" ng-click="getImageSize()">获取图片尺寸</span>
+                    <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
                 </dd>    
              </dl>
-            <dl class="left">
+             <dl ng-if="dataMks.mks[canvasOrder].widget[order].text!=null" class="left clearfix full">
+                <dt>
+                    <span>文字内容</span>
+                </dt>
+                <dd>
+                  <textarea required ng-model="dataMks.mks[canvasOrder].widget[order].text"></textarea>
+                </dd>  
+             </dl>
+            <dl class="left clearfix full">
                 <dt>
                     <span>链接</span>
                 </dt>
                 <dd>
-                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link">
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
                 </dd>
-                <dd>点击后页面跳转的链接地址</dd>
             </dl>
-            <dl class="left image">
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].fontsize!=null" class="left clearfix full textstyle">
+                <dt>
+                    <span>文字样式</span>
+                </dt>
+                <dd>
+                  大小:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].fontsize">px
+                     &nbsp;&nbsp;行高:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].lineht">px
+                     &nbsp;&nbsp;字体:
+                     <select class="btn ts" ng-model="dataMks.mks[canvasOrder].widget[order].font">
+                      <option value="simsun" ng-selected="selected">宋体</option>
+                      <option value="simhei">黑体</option>
+                      <option value="lisu">隶书</option>
+                      <option value="kaiti_gb2312">楷体</option>
+                      <option value="microsoft yahei">微软雅黑</option>
+                      <option value="georgia">Georgia</option>
+                      <option value="times new roman">Times New Roman</option>
+                      <option value="impact">Impact</option>
+                      <option value="courier new">Courier New</option>
+                      <option value="arial">Arial</option>
+                      <option value="verdana">Verdana</option>
+                      <option value="tahoma">Tahoma</option>
+                    </select>
+                </dd>
+                <dd class="clearfix">
+                    <span class="left">加粗:</span>
+                    <div class="left switch small round">
+                        <input id="weight" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].weight" ng-true-value="600" ng-false-value="100">
+                        <label for="weight"></label>
+                    </div>
+                    <span class="left color">颜色:</span>
+                    <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].widget[order].color">
+                    <div class="right color-picker">
+                        <div class="sp-preview">
+                            <div colorpicker="rgb" colorpicker-position="top" colorpicker-with-input="dataMks.mks[canvasOrder].widget[order].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].widget[order].color" style="background-color:{{dataMks.mks[canvasOrder].widget[order].color}}"></div>
+                        </div>
+                    </div>
+                </dd>  
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].scrollStatus!=null" class="left clearfix full  textstyle">
+                <dt class="clearfix">
+                    <span class="left">文字滚动</span>
+                    <div class="left switch small round">
+                        <input id="hover" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].scrollStatus">
+                        <label for="hover"></label>
+                    </div>
+                </dt>
+                <div class="clearfix animated other" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].scrollStatus,'fadeInUp':dataMks.mks[canvasOrder].widget[order].scrollStatus}">
+                  <dd class="clearfix">
+                      <div class="name left">滚动方向:</div>
+                      <div class="cont left">
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat"> 上
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-x"> 下
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat-y"> 左
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="no-repeat"> 右
+                      </div>
+                  </dd>
+                  <dd class="clearfix">
+                      <div class="name left">滚动速度:</div>
+                      <div class="range-slider round left">
+                          <div class="rsHandles range-slider-handle" role="slider" display="speed_val"></div>
+                      </div>
+                      <div id="speed_val" class="left">10</div>
+                  </dd>
+                </div>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].hover!=null" class="left clearfix full">
                 <dt class="clearfix">
                     <span class="left">鼠标悬浮图片</span>
                     <div class="left switch small round">
@@ -194,29 +259,27 @@
                         <label for="hover"></label>
                     </div>
                 </dt>
-                <dd class="clearfix animated" ng-class="{'fadeOutDown':!dataMks.mks[canvasOrder].widget[order].hover.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].hover.status,}">
-                    <input type="url"  required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
+                <dd class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].hover.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].hover.status}">
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
                 </dd>
             </dl>
-            <dl class="left image">
+
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].popup!=null" class="left clearfix full">
                 <dt  class="clearfix">
                     <span class="left">弹出层</span>
                     <div class="left switch small round">
-                        <input id="popup" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.status">
+                        <input id="popup" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.status" ng-change="tet()">
                         <label for="popup"></label>
                     </div>
                 </dt>
-                <div class="clearfix pop animated" ng-class="{'fadeOutDown':!dataMks.mks[canvasOrder].widget[order].popup.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].popup.status}">
+                <div class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].popup.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].popup.status}">
                   <dd>
                       <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].popup.imgUrl">
                   </dd>
                   <dd class="viewpopup">
-                      <input id="popupshow" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.show">
-                      预览弹出层
-                  </dd>
-                  <dd>
-                     左:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.left">px
-                     &nbsp;&nbsp;&nbsp;上:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.top">px
+                      <span class="left"><input id="popupshow" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.show">&nbsp;&nbsp;预览弹出层</span>
+                      <span class="right">&nbsp;&nbsp;&nbsp;上:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.top">px</span>
+                      <span class="right">左:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.left">px</span>
                   </dd>
                 </div>  
             </dl>

@@ -30,7 +30,13 @@ angular.module('toolApp').
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "图片层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 320},"imgUrl":'+
 				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","popup": {"status": false,"show": true,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1m.XNFl4iXXb1upjX",'+
-				' "position": {"left": 200,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
+				' "position": {"left": 300,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
+			} 
+			break;
+			case 'text': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "文字区'+(order+1)+'","type": "text","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 100},"text": "这是一个文本区",'+
+				'"link": "", "font": "microsoft yahei","fontsize": 14,"lineht":14,"weight": 100,"color": "#000","scrollStatus": false,"scrollMode": "left","scrollSpeed": 12}';
 			} 
 			break;
 		}

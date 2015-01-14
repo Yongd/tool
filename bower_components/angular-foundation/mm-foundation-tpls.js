@@ -6,7 +6,7 @@
  * License: MIT
  * (c) Pinecone, LLC
  */
-angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.resize", "mm.foundation.drag", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
+angular.module("mm.foundation", ["mm.foundation.tpls", "mm.foundation.ranger", "mm.foundation.rangers", "mm.foundation.resize", "mm.foundation.drag", "mm.foundation.accordion","mm.foundation.alert","mm.foundation.bindHtml","mm.foundation.buttons","mm.foundation.position","mm.foundation.mediaQueries","mm.foundation.dropdownToggle","mm.foundation.interchange","mm.foundation.transition","mm.foundation.modal","mm.foundation.offcanvas","mm.foundation.pagination","mm.foundation.tooltip","mm.foundation.popover","mm.foundation.progressbar","mm.foundation.rating","mm.foundation.tabs","mm.foundation.topbar","mm.foundation.tour","mm.foundation.typeahead"]);
 angular.module("mm.foundation.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/topbar/has-dropdown.html","template/topbar/toggle-top-bar.html","template/topbar/top-bar-dropdown.html","template/topbar/top-bar-section.html","template/topbar/top-bar.html","template/tour/tour.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
 angular.module('mm.foundation.accordion', [])
 
@@ -540,6 +540,42 @@ angular.module('mm.foundation.ranger',[])
    }  
   }
  }]);   
+
+angular.module('mm.foundation.rangers',[])
+.directive('rsHandles', ['$document', '$position', function ($document, $position) {
+  return {
+    restrict: 'C',
+    link: function(scope, element, attrs) {
+      var percent = 10,offset = $position.offset(element.parent());
+      function mousedown() {
+        $document.bind('mousemove',move);
+        $document.bind('mouseup', mouseup);
+      }
+      function mouseup() {
+        $document.unbind('mousemove', move);
+        $document.unbind('mouseup', mouseup);
+      }
+      function updateval(value){
+        angular.element(document.getElementById(attrs.display)).text(value);
+      }
+      element.bind('mousedown',mousedown);
+      function move(event){
+      var left = event.clientX-offset.left-16;
+        if(left<=0){
+          left=0;
+        }else if(left>=160){
+          left=160;
+        }
+        element.css('left',left+'px');
+        percent = Math.ceil(left/160*20);
+        updateval(percent);
+      }
+      element.css('left',80+'px');
+      updateval(percent);
+      //previousElementSibling).children().text(percent);    
+   }  
+  }
+ }]); 
 
 angular.module('mm.foundation.resize',[])
 .directive('ydResize', ['$document','$position', function ($document,$position) {

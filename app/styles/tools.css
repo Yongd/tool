@@ -13,17 +13,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 
 
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track-piece {
-    background-color:rgba(30,36,43,0.3);
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-    background-color:rgba(30,36,43,0.8);
-    border-radius: 5px;
-}
+
 .nowrap{
 	word-break:keep-all;
 	white-space:nowrap;
@@ -95,7 +85,6 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	opacity:1;
 	filter:alpha(opacity=100);
 }
-
 
 
 .wrap .area{

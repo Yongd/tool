@@ -272,7 +272,7 @@ angular.module('colorpicker.module', [])
               inputTemplate = withInput ? '<input type="text" name="colorpicker-input"></div>' : '',
               closeButton = !inline ? '<button type="button" class="tiny button">&times;</button>' : '',
               template =
-                      '<div class="colorpicker f-dropdown animated ">' +
+                      '<div class="colorpicker f-dropdown animated n'+position+'">' +
                       '<div class="left" ng-include="\'views/generatedcolor.html\'"></div>' +
                       '<div class="right rcolorpicker"><colorpicker-saturation><i></i></colorpicker-saturation>' +
                       '<colorpicker-hue><i></i></colorpicker-hue>' +
@@ -449,8 +449,8 @@ angular.module('colorpicker.module', [])
 
             if (position === 'top') {
               positionValue =  {
-                'top': positionOffset.top - 147,
-                'left': positionOffset.left
+                'top': positionOffset.top - 240,
+                'left': positionOffset.left-400
               };
             } else if (position === 'right') {
               positionValue = {
@@ -481,11 +481,17 @@ angular.module('colorpicker.module', [])
           if(inline === false) {
             elem.on('click', function () {
               update();
-              colorpickerTemplate
+              if(position=='top'){
+                colorpickerTemplate
+                .removeClass('fadeOutUp')
+                .addClass('colorpicker-visible fadeInDown')
+                .css(getColorpickerTemplatePosition());
+              }else{
+                colorpickerTemplate
                 .removeClass('fadeOutDown')
                 .addClass('colorpicker-visible fadeInUp')
                 .css(getColorpickerTemplatePosition());
-
+              }
               // register global mousedown event to hide the colorpicker
               $document.on('mousedown', documentMousedownHandler);
             });
@@ -513,7 +519,11 @@ angular.module('colorpicker.module', [])
 
           var hideColorpickerTemplate = function() {
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
-              colorpickerTemplate.removeClass('fadeInUp').addClass('fadeOutDown');
+              if(position=='top'){
+                colorpickerTemplate.removeClass('fadeInDown').addClass('fadeOutUp');
+              }else{
+                colorpickerTemplate.removeClass('fadeInUp').addClass('fadeOutDown');
+              }
               emitEvent('colorpicker-closed');
               // unregister the global mousedown event
               $document.off('mousedown', documentMousedownHandler);
