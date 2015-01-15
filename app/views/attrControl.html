@@ -1,0 +1,170 @@
+<div class="attribute animated" ng-class="{'fadeInRight':attrControl==true,'fadeOutRight':attrControl==false}">
+    <div class="hd">
+        <span class="name">组件属性:&nbsp;&nbsp; </span>
+        <i class="icon fi-arrow-right size-14 right"></i>
+    </div>
+    <div class="bd" style="height:{{wHeight-79}}px;">
+        <div class="attr_group">
+            <dl class="left">
+                <dt>
+                    <span>当前对象</span>
+                </dt>
+                <dd>
+                    <span>{{dataMks.mks[canvasOrder].widget[order].name}}</span>
+                </dd>
+                <dd>
+                  <span class="btn btn-delete ts" ng-click="deleteElement()"><i class="icon fi-x size-14 left"></i><b class="right">删除</b></span>
+                </dd>
+            </dl>
+
+            <dl class="left">
+                <dt>
+                    <span>位置</span>
+                </dt>
+                <dd class="">
+                    左:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.left">px</dd>
+                <dd class="">
+                    上:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
+            </dl>
+            <dl class="left size">
+                <dt>
+                    <span>大小</span>
+                </dt>
+                <dd>
+                    宽:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.width">px</dd>
+                <dd>
+                    高:
+                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.height">px</dd>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].imgUrl!=null" class="left clearfix full">
+                <dt>
+                    <span>图片</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+                </dd>  
+                <dd>  
+                    <span class="btn ts" ng-click="getImageSize()">获取图片尺寸</span>
+                    <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+                </dd>    
+             </dl>
+             <dl ng-if="dataMks.mks[canvasOrder].widget[order].text!=null" class="left clearfix full">
+                <dt>
+                    <span>文字内容</span>
+                </dt>
+                <dd>
+                  <textarea required ng-model="dataMks.mks[canvasOrder].widget[order].text"></textarea>
+                </dd>  
+             </dl>
+            <dl class="left clearfix full">
+                <dt>
+                    <span>链接</span>
+                </dt>
+                <dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
+                </dd>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].fontsize!=null" class="left clearfix full textstyle">
+                <dt>
+                    <span>文字样式</span>
+                </dt>
+                <dd>
+                  大小:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].fontsize">px
+                     &nbsp;&nbsp;行高:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].lineht">px
+                     &nbsp;&nbsp;字体:
+                     <select class="btn ts" ng-model="dataMks.mks[canvasOrder].widget[order].font">
+                      <option value="simsun" ng-selected="selected">宋体</option>
+                      <option value="simhei">黑体</option>
+                      <option value="lisu">隶书</option>
+                      <option value="kaiti_gb2312">楷体</option>
+                      <option value="microsoft yahei">微软雅黑</option>
+                      <option value="georgia">Georgia</option>
+                      <option value="times new roman">Times New Roman</option>
+                      <option value="impact">Impact</option>
+                      <option value="courier new">Courier New</option>
+                      <option value="arial">Arial</option>
+                      <option value="verdana">Verdana</option>
+                      <option value="tahoma">Tahoma</option>
+                    </select>
+                </dd>
+                <dd class="clearfix">
+                    <span class="left">加粗:</span>
+                    <div class="left switch small round">
+                        <input id="weight" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].weight" ng-true-value="600" ng-false-value="100">
+                        <label for="weight"></label>
+                    </div>
+                    <span class="left color">颜色:</span>
+                    <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].widget[order].color">
+                    <div class="right color-picker">
+                        <div class="sp-preview">
+                            <div colorpicker="rgb" colorpicker-position="top" colorpicker-with-input="dataMks.mks[canvasOrder].widget[order].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].widget[order].color" style="background-color:{{dataMks.mks[canvasOrder].widget[order].color}}"></div>
+                        </div>
+                    </div>
+                </dd>  
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].scrollStatus!=null" class="left clearfix full textstyle">
+                <dt class="clearfix">
+                    <span class="left">文字滚动</span>
+                    <div class="left switch small round" >
+                        <input id="marquee" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].scrollStatus" ng-change="$parent.$parent.$broadcast('marquee')">
+                        <label for="marquee"></label>
+                    </div>
+                </dt>
+                <div class="clearfix animated other" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].scrollStatus,'fadeInUp':dataMks.mks[canvasOrder].widget[order].scrollStatus}">
+                  <dd class="clearfix">
+                      <div class="name left">滚动方向:</div>
+                      <div class="cont left">
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="up"> 上 &nbsp;&nbsp;&nbsp;
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="down"> 下 &nbsp;&nbsp;&nbsp;
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="left"> 左 &nbsp;&nbsp;&nbsp;
+                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="right"> 右
+                      </div>
+                  </dd>
+                  <dd class="clearfix">
+                      <div class="name left">滚动速度:</div>
+                      <div class="range-slider round left">
+                          <div class="rsHandles range-slider-handle" role="slider"></div>
+                      </div>
+                      <div class="left" ng-bind="percent"><div class="hide">{{dataMks.mks[canvasOrder].widget[order].scrollSpeed=percent}}</div></div>
+                  </dd>
+                </div>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].hover!=null" class="left clearfix full">
+                <dt class="clearfix">
+                    <span class="left">鼠标悬浮图片</span>
+                    <div class="left switch small round">
+                        <input id="hover" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].hover.status">
+                        <label for="hover"></label>
+                    </div>
+                </dt>
+                <dd class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].hover.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].hover.status}">
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
+                </dd>
+            </dl>
+
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].popup!=null" class="left clearfix full">
+                <dt  class="clearfix">
+                    <span class="left">弹出层</span>
+                    <div class="left switch small round">
+                        <input id="popup" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.status" ng-change="tet()">
+                        <label for="popup"></label>
+                    </div>
+                </dt>
+                <div class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].popup.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].popup.status}">
+                  <dd>
+                      <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].popup.imgUrl">
+                  </dd>
+                  <dd class="viewpopup">
+                      <span class="left"><input id="popupshow" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.show">&nbsp;&nbsp;预览弹出层</span>
+                      <span class="right">&nbsp;&nbsp;&nbsp;上:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.top">px</span>
+                      <span class="right">左:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.left">px</span>
+                  </dd>
+                </div>  
+            </dl>
+        </div>
+
+    </div>
+</div>

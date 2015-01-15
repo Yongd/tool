@@ -393,6 +393,11 @@ div.switch.small label {
     overflow-y: auto;
     height: auto;
 }
+.layer .list::-webkit-scrollbar {  
+  width: 0px;  
+  height: 14px;  
+  overflow: hidden;
+}
 .layer p {
     font-size: 0.8rem;
     cursor: default;
@@ -448,14 +453,12 @@ div.switch.small label {
     top:43px;
     right:0;
     width: 21rem;
-    height: 90%;
+    height: 100%;
     background-color: rgba(30, 36, 43, 0.9);
     border-top: 1px solid rgba(30, 36, 43, 0.7);
     z-index: 1003;
     color: #bcbcbc;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
 .attribute .hd {
     font-size: 0.75rem;
@@ -466,6 +469,13 @@ div.switch.small label {
 .attribute .bd {
     padding: 0.2rem 0.4rem 0.4rem 0.4rem;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.attribute .bd::-webkit-scrollbar {  
+  width: 0px;  
+  height: 14px;  
+  overflow: hidden;
 }
 .attr_group {
     font-size: 0.8rem;

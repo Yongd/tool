@@ -181,11 +181,6 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
         };
     };
 
-    $scope.tet = function(){
-        $scope.myStyle={'height':200+'px'};
-    };
-    
-
 
 }]);
 

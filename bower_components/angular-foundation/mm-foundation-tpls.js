@@ -546,7 +546,8 @@ angular.module('mm.foundation.rangers',[])
   return {
     restrict: 'C',
     link: function(scope, element, attrs) {
-      var percent = 10,offset = $position.offset(element.parent());
+      scope.percent = 5;
+      var offset = $position.offset(element.parent());
       function mousedown() {
         $document.bind('mousemove',move);
         $document.bind('mouseup', mouseup);
@@ -555,9 +556,7 @@ angular.module('mm.foundation.rangers',[])
         $document.unbind('mousemove', move);
         $document.unbind('mouseup', mouseup);
       }
-      function updateval(value){
-        angular.element(document.getElementById(attrs.display)).text(value);
-      }
+      
       element.bind('mousedown',mousedown);
       function move(event){
       var left = event.clientX-offset.left-16;
@@ -567,13 +566,10 @@ angular.module('mm.foundation.rangers',[])
           left=160;
         }
         element.css('left',left+'px');
-        percent = Math.ceil(left/160*20);
-        updateval(percent);
+        scope.$apply(scope.percent = Math.ceil(left/160*20)); 
       }
-      element.css('left',80+'px');
-      updateval(percent);
-      //previousElementSibling).children().text(percent);    
-   }  
+      element.css('left',40+'px');
+    }  
   }
  }]); 
 
@@ -625,6 +621,7 @@ angular.module('mm.foundation.resize',[])
     newElement.on('mousedown', function() {
       function mousemove($event) {
         event.preventDefault();
+        console.log(b);
         a.$apply(resizeUp($event));
       }
       function mouseup() {
@@ -757,6 +754,7 @@ angular.module('mm.foundation.resize',[])
 angular.module('mm.foundation.drag',[])
 .directive('ydDrag', ['$document','$position', function ($document,$position) {
   return function(a, b, c){
+
     var startX = 0, startY = 0;
     var newElement = angular.element('<div class="draggable"></div>');
     b.append(newElement);
@@ -768,6 +766,11 @@ angular.module('mm.foundation.drag',[])
       $document.bind('mouseup', mouseup);
     });
     function mousemove($event) {
+      var e = $position.offset(b);
+      var attrC = $position.offset(angular.element(document.querySelector('.attribute'))).left;
+      if(e.left+e.width>attrC){
+        a.$apply( a.attrControl = false );
+      }
       var 
         y = $event.pageY - startY,
         x = $event.pageX - startX,
