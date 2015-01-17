@@ -46,9 +46,13 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 if (e.stopPropogation) {
                     e.stopPropogation();
                 }
-                scope.addElement( e.dataTransfer.getData('type') );
+                var dataTransfer = e.dataTransfer.getData('type');
+                scope.addElement( dataTransfer );
                 scope.attrControl = true;   
-                angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+e.dataTransfer.getData('type')+' yd-drag yd-resize></div>')(scope));
+                if(dataTransfer=='imgpop'){
+                    dataTransfer = 'img';
+                }
+                angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope));
                 var width = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.width,
                     height = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.height,
                     maxtop = scope.dataMks.height-height,

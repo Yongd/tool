@@ -212,3 +212,24 @@ Array.prototype.unique3 = function() {
     }
     return re;
 };
+Date.prototype.format = function(partten){
+            if(partten ==null||partten=='')
+            {
+                partten = 'y-m-d'    ;
+            }
+            var y = this.getFullYear();
+            var m = this.getMonth()+1;
+            var d = this.getDate();
+            var r = partten.replace(/y+/gi,y);
+            var h = this.getHours();  
+            var M = this.getMinutes();
+            var s = this.getSeconds(); 
+            h = h<10?0+h:h;
+            M = M<10?0+M:M;
+            s = s<10?0+s:s;
+            r = r.replace(/m+/gi,(m<10?"0":"")+m);
+            r = r.replace(/d+/gi,(d<10?"0":"")+d)+' '+h+':'+M+':'+s;
+            return r ; 
+}
+
+        alert((new Date()).format("y-m-d"));

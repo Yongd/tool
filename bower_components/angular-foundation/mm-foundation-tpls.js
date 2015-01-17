@@ -616,30 +616,42 @@ angular.module('mm.foundation.resize',[])
         a.dataMks.mks[a.canvasOrder].widget[c.index].size.width=10;
       }
     };
+    function checkPosition(event){
+      var e = $position.offset(b),attrC = angular.element(document.querySelector('.attribute')),offset = $position.offset(attrC);
+      if(e.left+e.width>offset.left-offset.width){
+        attrC.css('display','none');
+      }
+      if(event==1){
+        attrC.css('display','block');
+      }
+    }
     var newElement = angular.element('<div class="resizehandle n-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
-        console.log(b);
         a.$apply(resizeUp($event));
       }
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
       $document.bind('mousemove', mousemove);
       $document.bind('mouseup', mouseup);
-    });
+    })
     newElement = angular.element('<div class="resizehandle e-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeRight($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -651,12 +663,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle s-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeDown($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -668,12 +682,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle w-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeLeft($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -685,12 +701,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle nw-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeUp($event),resizeLeft($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -702,13 +720,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle ne-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
-      
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeUp($event),resizeRight($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -719,12 +738,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle se-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
       function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeDown($event),resizeRight($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
@@ -736,12 +757,14 @@ angular.module('mm.foundation.resize',[])
     newElement = angular.element('<div class="resizehandle sw-resize"></div>');
     b.append(newElement);
     newElement.on('mousedown', function() {
+      checkPosition();
        function mousemove($event) {
         event.preventDefault();
         a.$apply(resizeDown($event),resizeLeft($event));
       }
 
       function mouseup() {
+        checkPosition(1);
         $document.unbind('mousemove', mousemove);
         $document.unbind('mouseup', mouseup);
       }
