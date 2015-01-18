@@ -1324,7 +1324,7 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
       var backdropDomEl, backdropScope;
       var openedWindows = $$stackedMap.createNew();
       var $modalStack = {};
-
+      var mainElement = angular.element(document.querySelector('#workspace'));
       function backdropIndex() {
         var topBackdropIndex = -1;
         var opened = openedWindows.keys();
@@ -1423,10 +1423,9 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
           backdrop: modal.backdrop,
           keyboard: modal.keyboard
         });
-
+        mainElement.addClass('blur');
         var body = $document.find('body').eq(0),
             currBackdropIndex = backdropIndex();
-
         if (currBackdropIndex >= 0 && !backdropDomEl) {
           backdropScope = $rootScope.$new(true);
           backdropScope.index = currBackdropIndex;
@@ -1466,6 +1465,7 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
       };
 
       $modalStack.dismiss = function (modalInstance, reason) {
+        mainElement.removeClass('blur');
         var modalWindow = openedWindows.get(modalInstance).value;
         if (modalWindow) {
           modalWindow.deferred.reject(reason);

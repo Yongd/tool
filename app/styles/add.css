@@ -210,6 +210,8 @@
 #workspace.move-right #side {
     left: 0px;
 }
+
+
 .ftab > .tabs dd a {
     background-color: rgba(30, 36, 43, 0.4);
     color: #ccc;
@@ -689,4 +691,10 @@ div.switch.small label {
     padding-bottom: 0.64444rem;
     padding-left: 1.47778rem;
     margin: 0 0.5rem 0 0;
+}
+
+/*模糊效果*/
+.blur{
+    -webkit-filter:blur(1px);
+    filter:blur(1px);
 }
