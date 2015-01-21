@@ -7,12 +7,12 @@
  * # MainCtrl
  * Controller of the toolApp
  */
-var app = angular.module('toolApp');
-app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($scope, $http, dataHandler, $modal) {
+ var app = angular.module('toolApp');
+ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($scope, $http, dataHandler, $modal) {
     $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
+    'HTML5 Boilerplate',
+    'AngularJS',
+    'Karma'
     ];
     $scope.tabs = [{
         title: '添加组件',
@@ -46,8 +46,8 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
     }];
 
     $scope.dataMks = JSON.parse( dataHandler.canvas($scope.width.self,$scope.wHeight) ) ;
-	
-	/*canvas*/
+    
+    /*canvas*/
     $scope.canvasOrder = 0;
     $scope.indexCanvas = 1;
     $scope.addCanvas = function() {
@@ -121,10 +121,10 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
     $scope.order = -1;
     $scope.elementOrder = $scope.order + 1;
     $scope.addElement = function(type) {
-    	$scope.addOrder[$scope.canvasOrder] += 1;
+        $scope.addOrder[$scope.canvasOrder] += 1;
         $scope.order = $scope.addOrder[$scope.canvasOrder];
         $scope.dataMks.mks[$scope.canvasOrder].widget.push( JSON.parse( dataHandler.element(type,$scope.order) ) );
-	};
+    };
     $scope.remove = function() {
         angular.element($scope.obj).remove();
     };
@@ -151,12 +151,12 @@ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($s
         });
     };
     $scope.clearElement = function(){
-    	$scope.confirmClear = function(){
-    		angular.element(document.querySelector('.clearElement')).scope().emptyWrap($scope.canvasOrder);
-    		$scope.dataMks.mks[$scope.canvasOrder].widget.splice(0,$scope.dataMks.mks[$scope.canvasOrder].widget.length);
+        $scope.confirmClear = function(){
+            angular.element(document.querySelector('.clearElement')).scope().emptyWrap($scope.canvasOrder);
+            $scope.dataMks.mks[$scope.canvasOrder].widget.splice(0,$scope.dataMks.mks[$scope.canvasOrder].widget.length);
             $scope.addOrder[$scope.canvasOrder] = -1; 
-    	};
-    	var calldata = {
+        };
+        var calldata = {
             'name': $scope.canvastabs[$scope.canvasOrder].title + '中的所有组件',
             'remove': $scope.confirmClear,
             'code': 1
@@ -212,28 +212,52 @@ Array.prototype.unique3 = function() {
     }
     return re;
 };
-Date.prototype.format = function(partten){
-            if(partten ==null||partten=='')
-            {
-                partten = 'y-m-d h'    ;
-            }
-            var y = this.getFullYear();
-            var m = this.getMonth()+1;
-            var d = this.getDate();
-            var h = this.getHours(); 
-            var n = this.getMinutes();
-            var s = this.getSeconds();  
-            var r = partten.replace(/y+/gi,y);
-            r = r.replace(/m+/gi,(m<10?"0":"")+m);
-            r = r.replace(/d+/gi,(d<10?"0":"")+d);
-            r = r.replace(/h+/gi,(h<10?"0":"")+h);
-            r = r.replace(/n+/gi,(n<10?"0":"")+n);
-            r = r.replace(/s+/gi,(s<10?"0":"")+s);
-            //h = h<10?0+h:h;
-            //M = M<10?0+M:M;
-            //s = s<10?0:;
-            //r = r.replace(/d+/gi,(d<10?"0":"")+d)+' '+h+':'+M+':'+s;
-            return r ; 
-}
+Date.prototype.format = function(partten,time){
+    function getLastDay(y,m){
+        if(m == 2){
+            return y % 4 === 0 ? 29 : 28;
+        }else if(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12){
+            return 31;
+        }else{
+            return 30;
+        }
+    }
+    if(partten === null||partten === '')
+    {
+        partten = 'y-m-d h:n:s'    ;
+    }
 
-      alert((new Date()).format("y-m-d h:n:s"));
+    var y = this.getFullYear();
+    var m = this.getMonth()+1;
+    var d = this.getDate();
+    var h = this.getHours(); 
+    var n = this.getMinutes();
+    var s = this.getSeconds();  
+    var r = partten.replace(/y+/gi,y);
+
+
+    if(time == 'future'){ 
+        if(d==getLastDay(y,m)){
+            if(m==12){
+                y = y + 1;
+                m = 1;
+            }else{
+                m = m + 1;
+            }
+            d = 2;
+        }else{
+          d = d + 2;   
+        }
+    }
+    r = r.replace(/m+/gi,(m<10?'0':'')+m);
+    r = r.replace(/d+/gi,(d<10?'0':'')+d);
+    r = r.replace(/h+/gi,(h<10?'0':'')+h);
+    r = r.replace(/n+/gi,(n<10?'0':'')+n);
+    r = r.replace(/s+/gi,(s<10?'0':'')+s);
+    return r; 
+};
+
+
+
+//console.log( Date.parse(  (new Date()).format('y-m-d h:n:s','future') ) );
+//console.log( Date.parse(new Date())  );

@@ -52,13 +52,21 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 if(dataTransfer=='imgpop'){
                     dataTransfer = 'img';
                 }
-                angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope));
-                var width = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.width,
-                    height = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.height,
-                    maxtop = scope.dataMks.height-height,
-                    maxleft = scope.dataMks.width-width,
-                    dx = e.clientX - $position.offset(element).left - width / 2,
+                var width, height, maxtop, maxleft, dx, dy;
+                if(angular.isDefined(scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size)){
+                    width = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.width;
+                    height = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.height;
+                    maxtop = scope.dataMks.height-height;
+                    maxleft = scope.dataMks.width-width;
+                    dx = e.clientX - $position.offset(element).left - width / 2;
                     dy = e.clientY - $position.offset(element).top - height / 2;
+                }else{
+                    dx = e.clientX;
+                    dy = e.clientY; 
+                }
+                
+
+                
                 if(dy < 0){
                     dy = 0; 
                 }else if(dy > maxtop){
@@ -68,9 +76,17 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     dx = 0; 
                 }else if(dx > maxleft){
                     dx = maxleft;
-                }    
-                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
-                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
+                }   
+                if(dataTransfer == 'countdown'){
+                    angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag></div>')(scope)); 
+                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].d.position.left = dx;
+                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].d.position.top = dy;
+                }else{
+                    angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope)); 
+                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
+                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
+                }
+                
                 var layerHtml = '<p class="' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type + '_' + scope.order + ' now eButton" index="' + scope.order + '">'+
                 '<span class="left">' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name + '</span>'+
                 '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+

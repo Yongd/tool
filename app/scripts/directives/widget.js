@@ -83,6 +83,50 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
+}).directive('countdown', function($timeout) {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/countdown.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+
+            var last = Date.parse( scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].time );
+            
+
+            
+            scope.countdown = function() {
+                var minus =  last - Date.parse( new Date() ),leave1,leave2,leave3,days,hours,minutes,seconds;
+
+                $timeout(function() {
+                days  =  Math.floor( minus/(1000*3600*24) );  //剩余天数
+                leave1 = minus%(24*3600*1000);    //计算出小时数
+                leave2 = leave1%(3600*1000);
+                leave3 = leave2%(60*1000);    
+
+                hours =  Math.floor(leave1/(3600*1000));
+                minutes = Math.floor(leave2/(60*1000));
+                seconds = Math.round(leave3/1000);
+
+                scope.days = hours<1?'0':''+hours;
+                scope.hours = hours<10?'0':''+hours;
+                scope.minutes = minutes<10?'0':''+minutes;
+                scope.seconds = seconds>10?'0':''+seconds;
+
+
+                scope.countdown();   
+                }, 1000);
+            }
+            scope.countdown();
+
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
 });
 
 
@@ -118,4 +162,12 @@ app.run(['$templateCache', function($templateCache) {
     '.widget[index].color}};font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};"><div class="text_bd">{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].text}}</div></div>');
 }]);
 
-
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/countdown.html',
+    '<div class="eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].d.position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].d.position.top}}px;'+
+    'font-size:{{$parent.'+
+    'dataMks.mks[$parent.canvasOrder].widget[index].fontsize}}px;font-weight:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].weight}};color:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].color}};font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};">{{days}} 天 {{hours}} 时 {{minutes}} 分{{seconds}} 秒</div>');
+}]);

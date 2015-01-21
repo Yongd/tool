@@ -46,6 +46,13 @@ angular.module('toolApp').
 				' "position": {"left": 300,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
 			} 
 			break;
+			case 'countdown': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "倒计时'+(order+1)+'","type": "countdown","time": "'+(new Date()).format('y-m-d h:n:s','future')+'","show":0,"d":{"position": {"left": 100,"top": 100}},"h":'+ 
+				' {"position": {"left": 200,"top": 100}},"m": {"position": {"left": 300,"top": 100}},"s": {"position": {"left": 400,"top": 100}},"img": '+
+				' "http://img01.taobaocdn.com/bao/uploaded/i2/T1H0_cFg4dXXaCwpjX","font": "microsoft yahei","fontsize": 14,"weight": 100,"color": "#000","units":1}';
+			} 
+			break;
 		}
 	};
 });
