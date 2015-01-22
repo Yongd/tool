@@ -15,7 +15,8 @@
     'ngSanitize',
     'mm.foundation',
     'ngAnimate',
-    'colorpicker.module'
+    'colorpicker.module',
+    'datePicker'
   ])
   .config(['$tooltipProvider', function ($tooltipProvider) {
 	$tooltipProvider.options({

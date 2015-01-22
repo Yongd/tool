@@ -105,7 +105,15 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 }.popup.hide{
 	display: none;
 }
-
+.countdown{
+	white-space:nowrap;
+}
+.countdown span{
+	display: inline-block;
+	padding: 10px 5px;
+}.countdown span em{
+	font-style: normal;
+}
 
 /*
 .button,button.button{

@@ -92,35 +92,49 @@ app.directive('area', function() {
         templateUrl: 'template/widget/countdown.html',
         link: function(scope, element) {
             scope.index = scope.$parent.order;
-
             var last = Date.parse( scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].time );
-            
-
-            
+            scope.days = 2;
+            scope.seconds = scope.minutes = scope.hours = '00';
             scope.countdown = function() {
                 var minus =  last - Date.parse( new Date() ),leave1,leave2,leave3,days,hours,minutes,seconds;
-
+                var show = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].show;
                 $timeout(function() {
                 days  =  Math.floor( minus/(1000*3600*24) );  //剩余天数
                 leave1 = minus%(24*3600*1000);    //计算出小时数
                 leave2 = leave1%(3600*1000);
                 leave3 = leave2%(60*1000);    
-
                 hours =  Math.floor(leave1/(3600*1000));
                 minutes = Math.floor(leave2/(60*1000));
                 seconds = Math.round(leave3/1000);
-
-                scope.days = hours<1?'0':''+hours;
-                scope.hours = hours<10?'0':''+hours;
-                scope.minutes = minutes<10?'0':''+minutes;
-                scope.seconds = seconds>10?'0':''+seconds;
-
-
+                if(show<4){
+                   hours =  hours + days*24;
+                   if(show>1){
+                        minutes = minutes + hours*60;
+                        if(show==3){
+                            seconds = seconds + minutes*60;
+                        }
+                   }
+                }
+                scope.days = (days<1?'0':'')+days;
+                scope.hours = (hours<10?'0':'')+hours;
+                scope.minutes = (minutes<10?'0':'')+minutes;
+                scope.seconds = (seconds<10?'0':'')+seconds;
                 scope.countdown();   
                 }, 1000);
-            }
+            };
             scope.countdown();
-
+            scope.$on('show', function() {
+                var show = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].show;
+                for(var i=0;i<4;i++){
+                    if(i<show&&show!=4){
+                        angular.element(element.children()[i]).css('display','none');
+                    }else{
+                        angular.element(element.children()[i]).css('display','inline-block');
+                    }
+                }
+                
+               
+            });
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -164,10 +178,16 @@ app.run(['$templateCache', function($templateCache) {
 
 app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/countdown.html',
-    '<div class="eButton now" '+
-    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].d.position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
-    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].d.position.top}}px;'+
-    'font-size:{{$parent.'+
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;line-height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].lineht}}px;font-size:{{$parent.'+
     'dataMks.mks[$parent.canvasOrder].widget[index].fontsize}}px;font-weight:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].weight}};color:{{$parent.dataMks.mks[$parent.canvasOrder]'+
-    '.widget[index].color}};font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};">{{days}} 天 {{hours}} 时 {{minutes}} 分{{seconds}} 秒</div>');
+    '.widget[index].color}};font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};"><span style="background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}});'+
+    'margin:0 {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{days}}<em ng-class="{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">天</em></span>'+ 
+    '<span style="background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}});margin:0 {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{hours}}<em ng-class="'+
+    '{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">时</em></span><span style="background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}});margin:0 '+
+    '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{minutes}}<em ng-class="{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">分</em></span>'+
+    '<span style="background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}});margin:0 {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{seconds}}<em ng-class="'+
+    '{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">秒</em></span></div>');
 }]);

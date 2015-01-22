@@ -1,0 +1,30 @@
+<h3>温馨提示：</h3>
+
+<div ng-if="code==1">
+	<p>您确定<strong> 删除 </strong><em>{{name}}</em>  ? <span class="tip">（删除后不可恢复）</span></p>
+  	<a class="button small radius" ng-click="ok()">确定</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+<div ng-if="code==2">
+  	<p><em>{{name}}</em> 处于<strong> 锁定 </strong>状态，不可删除，请先解锁后再删除。</p>
+	<a class="button small radius" ng-click="cancel()">确定</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+<div ng-if="code==3">
+  	<p>⊙▂⊙ 请您按顺序删除画布，<strong> 暂不支持乱序删除 </strong>给您带来不便，请谅解。</p>
+	<a class="button small radius" ng-click="cancel()">确定</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+
+<div ng-if="code==4">
+	<p>*^︹^* 至少要给人家留个画布遮羞嘛，<em> 不然就曝光了哦... </em></p>
+	<a class="button small radius" ng-click="cancel()">确定</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+
+<a class="close-reveal-modal" ng-click="cancel()">×</a>
+

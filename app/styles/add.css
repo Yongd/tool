@@ -531,7 +531,7 @@ div.switch.small label {
 .attr_group dl::selection{
     background: none;
 }
-.attr_group input[type=url],.attr_group input[type=number],.attr_group input[type=text]{
+.attr_group input[type=url],.attr_group input[type=number],.attr_group input[type=text],.attr_group input[type=datetime]{
 	width: 19rem;
     height: 1.8rem;
     padding: 0 0.3rem;
