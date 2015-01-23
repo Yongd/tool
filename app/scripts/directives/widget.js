@@ -92,12 +92,17 @@ app.directive('area', function() {
         templateUrl: 'template/widget/countdown.html',
         link: function(scope, element) {
             scope.index = scope.$parent.order;
-            var last = Date.parse( scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].time );
             scope.days = 2;
             scope.seconds = scope.minutes = scope.hours = '00';
             scope.countdown = function() {
-                var minus =  last - Date.parse( new Date() ),leave1,leave2,leave3,days,hours,minutes,seconds;
-                var show = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].show;
+                var minus,leave1,leave2,leave3,days,hours,minutes,seconds,last,show;
+                if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].time!==''){
+                    last = Date.parse( scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].time );
+                }else{
+                    last = Date.parse( scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].placetime );     
+                }
+                minus =  last - Date.parse( new Date() );
+                show = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].show;
                 $timeout(function() {
                 days  =  Math.floor( minus/(1000*3600*24) );  //剩余天数
                 leave1 = minus%(24*3600*1000);    //计算出小时数
@@ -132,9 +137,37 @@ app.directive('area', function() {
                         angular.element(element.children()[i]).css('display','inline-block');
                     }
                 }
-                
-               
             });
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('cart', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/cart.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('qrcode', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/qrcode.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -190,4 +223,22 @@ app.run(['$templateCache', function($templateCache) {
     '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{minutes}}<em ng-class="{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">分</em></span>'+
     '<span style="background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}});margin:0 {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].margin}}px;">{{seconds}}<em ng-class="'+
     '{\'hide\':!$parent.dataMks.mks[$parent.canvasOrder].widget[index].units}">秒</em></span></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/cart.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
+    '</div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/qrcode.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="http://gqrcode.alicdn.com/img?v=1&type=bs&shop_id={{$parent.dataMks.mks[$parent.canvasOrder].widget[index].id}}&w=140&h=140">'+
+    '</div>');
 }]);

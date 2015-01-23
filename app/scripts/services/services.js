@@ -48,9 +48,22 @@ angular.module('toolApp').
 			break;
 			case 'countdown': 
 			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "倒计时'+(order+1)+'","type": "countdown","time": "'+(new Date()).format('y-m-d h:n:s','future')+'","show":4,"position": {"left": 100,"top"'+
+				return '{"id": '+order+',"zindex": '+order+',"name": "倒计时'+(order+1)+'","type": "countdown","placetime": "'+(new Date()).format('y-m-d h:n:s','future')+'","time":"","show":4,"position": {"left": 100,"top"'+
 				': 100},"size": {"width":305,"height":55},"margin":0,"lineht":36,"img": '+
 				' "http://img01.taobaocdn.com/bao/uploaded/i2/T1H0_cFg4dXXaCwpjX","font": "impact","fontsize": 36,"weight": 100,"color": "#fff","units":true}';
+			} 
+			break;
+			case 'cart': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "购物车'+(order+1)+'","type": "cart","position": {"left": 100,"top"'+
+				': 100},"size": {"width":50,"height":50},"imgUrl": '+
+				' "http://img02.taobaocdn.com/imgextra/i2/134264536/T2RjJ8X64XXXXXXXXX-134264536.png","link":""}';
+			} 
+			break;
+			case 'qrcode': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "二维码'+(order+1)+'","type": "qrcode","position": {"left": 100,"top"'+
+				': 100},"size": {"width":140,"height":140}, "qrtype":"v=1&type=bs&shop_id","id":"1"}';
 			} 
 			break;
 		}

@@ -56,7 +56,7 @@
                     <span>活动结束时间</span>
                 </dt>
                 <dd>
-                  <input type="datetime" required date-time ng-model="dataMks.mks[canvasOrder].widget[order].time">
+                  <input type="datetime" date-time ng-model="dataMks.mks[canvasOrder].widget[order].time" placeholder="{{dataMks.mks[canvasOrder].widget[order].placetime}}">
                 </dd> 
                 <dt>
                     <span>时间背景图片</span>
@@ -101,6 +101,21 @@
 					<div class="right">
                         左右间距:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].margin">px
                     </div>
+                </dd>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='qrcode'" class="left clearfix full textstyle">
+            	<dt>
+            		<span>二维码类型:</span>
+            	</dt>
+				<dd>
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bs&shop_id"> 天猫商品 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bi&item_id"> 天猫店铺 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="type=cs&shop_id"> 集市商品 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="&v=1&type=ci&item_id"> 集市店铺
+                </dd>
+                <dt>二维码内容:</dt>
+                <dd class="clearfix">
+                    <input type="text" required  ng-model="dataMks.mks[canvasOrder].widget[order].id">填写商品ID或店铺ID
                 </dd>
             </dl>
             <dl ng-if="dataMks.mks[canvasOrder].widget[order].fontsize!=null" class="left clearfix full textstyle">
