@@ -174,6 +174,61 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
+}).directive('search', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/search.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            var mkColor,inputBgColor;
+            scope.$on('transparent', function() {
+                if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].showStyle==1){
+                    mkColor = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].mkColor;
+                    inputBgColor = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].inputBgColor;
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].mkColor = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].inputBgColor = 'transparent';
+                    element.children()[0].src=scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgUrl;
+                }else{
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].mkColor = mkColor;
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].inputBgColor = inputBgColor;
+                    element.children()[0].src='';
+                }
+            });
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('wwgroup', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/wwgroup.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            scope.$on('changeStyle', function() {
+                var t = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgStyle;
+                if(t==1){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i1/T15nj0FopXXXartXjX';
+                }else if(t==2){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i3/T14kLTFaXdXXartXjX';
+                }else if(t==3){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i3/T1mtDYFodbXXartXjX';
+                }else if(t==4){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i4/T1ZsYpFfpgXXartXjX';
+                }
+            });
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
 });
 
 
@@ -239,6 +294,30 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="http://gqrcode.alicdn.com/img?v=1&type=bs&shop_id={{$parent.dataMks.mks[$parent.canvasOrder].widget[index].id}}&w=140&h=140">'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="http://gqrcode.alicdn.com/img?{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].qrtype}}'+
+    '={{$parent.dataMks.mks[$parent.canvasOrder].widget[index].id}}&w={{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}&h={{$parent.dataMks.mks[$parent.canvasOrder].widget[index]'+
+    '.size.height}}"></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/search.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} status{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].showStyle}} eButton now" index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent'+
+    '.canvasOrder].widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src=""><div yd-drag class="search_keyword" index="{{index}}" style="width: {{$parent.dataMks.mks[$parent.canvasOrder].'+
+    'widget[index].input.size.width}}px;height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].input.size.height}}px;left: {{$parent.dataMks.mks[$parent.canvasOrder].widget[index]'+
+    '.input.position.left}}px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].input.position.top}}px;border-color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].mkColor}}'+
+    ';background-color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].inputBgColor}};"></div><div yd-drag class="search_btn" index="{{index}}" style="width:{{$parent.dataMks.mks[$parent.'+
+    'canvasOrder].widget[index].btn.size.width}}px; height: {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].btn.size.height}}px;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index]'+
+    '.btn.position.left}}px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].btn.position.top}}px;border-color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].mkColor}}'+
+    ';background-color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].mkColor}};line-height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].btn.size.height}}px;">搜索</div></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/wwgroup.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;'+
+    '"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}">'+
     '</div>');
 }]);

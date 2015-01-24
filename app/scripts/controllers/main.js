@@ -176,8 +176,10 @@
         var img = new Image();
         img.src = $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].imgUrl;
         img.onload = function() {
-            $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.width = this.width;
-            $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.height = this.height;
+            $scope.$apply(
+                $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.width = this.width,
+                $scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].size.height = this.height
+            );
         };
     };
 

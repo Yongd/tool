@@ -522,6 +522,7 @@ div.switch.small label {
 
 .attr_group dt{
     margin-bottom: 0.4rem;
+    font-weight: 100;
 }
 .attr_group dt span{
     font-weight: normal;
@@ -631,8 +632,48 @@ div.switch.small label {
 .textstyle .other .clearfix{
     margin:0;
 }
-
-
+/*qrcode*/
+.qrcode dd{
+    margin-bottom: 0;
+}
+.qrcode dd s{
+    position: absolute;
+    width: 8.2rem;
+    right:0;
+    text-decoration: none;
+    z-index: 999999;
+    color:#999;
+    text-shadow:none;
+    margin-top: 0.3rem;
+}
+/*search*/
+.attr_group .search .colorinput{
+    width: 4.5rem;
+}
+.search dl{
+    padding-right: 0;
+    margin-left: 0;
+    padding-top: 0;
+}
+.search .size .color-picker{
+    width: 4.5rem;
+    margin:0.1rem;
+}
+.search .size .sp-preview{
+    width: 3.85rem;
+}
+.attr_group .search .input .colorinput{
+    width: 8rem;
+}
+.search dl.input{
+    min-height: 3.1rem;
+}
+.search dl.input dt{
+    padding-top: 0.8em;
+}
+.search input[type=radio]{
+    margin:0.4rem 0  0 0.5rem;
+}
 /*Aleat Window Animate*/
 
 .reveal-modal-bg.in {

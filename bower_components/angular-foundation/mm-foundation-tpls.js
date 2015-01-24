@@ -817,6 +817,16 @@ angular.module('mm.foundation.drag',[])
           a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].popup.position.left=x;
           a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].popup.position.top=y;
         });
+      }else if(b.hasClass('search_keyword')){
+        a.$apply(function(){
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].input.position.left=x;
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].input.position.top=y;
+        });
+      }else if(b.hasClass('search_btn')){
+        a.$apply(function(){
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].btn.position.left=x;
+          a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].btn.position.top=y;
+        });
       }else{
         a.$apply(function(){
           a.dataMks.mks[a.canvasOrder].widget[c.index].position.left=x;

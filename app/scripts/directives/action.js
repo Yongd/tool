@@ -52,13 +52,21 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 if(dataTransfer=='imgpop'){
                     dataTransfer = 'img';
                 }
-                
-                    var width = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.width,
-                    height = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.height,
-                    maxtop = scope.dataMks.height-height,
-                    maxleft = scope.dataMks.width-width,
-                    dx = e.clientX - $position.offset(element).left - width / 2,
+                var width,height,maxtop,maxleft,dx,dy;
+                if(dataTransfer=='wwgroup'){
+                    maxtop = scope.dataMks.height;
+                    maxleft = scope.dataMks.width;
+                    dx = e.clientX - $position.offset(element).left;
+                    dy = e.clientY - $position.offset(element).top;
+                }else{
+                    width = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.width;
+                    height = scope.dataMks.mks[scope.canvasOrder].widget[scope.order].size.height;
+                    maxtop = scope.dataMks.height-height;
+                    maxleft = scope.dataMks.width-width;
+                    dx = e.clientX - $position.offset(element).left - width / 2;
                     dy = e.clientY - $position.offset(element).top - height / 2;
+                }
+                    
                
                 
 
@@ -73,8 +81,13 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }else if(dx > maxleft){
                     dx = maxleft;
                 }   
-                
+                if(dataTransfer=='wwgroup'){
+                    angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag></div>')(scope)); 
+                }else{
                     angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope)); 
+                }
+                    
+
                     scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
                     scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
                 

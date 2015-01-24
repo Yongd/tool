@@ -55,15 +55,27 @@ angular.module('toolApp').
 			break;
 			case 'cart': 
 			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "购物车'+(order+1)+'","type": "cart","position": {"left": 100,"top"'+
-				': 100},"size": {"width":50,"height":50},"imgUrl": '+
+				return '{"id": '+order+',"zindex": '+order+',"name": "购物车'+(order+1)+'","type": "cart","position": {"left": 100,"top": 100},"size": {"width":50,"height":50},"imgUrl": '+
 				' "http://img02.taobaocdn.com/imgextra/i2/134264536/T2RjJ8X64XXXXXXXXX-134264536.png","link":""}';
 			} 
 			break;
 			case 'qrcode': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "二维码'+(order+1)+'","type": "qrcode","position": {"left": 100,"top"'+
-				': 100},"size": {"width":140,"height":140}, "qrtype":"v=1&type=bs&shop_id","id":"1"}';
+				': 100},"size": {"width":140,"height":140}, "qrtype":"v=1&type=bs&shop_id","id":"123456"}';
+			} 
+			break;
+			case 'search': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "搜索框'+(order+1)+'","type": "search","position": {"left": 100,"top":100},"size": {"width":394,"height":35}, "input": {"position":'+
+				' {"left": 0,"top": 0},"size": {"width": 300,"height": 32}},"btn": {"position": { "left": 303,"top": 0 },"size": {"width": 90,"height":32}},"shoplink": "","textColor": "#000000",'+
+				' "showStyle": 0,"mkColor": "#fa7f14","inputBgColor": "#ffffff","imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i3/T1cs0cFdXfXXaCwpjX"}';
+			} 
+			break;
+			case 'wwgroup': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "旺旺群'+(order+1)+'","type": "wwgroup","position": {"left": 100,"top":100},"img": "http://img01.taobaocdn.com/bao/uploaded/i4/T1ZsYpFfpg'+
+				'XXartXjX","wwGroupId":0, "imgStyle": 1}';
 			} 
 			break;
 		}

@@ -97,6 +97,7 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	opacity: .8;
 }
 
+/*popup*/
 .popup{
 	border:1px #f00 solid;
 	display: none;
@@ -105,16 +106,33 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 }.popup.hide{
 	display: none;
 }
-.countdown{
-	white-space:nowrap;
-}
+/*countdown*/
 .countdown span{
 	display: inline-block;
 	padding: 10px 5px;
 }.countdown span em{
 	font-style: normal;
 }
-
+/*search*/
+.search .search_keyword,.search .search_btn{
+	z-index: 99;
+	position: absolute;
+	overflow: hidden;
+	border-style: solid;
+	border-width: 1px;
+}
+.search .search_btn{
+	text-align: center;
+	color:#fff;
+	font-size: 0.85rem;
+	line-height: 2rem;
+}
+.search.status1 .search_keyword,.search.status1 .search_btn{
+	outline: 1px #f00 solid;
+}
+.search.status1 .search_btn{
+	text-indent: -9999px;
+}
 /*
 .button,button.button{
 	-webkit-border-radius:3px;
