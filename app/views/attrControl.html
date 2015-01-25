@@ -40,7 +40,7 @@
                     高:
                     <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].size.height">px</dd>
                 </div>  
-				<div ng-if="dataMks.mks[canvasOrder].widget[order].type=='wwgroup'">
+				<div ng-if="dataMks.mks[canvasOrder].widget[order].type=='wwgroup'" class="ww">
 					<dt>
                     	<span>旺旺群ID</span>
                 	</dt>
@@ -48,10 +48,27 @@
 	                    <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].wwGroupId"></dd>
 	                <dd>
 				</div>
+				<div ng-if="dataMks.mks[canvasOrder].widget[order].type=='ww'" class="ww">
+					<dt>
+                    	<span>旺旺ID</span>
+                	</dt>
+	                <dd>
+	                    <input type="text" ng-model="dataMks.mks[canvasOrder].widget[order].wwId" placeholder="您的旺旺账号"></dd>
+	                <dd>
+				</div>
             </dl>
-            <dl ng-if="dataMks.mks[canvasOrder].widget[order].imgUrla!=null" class="left clearfix full">
+			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='attention'||dataMks.mks[canvasOrder].widget[order].type=='favourite'" class="left clearfix full">
+                <dt class="clearfix">
+                    <span class="left">店铺链接</span>
+                </dt>
+                <dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].shoplink" placeholder="您的店铺地址">
+                </dd>
+            </dl>
+
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].imgUrla!='search'&&dataMks.mks[canvasOrder].widget[order].imgUrla!=null" class="left clearfix full">
                 <dt>
-                    <span>图片</span>
+                    <span>图片地址</span>
                 </dt>
                 <dd>
                     <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
@@ -61,6 +78,7 @@
                     <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
                 </dd>    
             </dl>
+
             <dl ng-if="dataMks.mks[canvasOrder].widget[order].time!=null" class="left clearfix full">
                 <dt>
                     <span>活动结束时间</span>
@@ -345,6 +363,14 @@
 	                </div>  
             	</dl>
 	         </div>
+	         <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='video'" class="left clearfix full qrcode">
+                <dt class="clearfix">
+                    <span>视频链接</span>
+                </dt>
+				<dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].videolink">
+                </dd>
+            </dl>	
 			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='wwgroup'" class="left clearfix full qrcode">
                 <dt class="clearfix">
                     <span class="left">图片风格</span>
@@ -360,6 +386,74 @@
 	                <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].img">
 	            </dd>
             </dl>	
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='ww'" class="left clearfix full qrcode search">
+                <dt class="clearfix">
+                    <span class="left">显示风格</span>
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].imgStyle" value="1"> 大图 &nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].imgStyle" value="2"> 小图 &nbsp;
+                </dt>
+                <dt class="clearfix">
+                    <span class="left">头像图片</span>
+                </dt>
+				<dd>
+	                <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].img" tooltip="留空则不显示图片">
+	            </dd>
+            </dl>
+            <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='share'" class="left clearfix full">
+                <dt class="clearfix">
+                    <span>显示风格</span>
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].showStyle" value="1" ng-change="$parent.$parent.$broadcast('changeShareStyle')"> 默认样式 &nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].showStyle" value="2" ng-change="$parent.$parent.$broadcast('changeShareStyle')"> 纯文字 &nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].showStyle" value="3" ng-change="$parent.$parent.$broadcast('changeShareStyle')"> 自定义 &nbsp;
+                </dt>
+                <div class="clearfix animated" ng-class="{'hide':dataMks.mks[canvasOrder].widget[order].showStyle!=3,'fadeInUp':dataMks.mks[canvasOrder].widget[order].showStyle==3}">
+	                  <dd>
+	                      <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+	                  </dd>
+	                  <dd>  
+		                    <span class="btn ts" ng-click="getImageSize()">获取图片尺寸</span>
+		                    <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+		               </dd>  
+	            </div>  
+	            <div class="clearfix animated" ng-class="{'hide':dataMks.mks[canvasOrder].widget[order].showStyle!=2,'fadeInUp':dataMks.mks[canvasOrder].widget[order].showStyle==2}">
+					<dt>
+	                    <span>文字样式</span>
+	                </dt>
+	                <dd>
+	                  大小:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].fontsize">px
+	                     &nbsp;&nbsp;行高:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].lineht">px
+	                     &nbsp;&nbsp;字体:
+	                     <select class="btn ts" ng-model="dataMks.mks[canvasOrder].widget[order].font">
+	                      <option value="simsun" ng-selected="selected">宋体</option>
+	                      <option value="simhei">黑体</option>
+	                      <option value="lisu">隶书</option>
+	                      <option value="kaiti_gb2312">楷体</option>
+	                      <option value="microsoft yahei">微软雅黑</option>
+	                      <option value="georgia">Georgia</option>
+	                      <option value="times new roman">Times New Roman</option>
+	                      <option value="impact">Impact</option>
+	                      <option value="courier new">Courier New</option>
+	                      <option value="arial">Arial</option>
+	                      <option value="verdana">Verdana</option>
+	                      <option value="tahoma">Tahoma</option>
+	                    </select>
+	                </dd>
+	                <dd class="clearfix">
+	                    <span class="left">加粗:</span>
+	                    <div class="left switch small round">
+	                        <input id="weight" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].weight" ng-true-value="600" ng-false-value="100">
+	                        <label for="weight"></label>
+	                    </div>
+	                    <span class="left color">颜色:</span>
+	                    <input class="left colorinput" type="text" ng-model="dataMks.mks[canvasOrder].widget[order].color">
+	                    <div class="right color-picker">
+	                        <div class="sp-preview">
+	                            <div colorpicker="rgb" colorpicker-position="top" colorpicker-with-input="dataMks.mks[canvasOrder].widget[order].color" class="sp-preview-inner form-control ng-pristine ng-valid" ng-model="dataMks.mks[canvasOrder].widget[order].color" style="background-color:{{dataMks.mks[canvasOrder].widget[order].color}}"></div>
+	                        </div>
+	                    </div>
+	                </dd> 
+            	</div> 
+            </dl>
         </div>
 	</div>
 </div>

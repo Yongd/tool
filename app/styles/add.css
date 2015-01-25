@@ -674,6 +674,12 @@ div.switch.small label {
 .search input[type=radio]{
     margin:0.4rem 0  0 0.5rem;
 }
+/*wwgroup*/
+.ww input[type=text],.ww input[type=number]{
+    width: 6rem;
+}
+
+
 /*Aleat Window Animate*/
 
 .reveal-modal-bg.in {

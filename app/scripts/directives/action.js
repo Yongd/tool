@@ -53,7 +53,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     dataTransfer = 'img';
                 }
                 var width,height,maxtop,maxleft,dx,dy;
-                if(dataTransfer=='wwgroup'){
+                if(dataTransfer=='wwgroup'||dataTransfer=='ww'){
                     maxtop = scope.dataMks.height;
                     maxleft = scope.dataMks.width;
                     dx = e.clientX - $position.offset(element).left;
@@ -81,7 +81,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }else if(dx > maxleft){
                     dx = maxleft;
                 }   
-                if(dataTransfer=='wwgroup'){
+                if(dataTransfer=='wwgroup'||dataTransfer=='ww'){
                     angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag></div>')(scope)); 
                 }else{
                     angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope)); 

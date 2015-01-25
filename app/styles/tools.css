@@ -133,6 +133,29 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 .search.status1 .search_btn{
 	text-indent: -9999px;
 }
+/*wwgroup*/
+.wwgroup.now{
+	border:1px #f00 solid;
+}
+/*ww*/
+.wrap .ww.now{
+	border:1px #f00 solid;
+}
+.wrap .ww{
+	text-align: center;
+	line-height:0;
+}
+.wrap .ww .toux{
+	position: absolute;
+	bottom: 0;
+	right:2px;
+}
+/*share*/
+.share .style1,.share .style3{
+	text-indent: -9999px;
+	background-repeat: no-repeat;
+}
+
 /*
 .button,button.button{
 	-webkit-border-radius:3px;

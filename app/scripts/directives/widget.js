@@ -202,6 +202,24 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
+}).directive('video', function($sce) {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/video.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            scope.trustSrc = function(src) {
+                return $sce.trustAsResourceUrl(src);
+            };
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
 }).directive('wwgroup', function() {
     return {
         restrict: 'A',
@@ -219,8 +237,78 @@ app.directive('area', function() {
                     scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i3/T14kLTFaXdXXartXjX';
                 }else if(t==3){
                     scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i3/T1mtDYFodbXXartXjX';
-                }else if(t==4){
+                }else{
                     scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].img = 'http://img01.taobaocdn.com/bao/uploaded/i4/T1ZsYpFfpgXXartXjX';
+                }
+            });
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('ww', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/ww.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('attention', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/attention.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('favourite', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/attention.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('share', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/share.html',
+        link: function(scope, element) {
+            scope.index = scope.$parent.order;
+            scope.$on('changeShareStyle', function() {
+                var t = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].showStyle;
+                if(t==1){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgUrl = 'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2U3D3bFXXXXbXXpXXXXXXXXXX-134264536.png';
+                }else if(t==2){
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgUrl = 'none';
+                }else{
+                    scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgUrl = 'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2uwf1bFXXXXbFXpXXXXXXXXXX-134264536.png';
                 }
             });
             function removeData() {
@@ -314,10 +402,44 @@ app.run(['$templateCache', function($templateCache) {
 }]);
 
 app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/video.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><iframe src="{{trustSrc($parent.dataMks.mks[$parent.canvasOrder].widget[index].videolink)}}" '+
+    'width="100%" height="100%" frameborder="0"></iframe></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/wwgroup.html',
     '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;'+
     '"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}">'+
     '</div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/ww.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}"><br>'+
+    '<img ng-class="{\'toux\':$parent.dataMks.mks[$parent.canvasOrder].widget[index].img!=\'\'&&$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgStyle==2}" src="images/tool/ww'+
+    '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgStyle}}.gif"></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/attention.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}"></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/share.html',
+    '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="style{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].showStyle}}" style="width:100%;height:100%;background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}});">分享给好友</div></div>');
 }]);

@@ -72,10 +72,40 @@ angular.module('toolApp').
 				' "showStyle": 0,"mkColor": "#fa7f14","inputBgColor": "#ffffff","imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i3/T1cs0cFdXfXXaCwpjX"}';
 			} 
 			break;
+			case 'video': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "视频层'+(order+1)+'","type": "video","position": {"left": 100,"top":100},"size": {"width":300,"height":300},"videolink":'+
+				'"http://player.youku.com/player.php/Type/Folder/Fid/23322150/Ob/1/sid/XODc2MzA4NDE2/v.swf"}';
+			} 
+			break;
 			case 'wwgroup': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "旺旺群'+(order+1)+'","type": "wwgroup","position": {"left": 100,"top":100},"img": "http://img01.taobaocdn.com/bao/uploaded/i4/T1ZsYpFfpg'+
-				'XXartXjX","wwGroupId":0, "imgStyle": 1}';
+				'XXartXjX","wwGroupId":123456, "imgStyle": 1}';
+			} 
+			break;
+			case 'ww': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "旺旺客服'+(order+1)+'","type": "ww","position": {"left": 100,"top":100},"img": '+
+				'"http://img04.taobaocdn.com/imgextra/i4/134264536/T2fMp6X6RaXXXXXXXX-134264536.gif","wwId":"", "imgStyle": 1}';
+			} 
+			break;
+			case 'attention': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "天猫关注'+(order+1)+'","type": "attention","size": {"width":83,"height":24},"position": {"left": 100,"top":100},"imgUrl": '+
+				'"http://img01.taobaocdn.com/bao/uploaded/i3/T1ROYFFn8eXXaCwpjX","shoplink":""}';
+			} 
+			break;
+			case 'favourite': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "店铺收藏'+(order+1)+'","type": "favourite","size": {"width":190,"height":160},"position": {"left": 100,"top":100},"imgUrl": '+
+				'"http://img03.taobaocdn.com/imgextra/i3/134264536/TB2w22ZbFXXXXb0XpXXXXXXXXXX-134264536.gif","shoplink":""}';
+			} 
+			break;
+			case 'share': 
+			{
+				return '{"id": '+order+',"zindex": '+order+',"name": "分享层'+(order+1)+'","type": "share","size": {"width":92,"height":27},"position": {"left": 100,"top":100},"imgUrl": '+
+				'"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2U3D3bFXXXXbXXpXXXXXXXXXX-134264536.png","shareType":"item","id":"","showStyle":1}';
 			} 
 			break;
 		}
