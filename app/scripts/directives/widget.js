@@ -320,11 +320,6 @@ app.directive('area', function() {
 });
 
 
-
-
-
-
-
 app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/area.html',
     '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
@@ -441,5 +436,8 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} eButton now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="style{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].showStyle}}" style="width:100%;height:100%;background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}});">分享给好友</div></div>');
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="style{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].showStyle}}" style="'+
+    'width:100%;height:100%;background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}});font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};'+
+    'color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].color}};font-size:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].fontsize}}px;font-weight:{{$parent.dataMks.mks'+
+    '[$parent.canvasOrder].widget[index].weight}};">分享给好友</div></div>');
 }]);

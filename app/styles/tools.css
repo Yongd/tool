@@ -88,7 +88,29 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	filter:alpha(opacity=100);
 }
 
-
+.canvas .slidenav,
+.canvas .slidearrow{
+	position: absolute;
+	display: block;
+	z-index: 99;
+}
+.canvas .slidenav.now,
+.canvas .slidearrow.now{
+	border:1px #f00 solid;
+}
+.canvas .slidenav li{
+	padding: 1px 8px;
+	opacity: .6;
+	filter: alpha(opacity=60);
+	margin: 5px;
+	list-style: none;
+	border-style: solid;
+	border-width: 1px;
+}
+.canvas .slidenav li.act{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
 .wrap .area{
 	opacity: .6;
 	overflow: hidden;
@@ -107,6 +129,9 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	display: none;
 }
 /*countdown*/
+.countdown {
+	white-space:nowrap;
+}
 .countdown span{
 	display: inline-block;
 	padding: 10px 5px;
@@ -155,7 +180,10 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	text-indent: -9999px;
 	background-repeat: no-repeat;
 }
-
+/*attention*/
+.attention img{
+	vertical-align: top;
+}
 /*
 .button,button.button{
 	-webkit-border-radius:3px;

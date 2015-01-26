@@ -827,6 +827,21 @@ angular.module('mm.foundation.drag',[])
           a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].btn.position.left=x;
           a.$parent.dataMks.mks[a.$parent.canvasOrder].widget[c.index].btn.position.top=y;
         });
+      }else if(b.hasClass('slidenav')){
+        a.$apply(function(){
+          a.$parent.dataMks.slider.nav.position.left=x;
+          a.$parent.dataMks.slider.nav.position.top=y;
+        });
+      }else if(b.hasClass('slidearrowl')){
+        a.$apply(function(){
+          a.$parent.dataMks.slider.arrow.leftPosition.left=x;
+          a.$parent.dataMks.slider.arrow.leftPosition.top=y;
+        });
+      }else if(b.hasClass('slidearrowr')){
+        a.$apply(function(){
+          a.$parent.dataMks.slider.arrow.rightPosition.left=x;
+          a.$parent.dataMks.slider.arrow.rightPosition.top=y;
+        });
       }else{
         a.$apply(function(){
           a.dataMks.mks[a.canvasOrder].widget[c.index].position.left=x;
@@ -1467,6 +1482,7 @@ angular.module('mm.foundation.modal', ['mm.foundation.transition'])
       };
 
       $modalStack.close = function (modalInstance, result) {
+        mainElement.removeClass('blur move-right');
         var modalWindow = openedWindows.get(modalInstance).value;
         if (modalWindow) {
           modalWindow.deferred.resolve(result);

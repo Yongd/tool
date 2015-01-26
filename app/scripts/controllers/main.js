@@ -127,6 +127,7 @@
     };
     $scope.remove = function() {
         angular.element($scope.obj).remove();
+        $scope.attrControl = false;
     };
     $scope.deleteElement = function() {
         $scope.obj = document.getElementsByClassName($scope.dataMks.mks[$scope.canvasOrder].widget[$scope.order].type + '_' + $scope.order);

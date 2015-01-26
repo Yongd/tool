@@ -12,9 +12,9 @@ angular.module('toolApp').
 	service('dataHandler', function() {
 	this.canvas = function(width,height){
 		return '{"jname": "未命名","width":'+width+',"height":'+(height-160)+',"offset": "margin:0 auto","slider": {'+
-				'"arrow": {"enable": true,"left_url": "http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX","left_position": { "left": 447.5,"top": 273},'+
-	                '"right_url": "http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX","right_position": { "left": 1397,"top": 273}},'+
-	           '"nav": {"enable": true,"bg_color": "","border_color": "", "font_color": "","align": 0,"position": {"left": 600,"top": 100}},'+
+				'"arrow": {"enable": true,"leftUrl": "http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX","leftPosition": { "left": 200,"top": '+(height-200)/2+'},'+
+	                '"rightUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX","rightPosition": { "left": '+(width-200)+',"top": '+(height-200)/2+'}},'+
+	           '"nav": {"enable": true,"bgColor": "#cccccc","borderColor": "#666666", "color": "#666666","align": 0,"position": {"left": '+(width-70)/2+',"top": '+(height-220)+'}},'+
 	            '"effect": "scrollx","duration": 0.5,"autoplay": true},'+
 	        '"mks": [{ "color": "transparent","img": {"repeat": "no-repeat","url": ""}, "widget": []}],'+
 	        '"version": 1}';
@@ -105,7 +105,7 @@ angular.module('toolApp').
 			case 'share': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "分享层'+(order+1)+'","type": "share","size": {"width":92,"height":27},"position": {"left": 100,"top":100},"imgUrl": '+
-				'"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2U3D3bFXXXXbXXpXXXXXXXXXX-134264536.png","shareType":"item","id":"","showStyle":1}';
+				'"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2U3D3bFXXXXbXXpXXXXXXXXXX-134264536.png","shareType":"item","id":"","showStyle":1,"font": "simsun","fontsize": 12,"weight": 100,"color": "#666"}';
 			} 
 			break;
 		}

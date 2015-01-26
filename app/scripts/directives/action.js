@@ -124,10 +124,17 @@ app.directive('eButton', function() {
             function addAct() {
                 removeAct();
                 angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('now');
-                if (angular.isUndefined(scope.order)) {
+                if (angular.isDefined(scope.$parent.order)) {
                     scope.$apply(scope.$parent.order = attrs.index,scope.$parent.attrControl=true);
-                } else {
+                    console.log(scope);
+                } else if(angular.isDefined(scope.order)){
                     scope.$apply(scope.order = attrs.index,scope.attrControl=true);
+                    console.log(scope);
+                }else{
+                    scope.$apply(
+                        scope.$parent.$parent.$parent.$parent.$parent.order = attrs.index,
+                        scope.$parent.$parent.$parent.$parent.$parent.attrControl = true
+                    );
                 }
 
             }
@@ -189,14 +196,22 @@ app.directive('addWrap', ['$compile', function($compile) {
     return {
         restrict: 'C',
         link: function(scope, element) {
-            var canvasTemplate, layerTemplate;
+            var canvasTemplate, layerTemplate, controlTemplate;
             scope.$parent.pre = 0;
             scope.$parent.index = 1;
+            controlTemplate = '<ul class="slidenav eButton" index="-1" yd-drag ng-class="{\'hide\':!dataMks.slider.nav.enable}" style="left:{{dataMks.slider.nav.position.left}}px;top:{{dataMks.slider.nav.position.top}}px;"><li class="left act" style="'+
+            'background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">1</li><li class="left" style="'+
+            'background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">2</li></ul><span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" class="slidearrow slidearrowl eButton" style="left:{{dataMks.slider.arrow.leftPosition.left}}px;'+
+            'top:{{dataMks.slider.arrow.leftPosition.top}}px;" index="-2" ng-class="{\'hide\':!dataMks.slider.arrow.enable}" yd-drag><img src="{{dataMks.slider.arrow.leftUrl}}"></span>'+
+            '<span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" index="-2" class="slidearrow slidearrowr eButton" style="left:{{dataMks.slider.arrow.rightPosition.left}}px;top:{{dataMks.slider.arrow.rightPosition.top}}px;" yd-drag><img src="{{dataMks.slider.arrow.rightUrl}}"></span>';
 
             function addWrap() {
                 canvasTemplate = '<div class="wrap_' + scope.indexCanvas + ' wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;' +
                     'background-repeat:{{dataMks.mks[' + scope.$parent.index + '].img.repeat}};background-color:{{dataMks.mks[' + scope.$parent.index + '].color}};"><div class="gridbg"></div></div>';
                 layerTemplate = '<div class="wrap_' + scope.$parent.index + ' layer_' + scope.$parent.index + ' wrap">';
+                if(scope.$parent.pre===0){
+                    angular.element(document.querySelector('.canvas')).append($compile(controlTemplate)(scope));
+                }
                 angular.element(document.querySelector('.wrap_' + scope.$parent.pre)).after($compile(canvasTemplate)(scope));
                 angular.element(document.querySelector('.layer_' + scope.$parent.pre)).after($compile(layerTemplate)(scope));
                 scope.$parent.index += 1;
