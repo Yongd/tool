@@ -464,7 +464,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
-
+.sp-palette .sp-thumb-dark.sp-thumb-active .sp-thumb-inner{
+    background-image: url(../images/tool/colorcheckdark.png);
+}
 .sp-palette .sp-thumb-light.sp-thumb-active .sp-thumb-inner
 {
     background-image: url(../images/tool/colorcheck.png);

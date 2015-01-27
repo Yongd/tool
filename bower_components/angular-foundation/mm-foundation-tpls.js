@@ -829,18 +829,18 @@ angular.module('mm.foundation.drag',[])
         });
       }else if(b.hasClass('slidenav')){
         a.$apply(function(){
-          a.$parent.dataMks.slider.nav.position.left=x;
-          a.$parent.dataMks.slider.nav.position.top=y;
+          a.dataMks.slider.nav.position.left=x;
+          a.dataMks.slider.nav.position.top=y;
         });
       }else if(b.hasClass('slidearrowl')){
         a.$apply(function(){
-          a.$parent.dataMks.slider.arrow.leftPosition.left=x;
-          a.$parent.dataMks.slider.arrow.leftPosition.top=y;
+          a.dataMks.slider.arrow.leftPosition.left=x;
+          a.dataMks.slider.arrow.leftPosition.top=y;
         });
       }else if(b.hasClass('slidearrowr')){
         a.$apply(function(){
-          a.$parent.dataMks.slider.arrow.rightPosition.left=x;
-          a.$parent.dataMks.slider.arrow.rightPosition.top=y;
+          a.dataMks.slider.arrow.rightPosition.left=x;
+          a.dataMks.slider.arrow.rightPosition.top=y;
         });
       }else{
         a.$apply(function(){
@@ -2585,7 +2585,7 @@ angular.module('mm.foundation.tabs', [])
     tab.active = true;
   };
   ctrl.getCanvasOrder = function(order){
-    $scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder=order;
+    $scope.$parent.$parent.$parent.$parent.$parent.canvasOrder=order;
   };
   ctrl.hide = function(index){
     angular.element(document.querySelectorAll('.wrap')).addClass('hide');

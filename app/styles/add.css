@@ -681,6 +681,13 @@ div.switch.small label {
 .ww input[type=text],.ww input[type=number]{
     width: 6rem;
 }
+/*nav*/
+.attr_group .nav .obj{
+    width:5.5rem;
+}
+.attr_group .nav .colorinput{
+    width: 16rem;
+}
 
 
 /*Aleat Window Animate*/

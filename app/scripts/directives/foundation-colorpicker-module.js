@@ -261,6 +261,7 @@ angular.module('colorpicker.module', [])
       return {
         require: '?ngModel',
         restrict: 'A',
+        scope:{},
         link: function ($scope, elem, attrs, ngModel) {
           var  
               thisFormat = attrs.colorpicker ? attrs.colorpicker : 'hex',
@@ -288,7 +289,6 @@ angular.module('colorpicker.module', [])
               sliderSaturation = colorpickerTemplate.find('colorpicker-saturation'),
               colorpickerPreview = colorpickerTemplate.find('colorpicker-preview'),
               pickerColorPointers = colorpickerTemplate.find('i');
-
           $compile(colorpickerTemplate)($scope);
           
           if (withInput) {
@@ -300,6 +300,7 @@ angular.module('colorpicker.module', [])
                 .on('keyup', function(event) {
                   var newColor = this.value;
                   elem.val(newColor);
+                  $scope.objvalue = newColor;
                   if(ngModel) {
                     $scope.$apply(ngModel.$setViewValue(newColor));
                   }
@@ -412,6 +413,7 @@ angular.module('colorpicker.module', [])
             previewColor();
             var newColor = pickerColor[thisFormat]();
             elem.val(newColor);
+            $scope.objvalue = newColor;
             if(ngModel) {
               $scope.$apply(ngModel.$setViewValue(newColor));
             }
@@ -436,7 +438,6 @@ angular.module('colorpicker.module', [])
             pickerColorPointers.eq(2).css('top', 150 * (1 - pickerColor.value.a) + 'px');
             previewColor();
           };
-
           var getColorpickerTemplatePosition = function() {
             var
                 positionValue,
@@ -477,29 +478,25 @@ angular.module('colorpicker.module', [])
           var documentMousedownHandler = function() {
             hideColorpickerTemplate();
           };
-
+          var inmethod = attrs.inmethod,
+          outmethod = attrs.outmethod;
           if(inline === false) {
             elem.on('click', function () {
               update();
-              if(position=='top'){
                 colorpickerTemplate
-                .removeClass('fadeOutUp')
-                .addClass('colorpicker-visible fadeInDown')
+                .removeClass(outmethod)
+                .addClass('colorpicker-visible')
+                .addClass(inmethod)
                 .css(getColorpickerTemplatePosition());
-              }else{
-                colorpickerTemplate
-                .removeClass('fadeOutDown')
-                .addClass('colorpicker-visible fadeInUp')
-                .css(getColorpickerTemplatePosition());
-              }
               // register global mousedown event to hide the colorpicker
               $document.on('mousedown', documentMousedownHandler);
             });
           } else {
             update();
             colorpickerTemplate
-              .removeClass('fadeOutDown')
-              .addClass('colorpicker-visible fadeInUp')
+              .removeClass(outmethod)
+              .addClass('colorpicker-visible')
+              .addClass(inmethod)
               .css(getColorpickerTemplatePosition());
           }
 
@@ -519,11 +516,7 @@ angular.module('colorpicker.module', [])
 
           var hideColorpickerTemplate = function() {
             if (colorpickerTemplate.hasClass('colorpicker-visible')) {
-              if(position=='top'){
-                colorpickerTemplate.removeClass('fadeInDown').addClass('fadeOutUp');
-              }else{
-                colorpickerTemplate.removeClass('fadeInUp').addClass('fadeOutDown');
-              }
+              colorpickerTemplate.removeClass(inmethod).addClass(outmethod);
               emitEvent('colorpicker-closed');
               // unregister the global mousedown event
               $document.off('mousedown', documentMousedownHandler);
@@ -532,6 +525,7 @@ angular.module('colorpicker.module', [])
 
           $scope.changeColor=function(color){
             ngModel.$setViewValue(color);
+            $scope.objvalue = color;
           };
 
           colorpickerTemplate.find('button').on('click', function () {

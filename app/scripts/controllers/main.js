@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
  var app = angular.module('toolApp');
- app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($scope, $http, dataHandler, $modal) {
+ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal',  function($scope, $http, dataHandler, $modal) {
     $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -51,11 +51,13 @@
     $scope.canvasOrder = 0;
     $scope.indexCanvas = 1;
     $scope.addCanvas = function() {
+        $scope.$broadcast('addWrap');
         $scope.indexCanvas += 1;
         $scope.canvastabs.push({
             title: '画布' + $scope.indexCanvas,
             content: 'views/canvasconfig.html'
         });
+        
         $scope.dataMks.mks.push({
             'color': 'transparent',
             'img': {
@@ -66,25 +68,10 @@
         });
         $scope.addOrder.push(-1);
     };
-    $scope.deleteCanvas = function() {
-        $scope.indexCanvas -= 1;
-        $scope.canvastabs.splice($scope.canvasOrder, 1);
-        $scope.addOrder.splice($scope.indexCanvas, 1);
-        var tabLength = $scope.canvastabs.length;
-        if ($scope.canvasOrder == tabLength) {
-            $scope.canvasOrder -= 1;
-        } else {
-            var rIndex = 0;
-            for (var $i = 0; $i < tabLength; $i++) {
-                rIndex++;
-                $scope.canvastabs[$i].title = '画布' + rIndex;
-            }
-        }
-    };
-
+    
     $scope.deleteCanvas = function() {
         $scope.confirmDelete = function() {
-            angular.element(document.querySelector('.addWrap')).scope().removeWrap();
+            $scope.$broadcast('removeWrap');
             $scope.canvasOrder -= 1;
             $scope.indexCanvas -= 1;
             $scope.canvastabs.splice($scope.indexCanvas, 1);

@@ -5,7 +5,8 @@
     </div>
     <div class="bd" style="height:{{wHeight-79}}px;">
         <div class="attr_group">
-            <dl class="left">
+			
+            <dl class="left" ng-class="{'hide': order<0}">
                 <dt>
                     <span>当前对象</span>
                 </dt>
@@ -17,7 +18,7 @@
                 </dd>
             </dl>
 
-            <dl class="left">
+            <dl class="left" ng-class="{'hide': order<0}">
                 <dt>
                     <span>位置</span>
                 </dt>
@@ -28,7 +29,7 @@
                     上:
                     <input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].position.top">px</dd>
             </dl>
-            <dl class="left size">
+            <dl class="left size" ng-class="{'hide': order<0}">
             	<div ng-if="dataMks.mks[canvasOrder].widget[order].size!=null">
                 <dt>
                     <span>大小</span>
@@ -57,6 +58,7 @@
 	                <dd>
 				</div>
             </dl>
+
 			<dl class="left clearfix full" ng-if="dataMks.mks[canvasOrder].widget[order].type=='area'">
                 <dt>
                     <span>链接地址</span>
@@ -502,6 +504,117 @@
 	                </dd> 
             	</div> 
             </dl>
+            <div ng-if="order==-2">
+	            <dl  class="left">
+	                <dt>
+	                    <span>当前对象</span>
+	                </dt>
+	                <dd>
+	                    <span>轮播箭头</span>
+	                </dd>
+	            </dl>
+	            <dl class="left">
+	                <dt>
+	                    <span>左箭头位置</span>
+	                </dt>
+	                <dd>
+	                    左:
+	                    <input type="number" required  ng-model="dataMks.slider.arrow.leftPosition.left">px</dd>
+	                <dd>
+	                    上:
+	                    <input type="number" required  ng-model="dataMks.slider.arrow.leftPosition.top">px</dd>
+	            </dl>
+	            <dl class="left size">
+	                <dt>
+	                    <span>右箭头位置</span>
+	                </dt>
+	                <dd>
+	                    左:
+	                    <input type="number" required  ng-model="dataMks.slider.arrow.rightPosition.left">px</dd>
+	                <dd>
+	                    上:
+	                    <input type="number" required  ng-model="dataMks.slider.arrow.rightPosition.top">px</dd>
+	            </dl>
+	            <dl class="left clearfix full">
+	                <dt>
+	                    <span>左箭头图片</span>
+	                </dt>
+	                <dd>
+	                    <input type="url" required ng-model="dataMks.slider.arrow.leftUrl">
+	                </dd>  
+	                <dt>
+	                    <span>右箭头图片</span>
+	                </dt>
+	                <dd>
+	                    <input type="url" required ng-model="dataMks.slider.arrow.rightUrl">
+	                </dd>  
+                </dl>
+        	</div>
+        	<div ng-if="order==-1" class="nav">
+	            <dl class="left obj">
+	                <dt>
+	                    <span>当前对象</span>
+	                </dt>
+	                <dd>
+	                    <span>轮播导航</span>
+	                </dd>
+	            </dl>
+	            <dl class="left">
+	                <dt>
+	                    <span>导航位置</span>
+	                </dt>
+	                <dd>
+	                    左:
+	                    <input type="number" required  ng-model="dataMks.slider.nav.position.left">px</dd>
+	                <dd>
+	                    上:
+	                    <input type="number" required  ng-model="dataMks.slider.nav.position.top">px</dd>
+	            </dl>
+	            <dl class="left size">
+	                <dt>
+	                    <span>排列方式</span>
+	                </dt>
+	                <dd>
+	                	<input type="radio" ng-model="dataMks.slider.nav.align" value="float"> 横排&nbsp;<br>
+                    	<input type="radio" ng-model="dataMks.slider.nav.align" value="vertical"> 竖排 &nbsp;	
+	                </dd>
+	            </dl>
+	            <dl class="left clearfix full">
+	                <dt class="clearfix">
+	                    <span>导航背景色</span>
+	                </dt>
+	                <dd class="clearfix">
+	                    <input class="colorinput left" type="text" ng-model="dataMks.slider.nav.bgColor">
+	                    <div class="right color-picker">
+	                        <div class="sp-preview">
+	                            <div colorpicker="rgb" colorpicker-position="top" inmethod="bounceInDown" outmethod="bounceOutUp" colorpicker-with-input="dataMks.slider.nav.bgColor" class="sp-preview-inner" ng-model="dataMks.slider.nav.bgColor" style="background-color:{{dataMks.slider.nav.bgColor}}"></div>
+	                        </div>
+	                    </div>
+	                </dd>
+	                <dt class="clearfix">
+	                    <span>导航边框色</span>
+	                </dt>
+	                <dd class="clearfix">
+	                    <input class="colorinput left" type="text" ng-model="dataMks.slider.nav.borderColor">
+	                    <div class="right color-picker">
+	                        <div class="sp-preview">
+	                            <div colorpicker="rgb" colorpicker-position="top" inmethod="bounceInDown" outmethod="bounceOutUp" colorpicker-with-input="dataMks.slider.nav.borderColor" class="sp-preview-inner" ng-model="dataMks.slider.nav.borderColor" style="background-color:{{dataMks.slider.nav.borderColor}}"></div>
+	                        </div>
+	                    </div>
+	                </dd>
+	                <dt class="clearfix">
+	                    <span>导航文字色</span>
+	                </dt>
+	                <dd class="clearfix">
+	                    <input class="colorinput left" type="text" ng-model="dataMks.slider.nav.color">
+	                    <div class="right color-picker">
+	                        <div class="sp-preview">
+	                            <div colorpicker="rgb" colorpicker-position="top" inmethod="fadeInLeft" outmethod="fadeOutRight" colorpicker-with-input="dataMks.slider.nav.color" class="sp-preview-inner" ng-model="dataMks.slider.nav.color" style="background-color:{{dataMks.slider.nav.color}}"></div>
+	                        </div>
+	                    </div>
+	                </dd>
+	            </dl>
+        	</div>
         </div>
 	</div>
 </div>

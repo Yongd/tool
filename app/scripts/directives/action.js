@@ -109,6 +109,52 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 angular.element(document.getElementById('workspace')).removeClass('move-right');
                 element.removeClass('drop-target');
             });
+
+
+            
+            var canvasTemplate, navli, layerTemplate, controlTemplate,preIndex=0,currentIndex=1;
+            
+
+            function addWrap() {
+                navli = '<li style="background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">'+(currentIndex+1)+'</li>';
+                controlTemplate = '<ul class="slidenav {{dataMks.slider.nav.align}} eButton" index="-1" yd-drag ng-class="{\'hide\':!dataMks.slider.nav.enable}" style="left:{{dataMks.slider.nav.position.left}}px;top:{{dataMks.slider.nav.position.top}}px;"><li class="act" style="'+
+                'background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">1</li>'+navli+'</ul><span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" class="slidearrow slidearrowl eButton" style="left:{{dataMks.slider.arrow.leftPosition.left}}px;'+
+                'top:{{dataMks.slider.arrow.leftPosition.top}}px;" index="-2" ng-class="{\'hide\':!dataMks.slider.arrow.enable}" yd-drag><img src="{{dataMks.slider.arrow.leftUrl}}"></span>'+
+                '<span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" index="-2" class="slidearrow slidearrowr eButton" style="left:{{dataMks.slider.arrow.rightPosition.left}}px;top:{{dataMks.slider.arrow.rightPosition.top}}px;" yd-drag><img src="{{dataMks.slider.arrow.rightUrl}}"></span>';
+                canvasTemplate = '<div class="wrap_' + currentIndex + ' wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;' +
+                'background-repeat:{{dataMks.mks[' + currentIndex + '].img.repeat}};background-color:{{dataMks.mks[' + currentIndex + '].color}};"><div class="gridbg"></div></div>';
+                layerTemplate = '<div class="wrap_' + currentIndex + ' layer_' + currentIndex + ' wrap">';
+                if(preIndex===0){
+                    angular.element(document.querySelector('.canvas')).append($compile(controlTemplate)(scope));
+                }else{
+                    angular.element(document.querySelector('.slidenav')).append($compile(navli)(scope));
+                }
+                angular.element(document.querySelector('.wrap_' + preIndex)).after($compile(canvasTemplate)(scope));
+                angular.element(document.querySelector('.layer_' + preIndex)).after($compile(layerTemplate)(scope));
+                currentIndex += 1;
+                preIndex += 1;
+            }
+            function removeWrap(){
+                if (preIndex === scope.canvasOrder) {
+                    if(preIndex === 1){
+                        angular.element(document.querySelector('.slidenav')).remove();
+                        angular.element(document.querySelector('.slidearrow')).remove();
+                    }else{
+                        var allLi = angular.element(document.querySelectorAll('.slidenav li'));
+                        allLi[allLi.length-1].remove();
+                    }
+                    angular.element(document.querySelector('.wrap_' + preIndex)).remove();
+                    angular.element(document.querySelector('.layer_' + preIndex)).remove();
+                    scope.dataMks.mks.splice(preIndex, 1);
+                    currentIndex -= 1;
+                    preIndex -= 1;
+                }
+            }
+            
+            scope.$on('addWrap',addWrap);
+            scope.$on('removeWrap',removeWrap);
+
+
         }
     };
 }]);
@@ -124,20 +170,15 @@ app.directive('eButton', function() {
             function addAct() {
                 removeAct();
                 angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('now');
-                if (angular.isDefined(scope.$parent.order)) {
-                    scope.$apply(scope.$parent.order = attrs.index,scope.$parent.attrControl=true);
-                    console.log(scope);
-                } else if(angular.isDefined(scope.order)){
-                    scope.$apply(scope.order = attrs.index,scope.attrControl=true);
-                    console.log(scope);
-                }else{
-                    scope.$apply(
-                        scope.$parent.$parent.$parent.$parent.$parent.order = attrs.index,
-                        scope.$parent.$parent.$parent.$parent.$parent.attrControl = true
-                    );
+                if (angular.isUndefined(scope.order)) {
+                        scope.$apply(scope.$parent.order = attrs.index,scope.$parent.attrControl=true);
+                        
+                    } else{
+                        scope.$apply(scope.order = attrs.index,scope.attrControl=true);
+                       
+                    }
                 }
-
-            }
+            
             removeAct();
             element.on('mousedown', addAct);
         }
@@ -192,47 +233,7 @@ app.directive('actLock', function() {
     };
 });
 
-app.directive('addWrap', ['$compile', function($compile) {
-    return {
-        restrict: 'C',
-        link: function(scope, element) {
-            var canvasTemplate, layerTemplate, controlTemplate;
-            scope.$parent.pre = 0;
-            scope.$parent.index = 1;
-            controlTemplate = '<ul class="slidenav eButton" index="-1" yd-drag ng-class="{\'hide\':!dataMks.slider.nav.enable}" style="left:{{dataMks.slider.nav.position.left}}px;top:{{dataMks.slider.nav.position.top}}px;"><li class="left act" style="'+
-            'background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">1</li><li class="left" style="'+
-            'background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">2</li></ul><span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" class="slidearrow slidearrowl eButton" style="left:{{dataMks.slider.arrow.leftPosition.left}}px;'+
-            'top:{{dataMks.slider.arrow.leftPosition.top}}px;" index="-2" ng-class="{\'hide\':!dataMks.slider.arrow.enable}" yd-drag><img src="{{dataMks.slider.arrow.leftUrl}}"></span>'+
-            '<span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" index="-2" class="slidearrow slidearrowr eButton" style="left:{{dataMks.slider.arrow.rightPosition.left}}px;top:{{dataMks.slider.arrow.rightPosition.top}}px;" yd-drag><img src="{{dataMks.slider.arrow.rightUrl}}"></span>';
 
-            function addWrap() {
-                canvasTemplate = '<div class="wrap_' + scope.indexCanvas + ' wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;' +
-                    'background-repeat:{{dataMks.mks[' + scope.$parent.index + '].img.repeat}};background-color:{{dataMks.mks[' + scope.$parent.index + '].color}};"><div class="gridbg"></div></div>';
-                layerTemplate = '<div class="wrap_' + scope.$parent.index + ' layer_' + scope.$parent.index + ' wrap">';
-                if(scope.$parent.pre===0){
-                    angular.element(document.querySelector('.canvas')).append($compile(controlTemplate)(scope));
-                }
-                angular.element(document.querySelector('.wrap_' + scope.$parent.pre)).after($compile(canvasTemplate)(scope));
-                angular.element(document.querySelector('.layer_' + scope.$parent.pre)).after($compile(layerTemplate)(scope));
-                scope.$parent.index += 1;
-                scope.$parent.pre += 1;
-            }
-            scope.removeWrap = function() {
-                var order = scope.$parent.$parent.$parent.$parent.$parent.$parent.canvasOrder;
-                if (scope.$parent.pre == order) {
-                    angular.element(document.querySelector('.wrap_' + scope.$parent.pre)).remove();
-                    angular.element(document.querySelector('.layer_' + scope.$parent.pre)).remove();
-                    scope.$parent.$parent.$parent.$parent.$parent.$parent.dataMks.mks.splice(scope.$parent.pre, 1);
-                    scope.$parent.index -= 1;
-                    scope.$parent.pre -= 1;
-                }
-            };
-            element.bind('mousedown', function() {
-                addWrap();
-            });
-        }
-    };
-}]);
 
 app.directive('bginput', function() {
     return {

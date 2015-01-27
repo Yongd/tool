@@ -14,7 +14,7 @@ angular.module('toolApp').
 		return '{"jname": "未命名","width":'+width+',"height":'+(height-160)+',"offset": "margin:0 auto","slider": {'+
 				'"arrow": {"enable": true,"leftUrl": "http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX","leftPosition": { "left": 200,"top": '+(height-200)/2+'},'+
 	                '"rightUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX","rightPosition": { "left": '+(width-200)+',"top": '+(height-200)/2+'}},'+
-	           '"nav": {"enable": true,"bgColor": "#cccccc","borderColor": "#666666", "color": "#666666","align": 0,"position": {"left": '+(width-70)/2+',"top": '+(height-220)+'}},'+
+	           '"nav": {"enable": true,"bgColor": "#cccccc","borderColor": "#666666", "color": "#666666","align": "float","position": {"left": '+(width-70)/2+',"top": '+(height-220)+'}},'+
 	            '"effect": "scrollx","duration": 0.5,"autoplay": true},'+
 	        '"mks": [{ "color": "transparent","img": {"repeat": "no-repeat","url": ""}, "widget": []}],'+
 	        '"version": 1}';
