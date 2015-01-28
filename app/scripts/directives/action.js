@@ -66,11 +66,6 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     dx = e.clientX - $position.offset(element).left - width / 2;
                     dy = e.clientY - $position.offset(element).top - height / 2;
                 }
-                    
-               
-                
-
-                
                 if(dy < 0){
                     dy = 0; 
                 }else if(dy > maxtop){
@@ -86,12 +81,8 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }else{
                     angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope)); 
                 }
-                    
-
-                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
-                    scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
-                
-            
+                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
+                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
                 var layerHtml = '<p class="' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type + '_' + scope.order + ' now eButton" index="' + scope.order + '">'+
                 '<span class="left">' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name + '</span>'+
                 '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+
@@ -111,10 +102,8 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
             });
 
 
-            
+            /*addWrap & removeWrao*/
             var canvasTemplate, navli, layerTemplate, controlTemplate,preIndex=0,currentIndex=1;
-            
-
             function addWrap() {
                 navli = '<li style="background-color:{{dataMks.slider.nav.bgColor}};border-color:{{dataMks.slider.nav.borderColor}};color:{{dataMks.slider.nav.color}};">'+(currentIndex+1)+'</li>';
                 controlTemplate = '<ul class="slidenav {{dataMks.slider.nav.align}} eButton" index="-1" yd-drag ng-class="{\'hide\':!dataMks.slider.nav.enable}" style="left:{{dataMks.slider.nav.position.left}}px;top:{{dataMks.slider.nav.position.top}}px;"><li class="act" style="'+
@@ -150,11 +139,8 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     preIndex -= 1;
                 }
             }
-            
             scope.$on('addWrap',addWrap);
             scope.$on('removeWrap',removeWrap);
-
-
         }
     };
 }]);

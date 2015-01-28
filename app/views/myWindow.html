@@ -18,12 +18,30 @@
 	<a class="button secondary small radius" ng-click="cancel()">取消</a>
 </div>
 
-
 <div ng-if="code==4">
 	<p>*^︹^* 至少要给人家留个画布遮羞嘛，<em> 不然就曝光了哦... </em></p>
 	<a class="button small radius" ng-click="cancel()">确定</a>
 	<a class="button secondary small radius" ng-click="cancel()">取消</a>
 </div>
+
+
+<div ng-if="code==11" class="generateCode">
+	<p>请选择生成类型</p>
+	<div class="buttonlist">
+		<a class="button small radius" ng-click="ok('taobao')">生成集市店铺代码</a>
+		<a class="button small radius" ng-click="ok('tmall')">生成天猫店铺代码</a>
+		<a class="button small radius" ng-click="ok('jd')">生成京东店铺代码</a>
+	</div>
+	<div class="alert-box success radius animated" ng-class="{'hide':!copied,'fadeInDown':copied}">
+	  复制代码成功，您可以去粘贴到店铺模块里啦！
+	</div>
+	<textarea>{"jname":"未命名","width":1885,"height":454,"wrap_left":0,"slide":{"arrows":{"enable":1,"left_url":"http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX","left_position":{"left":447.5,"top":187},"right_url":"http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX","right_position":{"left":1397.5,"top":187},"auto_p":1},"nav":{"enable":1,"bg_color":"#CCCCCC","border_color":"#666666","font_color":"#666666","align":0,"position":{"left":600,"top":100}},"effect":"scrollx","duration":"0.5","autoplay":"true"},"mks":[{"bg":{"color": "transparent","img":{"repeat":"no-repeat","url":""}},"index":8,"widget":[{"id":7,"z_index":7,"name":"天猫关注","type":"attention","pop_layer":[],"position":{"left":100,"top":0},"a_size":{"width":83,"height":24},"shop_url":"","shop_id":0,"img_url":"http://img01.taobaocdn.com/bao/uploaded/i3/T1ROYFFn8eXXaCwpjX"},{"id":6,"z_index":6,"name":"旺旺客服","type":"ww","pop_layer":[],"position":{"left":100,"top":0},"img":"http://img04.taobaocdn.com/imgextra/i4/134264536/T2fMp6X6RaXXXXXXXX-134264536.gif","ww_id":"你的账号","ww_style":1,"link":""},{"id":5,"z_index":5,"name":"视频层","type":"video","pop_layer":[],"position":{"left":100,"top":0},"a_size":{"width":300,"height":300},"link":"http://player.youku.com/player.php/sid/XNTU0Njk0NTM2/v.swf"},{"id":4,"z_index":4,"name":"二维码","type":"qrcode","pop_layer":[],"position":{"left":100,"top":0},"a_size":{"width":140,"height":140},"codetype":"v=1&type=bi&item_id=","img_url":"123456"},{"id":3,"z_index":3,"name":"文字区","type":"text","position":{"left":100,"top":0},"a_size":{"width":200,"height":100},"text":"这是一个文本区","link":"","pop_layer":[],"font":"宋体","size":14,"weight":0,"color":"#000000","line_height":"","scroll_status":0,"scroll_mode":"left","scroll_speed":5},{"id":2,"z_index":2,"name":"倒计时","time":"2015-2-7 11:27:2","type":"countdown","pop_layer":[],"show":0,"d":{"position":{"left":100,"top":100}},"h":{"position":{"left":200,"top":100}},"m":{"position":{"left":300,"top":100}},"s":{"position":{"left":400,"top":100}},"img":"http://img01.taobaocdn.com/bao/uploaded/i2/T1H0_cFg4dXXaCwpjX","font":"Impact","size":36,"weight":0,"color":"#ffffff","units":1},{"id":1,"z_index":1,"name":"弹出层","type":"img","position":{"left":100,"top":0},"a_size":{"width":200,"height":320},"img_url":"http://img01.taobaocdn.com/imgextra/i1/134264536/T2cqJ8X2xXXXXXXXXX-134264536.jpg","link":"","pop_layer":[],"popup":{"show":"checked","status":1,"img_url":"http://img04.taobaocdn.com/imgextra/i4/134264536/T2YnN6X1taXXXXXXXX-134264536.jpg","position":{"left":200,"top":0}},"sided":{"status":0,"img_url":"http://img01.taobaocdn.com/imgextra/i1/134264536/T2o8l8X4RXXXXXXXXX-134264536.jpg"}}],"group_index":1,"groups":[]},{"bg":{"color": "transparent","img":{"repeat":"no-repeat","url":""}},"index":4,"widget":[{"id":3,"z_index":3,"name":"旺旺群","type":"wwgroup","pop_layer":[],"position":{"left":100,"top":0},"img":"http://img01.taobaocdn.com/bao/uploaded/i1/T15nj0FopXXXartXjX","ww_group_id":0,"img_style":1,"link":""},{"id":2,"z_index":2,"name":"搜索框","type":"search","pop_layer":[],"position":{"left":200,"top":200},"a_size":{"width":508,"height":49},"input":{"position":{"left":8,"top":0},"size":{"width":374,"height":45}},"btn":{"position":{"left":382,"top":0},"size":{"width":106,"height":47}},"link":"","text_color":"#000000","show_style":0,"mk_color":"#fa7f14","input_bg_color":"#ffffff","bg":"http://img01.taobaocdn.com/bao/uploaded/i3/T1cs0cFdXfXXaCwpjX"},{"id":1,"z_index":1,"name":"文字区","type":"text","position":{"left":100,"top":0},"a_size":{"width":200,"height":100},"text":"这是一个文本区","link":"","pop_layer":[],"font":"宋体","size":14,"weight":0,"color":"#000000","line_height":"","scroll_status":0,"scroll_mode":"left","scroll_speed":5}],"group_index":1,"groups":[]}],"version":1.1}</textarea>
+	<a class="button small radius" clip-copy="getCodeToCopy()" clip-click="doSomething()">复制</a>
+	<a class="button secondary small radius" ng-click="cancel()">取消</a>
+</div>
+
+
+
 
 
 <a class="close-reveal-modal" ng-click="cancel()">×</a>

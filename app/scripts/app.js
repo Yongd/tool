@@ -16,7 +16,8 @@
     'mm.foundation',
     'ngAnimate',
     'colorpicker.module',
-    'datePicker'
+    'datePicker',
+    'ngClipboard'
   ])
   .config(['$tooltipProvider', function ($tooltipProvider) {
 	$tooltipProvider.options({
@@ -25,5 +26,6 @@
 		popupDelay:200,
 		appendToBody: true
 	});
+  
 	}
 ]);

@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
  var app = angular.module('toolApp');
- app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal',  function($scope, $http, dataHandler, $modal) {
+ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($scope, $http, dataHandler, $modal) {
     $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -68,7 +68,6 @@
         });
         $scope.addOrder.push(-1);
     };
-    
     $scope.deleteCanvas = function() {
         $scope.confirmDelete = function() {
             $scope.$broadcast('removeWrap');
@@ -171,6 +170,36 @@
         };
     };
 
+    $scope.generateCode = function(){
+        $scope.getCode = function(type){
+            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'code':'success'} })
+                .success(function(data, status) {
+                  $scope.status = status;
+                  $scope.data = data;
+                  console.log(data);
+                  console.log(type);
+                })
+                .error(function(data, status) {
+                  $scope.data = data || 'Request failed';
+                  $scope.status = status;
+            });
+        };  
+        var calldata = {
+            'action': $scope.getCode,
+            'code': 11
+        };
+        $modal.open({
+            templateUrl: 'views/myWindow.html',
+            controller: 'windowCtrl',
+            resolve: {
+                data: function() {
+                    return calldata;
+                }
+            }
+        });
+    };
+
+
 
 }]);
 
@@ -180,16 +209,38 @@
 app.controller('elementWindowCtrl', function($scope, $modalInstance, data) {
     $scope.name = data.name;
     $scope.code = data.code;
-    $scope.remove = data.remove;
+    var remove = data.remove;
     $scope.ok = function() {
-        $modalInstance.close($scope.remove());
-
+        $modalInstance.close(remove());
     };
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
+
 });
 
+app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
+    $scope.code = data.code;
+    var action = data.action;
+    $scope.ok = function(type) {
+        action(type);
+    };
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.getCodeToCopy = function() {
+        return 'ngClip is awesome!';
+    };
+    $scope.copied= false;
+    $scope.doSomething = function () {
+        $scope.copied= true;
+        $timeout(function() {
+            $scope.copied= false;
+            },
+            2000
+        );
+    };
+});
 
 
 Array.prototype.unique3 = function() {
@@ -216,7 +267,6 @@ Date.prototype.format = function(partten,time){
     {
         partten = 'y-m-d h:n:s'    ;
     }
-
     var y = this.getFullYear();
     var m = this.getMonth()+1;
     var d = this.getDate();
@@ -224,8 +274,6 @@ Date.prototype.format = function(partten,time){
     var n = this.getMinutes();
     var s = this.getSeconds();  
     var r = partten.replace(/y+/gi,y);
-
-
     if(time == 'future'){ 
         if(d==getLastDay(y,m)){
             if(m==12){
@@ -246,8 +294,3 @@ Date.prototype.format = function(partten,time){
     r = r.replace(/s+/gi,(s<10?'0':'')+s);
     return r; 
 };
-
-
-
-//console.log( Date.parse(  (new Date()).format('y-m-d h:n:s','future') ) );
-//console.log( Date.parse(new Date())  );
