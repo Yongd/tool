@@ -1,5 +1,4 @@
-<h3>温馨提示：</h3>
-
+<div ng-class="{'hide':code==12}"><h3>温馨提示：</h3></div>
 <div ng-if="code==1">
 	<p>您确定<strong> 删除 </strong><em>{{name}}</em>  ? <span class="tip">（删除后不可恢复）</span></p>
   	<a class="button small radius" ng-click="ok()">确定</a>
@@ -40,6 +39,26 @@
 	<a class="button secondary small radius" ng-click="cancel()">取消</a>
 </div>
 
+<div ng-if="code==12" class="login">
+	<h3>登录窗口：</h3>
+	<form>
+	  <div class="row">
+	    <div class="large-12 columns radius">
+	      <label>用户名
+	        <input type="text" placeholder="large-12.columns" />
+	      </label>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="large-12 columns">
+	      <label>密码
+	        <input type="text" placeholder="large-12.columns" />
+	      </label>
+	    </div>
+	  </div>
+	  
+	</form>
+</div>
 
 
 

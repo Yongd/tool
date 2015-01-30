@@ -71,6 +71,16 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 .generateCode .alert-box.hide{
 	display: none;
 }
+/*login*/
+.login h3{
+	border-bottom:1px #ececec solid;
+	padding-bottom:0.5rem;
+}
+.login form{
+	width: 30rem;
+	margin:0 auto;
+}
+
 /*模糊效果*/
 .blur{
     -webkit-filter:blur(1px);

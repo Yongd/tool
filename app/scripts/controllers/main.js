@@ -172,12 +172,12 @@
 
     $scope.generateCode = function(){
         $scope.getCode = function(type){
-            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'code':'success'} })
+            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'jsondata':$scope.dataMks} })
                 .success(function(data, status) {
                   $scope.status = status;
                   $scope.data = data;
                   console.log(data);
-                  console.log(type);
+                  console.log($scope.dataMks);
                 })
                 .error(function(data, status) {
                   $scope.data = data || 'Request failed';
@@ -198,6 +198,36 @@
             }
         });
     };
+
+    $scope.login = function(){
+        $scope.loginAjax = function(type){
+            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'jsondata':$scope.dataMks} })
+                .success(function(data, status) {
+                  $scope.status = status;
+                  $scope.data = data;
+                  console.log(data);
+                  console.log($scope.dataMks);
+                })
+                .error(function(data, status) {
+                  $scope.data = data || 'Request failed';
+                  $scope.status = status;
+            });
+        };  
+        var calldata = {
+            'action': $scope.loginAjax,
+            'code': 12
+        };
+        $modal.open({
+            templateUrl: 'views/myWindow.html',
+            controller: 'loginWindowCtrl',
+            resolve: {
+                data: function() {
+                    return calldata;
+                }
+            }
+        });
+    };
+
 
 
 
@@ -241,6 +271,18 @@ app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
         );
     };
 });
+
+app.controller('loginWindowCtrl', function($scope, $modalInstance, data) {
+    $scope.code = data.code;
+    var action = data.action;
+    $scope.ok = function(type) {
+        action(type);
+    };
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+});
+
 
 
 Array.prototype.unique3 = function() {
