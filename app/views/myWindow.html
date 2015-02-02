@@ -44,19 +44,32 @@
 	<form>
 	  <div class="row">
 	    <div class="large-12 columns radius">
-	      <label>用户名
-	        <input type="text" placeholder="large-12.columns" />
+	      <label>用户名:
+	        <input type="text" ng-model="$parent.$parent.$parent.userName" ng-change="hide()" placeholder="您的淘宝、天猫或京东账号(仅限我们的模板用户)" />
 	      </label>
+	      <div class="animated alert-box warning radius" ng-class="{'hide':backCode!=1,'fadeInRight':backCode==1}">
+			啊偶，用户名不存在！
+	      </div>	
 	    </div>
 	  </div>
 	  <div class="row">
 	    <div class="large-12 columns">
-	      <label>密码
-	        <input type="text" placeholder="large-12.columns" />
+	      <label>密码:
+	        <input type="password" ng-model="$parent.$parent.$parent.userPass" ng-change="hide()" placeholder="如无修改，默认密码为123456" />
 	      </label>
+	      <div class="animated alert-box warning radius" ng-class="{'hide':backCode!=2,'fadeInRight':backCode==2}">
+			很抱歉，密码不正确！
+	      </div>
 	    </div>
 	  </div>
-	  
+	  <div class="login-button">
+		<a class="button small radius" ng-click="login()">登录</a>
+		<a class="button secondary small radius" ng-click="cancel()">取消</a>
+		<div class="animated alert-box success radius" ng-class="{'hide':!showSuccess,'fadeInRight':showSuccess}">
+			登陆成功，欢迎您使用！
+	     </div>
+	  </div>
+	
 	</form>
 </div>
 

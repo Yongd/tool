@@ -77,10 +77,47 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	padding-bottom:0.5rem;
 }
 .login form{
-	width: 30rem;
-	margin:0 auto;
+	width: 25rem;
+	margin:2rem auto 0 auto;
+}
+.login form .row{
+	margin-top: 1rem;
+}
+.login form input{
+	margin: 0.5rem 0;
+	border-color: #ececec;
+}
+.login form input:focus{
+	background-color: #fff;
+}
+.login form .alert-box{
+	margin-left: 0.5rem;
+}
+.login .login-button{
+	margin-top: 1rem;
+	padding:0 15px;
 }
 
+.login form .alert-box{
+	position: absolute;
+	right:-170px;
+	bottom:0.5rem;
+	font-size: 0.85rem;
+	height: 2.3rem;
+	line-height: 1.7rem;
+	padding-top:0.3rem;
+	margin: 0;
+}
+.login form .alert-box.hide{
+	display: none;
+}
+.login form .login-button{
+	position: relative;
+}
+.login form .login-button .alert-box{
+	right:0;
+	bottom:0;
+}
 /*模糊效果*/
 .blur{
     -webkit-filter:blur(1px);
@@ -107,7 +144,7 @@ input[type=text],input[type=password],input[type=number],input[type=url],input[t
 	box-shadow:0 0 0px rgba(0,0,0,0);
 	transition-duration: 0.3s
 
-}input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,input[type=datetime]:focus{
+}input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,input[type=datetime]:focus,input[type=password]:focus{
 	box-shadow:0 0 7px rgba(39,170,227,1);
 	border-color:#27aae3;
 	

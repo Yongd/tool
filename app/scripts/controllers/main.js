@@ -272,7 +272,7 @@ app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
     };
 });
 
-app.controller('loginWindowCtrl', function($scope, $modalInstance, data) {
+app.controller('loginWindowCtrl', function($scope, $modalInstance, data, $http, $timeout) {
     $scope.code = data.code;
     var action = data.action;
     $scope.ok = function(type) {
@@ -280,6 +280,33 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data) {
     };
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
+    };
+    $scope.login = function(){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/welcome/view',data:{'name':$scope.userName,'pass':$scope.userPass}})
+                .success(function(data) {
+                    $scope.backCode = data.code;
+                    if(data.code===0){
+                        $scope.showSuccess = true;
+                        $scope.dbName = data.name;
+                        $timeout(function() {
+                            $scope.showSuccess = false;
+                            $modalInstance.dismiss('cancel');
+                            },
+                            1000
+                        );
+
+                   }
+                })
+                .error(function(data, status) {
+                  $scope.data = data || 'Request failed';
+                  $scope.status = status;
+        });
+        
+    }; 
+    $scope.hide = function(){
+        if($scope.backCode==1||$scope.backCode==2){
+            $scope.backCode=0;
+        }
     };
 });
 

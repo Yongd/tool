@@ -260,4 +260,11 @@ app.directive('gridbg', function(){
     };
 });
 
-
+app.directive('testa', function() {
+    return {
+        restrict: 'A',
+        link: function(scope) {
+           console.log(scope);
+        }
+    };
+});
