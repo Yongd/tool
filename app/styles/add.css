@@ -89,6 +89,9 @@
 .topbar .icon:hover:before, .topbar .icon.onhover:before {
     display: none;
 }
+.topbar .icon.hide{
+    display: none;
+}
 .topbar .icon span {
     display: none;
     width: 100%;

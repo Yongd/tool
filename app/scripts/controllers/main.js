@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
  var app = angular.module('toolApp');
- app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', function($scope, $http, dataHandler, $modal) {
+ app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', '$cookieStore', function($scope, $http, dataHandler, $modal, $cookieStore) {
     $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -171,51 +171,40 @@
     };
 
     $scope.generateCode = function(){
-        $scope.getCode = function(type){
-            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'jsondata':$scope.dataMks} })
-                .success(function(data, status) {
-                  $scope.status = status;
-                  $scope.data = data;
-                  console.log(data);
-                  console.log($scope.dataMks);
-                })
-                .error(function(data, status) {
-                  $scope.data = data || 'Request failed';
-                  $scope.status = status;
-            });
-        };  
-        var calldata = {
-            'action': $scope.getCode,
-            'code': 11
-        };
-        $modal.open({
-            templateUrl: 'views/myWindow.html',
-            controller: 'windowCtrl',
-            resolve: {
-                data: function() {
-                    return calldata;
+        if(angular.isDefined($scope.ckName)){
+            $scope.getCode = function(type){
+                $http({method: 'POST', url: 'http://localhost:8888/index.php/code',data:{'type':type,'jsondata':$scope.dataMks}})
+                .success(function(data) {
+                    
+                }).error(function(data, status) {
+                      $scope.data = data || 'Request failed';
+                      $scope.status = status;
+                });
+            };  
+            var calldata = {
+                'action': $scope.getCode,
+                'code': 11
+            };
+            $modal.open({
+                templateUrl: 'views/myWindow.html',
+                controller: 'windowCtrl',
+                resolve: {
+                    data: function() {
+                        return calldata;
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            $scope.login();
+        }
     };
 
     $scope.login = function(){
-        $scope.loginAjax = function(type){
-            $http({method: 'POST', url: 'http://127.0.0.1/',data:{'type':type,'jsondata':$scope.dataMks} })
-                .success(function(data, status) {
-                  $scope.status = status;
-                  $scope.data = data;
-                  console.log(data);
-                  console.log($scope.dataMks);
-                })
-                .error(function(data, status) {
-                  $scope.data = data || 'Request failed';
-                  $scope.status = status;
-            });
-        };  
+        $scope.setCk = function(){
+            $scope.ckName = $cookieStore.get('userName');
+        };
         var calldata = {
-            'action': $scope.loginAjax,
-            'code': 12
+            'action': $scope.setCk
         };
         $modal.open({
             templateUrl: 'views/myWindow.html',
@@ -225,11 +214,13 @@
                     return calldata;
                 }
             }
-        });
+         });
     };
-
-
-
+     $scope.logout = function(){
+        $cookieStore.remove('userName');
+        delete $scope.ckName;
+    };
+    
 
 }]);
 
@@ -272,35 +263,29 @@ app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
     };
 });
 
-app.controller('loginWindowCtrl', function($scope, $modalInstance, data, $http, $timeout) {
-    $scope.code = data.code;
+app.controller('loginWindowCtrl', function($scope, $modalInstance, data, $http, $timeout, $cookieStore) {
+    $scope.code = 12;
     var action = data.action;
-    $scope.ok = function(type) {
-        action(type);
-    };
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
     $scope.login = function(){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/welcome/view',data:{'name':$scope.userName,'pass':$scope.userPass}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/login',data:{'name':$scope.userName,'pass':$scope.userPass}})
                 .success(function(data) {
                     $scope.backCode = data.code;
                     if(data.code===0){
                         $scope.showSuccess = true;
                         $scope.dbName = data.name;
+                        $cookieStore.put('userName', $scope.dbName);
+                        action();
                         $timeout(function() {
                             $scope.showSuccess = false;
                             $modalInstance.dismiss('cancel');
                             },
                             1000
                         );
-
-                   }
-                })
-                .error(function(data, status) {
-                  $scope.data = data || 'Request failed';
-                  $scope.status = status;
-        });
+                    }
+                });
         
     }; 
     $scope.hide = function(){
