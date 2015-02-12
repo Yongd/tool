@@ -14,7 +14,7 @@
         <i class="left icon fi-page-add size-18 ts"><span>新建画布</span></i>
     </div>
     <div class="right">
-        <i class="icon left fi-paint-bucket size-18 ts"><span>装修模板{{ckName}}</span></i>
+        <i class="icon left fi-paint-bucket size-18 ts"><span>装修模板{{$cookieStore.get('userName')}}</span></i>
         <i class="icon left fi-share size-16 ts"><span>分享给好友</span></i>
         <div class="left" ng-if="ckName">
         <i class="icon left fi-torso size-18 ts"><span>我的账户</span></i>
@@ -104,8 +104,7 @@
     <div class="message">构建页面</div>
 </div>
 <div class="canvas" droppable style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;{{dataMks.offset}}">
-    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};">
-        
+    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};background-position:{{dataMks.mks[canvasOrder].img.position}} center;background-image:url({{dataMks.mks[canvasOrder].img.url}});">
         <div class="gridbg"></div>
     </div>
 </div>

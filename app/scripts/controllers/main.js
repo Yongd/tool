@@ -173,9 +173,14 @@
     $scope.generateCode = function(){
         if(angular.isDefined($scope.ckName)){
             $scope.getCode = function(type){
-                $http({method: 'POST', url: 'http://localhost:8888/index.php/code',data:{'type':type,'jsondata':$scope.dataMks}})
+                if(type=='taobao'){
+                   $scope.dataMks.offsetLeft =  ($scope.dataMks.width-950)/2; 
+                }else if(type=='tmall'){
+                    $scope.dataMks.offsetLeft =  ($scope.dataMks.width-990)/2; 
+                }
+                $http({method: 'POST', url: 'http://localhost:8888/index.php/make',data:{'type':type,'jsondata':$scope.dataMks}})
                 .success(function(data) {
-                    
+                   console.log(data); 
                 }).error(function(data, status) {
                       $scope.data = data || 'Request failed';
                       $scope.status = status;
@@ -220,7 +225,7 @@
         $cookieStore.remove('userName');
         delete $scope.ckName;
     };
-    
+    $scope.ckName = $cookieStore.get('userName');
 
 }]);
 

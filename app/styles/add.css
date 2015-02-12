@@ -358,10 +358,15 @@
 }
 .bg_config input[type=radio] {
     margin-left: 0.885rem;
+    margin-bottom: 0;
+}
+.bg_config .position input[type=radio]{
+    margin-left: 0.3rem;
 }
 .bg_config input[value=repeat] {
     margin-left: 0;
 }
+
 /*Slider_config*/
 
 .slide_config .name {

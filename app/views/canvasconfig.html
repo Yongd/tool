@@ -12,11 +12,19 @@
 <dd class="clearfix">
     <div class="name left">主背景图:</div>
     <div class="cont right">
-        <input type="url" class="bginput" ng-model="dataMks.mks[canvasOrder].img.url" ng-keyup="addbg()" placeholder="如需设置背景请输入地址">
+        <input type="url" class="bginput" ng-model="dataMks.mks[canvasOrder].img.url" placeholder="如需设置背景请输入地址">
         <a href="http://tu.taobao.com/manage/picList.htm" target="_blank" class="button tiny">图片空间</a>
     </div>
 </dd>
-<dd>
+<dd class="clearfix position">
+    <div class="name left">图像位置:</div>
+    <div class="cont right">
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.position" value="left"> 居左显示&nbsp;&nbsp;
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.position" value="center"> 居中显示&nbsp;&nbsp;
+        <input type="radio" ng-model="dataMks.mks[canvasOrder].img.position" value="right"> 居右显示
+    </div>
+</dd>
+<dd class="clearfix">
     <div class="name left">平铺方式:</div>
     <div class="cont right">
         <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="repeat"> 平铺
@@ -25,3 +33,4 @@
         <input type="radio" ng-model="dataMks.mks[canvasOrder].img.repeat" value="no-repeat"> 不平铺
     </div>
 </dd>
+

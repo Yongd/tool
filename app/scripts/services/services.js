@@ -11,12 +11,12 @@
 angular.module('toolApp').
 	service('dataHandler', function() {
 	this.canvas = function(width,height){
-		return '{"jname": "未命名","width":'+width+',"height":'+(height-160)+',"offset": "margin:0 auto","slider": {'+
+		return '{"jname": "未命名","width":'+width+',"height":'+(height-160)+',"offset":"margin:0 auto","offsetLeft": 0,"slider": {'+
 				'"arrow": {"enable": true,"leftUrl": "http://img01.taobaocdn.com/bao/uploaded/i2/T1kqzaFhtaXXaCwpjX","leftPosition": { "left": 200,"top": '+(height-200)/2+'},'+
 	                '"rightUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1eJnPXeNrXXaCwpjX","rightPosition": { "left": '+(width-200)+',"top": '+(height-200)/2+'}},'+
 	           '"nav": {"enable": true,"bgColor": "#cccccc","borderColor": "#666666", "color": "#666666","align": "float","position": {"left": '+(width-70)/2+',"top": '+(height-220)+'}},'+
 	            '"effect": "scrollx","duration": 0.5,"autoplay": true},'+
-	        '"mks": [{ "color": "transparent","img": {"repeat": "no-repeat","url": ""}, "widget": []}],'+
+	        '"mks": [{ "color": "transparent","img": {"repeat": "no-repeat","url": "","position":"center"}, "widget": []}],'+
 	        '"version": 1}';
 	};
 	this.element = function(type,order) {
@@ -29,21 +29,13 @@ angular.module('toolApp').
 			case 'img': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "图片层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 320},"imgUrl":'+
-				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","popup": {"status": false,"show": true,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1m.XNFl4iXXb1upjX",'+
-				' "position": {"left": 300,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
+				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
 			} 
 			break;
 			case 'text': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "文字区'+(order+1)+'","type": "text","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 100},"text": "这是一个文本区",'+
 				'"link": "", "font": "microsoft yahei","fontsize": 14,"lineht":14,"weight": 100,"color": "#000","scrollStatus": false,"scrollMode": "left","scrollSpeed": 5}';
-			} 
-			break;
-			case 'imgpop': 
-			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "弹出层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 320},"imgUrl":'+
-				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","popup": {"status": true,"show": true,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1m.XNFl4iXXb1upjX",'+
-				' "position": {"left": 300,"top": 0}},"hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
 			} 
 			break;
 			case 'countdown': 

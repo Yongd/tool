@@ -95,24 +95,7 @@
                 <dd class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].hover.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].hover.status}">
                     <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
                 </dd>
-          		<dt  class="clearfix">
-                    <span class="left">弹出层</span>
-                    <div class="left switch small round">
-                        <input id="popup" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.status">
-                        <label for="popup"></label>
-                    </div>
-                </dt>
-                <div class="clearfix animated" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].popup.status,'fadeInUp':dataMks.mks[canvasOrder].widget[order].popup.status}">
-                  <dd>
-                      <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].popup.imgUrl">
-                  </dd>
-                  <dd class="viewpopup">
-                      <span class="left"><input id="popupshow" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].popup.show">&nbsp;&nbsp;预览弹出层</span>
-                      <span class="right">&nbsp;&nbsp;&nbsp;上:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.top">px</span>
-                      <span class="right">左:<input type="number" required  ng-model="dataMks.mks[canvasOrder].widget[order].popup.position.left">px</span>
-                  </dd>
-                </div>  
-           </dl>
+         </dl>
 
 		   <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='text'" class="left clearfix full textstyle">
                 <dt>
