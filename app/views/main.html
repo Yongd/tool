@@ -9,7 +9,7 @@
         <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
         <i class="left icon fi-eye size-24 ts"><span>预览效果</span></i>
         <i class="left icon fi-checkbox size-20 ts" ng-click="generateCode()"><span>生成代码</span></i>
-        <i class="left icon fi-list-thumbnails size-20 ts"><span>代码列表</span></i>
+        <i class="left icon fi-list-thumbnails size-20 ts" ng-click="jsonList()"><span>代码列表</span></i>
         <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
         <i class="left icon fi-page-add size-18 ts"><span>新建画布</span></i>
     </div>
@@ -18,7 +18,7 @@
         <i class="icon left fi-share size-16 ts"><span>分享给好友</span></i>
         <div class="left" ng-if="ckName">
         <i class="icon left fi-torso size-18 ts"><span>我的账户</span></i>
-        <i class="icon left fi-save size-18 ts"><span>保存代码</span></i>
+        <i class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
         <i class="icon left fi-power size-18 ts" ng-click="logout()"><span>退出登录</span></i>
         </div>
      
@@ -116,9 +116,7 @@
         </tab>
     </tabset>
 </div>
-
 <div ng-include="'views/attrControl.html'"></div>
-
-
+<smalltip></smalltip>
 <a class="exit-off-canvas"></a>
 </div>

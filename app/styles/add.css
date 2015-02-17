@@ -686,6 +686,10 @@ div.switch.small label {
 .ww input[type=text],.ww input[type=number]{
     width: 6rem;
 }
+/*share*/
+.share .type input[type=radio]{
+    margin-bottom: 0;
+}
 /*nav*/
 .attr_group .nav .obj{
     width:5.5rem;
@@ -693,8 +697,41 @@ div.switch.small label {
 .attr_group .nav .colorinput{
     width: 16rem;
 }
-
-
+/*smalltip*/
+.smalltip{
+    width: 14%;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    position: absolute;
+    top:43px;
+    color:#fff;
+    z-index: 1002;
+    left:43%;
+    font-size: 0.9rem;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    filter: alpha(opacity=90);
+    opacity: .9;
+    background-color:#43AC6A;
+}
+.smalltip.load{
+    background:#43AC6A url(../images/tool/saveload.gif) 35% 50% no-repeat;
+    text-indent: 35px;
+    display: none;
+}
+.smalltip.fadeInDown,
+.smalltip .fadeOutUp{
+    display: block;
+}
+/*jsonlist*/
+.jsonlist table{
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+.jsonlist table th,
+.jsonlist table td{
+    text-align: center;
+}
 /*Aleat Window Animate*/
 .reveal-modal-bg.in {
     filter: alpha(opacity=50);

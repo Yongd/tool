@@ -172,7 +172,7 @@
                     <span>活动结束时间</span>
                 </dt>
                 <dd>
-                  <input type="datetime" date-time ng-model="dataMks.mks[canvasOrder].widget[order].time" placeholder="{{dataMks.mks[canvasOrder].widget[order].placetime}}">
+                  <input type="datetime" date-time ng-model="time" placeholder="{{dataMks.mks[canvasOrder].widget[order].placetime}}" datefilter canvasorder="{{canvasOrder}}" order="{{order}}">
                 </dd> 
                 <dt>
                     <span>时间背景图片</span>
@@ -256,11 +256,11 @@
             	<dt>
             		<span>二维码类型</span>
             	</dt>
-				<dd>
-                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bs&shop_id"> 天猫商品 &nbsp;&nbsp;
-                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bi&item_id"> 天猫店铺 &nbsp;&nbsp;
-                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="type=cs&shop_id"> 集市商品 &nbsp;&nbsp;
-                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="&v=1&type=ci&item_id"> 集市店铺
+				      <dd>
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bi&item_id"> 天猫商品 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="v=1&type=bs&shop_id"> 天猫店铺 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="type=ci&item_id"> 集市商品 &nbsp;&nbsp;
+                    <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].qrtype" value="&v=1&type=cs&shop_id"> 集市店铺
                 </dd>
                 <dt>
                 	<span>二维码内容</span>
@@ -422,12 +422,12 @@
 	                <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].img" tooltip="留空则不显示图片">
 	            </dd>
             </dl>
-			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='attention'||dataMks.mks[canvasOrder].widget[order].type=='favourite'" class="left clearfix full">
+			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='attention'" class="left clearfix full">
                 <dt class="clearfix">
-                    <span class="left">店铺链接</span>
+                    <span class="left">品牌ID</span>
                 </dt>
                 <dd>
-                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].shoplink" placeholder="您的店铺地址">
+                    <input type="text" ng-model="dataMks.mks[canvasOrder].widget[order].brandid" placeholder="您的品牌ID">
                 </dd>
                 <dt>
                     <span>图片地址</span>
@@ -435,9 +435,34 @@
                 <dd>
                     <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
                 </dd> 
-            </dl>
-			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='share'" class="left clearfix full">
+      </dl>
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='favourite'" class="left clearfix full">
                 <dt class="clearfix">
+                    <span class="left">收藏链接</span>
+                </dt>
+                <dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].favouriteurl" placeholder="您店铺的收藏链接">
+                </dd>
+                <dt>
+                    <span>图片地址</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+                </dd> 
+      </dl>
+			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='share'" class="left clearfix full share">
+              <dt class="type">
+                <span>分享类型</span>
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].shareType" value="shop"> 店铺 &nbsp;&nbsp;
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].shareType" value="item"> 商品 
+              </dt>
+              <dt>
+                    <span>店铺或商品ID</span>
+                </dt>
+                <dd>
+                    <input type="text" ng-model="dataMks.mks[canvasOrder].widget[order].id" placeholder="输入您的商品或店铺ID">
+                </dd> 
+              <dt>
                     <span>显示风格</span>
                     <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].showStyle" value="1" ng-change="$parent.$parent.$broadcast('changeShareStyle')"> 默认样式 &nbsp;
                     <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].showStyle" value="2" ng-change="$parent.$parent.$broadcast('changeShareStyle')"> 纯文字 &nbsp;
@@ -558,8 +583,8 @@
 	                    <span>排列方式</span>
 	                </dt>
 	                <dd>
-	                	<input type="radio" ng-model="dataMks.slider.nav.align" value="float"> 横排&nbsp;<br>
-                    	<input type="radio" ng-model="dataMks.slider.nav.align" value="vertical"> 竖排 &nbsp;	
+	                	<input type="radio" ng-model="dataMks.slider.nav.align" value="left"> 横排&nbsp;<br>
+                    	<input type="radio" ng-model="dataMks.slider.nav.align" value="none"> 竖排 &nbsp;	
 	                </dd>
 	            </dl>
 	            <dl class="left clearfix full">

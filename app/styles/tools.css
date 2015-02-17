@@ -251,7 +251,10 @@ input.ng-invalid{
 	border-style: solid;
 	border-width: 1px;
 }
-.canvas .slidenav.float li{
+.canvas .slidenav.left{
+	float: none!important;
+}
+.canvas .slidenav.left li{
 	float: left;
 }
 .canvas .slidenav li.act{

@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
  var app = angular.module('toolApp');
- app.controller('MyTool', ['$scope', '$http','dataHandler', '$modal', '$cookieStore', function($scope, $http, dataHandler, $modal, $cookieStore) {
+ app.controller('MyTool', ['$scope', '$http', 'dataHandler', 'ajax', '$modal', '$cookieStore', function($scope, $http, dataHandler, ajax, $modal, $cookieStore) {
     $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -62,7 +62,8 @@
             'color': 'transparent',
             'img': {
                 'repeat': 'no-repeat',
-                'url': ''
+                'url': '',
+                'position':'center'
             },
             'widget': []
         });
@@ -178,13 +179,9 @@
                 }else if(type=='tmall'){
                     $scope.dataMks.offsetLeft =  ($scope.dataMks.width-990)/2; 
                 }
-                $http({method: 'POST', url: 'http://localhost:8888/index.php/make',data:{'type':type,'jsondata':$scope.dataMks}})
-                .success(function(data) {
-                   console.log(data); 
-                }).error(function(data, status) {
-                      $scope.data = data || 'Request failed';
-                      $scope.status = status;
-                });
+                ajax.generateCode(type,$scope.dataMks);
+
+                
             };  
             var calldata = {
                 'action': $scope.getCode,
@@ -203,7 +200,6 @@
             $scope.login();
         }
     };
-
     $scope.login = function(){
         $scope.setCk = function(){
             $scope.ckName = $cookieStore.get('userName');
@@ -221,11 +217,30 @@
             }
          });
     };
-     $scope.logout = function(){
+    $scope.logout = function(){
         $cookieStore.remove('userName');
         delete $scope.ckName;
     };
     $scope.ckName = $cookieStore.get('userName');
+    $scope.save = function(){
+        $scope.smallTip = true;
+        if(angular.isDefined($scope.jid)){
+            ajax.updateData($scope.dataMks,$scope.jid);
+        }else{
+            ajax.saveData($scope.dataMks,$scope.ckName);
+        }
+    };
+    $scope.jsonList = function(){
+        $modal.open({
+            templateUrl: 'views/jsonlist.html',
+            controller: 'getJsonList',
+            resolve: {
+                data: function() {
+                    return $scope.ckName;
+                }
+            }
+         });
+    };
 
 }]);
 
@@ -242,7 +257,6 @@ app.controller('elementWindowCtrl', function($scope, $modalInstance, data) {
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
-
 });
 
 app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
@@ -250,12 +264,13 @@ app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
     var action = data.action;
     $scope.ok = function(type) {
         action(type);
+
     };
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
     $scope.getCodeToCopy = function() {
-        return 'ngClip is awesome!';
+        return $scope.htmlCode;
     };
     $scope.copied= false;
     $scope.doSomething = function () {
@@ -266,16 +281,19 @@ app.controller('windowCtrl', function($scope, $modalInstance, data, $timeout) {
             2000
         );
     };
+    $scope.$on('codeGenerateSuccess', function(event, code) {
+        $scope.htmlCode = code;
+    });
 });
 
-app.controller('loginWindowCtrl', function($scope, $modalInstance, data, $http, $timeout, $cookieStore) {
+app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $http, $timeout, $cookieStore) {
     $scope.code = 12;
     var action = data.action;
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
     $scope.login = function(){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/login',data:{'name':$scope.userName,'pass':$scope.userPass}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/login',data:{'name':$scope.userName,'pass':angular.isDefined($scope.userPass)?md5.createHash($scope.userPass):''}})
                 .success(function(data) {
                     $scope.backCode = data.code;
                     if(data.code===0){
@@ -299,7 +317,17 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, $http, 
         }
     };
 });
-
+app.controller('getJsonList', function($scope, $modalInstance, data, $http) {
+    var name = data; $scope.t =1;
+    $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/getlist',data:{'username':name,'page':0}}).success(function(data) {
+        $scope.jsonlist = data;
+       
+        console.log(data);           
+    });
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+});
 
 
 Array.prototype.unique3 = function() {

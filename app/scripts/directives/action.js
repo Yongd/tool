@@ -245,12 +245,52 @@ app.directive('gridbg', function(){
       }
     };
 });
-
-app.directive('testa', function() {
-    return {
+app.directive('datefilter',  function () {
+    return  {
         restrict: 'A',
-        link: function(scope) {
-           console.log(scope);
+        require: ['ngModel'],
+        link: function(scope, element, attr, ctrls) {
+            ctrls[0].$formatters.push(function (modelValue) {
+                if(angular.isDefined(modelValue)){
+                    console.log(modelValue);
+                   scope.$parent.$parent.$parent.dataMks.mks[attr.canvasorder].widget[attr.order].time = modelValue;
+                    return modelValue; 
+                }
+            });
         }
+    };
+});
+app.directive('smalltip', function($timeout){
+    return {
+      restrict:'E',
+      replace: true,
+      template: '<div class="smalltip text-center load animated" ng-class="{\'fadeInDown\':smallTip,\'fadeOutUp\':smallTip==null}">保存中...</div>',
+      link:function(scope, element){
+        var e = angular.element(element);
+        function recovery(){
+            e.removeClass('load').text('保存成功');
+                $timeout(function() {
+                    scope.smallTip= null;
+                    },
+                    2000
+            );
+        }
+        scope.$on('savestatus',function(event, data){
+            if(data.code==1){
+                scope.jid = data.jid;
+                recovery();
+            }else{
+                e.text(data.code);
+            }
+        }); 
+        scope.$on('updatestatus',function(event, data){
+            if(data==1){
+                e.removeClass('load').text('保存成功');
+                recovery();
+            }else{
+                e.text(data);
+            }
+        }); 
+      }
     };
 });
