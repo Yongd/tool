@@ -317,16 +317,35 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $h
         }
     };
 });
-app.controller('getJsonList', function($scope, $modalInstance, data, $http) {
-    var name = data; $scope.t =1;
-    $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/getlist',data:{'username':name,'page':0}}).success(function(data) {
-        $scope.jsonlist = data;
-       
-        console.log(data);           
-    });
+app.controller('getJsonList', function($scope, ajax, $modalInstance, data) {
+    var name = data; 
+    $scope.deletea = true;
+    $scope.ajax = function(method,page,jid,status){
+        ajax.getJsonList(method,name,page,jid,status);
+        $scope.$on('getlist',function(event,data){
+            $scope.jsonlist = data.data;
+            $scope.totalItems = data.total;
+            if(method=='delete'){
+               // $scope.delete = true;
+            }
+       });
+    };
+
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
+    $scope.currentPage = 1;
+    $scope.maxSize = 5;
+    $scope.ajax('getlist', $scope.currentPage);
+    
+    $scope.goPage = function(page){
+        $scope.ajax('getlist', page);
+    };
+
+
+
+
+
 });
 
 

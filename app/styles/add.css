@@ -157,7 +157,6 @@
     width: 100%;
     height: 20px;
     background: url(../images/tool/EditorRulerBG-H.png) 0px -2px repeat-x;
-    ;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: rgb(0, 0, 0);
@@ -724,13 +723,82 @@ div.switch.small label {
     display: block;
 }
 /*jsonlist*/
+.jsonlist h3{
+    padding:0;
+    margin:0;
+    position: absolute;
+    top:1.3rem;
+}
 .jsonlist table{
+    margin-top:3rem;
     border-collapse: separate;
     border-spacing: 2px;
+    text-shadow:0 1px 0 #fff;
 }
 .jsonlist table th,
 .jsonlist table td{
+    text-align: center;color:#333;
+}
+.jsonlist tr{
+    overflow: hidden;
+    height: 30px;
+}
+.jsonlist tr:hover{
+    background-color: #e7e7e7;
+}
+.jsonlist .canvasbg{
+   padding: 0;
+}
+.jsonlist .canvasbg div{
+    width: 26px;
+    height: 26px;
+    margin-top:3px;
+    display: inline-block;
+    border-radius: 2px;
+    background:url(../images/tool/transparent.png) repeat;
+}
+.jsonlist .canvasbg span{
+    display: inline-block;
+    width:100%;
+    height:100%;
+    border-radius: 2px;
+    background-size: cover!important;
+}
+.jsonlist .action span{
+    border:1px #cfcfcf solid;
     text-align: center;
+    display: inline-block;
+    padding:5px 14px;
+    border-radius: 2px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.jsonlist tr:hover .action span{
+    border-color:#ccc;
+}
+.jsonlist tr:hover .action span:hover{
+    background-color: #008cba;
+    color:#fff;
+    text-shadow:0 1px 0 #007095;
+    border-color:#008cba;
+}
+.jsonlist .action .icon{
+    padding-right: 2px;
+}
+.jsonlist .button{
+    display: block;
+    margin:0 auto;
+    width: 5rem;
+    font-size: 0.9rem;
+}
+.jsonlist .pagination-sm{
+    float: right;
+}
+.smalltip.deletesuccess{
+    top:0;
+}
+.jsonlist .clear{
+    clear: both;
 }
 /*Aleat Window Animate*/
 .reveal-modal-bg.in {

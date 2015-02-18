@@ -127,11 +127,11 @@ angular.module('toolApp').
                    $rootScope.$broadcast('updatestatus', data); 
                 });
     };
-    this.getJsonList = function(name){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/getlist',data:{'username':name,'page':0}})
+    this.getJsonList = function(method, name, page, jid, status){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
                 .success(function(data) {
-                   $rootScope.$broadcast('updatestatus', data); 
-                });
+                   $rootScope.$broadcast('getlist', data);
+        });
     };
 }).factory('md5', function() {
 	var md5 = {

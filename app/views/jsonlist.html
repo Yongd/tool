@@ -1,32 +1,41 @@
-<h3>代码列表：</h3>
 <div class="jsonlist">
+<h3>代码列表：</h3>
+
 <table>
   <thead>
     <tr>
-      <th width="">画布名称</th>
-      <th>画布背景</th>
+      <th width="200">画布名称</th>
+      <th width="100">画布背景</th>
       <th width="70">状态</th>
-      <th width="200">操作</th>
-      <th width="">最后修改时间</th>
+      <th width="">操作</th>
+      <th width="220">最后修改时间</th>
     </tr>
   </thead>
   <tbody>
   	<tr ng-repeat="data in jsonlist">
   		<td>{{data.json_name}}</td>
-  		<td>{{data.json_name}}</td>
-  		<td>{{data.status}}</td>
-  		<td>
-  			<span><i class="icon fi-page-edit size-18"></i>打开</span>  
-  			<span><i class="icon fi-trash size-18"></i>删除</span>   
-  			<span><i class="icon fi-share size-18"></i>设为公开</span>
+  		<td class="canvasbg"><div><span style="background:{{data.bgcolor}}"></span></div></td>
+  		<td>{{data.status==0?'私有':'共享'}}</td>
+  		<td class="action">
+  			<span><i class="icon fi-page-edit size-16"></i>打开</span>  
+  			<span ng-click="ajax('delete', currentPage, data.jid, data.status)"><i class="icon fi-trash size-16"></i>删除</span>   
+  			<span ng-click="ajax('changestatus', currentPage, data.jid, data.status)"><i class="icon fi-share size-16"></i>{{data.status==0?'设为共享':'设为私有'}}</span>
   		</td>
   		<td>{{data.last_time}}</td>
   	</tr>
   </tbody>
 </table> 
+
+
+	<pagination boundary-links="true" total-items="totalItems" items-per-page="5" page="currentPage" class="pagination-sm" on-select-page="goPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+
+
+
+
+	<a class="clear button radius tiny" ng-click="cancel()">关闭</a>
 </div>
 
-
+<div class="smalltip text-center deletesuccess animated" ng-class="{'fadeInDown':deletea,'fadeOutUp':deletea==false">删除成功{{deletea}}</div>
 
 
 <a class="close-reveal-modal" ng-click="cancel()">×</a>
