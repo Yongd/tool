@@ -17,7 +17,7 @@
   		<td class="canvasbg"><div><span style="background:{{data.bgcolor}}"></span></div></td>
   		<td>{{data.status==0?'私有':'共享'}}</td>
   		<td class="action">
-  			<span><i class="icon fi-page-edit size-16"></i>打开</span>  
+  			<span ng-click="open(data.jid)"><i class="icon fi-page-edit size-16"></i>打开</span>  
   			<span ng-click="ajax('delete', currentPage, data.jid, data.status)"><i class="icon fi-trash size-16"></i>删除</span>   
   			<span ng-click="ajax('changestatus', currentPage, data.jid, data.status)"><i class="icon fi-share size-16"></i>{{data.status==0?'设为共享':'设为私有'}}</span>
   		</td>
@@ -34,8 +34,8 @@
 
 	<a class="clear button radius tiny" ng-click="cancel()">关闭</a>
 </div>
-
-<div class="smalltip text-center deletesuccess animated" ng-class="{'fadeInDown':deletea,'fadeOutUp':deletea==false">删除成功{{deletea}}</div>
+<!--
+<div class="smalltip text-center deletesuccess animated" ng-class="{'fadeInDown':deletea,'fadeOutUp':deletea==false">删除成功{{deletea}}</div>-->
 
 
 <a class="close-reveal-modal" ng-click="cancel()">×</a>

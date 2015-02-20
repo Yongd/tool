@@ -16,13 +16,13 @@
     <div class="right">
         <i class="icon left fi-paint-bucket size-18 ts"><span>装修模板{{$cookieStore.get('userName')}}</span></i>
         <i class="icon left fi-share size-16 ts"><span>分享给好友</span></i>
-        <div class="left" ng-if="ckName">
+        <div class="left" ng-show="ckName">
         <i class="icon left fi-torso size-18 ts"><span>我的账户</span></i>
-        <i class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
+        <i save class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
         <i class="icon left fi-power size-18 ts" ng-click="logout()"><span>退出登录</span></i>
         </div>
      
-        <i class="icon left fi-torso size-18 ts" ng-click="login()" ng-class="{'hide':ckName}"><span>登陆</span></i>
+        <i class="icon left fi-torso size-18 ts" ng-click="login()" ng-hide="ckName"><span>登陆</span></i>
         <i class="icon left fi-info size-18 ts"><span>帮助&Bug</span></i>
     </div>
     <div id="tool-setting" class="f-dropdown">

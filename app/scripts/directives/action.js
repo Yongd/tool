@@ -29,6 +29,25 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
     return {
         restrict: 'A',
         link: function(scope, element) {
+            function addElement(type, number, canvasOrder){
+                    
+                    if(type=='wwgroup'||type=='ww'){
+                        angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag></div>')(scope)); 
+                    }else{
+                        angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag yd-resize></div>')(scope)); 
+                    }
+
+            }
+            function addLayer(index, type, name, canvasOrder){
+                var layerHtml = '<p class="' + type + '_' + index + ' now eButton" index="' + index + '">'+
+                '<span class="left">' + name + '</span>'+
+                '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+
+                '<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>'+
+                '<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>'+
+                '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>'+
+                '</p>';
+                angular.element(document.querySelector('.layer_' + canvasOrder)).prepend($compile(layerHtml)(scope));
+            }
             element.bind('dragover', function(e) {
                 if (e.preventDefault) {
                     e.preventDefault();
@@ -76,21 +95,12 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 }else if(dx > maxleft){
                     dx = maxleft;
                 }   
-                if(dataTransfer=='wwgroup'||dataTransfer=='ww'){
-                    angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag></div>')(scope)); 
-                }else{
-                    angular.element(element[0].children[scope.canvasOrder]).append($compile('<div '+dataTransfer+' yd-drag yd-resize></div>')(scope)); 
-                }
+                addElement(dataTransfer,'',scope.canvasOrder);
+                
                 scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
                 scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
-                var layerHtml = '<p class="' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type + '_' + scope.order + ' now eButton" index="' + scope.order + '">'+
-                '<span class="left">' + scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name + '</span>'+
-                '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+
-                '<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>'+
-                '<i class="icon fi-arrow-up size-14 actChangeZindex right" tooltip="上移"></i>'+
-                '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>'+
-                '</p>';
-                angular.element(document.querySelector('.layer_' + scope.canvasOrder)).prepend($compile(layerHtml)(scope));
+                addLayer(scope.order, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name);
+                
                 
             });
             $rootScope.$on('dragStart', function() {
@@ -141,6 +151,30 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
             }
             scope.$on('addWrap',addWrap);
             scope.$on('removeWrap',removeWrap);
+            /*open*/
+            
+            scope.$on('open',function(event, data){
+                scope.dataMks = data;
+                var t = scope.dataMks.mks;
+                for(var c in t){
+                    if(c>0){
+                        scope.addCanvas(1);
+                    }
+                    var e = t[c].widget;
+                    if(e.length>0){
+                        for(var p in e) {
+                            if(e[p].type){
+                                addElement(e[p].type, p, c);
+                                addLayer(p, e[p].type, e[p].name, c);
+                                scope.addElement();
+                            }
+                        }
+                    } 
+                    
+                }    
+            });
+           
+
         }
     };
 }]);
@@ -291,6 +325,16 @@ app.directive('smalltip', function($timeout){
                 e.text(data);
             }
         }); 
+      }
+    };
+});
+app.directive('save', function(){
+    return {
+      restrict:'A',
+      link:function(scope, element){
+        element.bind('click', function(){
+          //$scope.htmlCode = angular.element(document.querySelector('.canvas')).html()
+        });
       }
     };
 });

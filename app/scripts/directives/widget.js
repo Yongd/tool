@@ -18,8 +18,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/area.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -33,8 +33,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/img.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             var temp = '<div class="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} popup now" ng-class="{\'hide\': !$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup'+
             '.status||!$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.show}" style="position: absolute; left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.position.left}}px;'+
             'top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.position.top}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].zindex}};" index="{{index}}" yd-drag>'+
@@ -63,8 +63,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/text.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.$on('marquee', function() {
                 var marquee;
                 if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].scrollStatus){
@@ -151,8 +151,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/cart.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }

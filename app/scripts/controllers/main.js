@@ -50,23 +50,24 @@
     /*canvas*/
     $scope.canvasOrder = 0;
     $scope.indexCanvas = 1;
-    $scope.addCanvas = function() {
+    $scope.addCanvas = function(open) {
         $scope.$broadcast('addWrap');
         $scope.indexCanvas += 1;
         $scope.canvastabs.push({
             title: '画布' + $scope.indexCanvas,
             content: 'views/canvasconfig.html'
         });
-        
-        $scope.dataMks.mks.push({
-            'color': 'transparent',
-            'img': {
-                'repeat': 'no-repeat',
-                'url': '',
-                'position':'center'
-            },
-            'widget': []
-        });
+        if(open!=1){
+            $scope.dataMks.mks.push({
+                'color': 'transparent',
+                'img': {
+                    'repeat': 'no-repeat',
+                    'url': '',
+                    'position':'center'
+                },
+                'widget': []
+            });
+        }    
         $scope.addOrder.push(-1);
     };
     $scope.deleteCanvas = function() {
@@ -110,7 +111,9 @@
     $scope.addElement = function(type) {
         $scope.addOrder[$scope.canvasOrder] += 1;
         $scope.order = $scope.addOrder[$scope.canvasOrder];
-        $scope.dataMks.mks[$scope.canvasOrder].widget.push( JSON.parse( dataHandler.element(type,$scope.order) ) );
+        if(angular.isDefined(type)){
+            $scope.dataMks.mks[$scope.canvasOrder].widget.push( JSON.parse( dataHandler.element(type,$scope.order) ) );
+        }
     };
     $scope.remove = function() {
         angular.element($scope.obj).remove();
@@ -241,7 +244,19 @@
             }
          });
     };
-
+    /*
+    $scope.$on('open',function(event, jid){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
+                .success(function(data) {
+                   $scope.dataMks = data;
+                   
+        $scope.addOrder[$scope.canvasOrder] += 1;
+        $scope.order = $scope.addOrder[$scope.canvasOrder];
+                   angular.element(document.querySelector('.wrap_0')).append($compile('<div area yd-drag yd-resize></div>')($scope));
+                   //console.log($scope.htmlCode);
+                });
+       // console.log(jid);
+    });*/
 }]);
 
 
@@ -341,14 +356,15 @@ app.controller('getJsonList', function($scope, ajax, $modalInstance, data) {
     $scope.goPage = function(page){
         $scope.ajax('getlist', page);
     };
-
-
-
+    $scope.open = function(jid){
+        ajax.open(jid);
+        $modalInstance.dismiss('cancel');
+    };
 
 
 });
 
-
+/*
 Array.prototype.unique3 = function() {
     this.sort();
     var re = [this[0]];
@@ -358,7 +374,7 @@ Array.prototype.unique3 = function() {
         }
     }
     return re;
-};
+};*/
 Date.prototype.format = function(partten,time){
     function getLastDay(y,m){
         if(m == 2){

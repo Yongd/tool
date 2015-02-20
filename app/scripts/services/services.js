@@ -133,6 +133,12 @@ angular.module('toolApp').
                    $rootScope.$broadcast('getlist', data);
         });
     };
+    this.open = function(jid){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
+                .success(function(data) {
+                   $rootScope.$broadcast('open', data); 
+                });
+    };
 }).factory('md5', function() {
 	var md5 = {
 		createHash: function(str) {
