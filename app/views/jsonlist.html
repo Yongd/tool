@@ -15,7 +15,7 @@
   	<tr ng-repeat="data in jsonlist">
   		<td>{{data.json_name}}</td>
   		<td class="canvasbg"><div><span style="background:{{data.bgcolor}}"></span></div></td>
-  		<td>{{data.status==0?'私有':'共享'}}</td>
+  		<td class="status{{data.status}}">{{data.status==0?'私有':'共享'}}</td>
   		<td class="action">
   			<span ng-click="open(data.jid)"><i class="icon fi-page-edit size-16"></i>打开</span>  
   			<span ng-click="ajax('delete', currentPage, data.jid, data.status)"><i class="icon fi-trash size-16"></i>删除</span>   
@@ -26,16 +26,12 @@
   </tbody>
 </table> 
 
+<pagination boundary-links="true" total-items="totalItems" items-per-page="5" page="currentPage" class="pagination-sm" on-select-page="goPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 
-	<pagination boundary-links="true" total-items="totalItems" items-per-page="5" page="currentPage" class="pagination-sm" on-select-page="goPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-
-
-
-
-	<a class="clear button radius tiny" ng-click="cancel()">关闭</a>
+<a class="clear button radius tiny" ng-click="cancel()">关闭</a>
 </div>
-<!--
-<div class="smalltip text-center deletesuccess animated" ng-class="{'fadeInDown':deletea,'fadeOutUp':deletea==false">删除成功{{deletea}}</div>-->
+
+<div class="smalltip text-center deletesuccess animated" ng-class="{'fadeInDown':deletea,'fadeOutUp':deletea==false}">删除成功</div>
 
 
 <a class="close-reveal-modal" ng-click="cancel()">×</a>

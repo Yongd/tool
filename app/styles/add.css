@@ -92,6 +92,9 @@
 .topbar .icon.hide{
     display: none;
 }
+.topbar .icon a{
+    color: #fff;
+}
 .topbar .icon span {
     display: none;
     width: 100%;
@@ -749,6 +752,9 @@ div.switch.small label {
 .jsonlist .canvasbg{
    padding: 0;
 }
+.jsonlist .status1{
+    color:#d55424;
+}
 .jsonlist .canvasbg div{
     width: 26px;
     height: 26px;
@@ -821,6 +827,7 @@ div.switch.small label {
     outline: 0;
     filter: alpha(opacity=0);
     opacity: 0;
+    overflow: hidden;
 }
 .reveal-modal.bounceInDown {
     filter: alpha(opacity=100);

@@ -30,7 +30,6 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
         restrict: 'A',
         link: function(scope, element) {
             function addElement(type, number, canvasOrder){
-                    
                     if(type=='wwgroup'||type=='ww'){
                         angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag></div>')(scope)); 
                     }else{
@@ -39,7 +38,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
 
             }
             function addLayer(index, type, name, canvasOrder){
-                var layerHtml = '<p class="' + type + '_' + index + ' now eButton" index="' + index + '">'+
+                var layerHtml = '<p class="eButton ' + type + '_' + index + ' now" index="' + index + '">'+
                 '<span class="left">' + name + '</span>'+
                 '<i class="icon fi-x size-14 right" ng-click="deleteElement()" ></i>'+
                 '<i class="icon fi-arrow-down size-14 actChangeZindex right" tooltip="下移"></i>'+
@@ -47,6 +46,16 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 '<i class="icon fi-unlock size-14 actLock right" tooltip="锁定"></i>'+
                 '</p>';
                 angular.element(document.querySelector('.layer_' + canvasOrder)).prepend($compile(layerHtml)(scope));
+            }
+            function initialize(){
+                angular.element(element[0].children[0]).empty();
+                angular.element(document.querySelector('.layer_0')).empty();
+                scope.order = -1;
+                scope.addOrder = [-1];
+                scope.canvasOrder = scope.indexCanvas - 1;
+                for(var i=1;scope.indexCanvas>1;i++){
+                    scope.confirmDelete();
+                }
             }
             element.bind('dragover', function(e) {
                 if (e.preventDefault) {
@@ -99,7 +108,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 
                 scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = dx;
                 scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = dy;
-                addLayer(scope.order, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name);
+                addLayer(scope.order, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].type, scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name, scope.canvasOrder);
                 
                 
             });
@@ -152,9 +161,10 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
             scope.$on('addWrap',addWrap);
             scope.$on('removeWrap',removeWrap);
             /*open*/
-            
             scope.$on('open',function(event, data){
-                scope.dataMks = data;
+                initialize();
+                scope.dataMks = data.data;
+                scope.jid = data.jid;
                 var t = scope.dataMks.mks;
                 for(var c in t){
                     if(c>0){
@@ -189,10 +199,9 @@ app.directive('eButton', function() {
             }
             function addAct() {
                 removeAct();
-                angular.element(document.getElementsByClassName(attrs.class.split(' ')[0])).addClass('now');
+                angular.element(document.querySelectorAll('.'+element[0].className.split(' ')[1])).addClass('now');
                 if (angular.isUndefined(scope.order)) {
                         scope.$apply(scope.$parent.order = attrs.index,scope.$parent.attrControl=true);
-                        
                     } else{
                         scope.$apply(scope.order = attrs.index,scope.attrControl=true);
                        
@@ -325,16 +334,6 @@ app.directive('smalltip', function($timeout){
                 e.text(data);
             }
         }); 
-      }
-    };
-});
-app.directive('save', function(){
-    return {
-      restrict:'A',
-      link:function(scope, element){
-        element.bind('click', function(){
-          //$scope.htmlCode = angular.element(document.querySelector('.canvas')).html()
-        });
       }
     };
 });

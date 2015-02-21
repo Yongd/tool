@@ -70,14 +70,15 @@
         }    
         $scope.addOrder.push(-1);
     };
-    $scope.deleteCanvas = function() {
-        $scope.confirmDelete = function() {
+    $scope.confirmDelete = function() {
             $scope.$broadcast('removeWrap');
             $scope.canvasOrder -= 1;
             $scope.indexCanvas -= 1;
             $scope.canvastabs.splice($scope.indexCanvas, 1);
             $scope.addOrder.splice($scope.indexCanvas, 1);
         };
+    $scope.deleteCanvas = function() {
+        
         if ($scope.canvastabs.length == 1) {
             code = 4;
         } else {
@@ -109,6 +110,9 @@
     $scope.order = -1;
     $scope.elementOrder = $scope.order + 1;
     $scope.addElement = function(type) {
+        if(!angular.isDefined(type)){
+            $scope.canvasOrder = $scope.indexCanvas-1;
+        }
         $scope.addOrder[$scope.canvasOrder] += 1;
         $scope.order = $scope.addOrder[$scope.canvasOrder];
         if(angular.isDefined(type)){
@@ -244,19 +248,6 @@
             }
          });
     };
-    /*
-    $scope.$on('open',function(event, jid){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
-                .success(function(data) {
-                   $scope.dataMks = data;
-                   
-        $scope.addOrder[$scope.canvasOrder] += 1;
-        $scope.order = $scope.addOrder[$scope.canvasOrder];
-                   angular.element(document.querySelector('.wrap_0')).append($compile('<div area yd-drag yd-resize></div>')($scope));
-                   //console.log($scope.htmlCode);
-                });
-       // console.log(jid);
-    });*/
 }]);
 
 
@@ -332,16 +323,20 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $h
         }
     };
 });
-app.controller('getJsonList', function($scope, ajax, $modalInstance, data) {
+app.controller('getJsonList', function($scope, ajax, $modalInstance, data, $timeout) {
     var name = data; 
-    $scope.deletea = true;
     $scope.ajax = function(method,page,jid,status){
+        $scope.deletea = method=='delete'?true:false;
         ajax.getJsonList(method,name,page,jid,status);
         $scope.$on('getlist',function(event,data){
             $scope.jsonlist = data.data;
             $scope.totalItems = data.total;
             if(method=='delete'){
-               // $scope.delete = true;
+                $timeout(function() {
+                        $scope.deletea = false;
+                    },
+                            1500
+                );
             }
        });
     };
