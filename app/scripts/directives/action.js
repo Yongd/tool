@@ -261,10 +261,13 @@ app.directive('actLock', function() {
         }
     };
 });
-
-
-
-
+app.directive('backimg', function(){
+    return {
+        link: function() {
+            
+        }
+    };
+});​
 app.directive('clearElement', function() {
     return {
         restrict: 'C',
@@ -335,5 +338,19 @@ app.directive('smalltip', function($timeout){
             }
         }); 
       }
+    };
+});
+app.directive('preview',  function ($cookieStore,$compile) {
+    return  {
+        restrict: 'C',
+         link: function(scope,element) {
+            scope.$on('viewSuccess',function(event,data){
+                if(data==10){
+                    scope.preViewShow = true;
+                    scope.htmlUrl = 'shop_'+$cookieStore.get('shoptype')+'_'+scope.ckName;
+                    angular.element(element.children()[0]).empty().append($compile('<iframe ng-src="http://localhost:8888/index.php/make/show/'+scope.htmlUrl+'">')(scope));
+                }
+            });
+        }
     };
 });

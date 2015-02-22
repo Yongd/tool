@@ -139,6 +139,18 @@ angular.module('toolApp').
                    $rootScope.$broadcast('open', data); 
                 });
     };
+    this.getDate = function(method,name,bpass,pass){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
+                .success(function(data) {
+                   $rootScope.$broadcast('userDataReady', data); 
+                });
+    };
+    this.preViewt = function(json,name,type){
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/make/preview',data:{'data':json,'name':name,'type':type}})
+                .success(function(data) {
+                    $rootScope.$broadcast('viewSuccess', data);
+               });
+    };
 }).factory('md5', function() {
 	var md5 = {
 		createHash: function(str) {

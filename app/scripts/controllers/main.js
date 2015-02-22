@@ -47,6 +47,7 @@
 
     $scope.dataMks = JSON.parse( dataHandler.canvas($scope.width.self,$scope.wHeight) ) ;
     
+    
     /*canvas*/
     $scope.canvasOrder = 0;
     $scope.indexCanvas = 1;
@@ -177,15 +178,13 @@
             );
         };
     };
-
+    $scope.setLeft = function(){
+        $scope.dataMks.offsetLeft =  $cookieStore.get('shoptype')==1?($scope.dataMks.width-990)/2:($scope.dataMks.width-950)/2; 
+    };
     $scope.generateCode = function(){
         if(angular.isDefined($scope.ckName)){
             $scope.getCode = function(type){
-                if(type=='taobao'){
-                   $scope.dataMks.offsetLeft =  ($scope.dataMks.width-950)/2; 
-                }else if(type=='tmall'){
-                    $scope.dataMks.offsetLeft =  ($scope.dataMks.width-990)/2; 
-                }
+                $scope.setLeft();
                 ajax.generateCode(type,$scope.dataMks);
 
                 
@@ -229,6 +228,23 @@
         delete $scope.ckName;
     };
     $scope.ckName = $cookieStore.get('userName');
+    $scope.preViewShow = false;
+    $scope.preview = function(){
+        $scope.setLeft();
+        ajax.preViewt($scope.dataMks,$scope.ckName,$cookieStore.get('shoptype'));
+
+    };
+    $scope.accountInfo = function(){
+        $modal.open({
+            templateUrl: 'views/account.html',
+            controller: 'accountInfo',
+            resolve: {
+                data: function() {
+                    return $scope.ckName;
+                }
+            }
+         });
+    };
     $scope.save = function(){
         $scope.smallTip = true;
         if(angular.isDefined($scope.jid)){
@@ -306,6 +322,7 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $h
                         $scope.showSuccess = true;
                         $scope.dbName = data.name;
                         $cookieStore.put('userName', $scope.dbName);
+                        $cookieStore.put('shoptype', data.shoptype);
                         action();
                         $timeout(function() {
                             $scope.showSuccess = false;
@@ -358,7 +375,40 @@ app.controller('getJsonList', function($scope, ajax, $modalInstance, data, $time
 
 
 });
-
+app.controller('accountInfo', function($scope, md5, ajax, $modalInstance, data, $timeout) {
+    var name = data;
+    ajax.getDate('userdata',name);
+    $scope.$on('userDataReady',function(event,data){
+            $scope.userData = data.data;
+            $scope.backCode = data.code;
+            if($scope.backCode==3){
+                $timeout(function() {
+                        $scope.backCode = 0;
+                        $scope.code = 1;
+                    },
+                            1500
+                );
+            }
+    });
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.code = 1;
+    $scope.change = function(){
+        if($scope.userPass==$scope.confirmPass&&angular.isDefined($scope.userPass)&&angular.isDefined($scope.beforePass)){
+            ajax.getDate('changepass',name,md5.createHash($scope.beforePass),md5.createHash($scope.userPass));
+        }else if(angular.isUndefined($scope.beforePass)){
+            $scope.backCode = 1;
+        }else{
+            $scope.backCode = 2;
+        }
+    };
+    $scope.hide = function(){
+        if($scope.backCode==1||$scope.backCode==2){
+            $scope.backCode=0;
+        }
+    };
+});
 /*
 Array.prototype.unique3 = function() {
     this.sort();

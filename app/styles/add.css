@@ -806,6 +806,48 @@ div.switch.small label {
 .jsonlist .clear{
     clear: both;
 }
+/*account*/
+.account strong{
+    font-size: 1.4rem;
+}
+.account span{
+    color:#666;
+    margin-left: 0.7rem;
+}
+.account p{
+    font-size: 0.9rem;
+}
+.account p a{
+    margin:0 0.5rem;
+}
+/*preview*/
+.preview{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 99999;
+}
+.viewzone,.viewzone iframe{
+    width: 100%;
+    height: 100%;
+    border:none;
+}
+.preview a{
+    position: fixed;
+    background-color: #008cba;
+    top:-50px;
+    right:-50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    line-height: 140px;
+    text-indent:25px;
+    color:#fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
 /*Aleat Window Animate*/
 .reveal-modal-bg.in {
     filter: alpha(opacity=50);

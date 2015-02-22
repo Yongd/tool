@@ -7,7 +7,7 @@
         <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span></i>
         <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span></i>
         <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
-        <i class="left icon fi-eye size-24 ts"><span>预览效果</span></i>
+        <i class="left icon fi-eye size-24 ts" ng-click="preview()"><span>预览效果</span></i>
         <i class="left icon fi-checkbox size-20 ts" ng-click="generateCode()"><span>生成代码</span></i>
         <i class="left icon fi-list-thumbnails size-20 ts" ng-click="jsonList()"><span>代码列表</span></i>
         <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
@@ -17,7 +17,7 @@
         <i class="icon left fi-paint-bucket size-18 ts"><span>装修模板{{$cookieStore.get('userName')}}</span></i>
         <i class="icon left fi-share size-16 ts"><span>分享给好友</span></i>
         <div class="left" ng-show="ckName">
-        <i class="icon left fi-torso size-18 ts"><span>我的账户</span></i>
+        <i class="icon left fi-torso size-18 ts" ng-click="accountInfo()"><span>我的账户</span></i>
         <i save class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
         <i class="icon left fi-power size-18 ts" ng-click="logout()"><span>退出登录</span></i>
         </div>
@@ -104,7 +104,7 @@
     <div class="message">构建页面</div>
 </div>
 <div class="canvas" droppable style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;{{dataMks.offset}}">
-    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};background-position:{{dataMks.mks[canvasOrder].img.position}} center;background-image:url({{dataMks.mks[canvasOrder].img.url}});">
+    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};background-position:{{dataMks.mks[0].img.position}} center;" backimg="dataMks.mks[0].img.url">
         <div class="gridbg"></div>
     </div>
 </div>
@@ -119,4 +119,9 @@
 <div ng-include="'views/attrControl.html'"></div>
 <smalltip></smalltip>
 <a class="exit-off-canvas"></a>
+<div ng-show="preViewShow" class="preview animated" ng-class="{'fadeInDown':preViewShow,'fadeOutUp':preViewShow==false}">
+    <div class="viewzone">
+    </div>
+    <a ng-click="preViewShow=false">✖</a>
+</div>
 </div>
