@@ -26,7 +26,7 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
-}).directive('img', function($compile) {
+}).directive('img', function() {
     return {
         restrict: 'A',
         transclude: true,
@@ -35,11 +35,6 @@ app.directive('area', function() {
         templateUrl: 'template/widget/img.html',
         link: function(scope, element, attr) {
             scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
-            var temp = '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} popup now" ng-class="{\'hide\': !$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup'+
-            '.status||!$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.show}" style="position: absolute; left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.position.left}}px;'+
-            'top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.position.top}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].zindex}};" index="{{index}}" yd-drag>'+
-            '<img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].popup.imgUrl}}"></div>';
-            element.after( $compile(temp)(scope) );
             function changeUrl(){
                if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].hover.status){
                     element[0].children[0].src = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].hover.imgUrl;
@@ -90,8 +85,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/countdown.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.days = 2;
             scope.seconds = scope.minutes = scope.hours = '00';
             scope.countdown = function() {
@@ -166,8 +161,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/qrcode.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -181,8 +176,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/search.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             var mkColor,inputBgColor;
             scope.$on('transparent', function() {
                 if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].showStyle==1){
@@ -209,8 +204,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/video.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.trustSrc = function(src) {
                 return $sce.trustAsResourceUrl(src);
             };
@@ -227,8 +222,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/wwgroup.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.$on('changeStyle', function() {
                 var t = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].imgStyle;
                 if(t==1){
@@ -254,8 +249,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/ww.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -269,8 +264,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/attention.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -284,8 +279,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/attention.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -299,8 +294,8 @@ app.directive('area', function() {
         replace: true,
         scope: {},
         templateUrl: 'template/widget/share.html',
-        link: function(scope, element) {
-            scope.index = scope.$parent.order;
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.$on('changeShareStyle', function() {
                 var t = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].showStyle;
                 if(t==1){
@@ -333,7 +328,7 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
     '</div>');
 }]);
 
@@ -368,7 +363,7 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
     '</div>');
 }]);
 
@@ -410,7 +405,7 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;'+
-    '"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}">'+
+    '"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}">'+
     '</div>');
 }]);
 
@@ -418,8 +413,8 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/ww.html',
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
-    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}"><br>'+
-    '<img ng-class="{\'toux\':$parent.dataMks.mks[$parent.canvasOrder].widget[index].img!=\'\'&&$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgStyle==2}" src="images/tool/ww'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].img}}"><br>'+
+    '<img ng-class="{\'toux\':$parent.dataMks.mks[$parent.canvasOrder].widget[index].img!=\'\'&&$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgStyle==2}" ng-src="images/tool/ww'+
     '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgStyle}}.gif"></div>');
 }]);
 
@@ -428,7 +423,7 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}"></div>');
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}"></div>');
 }]);
 
 app.run(['$templateCache', function($templateCache) {

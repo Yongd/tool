@@ -48,7 +48,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 angular.element(document.querySelector('.layer_' + canvasOrder)).prepend($compile(layerHtml)(scope));
             }
             function initialize(){
-                angular.element(element[0].children[0]).empty();
+                angular.element(element[0].children[0]).empty().append($compile('<div class="gridbg"></div>')(scope));
                 angular.element(document.querySelector('.layer_0')).empty();
                 scope.order = -1;
                 scope.addOrder = [-1];
@@ -130,7 +130,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                 'top:{{dataMks.slider.arrow.leftPosition.top}}px;" index="-2" ng-class="{\'hide\':!dataMks.slider.arrow.enable}" yd-drag><img src="{{dataMks.slider.arrow.leftUrl}}"></span>'+
                 '<span ng-class="{\'hide\':!dataMks.slider.arrow.enable}" index="-2" class="slidearrow slidearrowr eButton" style="left:{{dataMks.slider.arrow.rightPosition.left}}px;top:{{dataMks.slider.arrow.rightPosition.top}}px;" yd-drag><img src="{{dataMks.slider.arrow.rightUrl}}"></span>';
                 canvasTemplate = '<div class="wrap_' + currentIndex + ' wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;' +
-                'background-repeat:{{dataMks.mks[' + currentIndex + '].img.repeat}};background-color:{{dataMks.mks[' + currentIndex + '].color}};background-position:{{dataMks.mks[' + currentIndex + '].img.position}} center;background-image:url({{dataMks.mks[' + currentIndex + '].img.url}});"><div class="gridbg"></div></div>';
+                'background-repeat:{{dataMks.mks[' + currentIndex + '].img.repeat}};background-color:{{dataMks.mks[' + currentIndex + '].color}};background-position:{{dataMks.mks[' + currentIndex + '].img.position}} center;" ng-style="{\'background-image\': \'url(\'+dataMks.mks['+currentIndex+'].img.url+\')\'}"><div class="gridbg"></div></div>';
                 layerTemplate = '<div class="wrap_' + currentIndex + ' layer_' + currentIndex + ' wrap">';
                 if(preIndex===0){
                     angular.element(document.querySelector('.canvas')).append($compile(controlTemplate)(scope));
@@ -261,13 +261,7 @@ app.directive('actLock', function() {
         }
     };
 });
-app.directive('backimg', function(){
-    return {
-        link: function() {
-            
-        }
-    };
-});​
+
 app.directive('clearElement', function() {
     return {
         restrict: 'C',

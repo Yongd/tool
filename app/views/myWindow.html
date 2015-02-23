@@ -27,14 +27,14 @@
 <div ng-if="code==11" class="generateCode">
 	<p>请选择生成类型</p>
 	<div class="buttonlist">
-		<a class="button small radius" ng-click="ok('taobao')">生成集市店铺代码</a>
-		<a class="button small radius" ng-click="ok('tmall')">生成天猫店铺代码</a>
-		<a class="button small radius" ng-click="ok('jd')">生成京东店铺代码</a>
+		<a class="button small radius" ng-click="ok('0')">生成集市店铺代码</a>
+		<a class="button small radius" ng-click="ok('1')">生成天猫店铺代码</a>
+		<a class="button small radius" ng-click="ok('2')">生成京东店铺代码</a>
 	</div>
 	<div class="alert-box success radius animated" ng-class="{'hide':!copied,'fadeInDown':copied}">
 	  复制代码成功，您可以去粘贴到店铺模块里啦！
 	</div>
-	<textarea ng-model="htmlCode"></textarea>
+	<textarea ng-model="htmlCode" ng-readonly="true"></textarea>
 	<a class="button small radius" clip-copy="getCodeToCopy()" clip-click="doSomething()">复制</a>
 	<a class="button secondary small radius" ng-click="cancel()">取消</a>
 </div>

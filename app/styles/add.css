@@ -21,7 +21,7 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    outline: 1px #f00 solid;
+    outline: 1px #888 solid;
 }
 .gridbg {
     position: fixed;
@@ -120,6 +120,15 @@
 }
 .topbar .f-dropdown:after {
     left: 37px;
+}
+.topbar .color-picker{
+    border-color:#ccc;
+    width: 4rem;
+    margin-left: 0;
+}
+.topbar .sp-preview{
+    width: 3.35rem;
+    border-color:rgba(16,16,16,0.1);
 }
 .tool-set {
     line-height: 1.8rem;

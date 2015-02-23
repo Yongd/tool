@@ -62,7 +62,10 @@ font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSa
 	padding-top: 1.5rem;
 }
 .generateCode textarea{
-	height: 20rem;
+	height: 15rem;
+}
+.generateCode textarea[readonly]{
+	background-color: #eeeeee;
 }
 .generateCode .alert-box{
 	position: absolute;

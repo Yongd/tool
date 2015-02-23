@@ -24,19 +24,17 @@
         title: '图层管理',
         content: 'views/layer.html'
     }];
-    $scope.bgcolor = '#f00';
-
     $scope.ruler = true;
     $scope.attrControl = false;
     $scope.canvasPosition = 1;
-
+    $scope.borderColor = '#888';
     $scope.wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     $scope.wHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
     $scope.width = {
         'c': 950,
         'b': 990,
-        'self': $scope.wWidth-160
+        'self': $scope.wWidth-130
     };
 
     $scope.addOrder = [-1];
@@ -179,7 +177,7 @@
         };
     };
     $scope.setLeft = function(){
-        $scope.dataMks.offsetLeft =  $cookieStore.get('shoptype')==1?($scope.dataMks.width-990)/2:($scope.dataMks.width-950)/2; 
+        $scope.dataMks.offsetLeft =  $cookieStore.get('shoptype')===0?($scope.dataMks.width-950)/2:($scope.dataMks.width-990)/2; 
     };
     $scope.generateCode = function(){
         if(angular.isDefined($scope.ckName)){
