@@ -292,8 +292,7 @@ app.directive('datefilter',  function () {
         link: function(scope, element, attr, ctrls) {
             ctrls[0].$formatters.push(function (modelValue) {
                 if(angular.isDefined(modelValue)){
-                    console.log(modelValue);
-                   scope.$parent.$parent.$parent.dataMks.mks[attr.canvasorder].widget[attr.order].time = modelValue;
+                    scope.$parent.$parent.$parent.dataMks.mks[attr.canvasorder].widget[attr.order].time = modelValue;
                     return modelValue; 
                 }
             });

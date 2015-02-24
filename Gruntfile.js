@@ -267,6 +267,44 @@ module.exports = function (grunt) {
     // concat: {
     //   dist: {}
     // },
+    cssmin: {
+        dist: {
+        options: {  
+                    banner: '/* Tian Cai Shop Design Tool Css by Yongd */'  
+                },  
+        files: {
+             '<%= yeoman.dist %>/styles/main.css': [
+              '<%= yeoman.app %>/styles/foundation/foundation.css',
+              '<%= yeoman.app %>/styles/foundation/icon/foundation-icons.css',
+              '<%= yeoman.app %>/styles/animate.css',
+              '<%= yeoman.app %>/styles/colorpicker.css',
+              '<%= yeoman.app %>/styles/tools.css',
+              '<%= yeoman.app %>/styles/add.css'
+           ]
+         }
+       }
+     },
+     uglify: {
+       dist: {
+         options: {  
+                    banner: '/* Tian Cai Shop Design Tool Js by Yongd */'  
+                },
+         files: {
+           '<%= yeoman.dist %>/scripts/scripts.js': [
+             '<%= yeoman.dist %>/scripts/scripts.js'
+           ]
+         }
+       }
+     },
+     concat: {
+      dist: {
+        files: {
+           '<%= yeoman.dist %>/scripts/scripts.js': [
+             '<%= yeoman.app %>/scripts/{,*/}*.js','<%= yeoman.app %>/scripts/controllers/{,*/}*.js','<%= yeoman.app %>/scripts/directives/{,*/}*.js','<%= yeoman.app %>/scripts/services/{,*/}*.js'
+           ]
+         }
+      }
+     },
 
     imagemin: {
       dist: {
@@ -297,7 +335,7 @@ module.exports = function (grunt) {
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
           removeCommentsFromCDATA: true,
-          removeOptionalTags: true
+          //removeOptionalTags: true
         },
         files: [{
           expand: true,
