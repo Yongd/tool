@@ -512,7 +512,70 @@
 	                </dd> 
             	</div> 
       </dl>
-
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='carousel'" class="left clearfix full carousel">
+        <dt class="clearfix">
+           <span class="left">轮播内容</span>
+           <i class="icon fi-minus size-14 right carouselAction" tooltip="删除"></i>
+           <i class="icon fi-plus size-14 right carouselAction" tooltip="添加"></i>
+        </dt>
+        <div class="list" ng-repeat="carousel in dataMks.mks[canvasOrder].widget[order].content">
+          <dd>
+            ┏图片地址:<input type="url" required ng-model="carousel.imgurl">
+          </dd>
+          <dd>
+            ┗链接地址:<input type="url" required ng-model="carousel.link">
+          </dd>  
+        </div> 
+        <dt class="clearfix">
+           <span class="left">箭头设置</span>
+        </dt>
+        <dd>
+          ┏左侧箭头:<input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].leftUrl">
+        </dd>
+        <dd>
+          ┗右侧箭头:<input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].rightUrl">
+        </dd>
+        <dt class="clearfix">
+           <span class="left">轮播设置</span>
+        </dt>
+        <dd class="clearfix effect">
+            <div class="name left">轮播方式:</div>
+            <div class="cont left">
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].effect" value="none"> 普通 &nbsp;&nbsp;
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].effect" value="scrollx" checked=""> 左右 &nbsp;&nbsp;
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].effect" value="scrolly"> 上下 &nbsp;&nbsp;
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].effect" value="fade"> 渐变
+            </div>
+        </dd>
+        <dd class="clearfix">
+            <div class="name left">轮播效果:</div>
+            <div class="cont left">
+                <select ng-model="dataMks.mks[canvasOrder].widget[order].easing">
+                  <option value="easeBoth">普通滚动</option>
+                  <option value="elasticOut">变换→抖动</option>
+                  <option value="elasticIn">抖动→变换</option>
+                  <option value="bounceIn">弹跳→变换</option>
+                  <option value="bounceOut">变换→弹跳</option>
+                  <option value="bounceBoth">抖动→弹跳</option>
+                  <option value="backIn">起步→跑</option>
+                  <option value="backOut">跑过头→返回</option>
+                  <option value="easeInStrong">先慢后快</option>
+                  <option value="easeOutStrong">先快后慢</option>
+                </select>
+            </div>
+        </dd>
+        <dd class="clearfix">
+            <div class="name left">自动播放:</div>
+            <div class="left switch small round">
+                <input id="autoplay" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].autoplay">
+                <label for="autoplay"></label>
+            </div>
+            <div class="right">
+                <input type="number" class="timeinput" ng-model="dataMks.mks[canvasOrder].widget[order].duration">
+            </div>
+            <div class="name right">轮播时长:</div>
+        </dd> 
+      </dl>
             <div ng-if="order==-2">
 	            <dl  class="left">
 	                <dt>

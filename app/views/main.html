@@ -10,20 +10,20 @@
         <i class="left icon fi-eye size-24 ts" ng-click="preview()"><span>预览效果</span></i>
         <i class="left icon fi-checkbox size-20 ts" ng-click="generateCode()"><span>生成代码</span></i>
         <i class="left icon fi-list-thumbnails size-20 ts" ng-click="jsonList()"><span>代码列表</span></i>
-        <i class="left icon fi-upload-cloud size-20 ts"><span>导入代码</span></i>
-        <i class="left icon fi-page-add size-18 ts"><a href="http://localhost:9000/" target="_blank"><span>新建画布</span></a></i>
+        <i class="left icon fi-upload-cloud size-20 ts" ng-click="import()"><span>导入代码</span></i>
+        <i class="left icon fi-page-add size-18 ts"><a href="#" target="_blank"><span>新建画布</span></a></i>
+        <i class="left icon fi-layout size-20 ts" ng-click="startTour()"><span>模块市场</span></i>
     </div>
     <div class="right">
         <i class="icon left fi-paint-bucket size-18 ts"><a href="http://zxn.taobao.com/designer_detail.htm?spm=0.0.0.34.1b3f6f&designerId=773" target="_blank"><span>装修模板{{$cookieStore.get('userName')}}</span></a></i>
-        <i class="icon left fi-share size-16 ts"><a href="http://www.jiathis.com/share?url=http://localhost:9000/&title=Easy Code店铺装修在线编辑工具" target="_blank"><span>分享给好友</span></a></i>
+        <i class="icon left fi-share size-16 ts"><a href="http://www.jiathis.com/share?url=http://www.tiancaiui.com/tool/&title=Easy Code店铺装修在线编辑工具" target="_blank"><span>分享给好友</span></a></i>
         <div class="left" ng-show="ckName">
         <i class="icon left fi-torso size-18 ts" ng-click="accountInfo()"><span>我的账户</span></i>
         <i save class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
         <i class="icon left fi-power size-18 ts" ng-click="logout()"><span>退出登录</span></i>
         </div>
-     
         <i class="icon left fi-torso size-18 ts" ng-click="login()" ng-hide="ckName"><span>登陆</span></i>
-        <i class="icon left fi-info size-18 ts"><a href="mailto:isharebst@gmail.com"><span>帮助&Bug</span></a></i>
+        <i class="icon left fi-info size-18 ts"><a href="http://www.tiancaiui.com/wecenter/"><span>帮助&Bug</span></a></i>
     </div>
     <div id="tool-setting" class="f-dropdown">
         <dl class="tool-set clearfix">
@@ -108,7 +108,7 @@
 </div>
 
 <div class="canvas" droppable style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;{{dataMks.offset}}" ng-style="{'outline-color':' '+borderColor+''}">
-    <div class="wrap_0 wrap" style="width:{{dataMks.width}}px;height:{{dataMks.height}}px;background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};background-position:{{dataMks.mks[0].img.position}} center;" ng-style="{'background-image': 'url(' + dataMks.mks[0].img.url + ')'}">
+    <div class="wrap_0 wrap" style="background-repeat:{{dataMks.mks[0].img.repeat}};background-color:{{dataMks.mks[0].color}};background-position:{{dataMks.mks[0].img.position}} center;" ng-style="{'background-image': 'url(' + dataMks.mks[0].img.url + ')'}">
         <div class="gridbg"></div>
     </div>
 </div>

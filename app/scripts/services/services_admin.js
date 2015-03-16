@@ -100,30 +100,6 @@ angular.module('toolApp').
 				'"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2U3D3bFXXXXbXXpXXXXXXXXXX-134264536.png","shareType":"item","id":"","showStyle":1,"font": "simsun","fontsize": 12,"weight": 100,"color": "#666"}';
 			} 
 			break;
-            case 'carousel': 
-            {
-                return '{"id": '+order+',"zindex": '+order+',"name": "图片轮播'+(order+1)+'","type": "carousel","effect":"scrollx","duration": 0.5,"autoplay": true,"easing":"easeBoth","size": {"width":500,'+
-                '"height":350},"position": {"left": 100,"top":100},"leftUrl":"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2WLNWcXXXXXcQXpXXXXXXXXXX-134264536.png","rightUrl": '+
-                '"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2Ll44cXXXXXcuXXXXXXXXXXXX-134264536.png","content":[{"imgurl"'+
-                ':"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2EcBWcXXXXXcHXpXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
-                'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2g9dZcXXXXXbeXpXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"}]}';
-            } 
-            break;
-            case 'carouseline': 
-            {
-                return '{"id": '+order+',"zindex": '+order+',"name": "无缝轮播'+(order+1)+'","type": "carouseline","effect":"scrollx","duration": 0.5,"autoplay": true,"easing":"easeBoth","step":1,"size": '+
-                '{"width":975,"height":484},"position": {"left": 100,"top":100},"leftUrl":"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2WLNWcXXXXXcQXpXXXXXXXXXX-134264536.png","rightUrl": '+
-                '"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2Ll44cXXXXXcuXXXXXXXXXXXX-134264536.png","content":[{"imgurl":'+
-                '"http://img02.taobaocdn.com/imgextra/i2/39767794/TB2lb0.bXXXXXXaXXXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
-                'http://img04.taobaocdn.com/imgextra/i4/39767794/TB26_h3bXXXXXXhXpXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
-                'http://img01.taobaocdn.com/imgextra/i1/39767794/TB2LQp0bXXXXXaoXpXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"}]}';
-            } 
-            break;
-            case 'import': 
-            {
-                return '{"id": '+order+',"zindex": '+order+',"name": "导入层'+(order+1)+'","type": "import","position": {"left": 100,"top":100},"code":""}';
-            } 
-            break;
 		}
 	};
 }).service('ajax', function($rootScope, $http) {
@@ -140,31 +116,31 @@ angular.module('toolApp').
 		return code;
 	};
     this.saveData = function(data, name){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/save',data:{'jsondata':data,'username':name}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/temp/save',data:{'jsondata':data,'username':name}})
                 .success(function(data) {
                    $rootScope.$broadcast('savestatus', data); 
                 });
     };
     this.updateData = function(data, jid){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/update',data:{'jsondata':data,'jid':jid}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/temp/update',data:{'jsondata':data,'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('updatestatus', data); 
                 });
     };
     this.getJsonList = function(method, name, page, jid, status){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/temp/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
                 .success(function(data) {
                    $rootScope.$broadcast('getlist', data);
         });
     };
     this.open = function(jid){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/temp/open',data:{'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('open', data); 
                 });
     };
     this.getDate = function(method,name,bpass,pass){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/temp/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
                 .success(function(data) {
                    $rootScope.$broadcast('userDataReady', data); 
                 });

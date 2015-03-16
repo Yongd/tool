@@ -30,7 +30,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
         restrict: 'A',
         link: function(scope, element) {
             function addElement(type, number, canvasOrder){
-                    if(type=='wwgroup'||type=='ww'){
+                    if(type=='wwgroup'||type=='ww'||type=='import'){
                         angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag></div>')(scope)); 
                     }else{
                         angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag yd-resize></div>')(scope)); 
@@ -158,6 +158,14 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     preIndex -= 1;
                 }
             }
+            $rootScope.$on('import', function(event, code) {
+                scope.addElement( 'import' );
+                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].code = code;
+                addElement('import','',scope.canvasOrder);
+                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.left = 50;
+                scope.dataMks.mks[scope.canvasOrder].widget[scope.order].position.top = 50;
+                addLayer(scope.order, 'import', scope.dataMks.mks[scope.canvasOrder].widget[scope.order].name, scope.canvasOrder);
+            });
             scope.$on('addWrap',addWrap);
             scope.$on('removeWrap',removeWrap);
             /*open*/

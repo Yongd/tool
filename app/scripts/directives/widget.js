@@ -312,6 +312,54 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
+}).directive('carousel', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/carousel.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('carouseline', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {
+            listcolumns: '='
+        },
+        templateUrl: 'template/widget/carouseline.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('import', function($compile) {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/import.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            angular.element(element).append($compile(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].code)(scope));
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
 });
 
 
@@ -435,4 +483,34 @@ app.run(['$templateCache', function($templateCache) {
     'width:100%;height:100%;background-image:url({{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}});font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};'+
     'color:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].color}};font-size:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].fontsize}}px;font-weight:{{$parent.dataMks.mks'+
     '[$parent.canvasOrder].widget[index].weight}};">分享给好友</div></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/carousel.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].content[0].imgurl}}">'+
+    '<span class="yd" style="z-index:99;cursor:pointer;left:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].leftUrl}}"></span>'+
+    '<span class="yd" style="z-index:99;cursor:pointer;right:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].rightUrl}}"></span>'+
+    '</div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/carouseline.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"  linkedlist listcolumns="dataMks.mks[canvasOrder].widget[order].content"><div class="list" ng-repeat="carousel in listcolumns"><img src="{{carousel.imgurl}}"></div>'+
+    '<span class="yd" style="z-index:99;cursor:pointer;left:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].leftUrl}}"></span>'+
+    '<span class="yd" style="z-index:99;cursor:pointer;right:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].rightUrl}}"></span>'+
+    '</div>');
+}]);
+
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/import.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;"></div>');
 }]);

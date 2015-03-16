@@ -338,4 +338,49 @@ input.ng-invalid{
 .attention img{
 	vertical-align: top;
 }
-
+/*import*/
+.import.now{
+	border:1px #f00 solid;
+}
+/*carousel*/
+.attr_group .carousel input[type=url]{
+	width: 76%;
+}
+.carousel .icon{
+	margin-right: 1.5rem;
+	cursor:pointer;
+}
+.carousel .list{
+	margin-top: 10px;
+}
+.carousel .cont{
+	margin-left: 1rem;
+}
+.carousel .effect{
+	margin-bottom: 0.3rem;
+}
+.carousel .name{
+	line-height: 1.6rem;
+}
+.carousel .effect .name{
+	line-height: 1.2rem;
+}
+.carousel select {
+  padding:0 0.5rem;
+  margin-bottom: 0.2rem;
+  border-radius: 0;
+  height: 1.6rem;
+  width: 8rem;
+  font-size: 0.8rem;
+}
+.carousel .switch{
+	margin-left: 1rem;
+}
+.carousel .right .timeinput{
+	margin-left: 0.5rem;
+	margin-right: 0.7rem;
+}
+/*carouseline*/
+.carouseline .list{
+	float: left;
+}

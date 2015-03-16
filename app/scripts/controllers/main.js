@@ -36,7 +36,6 @@
         'b': 990,
         'self': $scope.wWidth-130
     };
-
     $scope.addOrder = [-1];
     $scope.canvastabs = [{
         title: '画布1',
@@ -184,8 +183,6 @@
             $scope.getCode = function(type){
                 $scope.setLeft();
                 ajax.generateCode(type,$scope.dataMks);
-
-                
             };  
             var calldata = {
                 'action': $scope.getCode,
@@ -258,6 +255,21 @@
             resolve: {
                 data: function() {
                     return $scope.ckName;
+                }
+            }
+         });
+    };
+    $scope.import = function(){
+        $scope.getCode = function(code){
+            console.log(code);
+            $scope.addElement('import','',$scope.canvasOrder);
+        };
+        $modal.open({
+            templateUrl: 'views/import.html',
+            controller: 'import',
+            resolve: {
+                data: function() {
+                    return $scope.getCode;
                 }
             }
          });
@@ -373,6 +385,17 @@ app.controller('getJsonList', function($scope, ajax, $modalInstance, data, $time
 
 
 });
+app.controller('import',function($scope, $modalInstance){
+    $scope.ok = function() {
+        if(angular.isDefined($scope.htmlCode)){
+            $scope.$emit('import',$scope.htmlCode);
+        }
+        $scope.cancel();   
+    };
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+});
 app.controller('accountInfo', function($scope, md5, ajax, $modalInstance, data, $timeout) {
     var name = data;
     ajax.getDate('userdata',name);
@@ -401,7 +424,7 @@ app.controller('accountInfo', function($scope, md5, ajax, $modalInstance, data, 
             $scope.backCode = 2;
         }
     };
-    $scope.hide = function(){
+    $scope.hide = function($scope){
         if($scope.backCode==1||$scope.backCode==2){
             $scope.backCode=0;
         }
