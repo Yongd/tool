@@ -512,8 +512,8 @@
 	                </dd> 
             	</div> 
       </dl>
-      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='carousel'" class="left clearfix full carousel">
-        <dt class="clearfix">
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='carousel'||dataMks.mks[canvasOrder].widget[order].type=='carouseline'" class="left clearfix full carousel">
+        <dt class="clearfix {{dataMks.mks[canvasOrder].widget[order].type}}">
            <span class="left">轮播内容</span>
            <i class="icon fi-minus size-14 right carouselAction" tooltip="删除"></i>
            <i class="icon fi-plus size-14 right carouselAction" tooltip="添加"></i>
@@ -574,7 +574,19 @@
                 <input type="number" class="timeinput" ng-model="dataMks.mks[canvasOrder].widget[order].duration">
             </div>
             <div class="name right">轮播时长:</div>
-        </dd> 
+        </dd>
+        <dd class="clearfix" ng-if="dataMks.mks[canvasOrder].widget[order].type=='carouseline'">
+            <div class="name left">轮播幅度:</div>
+            <div class="cont left">
+                <select ng-model="dataMks.mks[canvasOrder].widget[order].step">
+                  <option value="1">一次滚动1张图片</option>
+                  <option value="2">一次滚动2张图片</option>
+                  <option value="3">一次滚动3张图片</option>
+                  <option value="4">一次滚动4张图片</option>
+                  <option value="5">一次滚动5张图片</option>
+                </select>
+            </div>
+        </dd>
       </dl>
             <div ng-if="order==-2">
 	            <dl  class="left">

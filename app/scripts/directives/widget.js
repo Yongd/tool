@@ -332,12 +332,26 @@ app.directive('area', function() {
         restrict: 'A',
         transclude: true,
         replace: true,
-        scope: {
-            listcolumns: '='
-        },
+        scope: {},
         templateUrl: 'template/widget/carouseline.html',
         link: function(scope, element, attr) {
             scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('accordiona', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/accordiona.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            scope.active = 1;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -501,12 +515,23 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
-    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"  linkedlist listcolumns="dataMks.mks[canvasOrder].widget[order].content"><div class="list" ng-repeat="carousel in listcolumns"><img src="{{carousel.imgurl}}"></div>'+
-    '<span class="yd" style="z-index:99;cursor:pointer;left:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].leftUrl}}"></span>'+
-    '<span class="yd" style="z-index:99;cursor:pointer;right:10px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].rightUrl}}"></span>'+
-    '</div>');
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div style="width:9999999px;height:100%;"><div class="list" '+
+    'ng-repeat="carousel in $parent.dataMks.mks[$parent.canvasOrder].widget[index].content"><img ng-src="{{carousel.imgurl}}"></div><div class="list" ng-repeat="carousel in '+
+    '$parent.dataMks.mks[$parent.canvasOrder].widget[index].content"><img ng-src="{{carousel.imgurl}}"></div></div><span class="yd" style="z-index:99;cursor:pointer;left:0px;top:'+
+    '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].leftUrl}}"></span><span class="yd" '+
+    'style="z-index:99;cursor:pointer;right:0px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height/2-40}}px;"><img src="'+
+    '{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].rightUrl}}"></span></div>');
 }]);
 
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/accordiona.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="list" '+
+    'ng-repeat="accordion in $parent.dataMks.mks[$parent.canvasOrder].widget[index].content"><div ng-show="active=={{$index}}">'+
+    '<img ng-src="{{accordion.imgurl}}"></div><div class="trigger"><img accordion ng-click="$parent.active=$index" ng-src="{{accordion.ximgurl}}"></div></div></div>');
+}]);
 
 app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/import.html',

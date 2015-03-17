@@ -15,9 +15,10 @@ app.directive('carouselAction', function() {
         restrict: 'C',
         link: function(scope, element) {
             element.bind('mousedown', function() {
+                var imgurl = angular.element(element).parent().hasClass('carousel')?'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2EcBWcXXXXXcHXpXXXXXXXXXX-134264536.jpg':'http://img02.taobaocdn.com/imgextra/i2/134264536/TB27kiacXXXXXX4XXXXXXXXXXXX-134264536.jpg';
                 var content = scope.$parent.$parent.$parent.dataMks.mks[scope.$parent.$parent.$parent.canvasOrder].widget[scope.$parent.$parent.$parent.order];
                 if (element.hasClass('fi-plus')) {
-                    content.content.push( {'imgurl':'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2EcBWcXXXXXcHXpXXXXXXXXXX-134264536.jpg','link':'http://www.tiancaiui.com'} );
+                    content.content.push( {'imgurl':imgurl,'link':'http://www.tiancaiui.com'} );
                 } else {
                     content.content.pop();
                 }
@@ -26,3 +27,36 @@ app.directive('carouselAction', function() {
     };
 });
 
+app.directive('accordion', function($document) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            var startX = 0, startY = 0, e = angular.element(element).parent().parent().parent();
+            element.bind('mousedown', function($event) {
+                event.preventDefault();
+                  startX = $event.pageX - parseInt(e.css('left'));
+                  startY = $event.pageY - parseInt(e.css('top'));
+                  $document.bind('mousemove', mousemove);
+                  $document.bind('mouseup', mouseup);  
+            });
+            function mousemove($event){
+                var 
+                    y = $event.pageY - startY,
+                    x = $event.pageX - startX;
+                    scope.$apply(function(){
+                        scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget[scope.$parent.index].position.left=x;
+                        scope.$parent.$parent.dataMks.mks[scope.$parent.$parent.canvasOrder].widget[scope.$parent.index].position.top=y;
+                    });
+                    e.css({
+                        top: y + 'px',
+                        left:  x + 'px'
+                    }).addClass('opacity');
+            }
+            function mouseup() {
+              $document.unbind('mousemove', mousemove);
+              $document.unbind('mouseup', mouseup);
+              e.removeClass('opacity');
+            }    
+        }
+    };
+});

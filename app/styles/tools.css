@@ -381,6 +381,20 @@ input.ng-invalid{
 	margin-right: 0.7rem;
 }
 /*carouseline*/
+.carouseline{
+	white-space:nowrap; 
+}
 .carouseline .list{
 	float: left;
+	white-space:nowrap; 
+	display: inline;
+}
+/*accordiona*/
+.accordiona .list,
+.accordiona .list div{
+	float: left;
+}
+.accordiona .list .trigger{
+	position: relative;
+	z-index: 1;
 }

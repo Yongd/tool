@@ -112,11 +112,27 @@ angular.module('toolApp').
             case 'carouseline': 
             {
                 return '{"id": '+order+',"zindex": '+order+',"name": "无缝轮播'+(order+1)+'","type": "carouseline","effect":"scrollx","duration": 0.5,"autoplay": true,"easing":"easeBoth","step":1,"size": '+
-                '{"width":975,"height":484},"position": {"left": 100,"top":100},"leftUrl":"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2WLNWcXXXXXcQXpXXXXXXXXXX-134264536.png","rightUrl": '+
-                '"http://img04.taobaocdn.com/imgextra/i4/134264536/TB2Ll44cXXXXXcuXXXXXXXXXXXX-134264536.png","content":[{"imgurl":'+
-                '"http://img02.taobaocdn.com/imgextra/i2/39767794/TB2lb0.bXXXXXXaXXXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
-                'http://img04.taobaocdn.com/imgextra/i4/39767794/TB26_h3bXXXXXXhXpXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
-                'http://img01.taobaocdn.com/imgextra/i1/39767794/TB2LQp0bXXXXXaoXpXXXXXXXXXX-39767794.jpg","link":"http://www.tiancaiui.com"}]}';
+                '{"width":975,"height":484},"position": {"left": 100,"top":100},"leftUrl":"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2oWzDXXXXXXXwXVXXXXXXXXXX-134264536.png","rightUrl": '+
+                '"http://img01.taobaocdn.com/imgextra/i1/39767794/TB2RIxNbXXXXXc_XXXXXXXXXXXX-39767794.png","content":[{"imgurl":'+
+                '"http://img02.taobaocdn.com/imgextra/i2/134264536/TB27kiacXXXXXX4XXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img03.taobaocdn.com/imgextra/i3/134264536/TB2oZebcXXXXXX1XXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2KZd_cXXXXXcUXXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"}]}';
+            } 
+            break;
+            case 'accordiona': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "手风琴'+(order+1)+'","type": "accordiona","triggerType":"mouse","activeIndex":1,"size": '+
+                '{"width":975,"height":484},"position": {"left": 100,"top":100},"content":[{"imgurl":'+
+                '"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2xpD9XXXXXXX5XFXXXXXXXXXX-134264536.jpg","ximgurl":"'+
+                'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2x9iXcXXXXXcHXXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2iTWXcXXXXXc6XXXXXXXXXXXX-134264536.jpg","ximgurl":"'+
+                'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2JV5XcXXXXXXBXpXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img03.taobaocdn.com/imgextra/i3/134264536/TB2_jSDXVXXXXa8XpXXXXXXXXXX-134264536.jpg","ximgurl":"'+
+                'http://img02.taobaocdn.com/imgextra/i2/134264536/TB27aj7XXXXXXXHXVXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2PxAlaFXXXXbaXpXXXXXXXXXX-134264536.jpg","ximgurl":"'+
+                'http://img02.taobaocdn.com/imgextra/i2/134264536/TB2pOCacXXXXXb_XXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
+                'http://img02.taobaocdn.com/imgextra/i2/134264536/TB2YJt9cXXXXXbmXpXXXXXXXXXX-134264536.jpg","ximgurl":"'+
+                'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2qIR.cXXXXXXVXpXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"}]}';
             } 
             break;
             case 'import': 
