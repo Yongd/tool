@@ -28,10 +28,23 @@ angular.module('toolApp').
 			break;
 			case 'img': 
 			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "图片层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 320},"imgUrl":'+
-				' "http://img01.taobaocdn.com/bao/uploaded/i1/T1HqlOFo4hXXb1upjX","link": "","hover": {"status": false,"imgUrl": "http://img01.taobaocdn.com/bao/uploaded/i1/T1TPl0FXhaXXb1upjX"}}';
+				return '{"id": '+order+',"zindex": '+order+',"name": "图片层'+(order+1)+'","type": "img","position": {"left": 200,"top": 100},"size": {"width": 310,"height": 390},"imgUrl":'+
+				' "http://img02.taobaocdn.com/imgextra/i2/134264536/TB2b21EXVXXXXa9XpXXXXXXXXXX-134264536.jpg","link": ""}';
 			} 
 			break;
+            case 'imgtwo': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "正反面'+(order+1)+'","type": "imgtwo","position": {"left": 200,"top": 100},"size": {"width": 320,"height": 430},"imgUrl":'+
+                ' "http://img04.taobaocdn.com/imgextra/i4/134264536/TB2cjqfXVXXXXa2XpXXXXXXXXXX-134264536.jpg","link": "","hover": {"status": true,"imgUrl": "http://img01.taobaocdn.com/imgextra/i1/134264536/TB2Z1KecXXXXXbvXXXXXXXXXXXX-134264536.jpg"}}';
+            } 
+            break;
+            case 'imgeffect': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "悬浮特效'+(order+1)+'","type": "imgeffect","position": {"left": 200,"top": 100},"size": {"width": 390,"height": 490},"imgUrl":'+
+                ' "http://img04.taobaocdn.com/imgextra/i4/134264536/TB2EwOhcXXXXXX0XXXXXXXXXXXX-134264536.jpg","link": "","hover": {"position": {"left": 29,"top": 340},"imgUrl": "http://img04.taobaocdn.com/imgextra/i4/134264536/TB2a9SecXXXXXa4XpXXXXXXXXXX-134264536.png"},'+
+                ' "transition":{"time":"05","effect":"ease-in","display":"yd-box-fadein","transX":"none","transY":"yd-box-dy40","css3":"none"}}';
+            } 
+            break;
 			case 'text': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "文字区'+(order+1)+'","type": "text","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 100},"text": "这是一个文本区",'+
@@ -122,7 +135,7 @@ angular.module('toolApp').
             case 'accordiona': 
             {
                 return '{"id": '+order+',"zindex": '+order+',"name": "手风琴'+(order+1)+'","type": "accordiona","triggerType":"mouse","activeIndex":1,"size": '+
-                '{"width":975,"height":484},"position": {"left": 100,"top":100},"content":[{"imgurl":'+
+                '{"width":1001,"height":428},"position": {"left": 100,"top":100},"content":[{"imgurl":'+
                 '"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2xpD9XXXXXXX5XFXXXXXXXXXX-134264536.jpg","ximgurl":"'+
                 'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2x9iXcXXXXXcHXXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
                 'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2iTWXcXXXXXc6XXXXXXXXXXXX-134264536.jpg","ximgurl":"'+
@@ -133,6 +146,17 @@ angular.module('toolApp').
                 'http://img02.taobaocdn.com/imgextra/i2/134264536/TB2pOCacXXXXXb_XXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
                 'http://img02.taobaocdn.com/imgextra/i2/134264536/TB2YJt9cXXXXXbmXpXXXXXXXXXX-134264536.jpg","ximgurl":"'+
                 'http://img04.taobaocdn.com/imgextra/i4/134264536/TB2qIR.cXXXXXXVXpXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"}]}';
+            } 
+            break;
+            case 'comment': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "评论层'+(order+1)+'","type": "comment","position": {"left": 100,"top":100},"size": '+
+                '{"width":750,"height":150},"activityUrl":"","activityTitle":"活动标题","pagesize":"3"}';
+            } 
+            break;
+            case 'userdefine': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "自定内容'+(order+1)+'","type": "userdefine","size":{"width":680,"height":300},"position": {"left": 100,"top":100},"code":"您的自定义内容(支持html)"}';
             } 
             break;
             case 'import': 

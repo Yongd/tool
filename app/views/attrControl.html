@@ -67,8 +67,26 @@
                     <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
                 </dd>
             </dl>
+       <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='img'" class="left clearfix full">
+                <dt>
+                    <span>图片地址</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+                </dd>  
+                <dd>  
+                    <span class="btn ts" ng-click="getImageSize()">获取图片尺寸</span>
+                    <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+                </dd>  
+                <dt>
+                    <span>链接地址</span>
+                </dt>
+                <dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
+                </dd>
+        </dl>
 
-		   <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='img'" class="left clearfix full">
+		   <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='imgtwo'" class="left clearfix full">
                 <dt>
                     <span>图片地址</span>
                 </dt>
@@ -96,8 +114,402 @@
                     <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
                 </dd>
         </dl>
-
-		   <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='text'" class="left clearfix full textstyle">
+        <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='imgeffect'" class="left clearfix full imgeffect">
+                <dt>
+                    <span>图片地址</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].imgUrl">
+                </dd>  
+                <dd>  
+                    <span class="btn ts" ng-click="getImageSize()">获取图片尺寸</span>
+                    <a class="btn ts" href="http://tadget.taobao.com/redaction/manager.htm" target="_blank">图片空间</a>
+                </dd>  
+                <dt>
+                    <span>链接地址</span>
+                </dt>
+                <dd>
+                    <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
+                </dd>
+                <dt class="clearfix">
+                    <span class="left">悬浮图片</span>
+                </dt>
+                <dd>
+                    <input type="url" required ng-model="dataMks.mks[canvasOrder].widget[order].hover.imgUrl">
+                </dd>
+                <dt></dt>
+                <dd>
+                      显示方式:
+                          &nbsp;&nbsp;&nbsp;<input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].transition.display" value="none"> 始终显示 &nbsp;&nbsp;&nbsp;
+                      <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].transition.display" value="yd-box-fadein"> 淡入显示 &nbsp;&nbsp;&nbsp;
+                      <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].transition.display" value="yd-box-fadeout"> 淡出消失 
+                </dd>
+                <dt class="clearfix">
+                    <span class="left">悬浮动画</span>
+                </dt>
+                <dd class="clearfix">
+                  <div class="left">
+                    动画速度:
+                    <select ng-model="dataMks.mks[canvasOrder].widget[order].transition.time">
+                      <option value="01">0.1秒</option>
+                      <option value="02">0.2秒</option>
+                      <option value="03">0.3秒</option>
+                      <option value="04">0.4秒</option>
+                      <option value="05">0.5秒</option>
+                      <option value="06">0.6秒</option>
+                      <option value="07">0.7秒</option>
+                      <option value="08">0.8秒</option>
+                      <option value="09">0.9秒</option>
+                      <option value="1">1秒</option>
+                      <option value="2">2秒</option>
+                      <option value="3">3秒</option>
+                      <option value="4">4秒</option>
+                      <option value="5">5秒</option>
+                    </select>
+                  </div>
+                  <div class="right">
+                      动画特效:
+                    <select ng-model="dataMks.mks[canvasOrder].widget[order].transition.effect">
+                      <option value="ease-in">匀速平滑</option>
+                      <option value="beziermkr">由慢到快（弱）</option>
+                      <option value="beziermkz">由慢到快（中）</option>
+                      <option value="beziermkq">由慢到快（强）</option>
+                      <option value="bezierkmr">由快到慢（弱）</option>
+                      <option value="bezierkmz">由快到慢（中）</option>
+                      <option value="bezierkmq">由快到慢（弱）</option>
+                    </select>
+                  </div>
+                </dd>
+                <dd class="clearfix">
+                  <div class="left">
+                    横向移动:
+                    <select ng-model="dataMks.mks[canvasOrder].widget[order].transition.transX">
+                      <option value="none">无效果</option>
+                      <option value="yd-box-fromleft">从左进入</option>
+                      <option value="yd-box-fromright">从右进入</option>
+                      <option value="yd-box-lx10">向左移动10像素</option>
+                      <option value="yd-box-lx20">向左移动20像素</option>
+                      <option value="yd-box-lx30">向左移动30像素</option>
+                      <option value="yd-box-lx40">向左移动40像素</option>
+                      <option value="yd-box-lx50">向左移动50像素</option>
+                      <option value="yd-box-lx60">向左移动60像素</option>
+                      <option value="yd-box-lx70">向左移动70像素</option>
+                      <option value="yd-box-lx80">向左移动80像素</option>
+                      <option value="yd-box-lx90">向左移动90像素</option>
+                      <option value="yd-box-lx100">向左移动100像素</option>
+                      <option value="yd-box-lx110">向左移动110像素</option>
+                      <option value="yd-box-lx120">向左移动120像素</option>
+                      <option value="yd-box-lx130">向左移动130像素</option>
+                      <option value="yd-box-lx140">向左移动140像素</option>
+                      <option value="yd-box-lx150">向左移动150像素</option>
+                      <option value="yd-box-lx160">向左移动160像素</option>
+                      <option value="yd-box-lx170">向左移动170像素</option>
+                      <option value="yd-box-lx180">向左移动180像素</option>
+                      <option value="yd-box-lx190">向左移动190像素</option>
+                      <option value="yd-box-lx200">向左移动200像素</option>
+                      <option value="yd-box-lx210">向左移动210像素</option>
+                      <option value="yd-box-lx220">向左移动220像素</option>
+                      <option value="yd-box-lx230">向左移动230像素</option>
+                      <option value="yd-box-lx240">向左移动240像素</option>
+                      <option value="yd-box-lx250">向左移动250像素</option>
+                      <option value="yd-box-lx260">向左移动260像素</option>
+                      <option value="yd-box-lx270">向左移动270像素</option>
+                      <option value="yd-box-lx280">向左移动280像素</option>
+                      <option value="yd-box-lx290">向左移动290像素</option>
+                      <option value="yd-box-lx300">向左移动300像素</option>
+                      <option value="yd-box-lx310">向左移动310像素</option>
+                      <option value="yd-box-lx320">向左移动320像素</option>
+                      <option value="yd-box-lx330">向左移动330像素</option>
+                      <option value="yd-box-lx340">向左移动340像素</option>
+                      <option value="yd-box-lx350">向左移动350像素</option>
+                      <option value="yd-box-lx360">向左移动360像素</option>
+                      <option value="yd-box-lx370">向左移动370像素</option>
+                      <option value="yd-box-lx380">向左移动380像素</option>
+                      <option value="yd-box-lx390">向左移动390像素</option>
+                      <option value="yd-box-lx400">向左移动400像素</option>
+                      <option value="yd-box-lx410">向左移动410像素</option>
+                      <option value="yd-box-lx420">向左移动420像素</option>
+                      <option value="yd-box-lx430">向左移动430像素</option>
+                      <option value="yd-box-lx440">向左移动440像素</option>
+                      <option value="yd-box-lx450">向左移动450像素</option>
+                      <option value="yd-box-lx460">向左移动460像素</option>
+                      <option value="yd-box-lx470">向左移动470像素</option>
+                      <option value="yd-box-lx480">向左移动480像素</option>
+                      <option value="yd-box-lx490">向左移动490像素</option>
+                      <option value="yd-box-lx500">向左移动500像素</option>
+                      <option value="yd-box-lx510">向左移动510像素</option>
+                      <option value="yd-box-lx520">向左移动520像素</option>
+                      <option value="yd-box-lx530">向左移动530像素</option>
+                      <option value="yd-box-lx540">向左移动540像素</option>
+                      <option value="yd-box-lx550">向左移动550像素</option>
+                      <option value="yd-box-lx560">向左移动560像素</option>
+                      <option value="yd-box-lx570">向左移动570像素</option>
+                      <option value="yd-box-lx590">向左移动580像素</option>
+                      <option value="yd-box-lx590">向左移动590像素</option>
+                      <option value="yd-box-lx600">向左移动600像素</option>
+                      <option value="yd-box-rx10">向右移动10像素</option>
+                      <option value="yd-box-rx20">向右移动20像素</option>
+                      <option value="yd-box-rx30">向右移动30像素</option>
+                      <option value="yd-box-rx40">向右移动40像素</option>
+                      <option value="yd-box-rx50">向右移动50像素</option>
+                      <option value="yd-box-rx60">向右移动60像素</option>
+                      <option value="yd-box-rx70">向右移动70像素</option>
+                      <option value="yd-box-rx80">向右移动80像素</option>
+                      <option value="yd-box-rx90">向右移动90像素</option>
+                      <option value="yd-box-rx100">向右移动100像素</option>
+                      <option value="yd-box-rx110">向右移动110像素</option>
+                      <option value="yd-box-rx120">向右移动120像素</option>
+                      <option value="yd-box-rx130">向右移动130像素</option>
+                      <option value="yd-box-rx140">向右移动140像素</option>
+                      <option value="yd-box-rx150">向右移动150像素</option>
+                      <option value="yd-box-rx160">向右移动160像素</option>
+                      <option value="yd-box-rx170">向右移动170像素</option>
+                      <option value="yd-box-rx180">向右移动180像素</option>
+                      <option value="yd-box-rx190">向右移动190像素</option>
+                      <option value="yd-box-rx200">向右移动200像素</option>
+                      <option value="yd-box-rx210">向右移动210像素</option>
+                      <option value="yd-box-rx220">向右移动220像素</option>
+                      <option value="yd-box-rx230">向右移动230像素</option>
+                      <option value="yd-box-rx240">向右移动240像素</option>
+                      <option value="yd-box-rx250">向右移动250像素</option>
+                      <option value="yd-box-rx260">向右移动260像素</option>
+                      <option value="yd-box-rx270">向右移动270像素</option>
+                      <option value="yd-box-rx280">向右移动280像素</option>
+                      <option value="yd-box-rx290">向右移动290像素</option>
+                      <option value="yd-box-rx300">向右移动300像素</option>
+                      <option value="yd-box-rx310">向右移动310像素</option>
+                      <option value="yd-box-rx320">向右移动320像素</option>
+                      <option value="yd-box-rx330">向右移动330像素</option>
+                      <option value="yd-box-rx340">向右移动340像素</option>
+                      <option value="yd-box-rx350">向右移动350像素</option>
+                      <option value="yd-box-rx360">向右移动360像素</option>
+                      <option value="yd-box-rx370">向右移动370像素</option>
+                      <option value="yd-box-rx380">向右移动380像素</option>
+                      <option value="yd-box-rx390">向右移动390像素</option>
+                      <option value="yd-box-rx400">向右移动400像素</option>
+                      <option value="yd-box-rx410">向右移动410像素</option>
+                      <option value="yd-box-rx420">向右移动420像素</option>
+                      <option value="yd-box-rx430">向右移动430像素</option>
+                      <option value="yd-box-rx440">向右移动440像素</option>
+                      <option value="yd-box-rx450">向右移动450像素</option>
+                      <option value="yd-box-rx460">向右移动460像素</option>
+                      <option value="yd-box-rx470">向右移动470像素</option>
+                      <option value="yd-box-rx480">向右移动480像素</option>
+                      <option value="yd-box-rx490">向右移动490像素</option>
+                      <option value="yd-box-rx500">向右移动500像素</option>
+                      <option value="yd-box-rx510">向右移动510像素</option>
+                      <option value="yd-box-rx520">向右移动520像素</option>
+                      <option value="yd-box-rx530">向右移动530像素</option>
+                      <option value="yd-box-rx540">向右移动540像素</option>
+                      <option value="yd-box-rx550">向右移动550像素</option>
+                      <option value="yd-box-rx560">向右移动560像素</option>
+                      <option value="yd-box-rx570">向右移动570像素</option>
+                      <option value="yd-box-rx590">向右移动580像素</option>
+                      <option value="yd-box-rx590">向右移动590像素</option>
+                      <option value="yd-box-rx600">向右移动600像素</option>
+                    </select>
+                  </div>
+                  <div class="right">
+                    纵向移动:
+                    <select ng-model="dataMks.mks[canvasOrder].widget[order].transition.transY">
+                      <option value="none">无效果</option>
+                      <option value="yd-box-fromleft">从左进入</option>
+                      <option value="yd-box-fromright">从右进入</option>
+                      <option value="yd-box-uy10">向上移动10像素</option>
+                      <option value="yd-box-uy20">向上移动20像素</option>
+                      <option value="yd-box-uy30">向上移动30像素</option>
+                      <option value="yd-box-uy40">向上移动40像素</option>
+                      <option value="yd-box-uy50">向上移动50像素</option>
+                      <option value="yd-box-uy60">向上移动60像素</option>
+                      <option value="yd-box-uy70">向上移动70像素</option>
+                      <option value="yd-box-uy80">向上移动80像素</option>
+                      <option value="yd-box-uy90">向上移动90像素</option>
+                      <option value="yd-box-uy100">向上移动100像素</option>
+                      <option value="yd-box-uy110">向上移动110像素</option>
+                      <option value="yd-box-uy120">向上移动120像素</option>
+                      <option value="yd-box-uy130">向上移动130像素</option>
+                      <option value="yd-box-uy140">向上移动140像素</option>
+                      <option value="yd-box-uy150">向上移动150像素</option>
+                      <option value="yd-box-uy160">向上移动160像素</option>
+                      <option value="yd-box-uy170">向上移动170像素</option>
+                      <option value="yd-box-uy180">向上移动180像素</option>
+                      <option value="yd-box-uy190">向上移动190像素</option>
+                      <option value="yd-box-uy200">向上移动200像素</option>
+                      <option value="yd-box-uy210">向上移动210像素</option>
+                      <option value="yd-box-uy220">向上移动220像素</option>
+                      <option value="yd-box-uy230">向上移动230像素</option>
+                      <option value="yd-box-uy240">向上移动240像素</option>
+                      <option value="yd-box-uy250">向上移动250像素</option>
+                      <option value="yd-box-uy260">向上移动260像素</option>
+                      <option value="yd-box-uy270">向上移动270像素</option>
+                      <option value="yd-box-uy280">向上移动280像素</option>
+                      <option value="yd-box-uy290">向上移动290像素</option>
+                      <option value="yd-box-uy300">向上移动300像素</option>
+                      <option value="yd-box-uy310">向上移动310像素</option>
+                      <option value="yd-box-uy320">向上移动320像素</option>
+                      <option value="yd-box-uy330">向上移动330像素</option>
+                      <option value="yd-box-uy340">向上移动340像素</option>
+                      <option value="yd-box-uy350">向上移动350像素</option>
+                      <option value="yd-box-uy360">向上移动360像素</option>
+                      <option value="yd-box-uy370">向上移动370像素</option>
+                      <option value="yd-box-uy380">向上移动380像素</option>
+                      <option value="yd-box-uy390">向上移动390像素</option>
+                      <option value="yd-box-uy400">向上移动400像素</option>
+                      <option value="yd-box-uy410">向上移动410像素</option>
+                      <option value="yd-box-uy420">向上移动420像素</option>
+                      <option value="yd-box-uy430">向上移动430像素</option>
+                      <option value="yd-box-uy440">向上移动440像素</option>
+                      <option value="yd-box-uy450">向上移动450像素</option>
+                      <option value="yd-box-uy460">向上移动460像素</option>
+                      <option value="yd-box-uy470">向上移动470像素</option>
+                      <option value="yd-box-uy480">向上移动480像素</option>
+                      <option value="yd-box-uy490">向上移动490像素</option>
+                      <option value="yd-box-uy500">向上移动500像素</option>
+                      <option value="yd-box-uy510">向上移动510像素</option>
+                      <option value="yd-box-uy520">向上移动520像素</option>
+                      <option value="yd-box-uy530">向上移动530像素</option>
+                      <option value="yd-box-uy540">向上移动540像素</option>
+                      <option value="yd-box-uy550">向上移动550像素</option>
+                      <option value="yd-box-uy560">向上移动560像素</option>
+                      <option value="yd-box-uy570">向上移动570像素</option>
+                      <option value="yd-box-uy590">向上移动580像素</option>
+                      <option value="yd-box-uy590">向上移动590像素</option>
+                      <option value="yd-box-uy600">向上移动600像素</option>
+                      <option value="yd-box-dy10">向下移动10像素</option>
+                      <option value="yd-box-dy20">向下移动20像素</option>
+                      <option value="yd-box-dy30">向下移动30像素</option>
+                      <option value="yd-box-dy40">向下移动40像素</option>
+                      <option value="yd-box-dy50">向下移动50像素</option>
+                      <option value="yd-box-dy60">向下移动60像素</option>
+                      <option value="yd-box-dy70">向下移动70像素</option>
+                      <option value="yd-box-dy80">向下移动80像素</option>
+                      <option value="yd-box-dy90">向下移动90像素</option>
+                      <option value="yd-box-dy100">向下移动100像素</option>
+                      <option value="yd-box-dy110">向下移动110像素</option>
+                      <option value="yd-box-dy120">向下移动120像素</option>
+                      <option value="yd-box-dy130">向下移动130像素</option>
+                      <option value="yd-box-dy140">向下移动140像素</option>
+                      <option value="yd-box-dy150">向下移动150像素</option>
+                      <option value="yd-box-dy160">向下移动160像素</option>
+                      <option value="yd-box-dy170">向下移动170像素</option>
+                      <option value="yd-box-dy180">向下移动180像素</option>
+                      <option value="yd-box-dy190">向下移动190像素</option>
+                      <option value="yd-box-dy200">向下移动200像素</option>
+                      <option value="yd-box-dy210">向下移动210像素</option>
+                      <option value="yd-box-dy220">向下移动220像素</option>
+                      <option value="yd-box-dy230">向下移动230像素</option>
+                      <option value="yd-box-dy240">向下移动240像素</option>
+                      <option value="yd-box-dy250">向下移动250像素</option>
+                      <option value="yd-box-dy260">向下移动260像素</option>
+                      <option value="yd-box-dy270">向下移动270像素</option>
+                      <option value="yd-box-dy280">向下移动280像素</option>
+                      <option value="yd-box-dy290">向下移动290像素</option>
+                      <option value="yd-box-dy300">向下移动300像素</option>
+                      <option value="yd-box-dy310">向下移动310像素</option>
+                      <option value="yd-box-dy320">向下移动320像素</option>
+                      <option value="yd-box-dy330">向下移动330像素</option>
+                      <option value="yd-box-dy340">向下移动340像素</option>
+                      <option value="yd-box-dy350">向下移动350像素</option>
+                      <option value="yd-box-dy360">向下移动360像素</option>
+                      <option value="yd-box-dy370">向下移动370像素</option>
+                      <option value="yd-box-dy380">向下移动380像素</option>
+                      <option value="yd-box-dy390">向下移动390像素</option>
+                      <option value="yd-box-dy400">向下移动400像素</option>
+                      <option value="yd-box-dy410">向下移动410像素</option>
+                      <option value="yd-box-dy420">向下移动420像素</option>
+                      <option value="yd-box-dy430">向下移动430像素</option>
+                      <option value="yd-box-dy440">向下移动440像素</option>
+                      <option value="yd-box-dy450">向下移动450像素</option>
+                      <option value="yd-box-dy460">向下移动460像素</option>
+                      <option value="yd-box-dy470">向下移动470像素</option>
+                      <option value="yd-box-dy480">向下移动480像素</option>
+                      <option value="yd-box-dy490">向下移动490像素</option>
+                      <option value="yd-box-dy500">向下移动500像素</option>
+                      <option value="yd-box-dy510">向下移动510像素</option>
+                      <option value="yd-box-dy520">向下移动520像素</option>
+                      <option value="yd-box-dy530">向下移动530像素</option>
+                      <option value="yd-box-dy540">向下移动540像素</option>
+                      <option value="yd-box-dy550">向下移动550像素</option>
+                      <option value="yd-box-dy560">向下移动560像素</option>
+                      <option value="yd-box-dy570">向下移动570像素</option>
+                      <option value="yd-box-dy590">向下移动580像素</option>
+                      <option value="yd-box-dy590">向下移动590像素</option>
+                      <option value="yd-box-dy600">向下移动600像素</option>
+                    </select>
+                  </div>
+                </dd>
+                <dd  class="clearfix">
+                   CSS3特效:
+                    <select ng-model="dataMks.mks[canvasOrder].widget[order].transition.css3">
+                      <option value="none">无效果</option>
+                      <option value="yd-box-fx">横向翻转</option>
+                      <option value="yd-box-fy">纵向翻转</option>
+                      <option value="yd-box-fxy">横向纵向同时翻转</option>
+                      <option value="yd-box-sf1">放大显示</option>
+                      <option value="yd-box-sf0">缩小消失</option>
+                      <option value="yd-box-sfr360">顺时针旋转一周放大显示</option>
+                      <option value="yd-box-sfr720">顺时针旋转二周放大显示</option>
+                      <option value="yd-box-sffr360">逆时针旋转一周放大显示</option>
+                      <option value="yd-box-sffr720">逆时针旋转二周放大显示</option>
+                      <option value="yd-box-sf0r360">顺时针旋转一周缩小消失</option>
+                      <option value="yd-box-sf0r720">顺时针旋转二周缩小消失</option>
+                      <option value="yd-box-sf0fr360">逆时针旋转一周缩小消失</option>
+                      <option value="yd-box-sf0fr720">逆时针旋转二周缩小消失</option>
+                      <option value="yd-box-fxr360">顺时针旋转一周横向翻转</option>
+                      <option value="yd-box-fxr720">顺时针旋转二周横向翻转</option>
+                      <option value="yd-box-fxfr360">逆时针旋转一周横向翻转</option>
+                      <option value="yd-box-fxfr720">逆时针旋转二周横向翻转</option>
+                      <option value="yd-box-fyr360">顺时针旋转一周纵向翻转</option>
+                      <option value="yd-box-fyr720">顺时针旋转二周纵向翻转</option>
+                      <option value="yd-box-fyfr360">逆时针旋转一周纵向翻转</option>
+                      <option value="yd-box-fyfr720">逆时针旋转二周纵向翻转</option>
+                      <option value="yd-box-sf02">缩小至0.2倍</option>
+                      <option value="yd-box-sf04">缩小至0.4倍</option>
+                      <option value="yd-box-sf05">缩小至0.5倍</option>
+                      <option value="yd-box-sf06">缩小至0.6倍</option>
+                      <option value="yd-box-sf07">缩小至0.8倍</option>
+                      <option value="yd-box-sf09">缩小至0.9倍</option>
+                      <option value="yd-box-sf095">缩小至0.95倍</option>
+                      <option value="yd-box-sf098">缩小至0.98倍</option>
+                      <option value="yd-box-sf102">放大至1.02倍</option>
+                      <option value="yd-box-sf105">放大至1.05倍</option>
+                      <option value="yd-box-sf110">放大至1.1倍</option>
+                      <option value="yd-box-sf120">放大至1.2倍</option>
+                      <option value="yd-box-sf150">放大至1.5倍</option>
+                      <option value="yd-box-sf180">放大至1.8倍</option>
+                      <option value="yd-box-sf200">放大至2倍</option>
+                      <option value="yd-box-r10">顺时针旋转10度</option>
+                      <option value="yd-box-r20">顺时针旋转20度</option>
+                      <option value="yd-box-r30">顺时针旋转30度</option>
+                      <option value="yd-box-r40">顺时针旋转40度</option>
+                      <option value="yd-box-r50">顺时针旋转50度</option>
+                      <option value="yd-box-r60">顺时针旋转60度</option>
+                      <option value="yd-box-r70">顺时针旋转70度</option>
+                      <option value="yd-box-r80">顺时针旋转80度</option>
+                      <option value="yd-box-r90">顺时针旋转90度</option>
+                      <option value="yd-box-r130">顺时针旋转120度</option>
+                      <option value="yd-box-r180">顺时针旋转180度</option>
+                      <option value="yd-box-r270">顺时针旋转270度</option>
+                      <option value="yd-box-r360">顺时针旋转360度</option>
+                      <option value="yd-box-r720">顺时针旋转720度</option>
+                      <option value="yd-box-fr10">逆时针旋转10度</option>
+                      <option value="yd-box-fr20">逆时针旋转20度</option>
+                      <option value="yd-box-fr30">逆时针旋转30度</option>
+                      <option value="yd-box-fr40">逆时针旋转40度</option>
+                      <option value="yd-box-fr50">逆时针旋转50度</option>
+                      <option value="yd-box-fr60">逆时针旋转60度</option>
+                      <option value="yd-box-fr70">逆时针旋转70度</option>
+                      <option value="yd-box-fr80">逆时针旋转80度</option>
+                      <option value="yd-box-fr90">逆时针旋转90度</option>
+                      <option value="yd-box-fr120">逆时针旋转120度</option>
+                      <option value="yd-box-fr180">逆时针旋转180度</option>
+                      <option value="yd-box-fr270">逆时针旋转270度</option>
+                      <option value="yd-box-fr360">逆时针旋转360度</option>
+                      <option value="yd-box-fr720">逆时针旋转720度</option>
+                  </select>
+                <dd>  
+        </dl>
+		    <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='text'" class="left clearfix full textstyle">
                 <dt>
                     <span>文字内容</span>
                 </dt>
@@ -588,6 +1000,80 @@
             </div>
         </dd>
       </dl>
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='accordiona'" class="left clearfix full carousel">
+        <dt class="clearfix {{dataMks.mks[canvasOrder].widget[order].type}}">
+           <span class="left">内容设置</span>
+           <i class="icon fi-minus size-14 right accordionAction" tooltip="删除"></i>
+           <i class="icon fi-plus size-14 right accordionAction" tooltip="添加"></i>
+        </dt>
+        <div class="list" ng-repeat="accordion in dataMks.mks[canvasOrder].widget[order].content">
+          <dd>
+            ┏展开图片:<input type="url" required ng-model="accordion.imgurl">
+          </dd>
+          <dd>
+            ┠ 封面图片:<input type="url" required ng-model="accordion.ximgurl">
+          </dd>
+          <dd>
+            ┗链接地址:<input type="url" required ng-model="accordion.link">
+          </dd>  
+        </div> 
+        <dt class="clearfix">
+           <span class="left">效果设置</span>
+        </dt>
+        <dd class="clearfix effect">
+            <div class="name left">触发方式:</div>
+            <div class="cont left">
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].triggerType" value="mouse"> 鼠标悬浮触发 &nbsp;&nbsp;
+                <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].triggerType" value="click" checked=""> 鼠标点击触发
+        </dd>
+        <dd class="clearfix">
+            <div class="name left">默认展开:</div>
+            <div class="cont left">
+                <select ng-model="dataMks.mks[canvasOrder].widget[order].activeIndex">
+                  <option value="1">第一张图片</option>
+                  <option value="2">第二张图片</option>
+                  <option value="3">第三张图片</option>
+                  <option value="4">第四张图片</option>
+                  <option value="5">第五张图片</option>
+                </select>
+            </div>
+        </dd>
+      </dl>
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='comment'" class="left clearfix full comment">
+                <dt class="clearfix">
+                    <span>活动页面</span>
+                </dt>
+                <dd>
+                  <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].activityUrl">
+               </dd>
+                <dt>
+                    <span>活动标题</span>
+                </dt>
+                <dd>
+                  <input type="text" ng-model="dataMks.mks[canvasOrder].widget[order].activityTitle">
+               </dd>
+               <dt></dt>
+               <dd>
+                  <div class="name left">每页评论:</div>
+                  <div class="left">
+                      <select ng-model="dataMks.mks[canvasOrder].widget[order].pagesize">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                  </div>
+              </dd>
+      </dl>
+      <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='userdefine'" class="left clearfix full userdefine">
+                <dt>
+                    <span>自定内容</span>
+                </dt>
+                <dd>
+                  <textarea required ng-model="dataMks.mks[canvasOrder].widget[order].code"></textarea>
+                </dd>
+      </dl>          
             <div ng-if="order==-2">
 	            <dl  class="left">
 	                <dt>

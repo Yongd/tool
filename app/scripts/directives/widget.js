@@ -35,6 +35,21 @@ app.directive('area', function() {
         templateUrl: 'template/widget/img.html',
         link: function(scope, element, attr) {
             scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('imgtwo', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/img.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function changeUrl(){
                if(scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].hover.status){
                     element[0].children[0].src = scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index].hover.imgUrl;
@@ -49,6 +64,21 @@ app.directive('area', function() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
             element.on('mouseover',changeUrl).on('mouseleave',recoverUrl).on('$destroy', removeData);
+        }
+    };
+}).directive('imgeffect', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/imgeffect.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
         }
     };
 }).directive('text', function($compile) {
@@ -351,7 +381,37 @@ app.directive('area', function() {
         templateUrl: 'template/widget/accordiona.html',
         link: function(scope, element, attr) {
             scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
-            scope.active = 1;
+            scope.active = 0;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('comment', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/comment.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('userdefine', function() {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/userdefine.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             function removeData() {
                 delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
             }
@@ -392,6 +452,15 @@ app.run(['$templateCache', function($templateCache) {
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
     'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
     '</div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/imgeffect.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><img ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].imgUrl}}">'+
+    '<img class="imghover" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].hover.position.left}}px;top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].hover.position.top}}px;" ng-src="{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].hover.imgUrl}}"></div>');
 }]);
 
 app.run(['$templateCache', function($templateCache) {
@@ -529,8 +598,26 @@ app.run(['$templateCache', function($templateCache) {
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
     'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="list" '+
-    'ng-repeat="accordion in $parent.dataMks.mks[$parent.canvasOrder].widget[index].content"><div ng-show="active=={{$index}}">'+
+    'ng-repeat="accordion in $parent.dataMks.mks[$parent.canvasOrder].widget[index].content"><div class="ks-content" ng-show="active=={{$index}}">'+
     '<img ng-src="{{accordion.imgurl}}"></div><div class="trigger"><img accordion ng-click="$parent.active=$index" ng-src="{{accordion.ximgurl}}"></div></div></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/comment.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now sns-widget sns-comment sns-widget-ui" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div class="comment-widget"><div class="comment-edit"><div class="comment-add"><div class="textarea-b">'+
+    '<textarea class="f-txt" resize="none" style="" placeholder="我也插句话..."></textarea></div><div class="act"><span class="skin-blue"><em class="J_LetterCount">0/140</em><span class="btn">'+
+    '<a href="#" class="J_PostComment">评论</a></span></span><a href="#" class="face">表情</a><label><input type="checkbox" class="ui-buttonset"> 同时转发到我的淘宝</label></div></div></div></div></div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/userdefine.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;"><div ng-bind-html="$parent.dataMks.mks[$parent.canvasOrder].widget[index].code | unsafe"></div>');
 }]);
 
 app.run(['$templateCache', function($templateCache) {
