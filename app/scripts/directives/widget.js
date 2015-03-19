@@ -81,13 +81,28 @@ app.directive('area', function() {
             element.on('$destroy', removeData);
         }
     };
-}).directive('text', function($compile) {
+}).directive('text', function() {
     return {
         restrict: 'A',
         transclude: true,
         replace: true,
         scope: {},
         templateUrl: 'template/widget/text.html',
+        link: function(scope, element, attr) {
+            scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
+            function removeData() {
+                delete scope.$parent.dataMks.mks[scope.$parent.canvasOrder].widget[scope.index];
+            }
+            element.on('$destroy', removeData);
+        }
+    };
+}).directive('paragraph', function($compile) {
+    return {
+        restrict: 'A',
+        transclude: true,
+        replace: true,
+        scope: {},
+        templateUrl: 'template/widget/paragraph.html',
         link: function(scope, element, attr) {
             scope.index = attr.loadx!==''?attr.loadx:scope.$parent.order;
             scope.$on('marquee', function() {
@@ -465,6 +480,16 @@ app.run(['$templateCache', function($templateCache) {
 
 app.run(['$templateCache', function($templateCache) {
   $templateCache.put('template/widget/text.html',
+    '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
+    'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+
+    'height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.height}}px;line-height:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].lineht}}px;font-size:{{$parent.'+
+    'dataMks.mks[$parent.canvasOrder].widget[index].fontsize}}px;font-weight:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].weight}};color:{{$parent.dataMks.mks[$parent.canvasOrder]'+
+    '.widget[index].color}};font-family:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].font}};">{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].text}}</div>');
+}]);
+
+app.run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/widget/paragraph.html',
     '<div class="eButton {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}}_{{index}} {{$parent.dataMks.mks[$parent.canvasOrder].widget[index].type}} now" '+
     'index="{{index}}" style="position:absolute;left:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.left}}px;z-index:{{$parent.dataMks.mks[$parent.canvasOrder]'+
     '.widget[index].zindex}};top:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].position.top}}px;width:{{$parent.dataMks.mks[$parent.canvasOrder].widget[index].size.width}}px;'+

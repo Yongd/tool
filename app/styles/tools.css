@@ -164,6 +164,9 @@ body {
 	-o-transition: 0.2s ease-in-out;
 	transition: 0.2s ease-in-out;
 }
+.yd{
+  position: absolute;
+}
 /*tooltip*/
 .tooltip{
 	z-index: 999999;

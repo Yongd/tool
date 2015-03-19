@@ -47,10 +47,16 @@ angular.module('toolApp').
             break;
 			case 'text': 
 			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "文字区'+(order+1)+'","type": "text","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 100},"text": "这是一个文本区",'+
-				'"link": "", "font": "microsoft yahei","fontsize": 14,"lineht":14,"weight": 100,"color": "#000","scrollStatus": false,"scrollMode": "left","scrollSpeed": 5}';
+				return '{"id": '+order+',"zindex": '+order+',"name": "文本层'+(order+1)+'","type": "text","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 20},"text": "这是一个文本区",'+
+				'"link": "", "font": "microsoft yahei","fontsize": 14,"lineht":14,"weight": 100,"color": "#000"}';
 			} 
 			break;
+            case 'paragraph': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "段落层'+(order+1)+'","type": "paragraph","position": {"left": 200,"top": 100},"size": {"width": 200,"height": 100},"text": "我们是专业的店铺装修工作室，致力于各行业店铺模板的设计",'+
+                '"font": "microsoft yahei","fontsize": 14,"lineht":14,"weight": 100,"color": "#000","scrollStatus": false,"scrollMode": "left","scrollSpeed": 5}';
+            } 
+            break;
 			case 'countdown': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "倒计时'+(order+1)+'","type": "countdown","placetime": "'+(new Date()).format('y-m-d h:n:s','future')+'","time":"","show":4,"position": {"left": 100,"top"'+
@@ -134,7 +140,7 @@ angular.module('toolApp').
             break;
             case 'accordiona': 
             {
-                return '{"id": '+order+',"zindex": '+order+',"name": "手风琴'+(order+1)+'","type": "accordiona","triggerType":"mouse","activeIndex":1,"size": '+
+                return '{"id": '+order+',"zindex": '+order+',"name": "手风琴'+(order+1)+'","type": "accordiona","triggerType":"mouse","size": '+
                 '{"width":1001,"height":428},"position": {"left": 100,"top":100},"content":[{"imgurl":'+
                 '"http://img01.taobaocdn.com/imgextra/i1/134264536/TB2xpD9XXXXXXX5XFXXXXXXXXXX-134264536.jpg","ximgurl":"'+
                 'http://img01.taobaocdn.com/imgextra/i1/134264536/TB2x9iXcXXXXXcHXXXXXXXXXXXX-134264536.jpg","link":"http://www.tiancaiui.com"},{"imgurl":"'+
@@ -151,7 +157,7 @@ angular.module('toolApp').
             case 'comment': 
             {
                 return '{"id": '+order+',"zindex": '+order+',"name": "评论层'+(order+1)+'","type": "comment","position": {"left": 100,"top":100},"size": '+
-                '{"width":750,"height":150},"activityUrl":"","activityTitle":"活动标题","pagesize":"3"}';
+                '{"width":750,"height":150},"activityUrl":"http://www.taobao.com","activityTitle":"活动标题","pagesize":"3"}';
             } 
             break;
             case 'userdefine': 

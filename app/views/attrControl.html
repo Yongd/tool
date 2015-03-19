@@ -509,13 +509,21 @@
                   </select>
                 <dd>  
         </dl>
-		    <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='text'" class="left clearfix full textstyle">
+		    <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='text'||dataMks.mks[canvasOrder].widget[order].type=='paragraph'" class="left clearfix full textstyle">
                 <dt>
                     <span>文字内容</span>
                 </dt>
                 <dd>
                   <textarea required ng-model="dataMks.mks[canvasOrder].widget[order].text"></textarea>
                 </dd>
+                <div ng-show="dataMks.mks[canvasOrder].widget[order].type=='text'">
+                  <dt>
+                      <span>链接地址</span>
+                  </dt>
+                  <dd>
+                      <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].link" placeholder="点击后页面跳转的链接地址">
+                  </dd>
+                </div>
                 <dt>
                     <span>文字样式</span>
                 </dt>
@@ -552,31 +560,33 @@
                         </div>
                     </div>
                 </dd>  
-            	  <dt class="clearfix">
-                    <span class="left">文字滚动</span>
-                    <div class="left switch small round" >
-                        <input id="marquee" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].scrollStatus" ng-change="$parent.$parent.$broadcast('marquee')">
-                        <label for="marquee"></label>
-                    </div>
-                </dt>
-                <div class="clearfix animated other" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].scrollStatus,'fadeInUp':dataMks.mks[canvasOrder].widget[order].scrollStatus}">
-                  <dd class="clearfix">
-                      <div class="name left">滚动方向:</div>
-                      <div class="cont left">
-                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="up"> 上 &nbsp;&nbsp;&nbsp;
-                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="down"> 下 &nbsp;&nbsp;&nbsp;
-                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="left"> 左 &nbsp;&nbsp;&nbsp;
-                          <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="right"> 右
+                <div ng-show="dataMks.mks[canvasOrder].widget[order].type=='paragraph'">
+              	  <dt class="clearfix">
+                      <span class="left">文字滚动</span>
+                      <div class="left switch small round" >
+                          <input id="marquee" type="checkbox" ng-model="dataMks.mks[canvasOrder].widget[order].scrollStatus" ng-change="$parent.$parent.$broadcast('marquee')">
+                          <label for="marquee"></label>
                       </div>
-                  </dd>
-                  <dd class="clearfix">
-                      <div class="name left">滚动速度:</div>
-                      <div class="range-slider round left">
-                          <div class="rsHandles range-slider-handle" role="slider"></div>
-                      </div>
-                      <div class="left" ng-bind="percent"><div class="hide">{{dataMks.mks[canvasOrder].widget[order].scrollSpeed=percent}}</div></div>
-                  </dd>
-                </div>
+                  </dt>
+                  <div class="clearfix animated other" ng-class="{'hide':!dataMks.mks[canvasOrder].widget[order].scrollStatus,'fadeInUp':dataMks.mks[canvasOrder].widget[order].scrollStatus}">
+                    <dd class="clearfix">
+                        <div class="name left">滚动方向:</div>
+                        <div class="cont left">
+                            <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="up"> 上 &nbsp;&nbsp;&nbsp;
+                            <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="down"> 下 &nbsp;&nbsp;&nbsp;
+                            <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="left"> 左 &nbsp;&nbsp;&nbsp;
+                            <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].scrollMode" ng-change="$parent.$parent.$broadcast('marquee')" value="right"> 右
+                        </div>
+                    </dd>
+                    <dd class="clearfix">
+                        <div class="name left">滚动速度:</div>
+                        <div class="range-slider round left">
+                            <div class="rsHandles range-slider-handle" role="slider"></div>
+                        </div>
+                        <div class="left" ng-bind="percent"><div class="hide">{{dataMks.mks[canvasOrder].widget[order].scrollSpeed=percent}}</div></div>
+                    </dd>
+                  </div>
+                </div>  
        </dl>
 		
 			<dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='countdown'" class="left clearfix full textstyle">
@@ -1026,25 +1036,13 @@
                 <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].triggerType" value="mouse"> 鼠标悬浮触发 &nbsp;&nbsp;
                 <input type="radio" ng-model="dataMks.mks[canvasOrder].widget[order].triggerType" value="click" checked=""> 鼠标点击触发
         </dd>
-        <dd class="clearfix">
-            <div class="name left">默认展开:</div>
-            <div class="cont left">
-                <select ng-model="dataMks.mks[canvasOrder].widget[order].activeIndex">
-                  <option value="1">第一张图片</option>
-                  <option value="2">第二张图片</option>
-                  <option value="3">第三张图片</option>
-                  <option value="4">第四张图片</option>
-                  <option value="5">第五张图片</option>
-                </select>
-            </div>
-        </dd>
       </dl>
       <dl ng-if="dataMks.mks[canvasOrder].widget[order].type=='comment'" class="left clearfix full comment">
                 <dt class="clearfix">
                     <span>活动页面</span>
                 </dt>
                 <dd>
-                  <input type="url" ng-model="dataMks.mks[canvasOrder].widget[order].activityUrl">
+                  <input type="url" placeholder="输入您的活动页面链接" ng-model="dataMks.mks[canvasOrder].widget[order].activityUrl">
                </dd>
                 <dt>
                     <span>活动标题</span>
