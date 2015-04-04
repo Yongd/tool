@@ -172,6 +172,9 @@ body {
 	z-index: 999999;
 	background: rgba(30, 36, 43, 0.9);
 }
+.tooltip .nub{
+	border-color: transparent transparent rgba(30, 36, 43, 0.9) transparent;
+}
 /*input*/
 input[type=text],input[type=password],input[type=number],input[type=url],input[type=datetime]{
 	border:1px solid rgba(30,36,43,1);

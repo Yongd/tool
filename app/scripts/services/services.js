@@ -67,7 +67,7 @@ angular.module('toolApp').
 			case 'cart': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "购物车'+(order+1)+'","type": "cart","position": {"left": 100,"top": 100},"size": {"width":50,"height":50},"imgUrl": '+
-				' "http://img02.taobaocdn.com/imgextra/i2/134264536/T2RjJ8X64XXXXXXXXX-134264536.png","link":""}';
+				' "http://img02.taobaocdn.com/imgextra/i2/134264536/T2RjJ8X64XXXXXXXXX-134264536.png","itemid":""}';
 			} 
 			break;
 			case 'qrcode': 
@@ -97,10 +97,16 @@ angular.module('toolApp').
 			break;
 			case 'ww': 
 			{
-				return '{"id": '+order+',"zindex": '+order+',"name": "旺旺客服'+(order+1)+'","type": "ww","position": {"left": 100,"top":100},"img": '+
+				return '{"id": '+order+',"zindex": '+order+',"name": "在线客服'+(order+1)+'","type": "ww","position": {"left": 100,"top":100},"img": '+
 				'"http://img04.taobaocdn.com/imgextra/i4/134264536/T2fMp6X6RaXXXXXXXX-134264536.gif","wwId":"", "imgStyle": 1}';
 			} 
 			break;
+            case 'jdservice': 
+            {
+                return '{"id": '+order+',"zindex": '+order+',"name": "在线客服'+(order+1)+'","type": "jdservice","position": {"left": 100,"top":100},"img": '+
+                '"http://img11.360buyimg.com/cms/jfs/t625/297/864798345/3219/6c8f477b/548fe1c3N9f50938a.gif","shopId":""}';
+            } 
+            break;
 			case 'attention': 
 			{
 				return '{"id": '+order+',"zindex": '+order+',"name": "天猫关注'+(order+1)+'","type": "attention","size": {"width":83,"height":24},"position": {"left": 100,"top":100},"imgUrl": '+
@@ -175,7 +181,7 @@ angular.module('toolApp').
 }).service('ajax', function($rootScope, $http) {
 	var code;
 	this.generateCode = function(type,data){
-		$http({method: 'POST', url: 'http://localhost:8888/index.php/make',data:{'type':type,'jsondata':data}})
+		$http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/make',data:{'type':type,'jsondata':data}})
                 .success(function(data) {
                    $rootScope.$broadcast('codeGenerateSuccess', data); 
                 }).error(function(data, status) {
@@ -186,37 +192,37 @@ angular.module('toolApp').
 		return code;
 	};
     this.saveData = function(data, name){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/save',data:{'jsondata':data,'username':name}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/save',data:{'jsondata':data,'username':name}})
                 .success(function(data) {
                    $rootScope.$broadcast('savestatus', data); 
                 });
     };
     this.updateData = function(data, jid){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/update',data:{'jsondata':data,'jid':jid}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/update',data:{'jsondata':data,'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('updatestatus', data); 
                 });
     };
     this.getJsonList = function(method, name, page, jid, status){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
                 .success(function(data) {
                    $rootScope.$broadcast('getlist', data);
         });
     };
     this.open = function(jid){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/open',data:{'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('open', data); 
                 });
     };
     this.getDate = function(method,name,bpass,pass){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
                 .success(function(data) {
                    $rootScope.$broadcast('userDataReady', data); 
                 });
     };
     this.preViewt = function(json,name,type){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/make/preview',data:{'data':json,'name':name,'type':type}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/make/preview',data:{'data':json,'name':name,'type':type}})
                 .success(function(data) {
                     $rootScope.$broadcast('viewSuccess', data);
                });

@@ -8,7 +8,7 @@
  * Controller of the toolApp
  */
  var app = angular.module('toolApp');
- app.controller('MyTool', ['$scope', '$http', 'dataHandler', 'ajax', '$modal', '$cookieStore', function($scope, $http, dataHandler, ajax, $modal, $cookieStore) {
+ app.controller('MyTool', ['$scope', '$http', 'dataHandler', 'ajax', '$modal', '$cookieStore', '$tour', function($scope, $http, dataHandler, ajax, $modal, $cookieStore, $tour) {
     $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
@@ -30,7 +30,13 @@
     $scope.borderColor = '#888';
     $scope.wWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     $scope.wHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
+    $scope.start = function(){
+        $tour.start();
+        $cookieStore.put('tour', true);
+    };
+    if(!$cookieStore.get('tour')){
+        $scope.start();
+    }
     $scope.width = {
         'c': 950,
         'b': 990,
@@ -204,6 +210,7 @@
     $scope.login = function(){
         $scope.setCk = function(){
             $scope.ckName = $cookieStore.get('userName');
+            $scope.shopType = $cookieStore.get('shoptype');
         };
         var calldata = {
             'action': $scope.setCk
@@ -218,16 +225,17 @@
             }
          });
     };
+    $scope.ckName = $cookieStore.get('userName');
+    $scope.shopType = $cookieStore.get('shoptype');
     $scope.logout = function(){
         $cookieStore.remove('userName');
+        $cookieStore.remove('shoptype');
         delete $scope.ckName;
+        delete $scope.shopType;
     };
-    $scope.ckName = $cookieStore.get('userName');
-    $scope.preViewShow = false;
     $scope.preview = function(){
         $scope.setLeft();
         ajax.preViewt($scope.dataMks,$scope.ckName,$cookieStore.get('shoptype'));
-
     };
     $scope.accountInfo = function(){
         $modal.open({
@@ -325,7 +333,7 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $h
         $modalInstance.dismiss('cancel');
     };
     $scope.login = function(){
-        $http({method: 'POST', url: 'http://localhost:8888/index.php/login',data:{'name':$scope.userName,'pass':angular.isDefined($scope.userPass)?md5.createHash($scope.userPass):''}})
+        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/login',data:{'name':$scope.userName,'pass':angular.isDefined($scope.userPass)?md5.createHash($scope.userPass):''}})
                 .success(function(data) {
                     $scope.backCode = data.code;
                     if(data.code===0){
@@ -430,17 +438,7 @@ app.controller('accountInfo', function($scope, md5, ajax, $modalInstance, data, 
         }
     };
 });
-/*
-Array.prototype.unique3 = function() {
-    this.sort();
-    var re = [this[0]];
-    for (var i = 1; i < this.length; i++) {
-        if (this[i] !== re[re.length - 1]) {
-            re.push(this[i]);
-        }
-    }
-    return re;
-};*/
+
 Date.prototype.format = function(partten,time){
     function getLastDay(y,m){
         if(m == 2){

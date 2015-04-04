@@ -1,6 +1,5 @@
 <div class="bd">
-    <ul class="toolist">
-     
+    <ul class="toolist clearfix">
         <li class="ts has-tip" tooltip="可在图片上添加链接区域" draggable directive="area">
             <i class="icon fi-crop size-28"></i>
             <label>热点</label>
@@ -37,11 +36,11 @@
           <i class="icon fi-social-picasa size-28"></i>
           <label>图片轮播</label>
         </li>
-        <li class="ts has-tip" tooltip="可添加任意文字段落,任意位置" draggable directive="carouseline">  
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="可添加任意文字段落,任意位置" draggable directive="carouseline">  
           <i class="icon fi-social-500px size-28"></i>
           <label>无缝轮播</label>
         </li>
-        <li class="ts has-tip" tooltip="可添加任意文字段落,任意位置" draggable directive="accordiona">  
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="可添加任意文字段落,任意位置" draggable directive="accordiona">  
           <i class="icon fi-foundation size-28"></i>
           <label>手风琴</label>
         </li>
@@ -49,11 +48,11 @@
           <i class="icon fa fa-code size-26"></i>
           <label>自定内容</label>
         </li>
-        <li class="ts has-tip" tooltip="可生成手机二维码" draggable directive="qrcode">
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="可生成手机二维码" draggable directive="qrcode">
           <i class="icon fi-mobile size-28"></i>
           <label>二维码</label>
         </li>  
-        <li class="ts has-tip" tooltip="可生成店铺搜索框" draggable directive="search">
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="可生成店铺搜索框" draggable directive="search">
           <i class="icon fi-magnifying-glass size-28"></i>
           <label>搜索</label>
         </li>  
@@ -61,17 +60,21 @@
           <i class="icon fi-video size-28"></i>
           <label>视频</label>
         </li>
-        <li class="ts has-tip" tooltip="添加旺旺群" draggable directive="wwgroup">
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="添加旺旺群" draggable directive="wwgroup">
           <i class="icon fi-torsos-all size-28"></i>
           <label>旺旺群</label>
         </li>  
-        <li class="ts has-tip" tooltip="添加客服旺旺" draggable directive="ww">
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="添加在线客服，适用于天猫与淘宝" draggable directive="ww">
           <i class="icon fi-torso size-28"></i>
-          <label>旺旺客服</label>
+          <label>在线客服</label>
+        </li> 
+        <li ng-hide="shopType!=2" class="ts has-tip" tooltip="添加在线客服，适用于京东" draggable directive="jdservice">
+          <i class="icon fi-torso-business size-28"></i>
+          <label>在线客服</label>
         </li>  
         <li class="ts has-tip" tooltip="添加天猫品牌关注" draggable directive="attention">  
           <i class="icon fi-heart size-28"></i>
-          <label>天猫关注</label>
+          <label>关注店铺</label>
         </li>
         <li class="ts has-tip" tooltip="可添加店铺收藏" draggable directive="favourite">
           <i class="icon fi-star size-28"></i>
@@ -81,7 +84,7 @@
           <i class="icon fi-share size-28"></i>
           <label>分享</label>
         </li>
-        <li class="ts has-tip" tooltip="支持用户围绕特定的商品或者页面话题" draggable directive="comment">  
+        <li ng-hide="shopType==2" class="ts has-tip" tooltip="支持用户围绕特定的商品或者页面话题" draggable directive="comment">  
           <i class="icon fi-comments size-28"></i>
           <label>评论</label>
         </li>
@@ -90,4 +93,5 @@
           <label>更多</label>
         </li>
     </ul>
- </div>
+    <div class="tool-tip"><i class="icon fi-lightbulb size-18"></i>鼠标按住要添加的组件拖动到画布</div>
+</div>

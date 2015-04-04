@@ -30,7 +30,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
         restrict: 'A',
         link: function(scope, element) {
             function addElement(type, number, canvasOrder){
-                    if(type=='wwgroup'||type=='ww'||type=='import'){
+                    if(type=='wwgroup'||type=='ww'||type=='jdservice'||type=='import'){
                         angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag></div>')(scope)); 
                     }else{
                         angular.element(element[0].children[canvasOrder]).append($compile('<div loadx="'+number+'" '+type+' yd-drag yd-resize></div>')(scope)); 
@@ -81,7 +81,7 @@ app.directive('droppable', ['$rootScope', '$compile', '$position', function($roo
                     dataTransfer = 'img';
                 }
                 var width,height,maxtop,maxleft,dx,dy;
-                if(dataTransfer=='wwgroup'||dataTransfer=='ww'){
+                if(dataTransfer=='wwgroup'||dataTransfer=='ww'||dataTransfer=='jdservice'){
                     maxtop = scope.dataMks.height;
                     maxleft = scope.dataMks.width;
                     dx = e.clientX - $position.offset(element).left;
@@ -349,9 +349,25 @@ app.directive('preview',  function ($cookieStore,$compile) {
                 if(data==10){
                     scope.preViewShow = true;
                     scope.htmlUrl = 'shop_'+$cookieStore.get('shoptype')+'_'+scope.ckName;
-                    angular.element(element.children()[0]).empty().append($compile('<iframe ng-src="http://localhost:8888/index.php/make/show/'+scope.htmlUrl+'">')(scope));
+                    angular.element(element.children()[0]).empty().append($compile('<iframe ng-src="http://www.tiancaiui.com/tool/ajax/index.php/make/show/'+scope.htmlUrl+'">')(scope));
                 }
             });
         }
     };
 });
+
+app.directive('mAppLoading',function( $animate ) {
+    return{
+        restrict: 'C',
+        link: function( scope, element, attributes ) {
+             $animate.leave( element.children().eq( 1 ) ).then(
+                function cleanupAfterAnimation() {
+                    // Remove the root directive element.
+                    element.remove();
+                    // Clear the closed-over variable references.
+                    scope = element = attributes = null;
+                }
+            );
+        }
+    };
+ });

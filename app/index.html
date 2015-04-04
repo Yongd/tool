@@ -28,8 +28,26 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
     <!-- Add your site or application content here -->
+    
+    <!-- BEGIN: App-Loading Screen. -->
+    <div class="m-app-loading" ng-animate-children>
+        <!-- BEGIN: Actual animated container. -->
+        <div class="animated-container">
+            <div class="messaging">
+                <i class="fa fa-spinner fa-pulse fa-2x"></i>
+                <h1>
+                    App is Loading
+                </h1>
+                <p>
+                    Please stand by for your ticket to awesome-town!
+                </p>
+            </div>
+        </div>
+        <!-- END: Actual animated container. -->
+    </div>
+    <!-- END: App-Loading Screen. -->
+
     <div id="workspace"  class="container off-canvas-wrap" ng-include="'views/main.html'">
       
     </div>

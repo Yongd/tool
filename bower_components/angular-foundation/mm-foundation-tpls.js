@@ -2115,6 +2115,12 @@ angular.module( 'mm.foundation.tooltip', [ 'mm.foundation.position', 'mm.foundat
                     left: position.left
                   };
                   break;
+                case 'bottomr':
+                  ttPosition = {
+                    top: 53,
+                    left: position.left - ttWidth + 80
+                  };
+                  break;  
                 case 'left':
                   ttPosition = {
                     top: position.top + position.height / 2 - ttHeight / 2,
@@ -3382,7 +3388,6 @@ angular.module( 'mm.foundation.tour', [ 'mm.foundation.position', 'mm.foundation
 .directive( 'stepText', [ '$position', '$tooltip', '$tour', '$window', function ( $position, $tooltip, $tour, $window ) {
   function isElementInViewport( element ) {
     var rect = element[0].getBoundingClientRect();
-
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -3393,10 +3398,8 @@ angular.module( 'mm.foundation.tour', [ 'mm.foundation.position', 'mm.foundation
 
   function show( scope, element, attrs ) {
     var index = parseInt( attrs.stepIndex, 10);
-
     if ( $tour.isActive() && index ) {
       $tour.add( index, attrs );
-
       if ( index === $tour.current() ) {
         if ( !isElementInViewport( element ) ) {
           var offset = $position.offset( element );
@@ -3948,8 +3951,8 @@ angular.module("template/tour/tour.html", []).run(["$templateCache", function($t
     "  <div class=\"joyride-content-wrapper\">\n" +
     "    <h4 ng-bind=\"title\" ng-show=\"title\"></h4>\n" +
     "    <p ng-bind=\"content\"></p>\n" +
-    "    <a class=\"small button joyride-next-tip\" ng-show=\"!isLastStep()\" ng-click=\"nextStep()\">Next</a>\n" +
-    "    <a class=\"small button joyride-next-tip\" ng-show=\"isLastStep()\" ng-click=\"endTour()\">End</a>\n" +
+    "    <a class=\"small button joyride-next-tip\" ng-show=\"!isLastStep()\" ng-click=\"nextStep()\">下一步</a>\n" +
+    "    <a class=\"small button joyride-next-tip\" ng-show=\"isLastStep()\" ng-click=\"endTour()\">结束</a>\n" +
     "    <a class=\"joyride-close-tip\" ng-click=\"endTour()\">&times;</a>\n" +
     "  </div>\n" +
     "</div>\n" +

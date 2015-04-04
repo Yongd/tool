@@ -4,15 +4,23 @@
         <a class="left logo" href="#" target="_blank"></a>
         <a class="left icon fi-home size-18 ts" href="#" target="_blank"><span>首页</span></a>
         <i class="left icon fi-widget size-18 ts" dropdown-toggle="#tool-setting"><span>界面设置</span></i>
-        <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span></i>
-        <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span></i>
+        <i class="left icon fi-social-windows size-18 left-off-canvas-toggle ts" actab="0" ng-click="tabs[1].active = true"><span>画布管理</span>
+            <div step-text="2、点此设置画布名称、尺寸、背景等信息，也可添加画布轮播显示" step-index="2" step-placement="bottom"></div>
+        </i>
+        <i class="left icon fi-plus size-18 has-tip left-off-canvas-toggle ts" actab="1" ng-click="tabs[0].active = true"><span>添加组件</span>
+            <div step-text="3、点此添加组件，鼠标按住要添加的组件拖动到画布" step-index="3" step-placement="bottom"></div>
+        </i>
         <i class="left icon fi-page-multiple size-16 has-tip left-off-canvas-toggle ts" actab="2" ng-click="tabs[2].active = true"><span>图层管理</span></i>
-        <i class="left icon fi-eye size-24 ts" ng-click="preview()"><span>预览效果</span></i>
-        <i class="left icon fi-checkbox size-20 ts" ng-click="generateCode()"><span>生成代码</span></i>
+        <i class="left icon fi-eye size-24 ts" ng-click="preview()"><span>预览效果</span>
+            <div step-text="4、点此可预览在店铺中的效果" step-index="4" step-placement="bottom"></div>
+        </i>
+        <i class="left icon fi-checkbox size-20 ts" ng-click="generateCode()"><span>生成代码</span>
+            <div step-text="5、最后点此根据您的店铺类型，生成对应的代码，您复制一下便可以粘贴到店铺里面了" step-index="5" step-placement="bottom"></div>
+        </i>
         <i class="left icon fi-list-thumbnails size-20 ts" ng-click="jsonList()"><span>代码列表</span></i>
         <i class="left icon fi-upload-cloud size-20 ts" ng-click="import()"><span>导入代码</span></i>
         <i class="left icon fi-page-add size-18 ts"><a href="#" target="_blank"><span>新建画布</span></a></i>
-        <i class="left icon fi-layout size-20 ts" ng-click="startTour()"><span>模块市场</span></i>
+        <a class="left icon fi-layout size-20 ts" href="http://www.tiancaiui.com/module" target="_blank"><span>模块库</span></a>
     </div>
     <div class="right">
         <i class="icon left fi-paint-bucket size-18 ts"><a href="http://zxn.taobao.com/designer_detail.htm?spm=0.0.0.34.1b3f6f&designerId=773" target="_blank"><span>装修模板{{$cookieStore.get('userName')}}</span></a></i>
@@ -22,8 +30,10 @@
         <i save class="icon left fi-save size-18 ts" ng-click="save()"><span>保存代码</span></i>
         <i class="icon left fi-power size-18 ts" ng-click="logout()"><span>退出登录</span></i>
         </div>
-        <i class="icon left fi-torso size-18 ts" ng-click="login()" ng-hide="ckName"><span>登陆</span></i>
-        <i class="icon left fi-info size-18 ts"><a href="http://www.tiancaiui.com/wecenter/"><span>帮助&Bug</span></a></i>
+        <i class="icon left fi-torso size-18 ts" ng-click="login()" ng-hide="ckName"><span>登陆</span> 
+            <div step-text="1、点击登录按钮，登录您的账号，初始密码为123456" step-index="1" step-placement="bottomr"></div>
+        </i>
+        <i class="icon left fi-info size-18 ts"><a href="http://www.tiancaiui.com/wecenter/" target="_blank"><span>帮助&Bug</span></a></i>
     </div>
     <div id="tool-setting" class="f-dropdown">
         <dl class="tool-set clearfix">
