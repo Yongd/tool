@@ -311,7 +311,7 @@ app.directive('smalltip', function($timeout){
     return {
       restrict:'E',
       replace: true,
-      template: '<div class="smalltip text-center load animated" ng-class="{\'fadeInDown\':smallTip,\'fadeOutUp\':smallTip==null}">保存中...</div>',
+      template: '<div class="smalltip text-center load animated" ng-class="{\'fadeInDown\':smallTip,\'fadeOutUp\':smallTip==null}">{{tipText}}</div>',
       link:function(scope, element){
         var e = angular.element(element);
         function recovery(){
@@ -338,6 +338,9 @@ app.directive('smalltip', function($timeout){
                 e.text(data);
             }
         }); 
+        scope.$on('endview',function(){
+            scope.smallTip= null;
+        });
       }
     };
 });
@@ -346,10 +349,12 @@ app.directive('preview',  function ($cookieStore,$compile) {
         restrict: 'C',
          link: function(scope,element) {
             scope.$on('viewSuccess',function(event,data){
-                if(data==10){
+                if(data){
                     scope.preViewShow = true;
                     scope.htmlUrl = 'shop_'+$cookieStore.get('shoptype')+'_'+scope.ckName;
-                    angular.element(element.children()[0]).empty().append($compile('<iframe ng-src="http://www.tiancaiui.com/tool/ajax/index.php/make/show/'+scope.htmlUrl+'">')(scope));
+                    angular.element(element.children()[0]).empty().append($compile(data)(scope));
+                }else{
+                    scope.tipText = '通信失败，检查网络！';
                 }
             });
         }

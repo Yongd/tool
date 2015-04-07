@@ -234,6 +234,8 @@
         delete $scope.shopType;
     };
     $scope.preview = function(){
+        $scope.smallTip = true;
+        $scope.tipText = '加载中...';
         $scope.setLeft();
         ajax.preViewt($scope.dataMks,$scope.ckName,$cookieStore.get('shoptype'));
     };
@@ -250,6 +252,7 @@
     };
     $scope.save = function(){
         $scope.smallTip = true;
+        $scope.tipText = '保存中...';
         if(angular.isDefined($scope.jid)){
             ajax.updateData($scope.dataMks,$scope.jid);
         }else{
@@ -333,7 +336,7 @@ app.controller('loginWindowCtrl', function($scope, $modalInstance, data, md5, $h
         $modalInstance.dismiss('cancel');
     };
     $scope.login = function(){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/login',data:{'name':$scope.userName,'pass':angular.isDefined($scope.userPass)?md5.createHash($scope.userPass):''}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/login',data:{'name':$scope.userName,'pass':angular.isDefined($scope.userPass)?md5.createHash($scope.userPass):''}})
                 .success(function(data) {
                     $scope.backCode = data.code;
                     if(data.code===0){

@@ -181,7 +181,7 @@ angular.module('toolApp').
 }).service('ajax', function($rootScope, $http) {
 	var code;
 	this.generateCode = function(type,data){
-		$http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/make',data:{'type':type,'jsondata':data}})
+		$http({method: 'POST', url: 'http://localhost:8888/index.php/make',data:{'type':type,'jsondata':data}})
                 .success(function(data) {
                    $rootScope.$broadcast('codeGenerateSuccess', data); 
                 }).error(function(data, status) {
@@ -192,37 +192,37 @@ angular.module('toolApp').
 		return code;
 	};
     this.saveData = function(data, name){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/save',data:{'jsondata':data,'username':name}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/save',data:{'jsondata':data,'username':name}})
                 .success(function(data) {
                    $rootScope.$broadcast('savestatus', data); 
                 });
     };
     this.updateData = function(data, jid){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/update',data:{'jsondata':data,'jid':jid}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/update',data:{'jsondata':data,'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('updatestatus', data); 
                 });
     };
     this.getJsonList = function(method, name, page, jid, status){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'page':page,'jid':jid,'status':status}})
                 .success(function(data) {
                    $rootScope.$broadcast('getlist', data);
         });
     };
     this.open = function(jid){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/open',data:{'jid':jid}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/open',data:{'jid':jid}})
                 .success(function(data) {
                    $rootScope.$broadcast('open', data); 
                 });
     };
     this.getDate = function(method,name,bpass,pass){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/curd/'+method,data:{'username':name,'beforepass':bpass,'pass':pass}})
                 .success(function(data) {
                    $rootScope.$broadcast('userDataReady', data); 
                 });
     };
     this.preViewt = function(json,name,type){
-        $http({method: 'POST', url: 'http://www.tiancaiui.com/tool/ajax/index.php/make/preview',data:{'data':json,'name':name,'type':type}})
+        $http({method: 'POST', url: 'http://localhost:8888/index.php/make/preview',data:{'data':json,'name':name,'type':type}})
                 .success(function(data) {
                     $rootScope.$broadcast('viewSuccess', data);
                });

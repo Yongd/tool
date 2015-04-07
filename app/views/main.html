@@ -136,6 +136,6 @@
 <div ng-show="preViewShow" class="preview animated" ng-class="{'fadeInDown':preViewShow,'fadeOutUp':preViewShow==false}">
     <div class="viewzone">
     </div>
-    <a ng-click="preViewShow=false">✖</a>
+    <a class="endview" ng-click="preViewShow=false;$emit('endview')">✖</a>
 </div>
 </div>

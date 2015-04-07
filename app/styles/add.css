@@ -7,6 +7,9 @@
     *zoom: 1;
     overflow: visible;
 }
+#workspace a:hover{
+    text-decoration: none;
+}
 #main {
     height: 100%;
     min-height: 100%;
@@ -749,7 +752,7 @@ div.switch.small label {
     height: 100%;
     border:none;
 }
-.preview a{
+.preview .endview{
     position: fixed;
     background-color: #008cba;
     top:-50px;
@@ -762,7 +765,38 @@ div.switch.small label {
     color:#fff;
     font-weight: bold;
     font-size: 1.5rem;
+    z-index: 11;
+    text-decoration: none;
 }
+.viewzone *{
+    box-sizing:content-box;
+    font-size: 12px;
+}
+.viewzone .search-panel-fields input{
+    box-sizing: border-box;
+}
+.viewzone .tshop-psm-shop-header2{
+    z-index: 10;
+}
+.viewzone #site-nav{
+    z-index: 11;
+}.viewzone #header{
+    z-index: 10;
+}
+.viewzone #site-nav a{
+    color:#999;
+}
+#site-nav .sn-sitemap .menu-hd{
+    line-height: 26px;
+    color:#999;
+}
+.viewzone .accordion li{
+    list-style:none;
+}
+#shortcut-2013 li{
+    line-height: 30px;
+}
+
 /*Aleat Window Animate*/
 .reveal-modal-bg.in {
     filter: alpha(opacity=50);
@@ -789,6 +823,12 @@ div.switch.small label {
 .reveal-modal.bounceInDown {
     filter: alpha(opacity=100);
     opacity: 1;
+}
+.reveal-modal h3{
+    font-size:1.6875rem;
+}
+.reveal-modal textarea{
+    margin-bottom: 16px;
 }
 /*fist joyride*/
 .joyride-tip-guide[placement=bottomr] .joyride-nub{

@@ -17,7 +17,8 @@
     'ngAnimate',
     'colorpicker.module',
     'datePicker',
-    'ngClipboard'
+    'ngClipboard',
+    'ngLoadScript'
   ])
   .config(['$tooltipProvider', function ($tooltipProvider) {
 	$tooltipProvider.options({
